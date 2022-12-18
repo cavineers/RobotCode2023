@@ -1,14 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
 
 public class IntakeSetCommand extends CommandBase {
 
-    private final IntakeSubsystem intakeSubsystem;
+    private final SwerveSubsystem intakeSubsystem;
     private final boolean open;
 
-    public IntakeSetCommand(IntakeSubsystem intakeSubsystem, boolean open) {
+    public IntakeSetCommand(SwerveSubsystem intakeSubsystem, boolean open) {
         this.open = open;
         this.intakeSubsystem = intakeSubsystem;
         addRequirements(intakeSubsystem);
