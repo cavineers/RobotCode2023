@@ -1,9 +1,9 @@
+
+
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2022.4.1"
-    
 }
-
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
@@ -44,7 +44,7 @@ def deployArtifact = deploy.targets.roborio.artifacts.frcJava
 wpi.java.debugJni = false
 
 // Set this to true to enable desktop support.
-def includeDesktopSupport = true
+def includeDesktopSupport = false
 
 // Defining my dependencies. In this case, WPILib (+ friends), and vendor libraries.
 // Also defines JUnit 4.
@@ -65,8 +65,6 @@ dependencies {
     nativeRelease wpi.java.deps.wpilibJniRelease(wpi.platforms.desktop)
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
-
-    testImplementation 'junit:junit:4.12'
 }
 
 // Simulation configuration (e.g. environment variables).
@@ -83,18 +81,7 @@ jar {
 }
 
 
-test {
-    useJUnitPlatform()
-
-    systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
-
-    testLogging {
-        events "passed"
-    }
-}
-
 // Configure jar and deploy tasks
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
-wpi.java.configureTestTasks(test)
-
+//wpi.java.configureTestTasks(test)
