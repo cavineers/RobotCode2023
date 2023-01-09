@@ -1,9 +1,13 @@
 package frc.robot;
 
+import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-
+import frc.robot.subsystems.SwerveDriveSubsystem;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.DriverStation;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -13,17 +17,40 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
-  private RobotContainer m_robotContainer;
+  //Container
+  public static RobotContainer m_robotContainer;
+
+  //Subsystems
+  public static SwerveDriveSubsystem m_swerveDriveSubsystem;
+
+
+  //Navx
+  public static AHRS m_ahrs;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
+
+  public Robot() {
+
+    //Subsystems
+    m_swerveDriveSubsystem = new SwerveDriveSubsystem();
+    //Container
+    m_robotContainer = new RobotContainer();
+
+    //Navx
+    try {
+          m_ahrs = new AHRS(SPI.Port.kMXP); 
+        } catch (RuntimeException ex ) {
+            DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
+        }
+
+  }
   @Override
   public void robotInit() {
-    // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-    // autonomous chooser on the dashboard.
-    m_robotContainer = new RobotContainer();
+
   }
 
   /**
