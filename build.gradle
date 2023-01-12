@@ -1,8 +1,9 @@
+
+
 plugins {
     id "java"
     id "edu.wpi.first.GradleRIO" version "2022.4.1"
 }
-
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
@@ -64,8 +65,6 @@ dependencies {
     nativeRelease wpi.java.deps.wpilibJniRelease(wpi.platforms.desktop)
     nativeRelease wpi.java.vendor.jniRelease(wpi.platforms.desktop)
     simulationRelease wpi.sim.enableRelease()
-
-    testImplementation 'junit:junit:4.12'
 }
 
 // Simulation configuration (e.g. environment variables).
@@ -81,7 +80,8 @@ jar {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
 }
 
+
 // Configure jar and deploy tasks
 deployArtifact.jarTask = jar
 wpi.java.configureExecutableTasks(jar)
-wpi.java.configureTestTasks(test)
+//wpi.java.configureTestTasks(test)
