@@ -47,7 +47,7 @@ public class Intake extends SubsystemBase{
                 break;
             case REVERSED:
                 // Reversed
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRev);
+                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
                 break;
             default:
                 this.setRightMotorState(IntakeMotorStateRight.OFF);
@@ -70,7 +70,7 @@ public class Intake extends SubsystemBase{
                 break;
             case REVERSED:
                 // Reversed
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRev);
+                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);
                 break;
             default:
                 this.setLeftMotorState(IntakeMotorStateLeft.OFF);
