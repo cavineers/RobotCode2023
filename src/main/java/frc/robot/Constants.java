@@ -10,6 +10,10 @@ public final class Constants {
         public static int ArmJointThree = 3; // Joint 3 Neo
     }
 
+    public static class CANIds{
+        public static int IntakeMotor           = 9;  // IntakeMotor (neo)
+        public static int IntakeMotorDrop       = 10;  // IntakeDrop (minineo)
+    }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kDriveMotorGearRatio = 1 / 5.8462;
@@ -19,6 +23,24 @@ public final class Constants {
         public static final double kDriveEncoderRPM2MeterPerSec = kDriveEncoderRot2Meter / 60;
         public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
         public static final double kPTurning = 0.5;
+    }
+
+    public static final class Intake{
+        public static int IntakeID = CANIds.IntakeMotor;
+        public static int IntakeDropID = CANIds.IntakeMotorDrop;
+
+        public static double IntakeSpeed = 0.7;
+        public static double IntakeSpeedRev = -0.65; // Intake reverse speed
+        
+        public static double IntakeSpeedRight = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedLeft = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedRevRight = IntakeSpeedRev; // Intake reverse speed
+        public static double IntakeSpeedRevLeft = -(IntakeSpeedRev); // Intake reverse speed
+
+        public static double DropSpeed = -0.2;
+        public static double LiftSpeed = 0.2;
+
+        public static double RevolutionsToLower = -31;
     }
 
     public static final class DriveConstants {
