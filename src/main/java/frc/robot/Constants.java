@@ -6,18 +6,10 @@ public final class Constants {
     
     public static class CANIds {
         public static int ArmJointOne = 1; // Joint 1 Neo
-<<<<<<< HEAD
         public static int ArmJointTwo = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree = 3; // Joint 3 Neo
         public static int IntakeMotor           = 4;  // IntakeMotor (neo)
     }
-=======
-        public static int ArmJointTwo = 2; // Joint 2 Neo  
-        public static int IntakeMotor = 3;  // IntakeMotor Neo
-        public static int IntakeMotorDrop = 4;  // IntakeDrop Neo 
-    }
-
->>>>>>> ceacca3ecc1b05a25e6503227ee26fe20cf09975
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kDriveMotorGearRatio = 1 / 5.8462;
