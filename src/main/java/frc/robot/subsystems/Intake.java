@@ -1,10 +1,8 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -21,6 +19,9 @@ public class Intake extends SubsystemBase{
         OFF,
         REVERSED
     }
+
+    boolean Opening;
+    boolean Closing;
 
     public CANSparkMax m_intakeMotorRight = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
     public CANSparkMax m_intakeMotorLeft = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
@@ -41,17 +42,17 @@ public class Intake extends SubsystemBase{
         // set motor state
         switch (state) {
             case ON:
-                // On
+                // turns on intake
                 this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRight);
                 this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedLeft);
                 break;
             case OFF:
-                // Off
+                // turns off intake
                 this.m_intakeMotorRight.set(0.0);
                 this.m_intakeMotorLeft.set(0.0);
                 break;
             case REVERSED:
-                // Reversed
+                // reverses intake
                 this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
                 this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);
                 break;
@@ -67,26 +68,26 @@ public class Intake extends SubsystemBase{
         // set motor state
         switch (state) {
             case ON:
-                // On
-                this.m_gateMotorRight.set(Constants.Intake.IntakeSpeedRight);
-                this.m_gateMotorLeft.set(Constants.Intake.IntakeSpeedLeft);
+                // opens gate
+                this.m_gateMotorRight.set(Constants.Intake.GateSpeedRight);
+                this.m_gateMotorLeft.set(Constants.Intake.GateSpeedLeft);
+                Opening = true;
                 break;
             case OFF:
-                // Off
+                // stops gate
                 this.m_gateMotorRight.set(0.0);
                 this.m_gateMotorLeft.set(0.0);
                 break;
             case REVERSED:
-                // Reversed
-                this.m_gateMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
-                this.m_gateMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);
+                // closes gate
+                this.m_gateMotorRight.set(Constants.Intake.GateSpeedRevRight);
+                this.m_gateMotorLeft.set(Constants.Intake.GateSpeedRevLeft);
+                Closing = true;
                 break;
             default:
                 this.setGateMotorState(GateMotorState.OFF);
         }
     }
-
-
     /**
      * Get the current intake state.
      * @return intake state
