@@ -97,6 +97,17 @@ public final class Constants {
         // Joint one is closest to chassis and joint two is the furthest
         public static int ArmJointOne = CANIds.ArmJointOne;
         public static int ArmJointTwo = CANIds.ArmJointTwo;
+        public static double TopX = 101;
+        public static double MidX = 58;
+        public static double TopPegY = 117;
+        public static double MidPegY = 87;
+        public static double TopShelfY = 90;
+        public static double MidShelfY= 60;
+        //public static double DropHeigthPeg = 0; Dont have values yet
+        //public static double DropHeightShelf = 0; 
+        //public static double armHeight = 0;
+        //public static double armDistanceFromFront = 0;
+
     }
 
     public static final class OIConstants {

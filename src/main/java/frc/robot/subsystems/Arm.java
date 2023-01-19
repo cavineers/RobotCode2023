@@ -29,4 +29,36 @@ public class Arm extends SubsystemBase {
         return this.m_armJointTwo;
     }
 
+    // This func will calculate what angle our arm needs to be when we drop the cone or cube
+
+    public static double calculateArmDropAngle(boolean isTopRow, boolean isCone, double armHeight, double distanceFromGrid) {
+        double nodeX;
+        double nodeY;
+        double dropHeight;
+
+        if (isCone) {
+            dropHeight = Constants.Arm.dropHeightPeg; //dont have values yet
+            if (isTopRow) {
+                nodeX = Constants.Arm.TopX;
+                nodeY = Constants.Arm.TopPegY;
+            } else {
+                nodeX = Constants.Arm.MidX;
+                nodeY = Constants.Arm.MidPegY;
+            }
+        } else {
+            dropHeight = Constants.Arm.dropHeightShelf; //dont have values yet
+            if (isTopRow) {
+                nodeX = Constants.Arm.TopX;
+                nodeY = Constants.Arm.TopShelfY;
+            } else {
+                nodeX = Constants.Arm.MidX;
+                nodeY = Constants.Arm.MidShelfY;
+            }
+        }
+
+        double distanceY = nodeY + dropHeight - Constants.Arm.armHeight;
+        double distanceX = nodeX + distanceFromGrid + Constants.Arm.armDistanceFromFront;
+        return Math.tan(distanceY/distanceX);
+    }
+
 }
