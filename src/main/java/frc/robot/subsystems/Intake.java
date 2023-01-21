@@ -14,38 +14,46 @@ public class Intake extends SubsystemBase{
         REVERSED
     }
 
-    public CANSparkMax m_intakeMotorRight = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public CANSparkMax m_intakeMotorLeft = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public IntakeMotorState m_intakeMotorStateRight = IntakeMotorState.OFF;
-    public IntakeMotorState m_intakeMotorStateLeft = IntakeMotorState.OFF;
+    public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
+    public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
+    public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
+    public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
 
     //Intake states
 
+    public Intake() {
+        this.setIntakeMotorState(IntakeMotorState.OFF);
+    }
+
     public void setIntakeMotorState(IntakeMotorState state) {
         // set the current state
-        this.m_intakeMotorStateRight = state;
-        this.m_intakeMotorStateLeft = state;
+        this.m_intakeMotorStateTop = state;
+        this.m_intakeMotorStateBottom = state;
         
         // set motor state
         switch (state) {
             case ON:
                 // turns on intake
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRight);
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedLeft);
+                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedTop);
+                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedBottom);
                 break;
             case OFF:
                 // turns off intake
-                this.m_intakeMotorRight.set(0.0);
-                this.m_intakeMotorLeft.set(0.0);
+                this.m_intakeMotorTop.set(0.0);
+                this.m_intakeMotorBottom.set(0.0);
                 break;
             case REVERSED:
                 // reverses intake
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);
+                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedRevTop);
+                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedRevBottom);
                 break;
             default:
                 this.setIntakeMotorState(IntakeMotorState.OFF);
         }
+    }
+
+    public IntakeMotorState getIntakeMotorState() {
+        return this.m_intakeMotorStateTop;
     }
     /**
      * Get the current intake state.

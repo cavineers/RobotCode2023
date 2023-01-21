@@ -27,10 +27,10 @@ public final class Constants {
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
         
-        public static double IntakeSpeedRight = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedLeft = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedRevRight = IntakeSpeedRev; // Intake reverse speed
-        public static double IntakeSpeedRevLeft = -(IntakeSpeedRev); // Intake reverse speed
+        public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedRevTop = IntakeSpeedRev; // Intake reverse speed
+        public static double IntakeSpeedRevBottom = -(IntakeSpeedRev); // Intake reverse speed
     }
 
     public static final class DriveConstants {
