@@ -31,15 +31,6 @@ public final class Constants {
         public static double IntakeSpeedLeft = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedRevRight = IntakeSpeedRev; // Intake reverse speed
         public static double IntakeSpeedRevLeft = -(IntakeSpeedRev); // Intake reverse speed
-
-        public static double GateSpeed = -0.2;
-
-        public static double GateSpeedRight = GateSpeed;
-        public static double GateSpeedLeft = -(GateSpeed);
-        public static double GateSpeedRevRight = -(GateSpeed);
-        public static double GateSpeedRevLeft = GateSpeed;
-
-        public static double RevolutionsToLower = -31;
     }
 
     public static final class DriveConstants {
