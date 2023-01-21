@@ -9,6 +9,7 @@ public final class Constants {
         public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
+        public static int ClawMotor           = 5; // ClawMotor (minineo) *to my knowledge
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -105,5 +106,13 @@ public final class Constants {
         public static final int kDriverJoystickPort = 0;
     }
 
+    public static final class Claw {
+        public static int ClawID = CANIds.ClawMotor;
+        public static int ClawSpeed = 0; //unknown variable for now. Once known change int -> double
+        public static int ClawSpeedRev = -0; //unknown variable for now. Once known change int -> double
+        public static int ClawSpeedHPressure = 0; //unknown variable for now. Once known change int -> double
+        public static int ClawSpeedLPressure = 0; // Variables will depend on after testing. TBD
+
+    }
 }
 
