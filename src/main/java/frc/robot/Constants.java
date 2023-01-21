@@ -8,8 +8,8 @@ public final class Constants {
         public static int ArmJointOne         = 1; // Joint 1 Neo
         public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree       = 3; // Joint 3 Neo
-        public static int IntakeMotorTop      = 4;  // IntakeMotor (neo)
-        public static int IntakeMotorBottom   = 5;
+        public static int IntakeMotorTop      = 4; // IntakeMotor (neo)
+        public static int IntakeMotorBottom   = 5; // IntakeMotor (neo)
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -23,8 +23,8 @@ public final class Constants {
     }
 
     public static final class Intake{
-        public static int IntakeID2 = CANIds.IntakeMotorTop;
-        public static int IntakeID1 = CANIds.IntakeMotorBottom;
+        public static int IntakeTopID = CANIds.IntakeMotorTop;
+        public static int IntakeBottomID = CANIds.IntakeMotorBottom;
 
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
