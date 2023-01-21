@@ -9,7 +9,6 @@ import frc.robot.subsystems.SwerveDriveSubsystem;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.Intake;
-import frc.robot.subsystems.Arm;
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -24,7 +23,6 @@ public class Robot extends TimedRobot {
 
   //Subsystems
   public static SwerveDriveSubsystem m_swerveDriveSubsystem;
-  public static Arm arm;
   public static Intake intake;
 
 
@@ -41,7 +39,6 @@ public class Robot extends TimedRobot {
 
     //Subsystems
     m_swerveDriveSubsystem = new SwerveDriveSubsystem();
-    arm = new Arm();
     intake = new Intake();
     //Container
     m_robotContainer = new RobotContainer();

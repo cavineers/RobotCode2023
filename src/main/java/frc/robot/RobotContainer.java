@@ -7,9 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.ArmControlCommand;
 import frc.robot.commands.ToggleIntake;
-import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
 
 public class RobotContainer {
