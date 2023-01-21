@@ -40,7 +40,7 @@ public class Claw extends SubsystemBase {
                 // turns off motor
                 
                 break;
-            case REVERSED:
+            case REVERSE:
                 // reverses intake
                 this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
                 this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);

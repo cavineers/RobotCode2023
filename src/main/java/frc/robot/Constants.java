@@ -6,10 +6,10 @@ public final class Constants {
     
     public static class CANIds {
         public static int ArmJointOne         = 1; // Joint 1 Neo
-        public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
+        public static int ArmJointTwo         = 2; // Joint 2 Neo  
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int ClawMotor           = 5; // ClawMotor (minineo) *to my knowledge
+        public static int ClawMotor           = 5; // ClawMotor (neo)
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -107,12 +107,21 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static int ClawID = CANIds.ClawMotor;
-        public static int ClawSpeed = 0; //unknown variable for now. Once known change int -> double
-        public static int ClawSpeedRev = -0; //unknown variable for now. Once known change int -> double
-        public static int ClawSpeedHPressure = 0; //unknown variable for now. Once known change int -> double
-        public static int ClawSpeedLPressure = 0; // Variables will depend on after testing. TBD
-
+        public static final int ClawID = ClawIds.ClawMotor;
+        public static final int ClawSpeed = 0; //unknown variable for now. Once known change int -> double
+        public static final int ClawSpeedRev = -0; //unknown variable for now. Once known change int -> double
+        public static final int ClawSpeedHPressure = 0; //unknown variable for now. Once known change int -> double
+        public static final int ClawSpeedLPressure = 0; // Variables will depend on after testing. TBD
+        public static final int clawHighPressure = 0; // Variables will depend on after testing. TBD
+        public static final int clawLowPressure = 0; // Variables will depend on after testing. TBD
     }
+
+    public static final class IntakeMotorState {
+        public static final boolean ON = true; 
+        public static final boolean OFF = false;
+        
+    }
+    
+    
 }
 
