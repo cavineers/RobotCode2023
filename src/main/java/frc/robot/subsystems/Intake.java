@@ -14,8 +14,8 @@ public class Intake extends SubsystemBase{
         REVERSED
     }
 
-    public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
+    public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeID2, MotorType.kBrushless);
+    public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeID1, MotorType.kBrushless);
     public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
     public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
 
