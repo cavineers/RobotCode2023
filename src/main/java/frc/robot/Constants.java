@@ -5,8 +5,8 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int ArmJointOne = 1; // Joint 1 Neo
-        public static int ArmJointTwo = 2; // Joint 2 Neo  
+        public static int ArmChainMotor = 1; // Joint 1 Neo
+        public static int ArmExtensionMotor = 2; // Joint 2 Neo  
         public static int IntakeMotor = 3;  // IntakeMotor Neo
         public static int IntakeMotorDrop = 4;  // IntakeDrop Neo 
     }
@@ -95,20 +95,35 @@ public final class Constants {
     }
     public static class Arm {
         // Joint one is closest to chassis and joint two is the furthest
-        public static int ArmJointOne = CANIds.ArmJointOne;
-        public static int ArmJointTwo = CANIds.ArmJointTwo;
+        public static int ArmChainMotor = CANIds.ArmChainMotor;
+        public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
         public static double TopX = 101;
         public static double MidX = 58;
         public static double TopPegY = 117;
         public static double MidPegY = 87;
         public static double TopShelfY = 90;
         public static double MidShelfY= 60;
-        //public static double DropHeigthPeg = 0; Dont have values yet
-        //public static double DropHeightShelf = 0; 
-        //public static double armHeight = 0;
-        //public static double armDistanceFromFront = 0;
+        public static double DropHeight = 0; //
+        public static double ArmHeight = 0;//
+        public static double ArmDistanceFromFront = 0;//
+        
+        public static double ArmChainSpeed = 0.2;
+        public static double ArmChainSpeedRev = -0.2; // Chain reverse speed
 
+        public static double ArmExtensionSpeed = 0.1;
+        public static double ArmExtensionSpeedRev = -0.1; // Intake reverse speed
+
+        //Speed of motor movement in meters per second
+        public static double ArmChainSpeedRevMPS = 0; //Not yet known
+        public static double ArmExtensionSpeedMPS = 0; //Not yet known
+        
+
+        public static double ArmExtensionMetersPerRevolution = Math.PI / 367.3221; //pi/9.33, then converted into meters
+
+        public static double MaxChainRevolutions = 89; //89 is temporary
+        public static double MaxExtensionRevolutions = 89; //89 is temporary
     }
+
 
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;
