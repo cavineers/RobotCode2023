@@ -121,6 +121,12 @@ public final class Constants {
         public static double MaxExtensionRevolutions = 89; //89 is temporary
     }
 
+    public static final class Limelight{
+        public static double limelight2Ground = 0; //TODO input real values
+        public static double limelightMountedAngle = 0; 
+        public static double ground2Node = 0;
+        
+    }
 
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;

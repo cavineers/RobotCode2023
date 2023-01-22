@@ -1,12 +1,6 @@
 package frc.robot.subsystems;
-
-import java.util.Dictionary;
-
 import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
@@ -48,46 +42,46 @@ public class Arm extends SubsystemBase {
         MID_PEG,
         TOP_SHELF,
         MID_SHELF
-        }
-
-        public double[] getNodePlacementTime(NodeMode state, double distanceFromGrid, double currentArmDistance, double currentArmAngle){
-            
-            double nodeX, nodeY;
-
-            //Switches State
-            switch(state){
-                case TOP_PEG:
-                    nodeX = Constants.Arm.TopX;
-                    nodeY = Constants.Arm.TopPegY;
-                    break;
-                case TOP_SHELF:
-                    nodeX = Constants.Arm.TopX;
-                    nodeY = Constants.Arm.TopShelfY;
-                    break;
-                case MID_PEG:
-                    nodeX = Constants.Arm.MidX;
-                    nodeY = Constants.Arm.MidPegY;
-                    break;
-                case MID_SHELF:
-                    nodeX = Constants.Arm.MidX;
-                    nodeY = Constants.Arm.MidShelfY;
-                    break;
-                default:
-                nodeX = 0;
-                nodeY = 0;
-            }
-            
-
-            //Calculations for Placement and angle
-             double distanceY = nodeY + Constants.Arm.DropHeight - Constants.Arm.ArmHeight;
-             double distanceX = nodeX + distanceFromGrid + Constants.Arm.ArmDistanceFromFront;
-             double finalAngle = Math.tan(distanceY/distanceX);
-             double finalDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
-             double angleTime = (finalAngle - currentArmAngle) * Constants.Arm.ArmChainSpeedRevMPS;
-             double distanceTime = (finalDistance - currentArmDistance) * Constants.Arm.ArmExtensionSpeedMPS;
-             double[] values = {angleTime, distanceTime, finalDistance, finalAngle};
-             return values;
-        }
     }
 
-//TODO add intake pickup, and shelf pick/ start motors for certain time.  
+
+    public double[] getNodePlacementTime(NodeMode state, double distanceFromGrid, double currentArmDistance, double currentArmAngle){
+            
+        double nodeX, nodeY, distanceX, distanceY;
+
+        //Switches State
+        switch(state){
+            case TOP_PEG:
+                nodeX = Constants.Arm.TopX;
+                nodeY = Constants.Arm.TopPegY;
+                break;
+            case TOP_SHELF:
+                nodeX = Constants.Arm.TopX;
+                nodeY = Constants.Arm.TopShelfY;
+                break;
+            case MID_PEG:
+                nodeX = Constants.Arm.MidX;
+                nodeY = Constants.Arm.MidPegY;
+                break;
+            case MID_SHELF:
+                nodeX = Constants.Arm.MidX;
+                nodeY = Constants.Arm.MidShelfY;
+                break;
+            default:
+            nodeX = 0;
+            nodeY = 0;
+        }
+            
+        //Calculations for Placement of Nodes & Angle the Arm will be set to for each node
+        distanceY = nodeY + Constants.Arm.DropHeight - Constants.Arm.ArmHeight;
+        distanceX = nodeX + distanceFromGrid + Constants.Arm.ArmDistanceFromFront;
+        double finalAngle = Math.tan(distanceY/distanceX);
+        double finalDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+        double angleTime = (finalAngle - currentArmAngle) * Constants.Arm.ArmChainSpeedRevMPS;
+        double distanceTime = (finalDistance - currentArmDistance) * Constants.Arm.ArmExtensionSpeedMPS;
+        double[] values = {angleTime, distanceTime, finalDistance, finalAngle};
+        return values;
+    }
+}
+
+//TODO add intake pickup, and shelf pick/ start motors for certain time take out anything uneccasarry since adding limelight  
