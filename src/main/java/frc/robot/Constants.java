@@ -5,8 +5,8 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int ArmChainMotor = 1; // Joint 1 Neo
-        public static int ArmExtensionMotor = 2; // Joint 2 Neo  
+        public static int ArmChainMotor = 1; // Chain Neo
+        public static int ArmExtensionMotor = 2; // Extension Neo  
         public static int IntakeMotor = 3;  // IntakeMotor Neo
         public static int IntakeMotorDrop = 4;  // IntakeDrop Neo 
     }
@@ -102,8 +102,16 @@ public final class Constants {
         public static double TopPegY = 117;
         public static double MidPegY = 87;
         public static double TopShelfY = 90;
-        public static double MidShelfY= 60;
+        public static double MidShelfY = 60;
+        public static double OutputShelfX = 16.5;
+        public static double OutputShelfY = 95;
+
+        public static double IntakeX = 0;
+        public static double IntakeY = 0;
+
+        public static double PickupHeight = 0; 
         public static double DropHeight = 0; //
+
         public static double ArmHeight = 0;//
         public static double ArmDistanceFromFront = 0;//
         

@@ -17,7 +17,7 @@ public class LowerArm extends CommandBase {
 
     @Override
     public void execute() {
-        
+        Robot.arm.setMotorState(Arm.ArmChainMotorState.REVERSED);
     }
 
     @Override

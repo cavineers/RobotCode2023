@@ -17,9 +17,9 @@ public class RaiseArm extends CommandBase {
 
     @Override
     public void execute() {
-    
+        Robot.arm.setMotorState(Arm.ArmChainMotorState.ON);
     }
-
+    
     @Override
     public void end(boolean interrupted) {}
 

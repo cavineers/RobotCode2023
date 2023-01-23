@@ -74,7 +74,7 @@ public class Robot extends TimedRobot {
 
     // Arm
 
-    SmartDashboard.putNumber("Chain Motor Position", -arm.getArmChainMotor().getEncoder().getPosition());
+    
     SmartDashboard.putNumber("Extension Motor Position", -arm.getArmExtensionMotor().getEncoder().getPosition());
   }
 
