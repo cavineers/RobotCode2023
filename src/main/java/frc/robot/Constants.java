@@ -103,6 +103,8 @@ public final class Constants {
         public static double DropHeight = 0; //
         public static double ArmHeight = 0;//
         public static double ArmDistanceFromFront = 0;//
+
+        public static double ArmMaxLength = 0;
         
         public static double ArmChainSpeed = 0.2;
         public static double ArmChainSpeedRev = -0.2; // Chain reverse speed

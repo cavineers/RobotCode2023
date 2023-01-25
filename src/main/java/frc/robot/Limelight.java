@@ -1,4 +1,5 @@
 package frc.robot;
+import edu.wpi.first.hal.ThreadsJNI;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import frc.robot.subsystems.Arm;
@@ -59,17 +60,37 @@ public class Limelight {
         }
     }
 
-    public double getDistance() {
+    public double[] getDistance() {
         double height1 = Constants.Limelight.limelight2Ground;
         double height2 = Constants.Limelight.ground2Node;
         double angle1 = Constants.Limelight.limelightMountedAngle;
         double angle2 = this.limelightTable.getEntry("ty").getDouble(0.0);
         double finalDistance = (height2 - height1) / (Math.sin(Math.toRadians(angle1 + angle2)));
-        return finalDistance;
+        double finalAngle = (angle2 - angle1);
+        double[] vals = {finalDistance, finalAngle};
+        return vals;
 
     }
 
-    //TODO add condition to make the limelight tell weather or not the node is the top node, etc. based off of distance and angle 
-    public void recognizeNode(){}
-}
+    public boolean isInRangeOfDistance(double min, double max) {
+        double distance = getDistance()[1];
+        if (min < distance && distance > max) {
+            return true;
+        }
+        return false;
+    }
 
+    public boolean isInRangeOfAngle(double min, double max) {
+        double angle = getDistance()[2];
+        if (min < angle && angle > max) {
+            return true;
+        }
+        return false;
+    }
+    
+    public void recognizeNode(){            
+        if (isInRangeOfAngle(0, 180) && isInRangeOfDistance(0, Constants.Arm.ArmMaxLength) && validTargets()){
+            this.limelightTable.getEntry("Node").setString("Top");          
+        }
+    }
+}
