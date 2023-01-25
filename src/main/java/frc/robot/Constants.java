@@ -110,10 +110,8 @@ public final class Constants {
         public static final int ClawID = CANIds.ClawMotor;
         public static final int ClawSpeed = 0; //unknown variable for now. Once known change int -> double
         public static final int ClawSpeedRev = -0; //unknown variable for now. Once known change int -> double
-        public static final int ClawSpeedHPressure = 0; //unknown variable for now. Once known change int -> double
-        public static final int ClawSpeedLPressure = 0; // Variables will depend on after testing. TBD
-        public static final int clawHighPressure = 0; // Variables will depend on after testing. TBD
-        public static final int clawLowPressure = 0; // Variables will depend on after testing. TBD
+        public static final int ClawHighPressure = 0; // Variables will depend on after testing. TBD
+        public static final int ClawLowPressure = 0; // Variables will depend on after testing. TBD
         
     }
 
