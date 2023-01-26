@@ -15,12 +15,6 @@ public class Intake extends SubsystemBase{
         REVERSED
     }
 
-<<<<<<< Updated upstream
-    public CANSparkMax m_intakeMotorRight = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public CANSparkMax m_intakeMotorLeft = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public IntakeMotorState m_intakeMotorStateRight = IntakeMotorState.OFF;
-    public IntakeMotorState m_intakeMotorStateLeft = IntakeMotorState.OFF;
-=======
     public enum IntakeDropMotorState {
         RAISE,
         LOWER,
@@ -33,38 +27,35 @@ public class Intake extends SubsystemBase{
     public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
     public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
     public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
->>>>>>> Stashed changes
-
     //Intake states
 
     public void setIntakeMotorState(IntakeMotorState state) {
         // set the current state
-        this.m_intakeMotorStateRight = state;
-        this.m_intakeMotorStateLeft = state;
+        this.m_intakeMotorStateTop = state;
+        this.m_intakeMotorStateBottom = state;
         
         // set motor state
         switch (state) {
             case ON:
                 // turns on intake
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRight);
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedLeft);
+                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedTop);
+                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedBottom);
                 break;
             case OFF:
                 // turns off intake
-                this.m_intakeMotorRight.set(0.0);
-                this.m_intakeMotorLeft.set(0.0);
+                this.m_intakeMotorTop.set(0.0);
+                this.m_intakeMotorBottom.set(0.0);
                 break;
             case REVERSED:
                 // reverses intake
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);
+                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedRevTop);
+                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedRevBottom);
                 break;
             default:
                 this.setIntakeMotorState(IntakeMotorState.OFF);
         }
     }
-<<<<<<< Updated upstream
-=======
+
     public void setIntakeDropMotorState(IntakeDropMotorState state) {
         this.m_intakeDropMotorState = state;
 
@@ -99,7 +90,6 @@ public class Intake extends SubsystemBase{
         // return the current motor state
         return this.m_intakeDropMotor;
     }
->>>>>>> Stashed changes
     /**
      * Get the current intake state.
      * @return intake state
