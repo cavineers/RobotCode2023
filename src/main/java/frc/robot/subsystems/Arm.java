@@ -31,7 +31,7 @@ public class Arm extends SubsystemBase {
     public ArmChainMotorState m_armChainMotorState = ArmChainMotorState.OFF;
     public ArmExtensionMotorState m_armExtensionMotorState = ArmExtensionMotorState.OFF;
     
-    public void setMotorState(ArmChainMotorState state) {
+    public void setArmChainMotorState(ArmChainMotorState state) {
         // set the current state
         this.m_armChainMotorState = state;
         
@@ -50,11 +50,15 @@ public class Arm extends SubsystemBase {
                 this.m_armChainMotor.set(Constants.Arm.ArmChainSpeedRev);
                 break;
             default:
-                this.setMotorState(ArmChainMotorState.OFF);
+                this.setArmChainMotorState(ArmChainMotorState.OFF);
         }
     }
     public ArmChainMotorState getArmChainMotorState() {
         return this.m_armChainMotorState;
+    }
+
+    public CANSparkMax getArmChainMotor() {
+        return this.m_armChainMotor;
     }
 
     public void setMotorState(ArmExtensionMotorState state) {

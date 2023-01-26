@@ -20,6 +20,7 @@ public class RobotContainer {
 
     public Command m_armChainMotorUp;
     public Command m_armChainMotorDown;
+    public Command m_arm;
 
     // Driver Controller
   public Joystick joy = new Joystick(0);
@@ -55,25 +56,18 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
     
-    this.r_bump.whenPressed(new InstantCommand() {
+    this.r_bump.onTrue(new InstantCommand() {
       @Override
       public void initialize() {
-        if (m_armChainMotorUp.isScheduled()) {
-          m_armChainMotorUp.cancel();
-        }
         m_armChainMotorDown = new LowerArm();
         m_armChainMotorDown.schedule();
       }
     });
 
-    this.r_bump.whenReleased(new InstantCommand() {
+    this.r_bump.onFalse(new InstantCommand() {
       @Override
       public void initialize() {
-        if (m_armChainMotorDown.isScheduled()) {
-          m_armChainMotorDown.cancel();
-        }
-        m_armChainMotorUp = new RaiseArm();
-        m_armChainMotorUp.schedule();
+        m_armChainMotorDown.cancel();
       }
     });
     

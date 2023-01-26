@@ -130,6 +130,8 @@ public final class Constants {
 
         public static double MaxChainRevolutions = 89; //89 is temporary
         public static double MaxExtensionRevolutions = 89; //89 is temporary
+
+        public static double RevolutionsToLower = -31;
     }
 
 
