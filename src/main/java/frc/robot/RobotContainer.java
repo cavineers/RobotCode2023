@@ -43,13 +43,7 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
-<<<<<<< Updated upstream
-    
-       this.r_bump.whenPressed(new InstantCommand() {
-=======
-
        this.r_bump.onTrue(new InstantCommand() {
->>>>>>> Stashed changes
         public void initialize() {
           m_intake = new ToggleIntake();
           m_intake.schedule();
