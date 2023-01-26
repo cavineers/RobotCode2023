@@ -9,7 +9,7 @@ public final class Constants {
         public static int ArmJointTwo         = 2; // Joint 2 Neo  
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int ClawMotor           = 5; // ClawMotor (neo)
+        public static int ClawMotor           = 5; // ClawMotor (BAG)
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
