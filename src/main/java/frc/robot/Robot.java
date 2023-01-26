@@ -35,7 +35,11 @@ public class Robot extends TimedRobot {
 
   public Robot() {
 
+<<<<<<< Updated upstream
 
+=======
+    //Subsystems
+>>>>>>> Stashed changes
     intake = new Intake();
     //Container
     m_robotContainer = new RobotContainer();

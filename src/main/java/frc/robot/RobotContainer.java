@@ -6,9 +6,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ToggleIntake;
-import frc.robot.subsystems.Intake;
 
 public class RobotContainer {
 
@@ -45,15 +43,20 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
+<<<<<<< Updated upstream
     
        this.r_bump.whenPressed(new InstantCommand() {
+=======
+
+       this.r_bump.onTrue(new InstantCommand() {
+>>>>>>> Stashed changes
         public void initialize() {
           m_intake = new ToggleIntake();
           m_intake.schedule();
         }
       });
 
-      this.r_bump.whenReleased(new InstantCommand() {
+      this.r_bump.onFalse(new InstantCommand() {
         public void initialize() {
           if(m_intake.isScheduled()) {
             m_intake.cancel();
