@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.SwerveDriveSubsystem;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.Arm;
@@ -23,7 +22,6 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer;
 
   //Subsystems
-  public static SwerveDriveSubsystem m_swerveDriveSubsystem;
   public static Arm arm;
 
 
@@ -39,7 +37,7 @@ public class Robot extends TimedRobot {
   public Robot() {
 
     //Subsystems
-    m_swerveDriveSubsystem = new SwerveDriveSubsystem();
+    
     arm = new Arm();
     //Container
     m_robotContainer = new RobotContainer();

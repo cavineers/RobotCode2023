@@ -54,7 +54,6 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         
-    this.m_povUp.whenPressed(new InstantCommand(() -> Robot.m_swerveDriveSubsystem.zeroHeading()));
     
     this.r_bump.whenPressed(new InstantCommand() {
       @Override
