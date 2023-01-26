@@ -31,9 +31,6 @@ public class Arm extends SubsystemBase {
     public ArmChainMotorState m_armChainMotorState = ArmChainMotorState.OFF;
     public ArmExtensionMotorState m_armExtensionMotorState = ArmExtensionMotorState.OFF;
     
-    public Arm() {
-        
-    }
     public void setMotorState(ArmChainMotorState state) {
         // set the current state
         this.m_armChainMotorState = state;

@@ -17,7 +17,12 @@ public class RaiseArm extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.arm.setMotorState(Arm.ArmChainMotorState.ON);
+        if (Robot.arm.getArmChainMotor().getEncoder().getPosition() > Constants.Arm.RevolutionsToLower) {
+            Robot.arm.setArmChainMotorState(arm.ArmChainMotorState.ON);
+        } else if (Robot.arm.getDropMotor().getEncoder().getPosition() <= Constants.Arm.RevolutionsToLower) {
+            Robot.m_robotContainer.m_arm.schedule();
+            Robot.arm.setArmChainMotorState(arm.ArmChainMotorState.OFF);
+        }
     }
     
     @Override
