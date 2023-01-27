@@ -2,7 +2,6 @@ package frc.robot;
 import edu.wpi.first.hal.ThreadsJNI;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
-import frc.robot.subsystems.Arm;
 
 public class Limelight {
     
@@ -88,9 +87,14 @@ public class Limelight {
         return false;
     }
     
+    //TODO in range of distance max and angle max 
     public void recognizeNode(){            
-        if (isInRangeOfAngle(0, 180) && isInRangeOfDistance(0, Constants.Arm.ArmMaxLength) && validTargets()){
+        if (isInRangeOfAngle(0, 0) && isInRangeOfDistance(0, 0) && validTargets()){
             this.limelightTable.getEntry("Node").setString("Top");          
+        } else if (isInRangeOfAngle(0,0) &&  isInRangeOfDistance(0, 0) && validTargets()){
+            this.limelightTable.getEntry("Node").setString("Middle");  
+        }else{
+            this.limelightTable.getEntry("Node").setString("None Detected");
         }
     }
 }
