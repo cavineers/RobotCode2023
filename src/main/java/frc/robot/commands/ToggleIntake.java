@@ -8,8 +8,6 @@ import frc.robot.subsystems.Intake;
 public class ToggleIntake extends CommandBase {
     private boolean isDone = false;
 
-    private boolean holding = false;
-
     private double m_timestamp;
 
     public ToggleIntake() {
