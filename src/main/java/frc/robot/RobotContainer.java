@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ToggleIntake;
 import frc.robot.commands.ToggleIntakeOrient;
+import frc.robot.commands.ToggleRaiseIntake;
 import frc.robot.commands.ToggleLowerIntake;
 
 public class RobotContainer {
@@ -16,6 +17,7 @@ public class RobotContainer {
     public Command m_intake;
     public Command m_intakeReverse;
     public Command m_dropIntake;
+    public Command m_raiseIntake;
     public Command m_orientIntake;
     
     public Joystick joy = new Joystick(0);
@@ -42,6 +44,7 @@ public class RobotContainer {
     public RobotContainer() {
 
       this.m_intake = new ToggleIntake();
+      this.m_raiseIntake = new ToggleRaiseIntake();
       this.m_dropIntake = new ToggleLowerIntake();
       this.m_orientIntake = new ToggleIntakeOrient();
       configureButtonBindings();
