@@ -10,6 +10,9 @@ public final class Constants {
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
         public static int ClawMotor           = 5; // ClawMotor (BAG)
+        public static int IntakeMotorTop      = 6; // IntakeMotor (neo)
+        public static int IntakeMotorBottom   = 7; // IntakeMotor (neo)
+        public static int IntakeDropMotor     = 8;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -24,21 +27,19 @@ public final class Constants {
 
     public static final class Intake{
         public static int IntakeID = CANIds.IntakeMotor;
+        public static int IntakeTopID = CANIds.IntakeMotorTop;
+        public static int IntakeBottomID = CANIds.IntakeMotorBottom;
+        public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
 
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
+        public static double IntakeDropSpeed = 0.2;
+        public static double IntakeRaiseSpeed = -0.2;
         
-        public static double IntakeSpeedRight = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedLeft = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedRevRight = IntakeSpeedRev; // Intake reverse speed
-        public static double IntakeSpeedRevLeft = -(IntakeSpeedRev); // Intake reverse speed
-
-        public static double GateSpeed = -0.2;
-
-        public static double GateSpeedRight = GateSpeed;
-        public static double GateSpeedLeft = -(GateSpeed);
-        public static double GateSpeedRevRight = -(GateSpeed);
-        public static double GateSpeedRevLeft = GateSpeed;
+        public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedRevTop = IntakeSpeedRev; // Intake reverse speed
+        public static double IntakeSpeedRevBottom = -(IntakeSpeedRev); // Intake reverse speed
 
         public static double RevolutionsToLower = -31;
     }

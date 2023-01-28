@@ -1,5 +1,6 @@
 package frc.robot.subsystems;
 
+import com.fasterxml.jackson.databind.introspect.AnnotationCollector.OneAnnotation;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
@@ -14,79 +15,80 @@ public class Intake extends SubsystemBase{
         REVERSED
     }
 
-    public enum GateMotorState {
-        ON,
-        OFF,
-        REVERSED
+    public enum IntakeDropMotorState {
+        RAISE,
+        LOWER,
+        OFF
     }
 
-    boolean Opening;
-    boolean Closing;
-
-    public CANSparkMax m_intakeMotorRight = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public CANSparkMax m_intakeMotorLeft = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public CANSparkMax m_gateMotorRight = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public CANSparkMax m_gateMotorLeft = new CANSparkMax(Constants.Intake.IntakeID, MotorType.kBrushless);
-    public IntakeMotorState m_intakeMotorStateRight = IntakeMotorState.OFF;
-    public IntakeMotorState m_intakeMotorStateLeft = IntakeMotorState.OFF;
-    public GateMotorState m_gateMotorStateRight = GateMotorState.OFF;
-    public GateMotorState m_gateMotorStateLeft = GateMotorState.OFF;
-
+    public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
+    public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
+    public CANSparkMax m_intakeDropMotor = new CANSparkMax(Constants.Intake.IntakeDropMotorID, MotorType.kBrushless);
+    public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
+    public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
+    public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
     //Intake states
 
     public void setIntakeMotorState(IntakeMotorState state) {
         // set the current state
-        this.m_intakeMotorStateRight = state;
-        this.m_intakeMotorStateLeft = state;
+        this.m_intakeMotorStateTop = state;
+        this.m_intakeMotorStateBottom = state;
         
         // set motor state
         switch (state) {
             case ON:
                 // turns on intake
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRight);
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedLeft);
+                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedTop);
+                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedBottom);
                 break;
             case OFF:
                 // turns off intake
-                this.m_intakeMotorRight.set(0.0);
-                this.m_intakeMotorLeft.set(0.0);
+                this.m_intakeMotorTop.set(0.0);
+                this.m_intakeMotorBottom.set(0.0);
                 break;
             case REVERSED:
                 // reverses intake
-                this.m_intakeMotorRight.set(Constants.Intake.IntakeSpeedRevRight);
-                this.m_intakeMotorLeft.set(Constants.Intake.IntakeSpeedRevLeft);
+                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedRevTop);
+                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedRevBottom);
                 break;
             default:
                 this.setIntakeMotorState(IntakeMotorState.OFF);
         }
     }
 
-    public void setGateMotorState(GateMotorState state) {
-        this.m_gateMotorStateRight = state;
-        this.m_gateMotorStateLeft = state;
+    public void setIntakeDropMotorState(IntakeDropMotorState state) {
+        this.m_intakeDropMotorState = state;
 
-        // set motor state
         switch (state) {
-            case ON:
-                // opens gate
-                this.m_gateMotorRight.set(Constants.Intake.GateSpeedRight);
-                this.m_gateMotorLeft.set(Constants.Intake.GateSpeedLeft);
-                Opening = true;
+            case LOWER:
+                // turns on intake
+                this.m_intakeDropMotor.set(Constants.Intake.IntakeDropSpeed);
                 break;
             case OFF:
-                // stops gate
-                this.m_gateMotorRight.set(0.0);
-                this.m_gateMotorLeft.set(0.0);
+                // turns off intake
+                this.m_intakeDropMotor.set(0.0);
                 break;
-            case REVERSED:
-                // closes gate
-                this.m_gateMotorRight.set(Constants.Intake.GateSpeedRevRight);
-                this.m_gateMotorLeft.set(Constants.Intake.GateSpeedRevLeft);
-                Closing = true;
+            case RAISE:
+                // reverses intake
+                this.m_intakeDropMotor.set(Constants.Intake.IntakeRaiseSpeed);
                 break;
             default:
-                this.setGateMotorState(GateMotorState.OFF);
+                this.setIntakeMotorState(IntakeMotorState.OFF);
         }
+    }
+
+    public IntakeMotorState getIntakeMotorState() {
+        return this.m_intakeMotorStateTop;
+    }
+    
+    public IntakeDropMotorState getIntakeDropMotorState() {
+        // return the current motor state
+        return this.m_intakeDropMotorState;
+    }
+
+    public CANSparkMax getIntakeDropMotor() {
+        // return the current motor state
+        return this.m_intakeDropMotor;
     }
     /**
      * Get the current intake state.
