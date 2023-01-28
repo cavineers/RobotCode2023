@@ -28,8 +28,8 @@ public class RobotContainer {
   public JoystickButton b_button = new JoystickButton(joy, 2);
   public JoystickButton x_button = new JoystickButton(joy, 3);
   public JoystickButton y_button = new JoystickButton(joy, 4);
-  public JoystickButton l_bump = new JoystickButton(joy, 5);
-  public JoystickButton r_bump = new JoystickButton(joy, 6);
+  public JoystickButton l_bump = new JoystickButton(joy, 6);
+  public JoystickButton r_bump = new JoystickButton(joy, 5);
   public JoystickButton left_menu = new JoystickButton(joy, 7);
   public JoystickButton right_menu = new JoystickButton(joy, 8);
   public JoystickButton left_stick = new JoystickButton(joy, 9);
