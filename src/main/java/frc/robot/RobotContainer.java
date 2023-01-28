@@ -7,12 +7,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ToggleIntake;
+import frc.robot.commands.ToggleIntakeOrient;
+import frc.robot.commands.ToggleLowerIntake;
 
 public class RobotContainer {
 
     
     public Command m_intake;
     public Command m_intakeReverse;
+    public Command m_dropIntake;
+    public Command m_orientIntake;
     
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
@@ -38,6 +42,8 @@ public class RobotContainer {
     public RobotContainer() {
 
       this.m_intake = new ToggleIntake();
+      this.m_dropIntake = new ToggleLowerIntake();
+      this.m_orientIntake = new ToggleIntakeOrient();
       configureButtonBindings();
 
     };
@@ -54,6 +60,36 @@ public class RobotContainer {
         public void initialize() {
           if(m_intake.isScheduled()) {
             m_intake.cancel();
+          }
+        }
+      });
+
+      this.r_bump.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_dropIntake = new ToggleLowerIntake();
+          m_dropIntake.schedule();
+        }
+      });
+
+      this.l_bump.onFalse(new InstantCommand() {
+        public void initialize() {
+          if(m_dropIntake.isScheduled()) {
+            m_dropIntake.cancel();
+          }
+        }
+      });
+
+      this.b_button.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_orientIntake = new ToggleIntakeOrient();
+          m_orientIntake.schedule();
+        }
+      });
+
+      this.b_button.onFalse(new InstantCommand() {
+        public void initialize() {
+          if(m_orientIntake.isScheduled()) {
+            m_orientIntake.cancel();
           }
         }
       });

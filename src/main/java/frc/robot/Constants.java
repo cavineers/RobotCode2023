@@ -5,8 +5,19 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
+<<<<<<< Updated upstream
         public static int IntakeMotorTop      = 1; // IntakeMotor (neo)
         public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
+=======
+        public static int IntakeMotorTop      = 1; // Intake Top Roller Motor (neo)
+        public static int IntakeMotorBottom   = 2; // Intake Bottom Roller Motor (neo)
+        public static int IntakeDropMotor     = 3; // Intake Raise and Drop motor (neo)
+        public static int IntakeLeftOrient    = 4;
+        public static int IntakeRightOrient   = 5; 
+        public static int ArmJointOne         = 6; // Joint 1 Neo
+        public static int ArmJointTwo         = 7; // Joint 2 Neo      One of these wil be a mini but is undecided
+        public static int ArmJointThree       = 8; // Joint 3 Neo
+>>>>>>> Stashed changes
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -22,9 +33,22 @@ public final class Constants {
     public static final class Intake{
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
+<<<<<<< Updated upstream
 
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
+=======
+        public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
+        public static int IntakeLeftOrientID = CANIds.IntakeLeftOrient;
+        public static int IntakeRightOrientID = CANIds.IntakeRightOrient;
+
+        public static double IntakeSpeed = 0.7;
+        public static double IntakeSpeedRev = -0.65; // Intake reverse speed
+        public static double IntakeDropSpeed = 0.2;
+        public static double IntakeRaiseSpeed = -0.2;
+        public static double IntakeLeftOrientSpeed = 0.4;
+        public static double IntakeRIghtOrientSpeed = -0.4;
+>>>>>>> Stashed changes
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
