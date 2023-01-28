@@ -89,9 +89,9 @@ public class Limelight {
     
     //TODO in range of distance max and angle max 
     public void recognizeNode(){            
-        if (isInRangeOfAngle(0, 0) && isInRangeOfDistance(0, 0) && validTargets()){
+        if (isInRangeOfAngle(0, 50) && isInRangeOfDistance(0, 157) && validTargets()){
             this.limelightTable.getEntry("Node").setString("Top");          
-        } else if (isInRangeOfAngle(0,0) &&  isInRangeOfDistance(0, 0) && validTargets()){
+        } else if (isInRangeOfAngle(0,57) &&  isInRangeOfDistance(0, 105)){
             this.limelightTable.getEntry("Node").setString("Middle");  
         }else{
             this.limelightTable.getEntry("Node").setString("None Detected");

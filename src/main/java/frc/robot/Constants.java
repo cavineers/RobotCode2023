@@ -26,7 +26,6 @@ public final class Constants {
     }
 
     public static final class Intake{
-        public static int IntakeID = CANIds.IntakeMotor;
 
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
