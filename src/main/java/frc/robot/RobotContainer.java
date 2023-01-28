@@ -28,8 +28,8 @@ public class RobotContainer {
   public JoystickButton b_button = new JoystickButton(joy, 2);
   public JoystickButton x_button = new JoystickButton(joy, 3);
   public JoystickButton y_button = new JoystickButton(joy, 4);
-  public JoystickButton l_bump = new JoystickButton(joy, 6);
-  public JoystickButton r_bump = new JoystickButton(joy, 5);
+  public JoystickButton l_bump = new JoystickButton(joy, 5);
+  public JoystickButton r_bump = new JoystickButton(joy, 6);
   public JoystickButton left_menu = new JoystickButton(joy, 7);
   public JoystickButton right_menu = new JoystickButton(joy, 8);
   public JoystickButton left_stick = new JoystickButton(joy, 9);
@@ -56,18 +56,31 @@ public class RobotContainer {
     private void configureButtonBindings() {
         
     
-    this.r_bump.onTrue(new InstantCommand() {
+    this.povRight.onTrue(new InstantCommand() {
       @Override
       public void initialize() {
         m_armChainMotorDown = new LowerArm();
         m_armChainMotorDown.schedule();
       }
     });
-
-    this.r_bump.onFalse(new InstantCommand() {
+    this.povRight.onFalse(new InstantCommand() {
       @Override
       public void initialize() {
         m_armChainMotorDown.cancel();
+      }
+    });
+
+    this.povLeft.onTrue(new InstantCommand() {
+      @Override
+      public void initialize() {
+        m_armChainMotorUp = new RaiseArm();
+        m_armChainMotorUp.schedule();
+      }
+    });
+    this.povLeft.onFalse(new InstantCommand() {
+      @Override
+      public void initialize() {
+        m_armChainMotorUp.cancel();
       }
     });
     

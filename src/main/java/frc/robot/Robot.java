@@ -70,10 +70,6 @@ public class Robot extends TimedRobot {
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
 
-    // Arm
-
-    
-    SmartDashboard.putNumber("Extension Motor Position", -arm.getArmExtensionMotor().getEncoder().getPosition());
   }
 
   /** This function is called once each time the robot enters Disabled mode. */

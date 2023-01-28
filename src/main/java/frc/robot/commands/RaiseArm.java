@@ -20,8 +20,14 @@ public class RaiseArm extends CommandBase {
         if (Robot.arm.getArmChainMotor().getEncoder().getPosition() > Constants.Arm.RevolutionsToLower) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         } else if (Robot.arm.getArmChainMotor().getEncoder().getPosition() <= Constants.Arm.RevolutionsToLower) {
-            Robot.m_robotContainer.m_arm.schedule();
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+            Robot.m_robotContainer.m_armChainMotorUp.schedule();
+            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
+        }
+        if (Robot.arm.getArmChainMotor2().getEncoder().getPosition() > Constants.Arm.RevolutionsToLower) {
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
+        } else if (Robot.arm.getArmChainMotor2().getEncoder().getPosition() <= Constants.Arm.RevolutionsToLower) {
+            Robot.m_robotContainer.m_armChainMotorUp.schedule();
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         }
     }
     

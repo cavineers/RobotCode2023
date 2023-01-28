@@ -23,6 +23,12 @@ public class LowerArm extends CommandBase {
             Robot.m_robotContainer.m_armChainMotorDown.schedule();
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         }
+        if (Robot.arm.getArmChainMotor2().getEncoder().getPosition() > Constants.Arm.RevolutionsToLower) {
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+        } else if (Robot.arm.getArmChainMotor2().getEncoder().getPosition() <= Constants.Arm.RevolutionsToLower) {
+            Robot.m_robotContainer.m_armChainMotorDown.schedule();
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+        }
     }
 
     @Override

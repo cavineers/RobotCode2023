@@ -6,7 +6,7 @@ public final class Constants {
     
     public static class CANIds {
         public static int ArmChainMotor = 4; // Chain Neo
-        public static int ArmExtensionMotor = 2; // Extension Neo  
+        public static int ArmChainMotor2 = 2; // Chain Neo 2 same as firt but
         public static int IntakeMotor = 3;  // IntakeMotor Neo
         public static int IntakeMotorDrop = 1;  // IntakeDrop Neo 
     }
@@ -96,7 +96,7 @@ public final class Constants {
     public static class Arm {
         // Joint one is closest to chassis and joint two is the furthest
         public static int ArmChainMotor = CANIds.ArmChainMotor;
-        public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
+        public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static double TopX = 101;
         public static double MidX = 58;
         public static double TopPegY = 117;

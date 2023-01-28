@@ -17,19 +17,21 @@ public class Arm extends SubsystemBase {
         OFF,
         REVERSED
     }
-     public enum ArmExtensionMotorState {
+    public enum ArmChainMotor2State {
         ON,
         OFF,
         REVERSED
     }
+
     
     
 
     public CANSparkMax m_armChainMotor = new CANSparkMax(Constants.Arm.ArmChainMotor, MotorType.kBrushless);
-    public CANSparkMax m_armExtensionMotor = new CANSparkMax(Constants.Arm.ArmExtensionMotor, MotorType.kBrushless);
+    public CANSparkMax m_armChainMotor2 = new CANSparkMax(Constants.Arm.ArmChainMotor2, MotorType.kBrushless);
+    
     
     public ArmChainMotorState m_armChainMotorState = ArmChainMotorState.OFF;
-    public ArmExtensionMotorState m_armExtensionMotorState = ArmExtensionMotorState.OFF;
+    public ArmChainMotor2State m_armChainMotor2State = ArmChainMotor2State.OFF;
     
     public void setArmChainMotorState(ArmChainMotorState state) {
         // set the current state
@@ -53,44 +55,44 @@ public class Arm extends SubsystemBase {
                 this.setArmChainMotorState(ArmChainMotorState.OFF);
         }
     }
-    public ArmChainMotorState getArmChainMotorState() {
-        return this.m_armChainMotorState;
-    }
-
-    public CANSparkMax getArmChainMotor() {
-        return this.m_armChainMotor;
-    }
-
-    public void setMotorState(ArmExtensionMotorState state) {
+    public void setArmChainMotor2State(ArmChainMotor2State state) {
         // set the current state
-        this.m_armExtensionMotorState = state;
+        this.m_armChainMotor2State = state;
         
         // set motor state
         switch (state) {
             case ON:
                 // On
-                this.m_armExtensionMotor.set(Constants.Arm.ArmExtensionSpeed);
+                this.m_armChainMotor2.set(Constants.Arm.ArmChainSpeedRev);
                 break;
             case OFF:
                 // Off
-                this.m_armExtensionMotor.set(0.0);
+                this.m_armChainMotor2.set(0.0);
                 break;
             case REVERSED:
                 // Reversed
-                this.m_armExtensionMotor.set(Constants.Arm.ArmExtensionSpeedRev);
+                this.m_armChainMotor2.set(Constants.Arm.ArmChainSpeed);
                 break;
             default:
-                this.setMotorState(ArmExtensionMotorState.OFF);
+                this.setArmChainMotor2State(ArmChainMotor2State.OFF);
         }
     }
-    public ArmExtensionMotorState getArmExtensionMotorState() {
-        return this.m_armExtensionMotorState;
+    public ArmChainMotorState getArmChainMotorState() {
+        return this.m_armChainMotorState;
+    }
+    public ArmChainMotor2State getArmChainMotor2State() {
+        return this.m_armChainMotor2State;
     }
 
-    public CANSparkMax getArmExtensionMotor() {
-        return this.m_armExtensionMotor;
+    public CANSparkMax getArmChainMotor() {
+        return this.m_armChainMotor;
+    }
+    public CANSparkMax getArmChainMotor2() {
+        return this.m_armChainMotor2;
     }
 
+   
+    
    
 
     //LimeLight will determine this. How u might ask? No clue 
