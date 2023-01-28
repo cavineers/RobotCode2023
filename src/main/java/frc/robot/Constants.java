@@ -119,9 +119,7 @@ public final class Constants {
     public static final class IntakeMotorState {
         public static final boolean ON = true; 
         public static final boolean OFF = false;
-        
     }
-    
     
 }
 

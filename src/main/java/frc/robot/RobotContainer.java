@@ -8,13 +8,15 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ToggleIntake;
 import frc.robot.commands.claw.ClawToggle;
+import frc.robot.commands.claw.ClawReverseToggle;
 
 public class RobotContainer {
 
     
     public Command m_claw;
-    public Command m_clawHighPressure;
-    public Command m_clawLowPressure;
+    public Command m_clawReverse;
+    public Command m_intake;
+    public Command m_intakeReverse;
     
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
@@ -45,18 +47,27 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
-       this.r_bump.onTrue(new InstantCommand() {
+
+
+      this.b_button.onTrue(new InstantCommand() {
+        @Override
         public void initialize() {
-          m_claw = new ToggleIntake();
+          if (m_claw.isScheduled()) {
+            m_claw.cancel();
+          }
+          m_claw = new ClawToggle();
           m_claw.schedule();
         }
       });
-
-      this.r_bump.onFalse(new InstantCommand() {
+  
+      this.b_button.onFalse(new InstantCommand() {
+        @Override
         public void initialize() {
-          if(m_claw.isScheduled()) {
-            m_claw.cancel();
+          if (m_clawReverse.isScheduled()) {
+            m_clawReverse.cancel();
           }
+          m_clawReverse = new ClawReverseToggle();
+          m_clawReverse.schedule();
         }
       });
     }   

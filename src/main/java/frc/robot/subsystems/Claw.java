@@ -23,6 +23,7 @@ public class Claw extends SubsystemBase {
 
     public CANSparkMax m_ClawMotor = new CANSparkMax(Constants.Claw.ClawID, MotorType.kBrushless);
     public ClawMotorState m_ClawMotorState = ClawMotorState.OFF;
+    public 
 
     public ClawMotorState getClawMotorState() {
         return this.m_ClawMotorState;

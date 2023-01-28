@@ -37,10 +37,10 @@ public class ClawToggle extends CommandBase {
     @Override
     public void execute() {
     
-        // Get right/left triggers to activate High/Low pressures
-        if (joy.getRawButton(1)) { //right trigger activates High Pressure
+        // Sensors activate High/Low Pressure
+        if (joy.getRawButton(2)) { //sensor activates High Pressure
             setPressure(Constants.Claw.ClawHighPressure);
-        } else if (joy.getRawButton(2)) { //left trigger activates Low Pressure
+        } else if (joy.getRawButton(2)) { //sensor activates Low Pressure
             setPressure(Constants.Claw.ClawLowPressure);
         } else { //Pressure is set to 0 if nothing else
             setPressure(0);
