@@ -5,15 +5,11 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int ArmJointOne         = 1; // Joint 1 Neo
-        public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
-        public static int ArmJointThree       = 3; // Joint 3 Neo
-        public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int IntakeMotorTop      = 4; // IntakeMotor (neo)
+        public static int IntakeMotorTop      = 1; // IntakeMotor (neo)
         public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
         public static int IntakeDropMotor     = 3;
-        public static int IntakeLeftOrient    = 8;
-        public static int IntakeRightOrient   = 9;
+        public static int IntakeLeftOrient    = 4;
+        public static int IntakeRightOrient   = 5;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -100,11 +96,6 @@ public final class Constants {
         public static final double kWheelBase = Units.inchesToMeters(23.5); //Needs editing - The distance between the centers of wheels on the same side
 
 
-    }
-    public static class Arm {
-        // Joint one is closest to chassis and joint two is the furthest
-        public static int ArmJointOne = CANIds.ArmJointOne;
-        public static int ArmJointTwo = CANIds.ArmJointTwo;
     }
 
     public static final class OIConstants {
