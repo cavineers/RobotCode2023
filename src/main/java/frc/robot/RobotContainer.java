@@ -67,7 +67,7 @@ public class RobotContainer {
         }
       });
 
-      this.r_bump.onTrue(new InstantCommand() {
+      this.l_bump.onTrue(new InstantCommand() {
         public void initialize() {
           m_dropIntake = new ToggleLowerIntake();
           m_dropIntake.schedule();
