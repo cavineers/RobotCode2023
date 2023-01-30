@@ -13,7 +13,6 @@ import frc.robot.commands.ToggleLowerIntake;
 
 public class RobotContainer {
 
-    
     public Command m_intake;
     public Command m_intakeReverse;
     public Command m_dropIntake;
@@ -51,6 +50,7 @@ public class RobotContainer {
 
     };
 
+    //TOGGLE INTAKE ON AND OFF
     private void configureButtonBindings() {
        this.r_bump.onTrue(new InstantCommand() {
         public void initialize() {
@@ -67,6 +67,7 @@ public class RobotContainer {
         }
       });
 
+      //LOWERS INTAKE
       this.l_bump.onTrue(new InstantCommand() {
         public void initialize() {
           m_dropIntake = new ToggleLowerIntake();
@@ -81,7 +82,8 @@ public class RobotContainer {
           }
         }
       });
-
+      
+      //RAISES INTAKE
       this.b_button.onTrue(new InstantCommand() {
         public void initialize() {
           m_orientIntake = new ToggleIntakeOrient();

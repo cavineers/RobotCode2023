@@ -25,12 +25,11 @@ public class Intake extends SubsystemBase{
         OFF
     }
 
-        //SparkMax's
+    //SparkMax's
     public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
     public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
     public CANSparkMax m_intakeDropMotor = new CANSparkMax(Constants.Intake.IntakeDropMotorID, MotorType.kBrushless);
-    public CANSparkMax m_intakeLeftOrient = new CANSparkMax(Constants.Intake.IntakeLeftOrientID, MotorType.kBrushless);
-    public CANSparkMax m_intakeRightOrient = new CANSparkMax(Constants.Intake.IntakeRightOrientID, MotorType.kBrushless);
+    public CANSparkMax m_intakeOrient = new CANSparkMax(Constants.Intake.IntakeOrientID, MotorType.kBrushless);
 
     //Intake states
     public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
@@ -71,7 +70,7 @@ public class Intake extends SubsystemBase{
         switch (state) {
             case LOWER:
                 //lowers intake for begining of match
-                this.m_intakeDropMotor.set(Constants.Intake.IntakeDropSpeed);
+                this.m_intakeDropMotor.set(Constants.Intake.IntakeLowerSpeed);
                 break;
             case OFF:
                 this.m_intakeDropMotor.set(0.0);
@@ -85,17 +84,16 @@ public class Intake extends SubsystemBase{
         }
     }
 
+    //Sets orient state
     public void setIntakeOrientState(IntakeOrientState state) {
         this.m_IntakeOrientState = state;
 
         switch (state) {
             case ON:
-                this.m_intakeLeftOrient.set(Constants.Intake.IntakeLeftOrientSpeed);
-                this.m_intakeRightOrient.set(Constants.Intake.IntakeRightOrientSpeed);
+                this.m_intakeOrient.set(Constants.Intake.IntakeOrientSpeed);
                 break;
             case OFF:
-                this.m_intakeLeftOrient.set(0.0);
-                this.m_intakeRightOrient.set(0.0);
+                this.m_intakeOrient.set(0.0);
                 break;
             default:
                 this.setIntakeOrientState(IntakeOrientState.OFF);

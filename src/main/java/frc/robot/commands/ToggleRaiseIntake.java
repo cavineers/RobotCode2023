@@ -1,13 +1,16 @@
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Intake.IntakeDropMotorState;
 
 public class ToggleRaiseIntake extends CommandBase {
 
     private boolean isDone = false;
+
+    private double m_timestamp;
     
     public ToggleRaiseIntake() {
         this.addRequirements(Robot.intake);
@@ -15,10 +18,7 @@ public class ToggleRaiseIntake extends CommandBase {
 
     // Set Motor State to ON / OFF
     @Override
-    public void initialize() {}
-
-    @Override
-    public void execute() {
+    public void initialize() {
         if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
             this.isDone = false;
@@ -29,10 +29,21 @@ public class ToggleRaiseIntake extends CommandBase {
     }
 
     @Override
-    public void end(boolean interrupted) {}
+    public void execute() {
+        Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        Robot.intake.setIntakeDropMotorState(IntakeDropMotorState.OFF);
+    }
 
     @Override
     public boolean isFinished() {
-        return false;
+        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0.4 && Robot.m_robotContainer.joy.getRawButton(2)) {
+            this.isDone = true;
+        }
+
+        return this.isDone;
     }
 }

@@ -5,11 +5,10 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int IntakeLeftOrient    = 1;
+        public static int IntakeOrientMotor   = 1;
         public static int IntakeMotorTop      = 2; // IntakeMotor (neo)
         public static int IntakeDropMotor     = 3;
         public static int IntakeMotorBottom   = 4; // IntakeMotor (neo)
-        public static int IntakeRightOrient   = 5;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -26,22 +25,18 @@ public final class Constants {
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
-        public static int IntakeLeftOrientID = CANIds.IntakeLeftOrient;
-        public static int IntakeRightOrientID = CANIds.IntakeRightOrient;
+        public static int IntakeOrientID = CANIds.IntakeOrientMotor;
 
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
-        public static double IntakeDropSpeed = 0.2;
+        public static double IntakeLowerSpeed = 0.2;
         public static double IntakeRaiseSpeed = -0.2;
-        public static double IntakeLeftOrientSpeed = 0.4;
-        public static double IntakeRightOrientSpeed = -0.4;
+        public static double IntakeOrientSpeed = 0.4;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedRevTop = IntakeSpeedRev; // Intake reverse speed
         public static double IntakeSpeedRevBottom = -(IntakeSpeedRev); // Intake reverse speed
-
-        public static double RevolutionsToLower = -31;
     }
 
     public static final class DriveConstants {
