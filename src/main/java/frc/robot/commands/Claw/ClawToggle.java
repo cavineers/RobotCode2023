@@ -36,29 +36,14 @@ public class ClawToggle extends CommandBase {
 
     @Override
     public void execute() {
-    
-        // Sensors activate High/Low Pressure
-        if (joy.getRawButton(2)) { //sensor activates High Pressure
-            setPressure(Constants.Claw.ClawHighPressure);
-        } else if (joy.getRawButton(2)) { //sensor activates Low Pressure
-            setPressure(Constants.Claw.ClawLowPressure);
-        } else { //Pressure is set to 0 if nothing else
-            setPressure(0);
-        }   
+    Robot.claw.setMotorState(Claw.ClawMotorState.ON); 
     }
 
-    private void setPressure(int pressure) {
-        if (pressure == (Constants.Claw.ClawHighPressure)) {
-            
-        } else if (pressure == (Constants.Claw.ClawLowPressure)) {
-            
-        } else {
-
-        }
-    }
 
     @Override 
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+    Robot.claw.setMotorState(Claw.ClawMotorState.OFF);
+    }
 
     @Override
     public boolean isFinished() {
