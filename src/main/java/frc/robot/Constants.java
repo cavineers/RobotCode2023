@@ -5,10 +5,10 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int ArmChainMotor = 4; // Chain Neo
-        public static int ArmChainMotor2 = 2; // Chain Neo 2 same as firt but
-        public static int IntakeMotor = 3;  // IntakeMotor Neo
-        public static int IntakeMotorDrop = 1;  // IntakeDrop Neo 
+        public static int ArmChainMotor = 2; // Chain Neo
+        public static int ArmChainMotor2 = 3; // Chain Neo 2 same as firt but
+        public static int ArmExtensionMotor = 4; // Chain Neo 2 same as firt but
+       
     }
 
     public static final class ModuleConstants {
@@ -23,8 +23,6 @@ public final class Constants {
     }
 
     public static final class Intake{
-        public static int IntakeID = CANIds.IntakeMotor;
-        public static int IntakeDropID = CANIds.IntakeMotorDrop;
 
         public static double IntakeSpeed = 0.7;
         public static double IntakeSpeedRev = -0.65; // Intake reverse speed
@@ -97,6 +95,7 @@ public final class Constants {
         // Joint one is closest to chassis and joint two is the furthest
         public static int ArmChainMotor = CANIds.ArmChainMotor;
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
+        public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
         public static double TopX = 101;
         public static double MidX = 58;
         public static double TopPegY = 117;

@@ -22,16 +22,23 @@ public class Arm extends SubsystemBase {
         OFF,
         REVERSED
     }
+    public enum ArmExtensionMotorState {
+        ON,
+        OFF,
+        REVERSED
+    }
 
     
     
 
     public CANSparkMax m_armChainMotor = new CANSparkMax(Constants.Arm.ArmChainMotor, MotorType.kBrushless);
     public CANSparkMax m_armChainMotor2 = new CANSparkMax(Constants.Arm.ArmChainMotor2, MotorType.kBrushless);
+    public CANSparkMax m_armExtensionMotor = new CANSparkMax(Constants.Arm.ArmExtensionMotor, MotorType.kBrushless);
     
     
     public ArmChainMotorState m_armChainMotorState = ArmChainMotorState.OFF;
     public ArmChainMotor2State m_armChainMotor2State = ArmChainMotor2State.OFF;
+    public ArmExtensionMotorState m_armExtensionMotorState = ArmExtensionMotorState.OFF;
     
     public void setArmChainMotorState(ArmChainMotorState state) {
         // set the current state
@@ -75,13 +82,38 @@ public class Arm extends SubsystemBase {
                 break;
             default:
                 this.setArmChainMotor2State(ArmChainMotor2State.OFF);
+            }
         }
+        public void setArmExtensionMotorState(ArmExtensionMotorState state) {
+            // set the current state
+            this.m_armExtensionMotorState = state;
+            
+            // set motor state
+            switch (state) {
+                case ON:
+                    // On
+                    this.m_armExtensionMotor.set(Constants.Arm.ArmExtensionSpeed);
+                    break;
+                case OFF:
+                    // Off
+                    this.m_armExtensionMotor.set(0.0);
+                    break;
+                case REVERSED:
+                    // Reversed
+                    this.m_armExtensionMotor.set(Constants.Arm.ArmExtensionSpeedRev);
+                    break;
+                default:
+                    this.setArmExtensionMotorState(ArmExtensionMotorState.OFF);
+            }
     }
     public ArmChainMotorState getArmChainMotorState() {
         return this.m_armChainMotorState;
     }
     public ArmChainMotor2State getArmChainMotor2State() {
         return this.m_armChainMotor2State;
+    }
+    public ArmExtensionMotorState getArmExtensionMotorState() {
+        return this.m_armExtensionMotorState;
     }
 
     public CANSparkMax getArmChainMotor() {
@@ -90,6 +122,11 @@ public class Arm extends SubsystemBase {
     public CANSparkMax getArmChainMotor2() {
         return this.m_armChainMotor2;
     }
+    public CANSparkMax getArmExtensionMotor() {
+        return this.m_armExtensionMotor;
+    }
+    
+
 
    
     

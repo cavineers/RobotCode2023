@@ -5,9 +5,9 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class LowerArm extends CommandBase {
+public class ExtendArm extends CommandBase {
     
-    public LowerArm() {
+    public ExtendArm() {
         this.addRequirements(Robot.arm);
     }
 
@@ -17,8 +17,7 @@ public class LowerArm extends CommandBase {
 
     @Override
     public void execute() {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
     }
 
     @Override

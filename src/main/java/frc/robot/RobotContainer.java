@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RaiseArm;
+import frc.robot.commands.RetractArm;
+import frc.robot.commands.ExtendArm;
 import frc.robot.commands.LowerArm;
 import frc.robot.subsystems.Arm;
 
@@ -20,6 +22,8 @@ public class RobotContainer {
 
     public Command m_armChainMotorUp;
     public Command m_armChainMotorDown;
+    public Command m_armExtendMotor;
+    public Command m_armRetractMotor;
     public Command m_arm;
 
     // Driver Controller
@@ -57,30 +61,48 @@ public class RobotContainer {
         
     
     this.povRight.onTrue(new InstantCommand() {
-      @Override
       public void initialize() {
         m_armChainMotorDown = new LowerArm();
         m_armChainMotorDown.schedule();
       }
     });
     this.povRight.onFalse(new InstantCommand() {
-      @Override
       public void initialize() {
         m_armChainMotorDown.cancel();
       }
     });
 
     this.povLeft.onTrue(new InstantCommand() {
-      @Override
       public void initialize() {
         m_armChainMotorUp = new RaiseArm();
         m_armChainMotorUp.schedule();
       }
     });
     this.povLeft.onFalse(new InstantCommand() {
-      @Override
       public void initialize() {
         m_armChainMotorUp.cancel();
+      }
+    });
+    this.povUp.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armExtendMotor = new ExtendArm();
+        m_armExtendMotor.schedule();
+      }
+    });
+    this.povUp.onFalse(new InstantCommand() {
+      public void initialize() {
+        m_armExtendMotor.cancel();
+      }
+    });
+    this.povDown.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armRetractMotor = new RetractArm();
+        m_armRetractMotor.schedule();
+      }
+    });
+    this.povDown.onFalse(new InstantCommand() {
+      public void initialize() {
+        m_armRetractMotor.cancel();
       }
     });
     
