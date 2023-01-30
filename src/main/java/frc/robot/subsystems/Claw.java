@@ -47,9 +47,7 @@ public class Claw extends SubsystemBase {
                 this.m_ClawMotor.set(Constants.Claw.ClawSpeedRev);
                 break;
             default:
-               
         }
-        
     }
 }
 
