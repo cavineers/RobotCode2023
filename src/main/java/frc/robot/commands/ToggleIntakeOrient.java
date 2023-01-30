@@ -6,6 +6,9 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
 public class ToggleIntakeOrient extends CommandBase{
+
+    private boolean isDone = false;
+    
     public ToggleIntakeOrient() {
         this.addRequirements(Robot.intake);
     }
@@ -16,11 +19,12 @@ public class ToggleIntakeOrient extends CommandBase{
 
     @Override
     public void execute() {
-        if (Robot.intake.getIntakeLeftOrient().getEncoder().getPosition() > Constants.Intake.RevolutionsToLower) {
+        if (Robot.intake.getIntakeOrientState() == Intake.IntakeOrientState.OFF) {
             Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.ON);
-        } else if (Robot.intake.getIntakeLeftOrient().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
-            Robot.m_robotContainer.m_intake.schedule();
+            this.isDone = false;
+        } else {
             Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.OFF);
+            this.isDone = true;
         }
     }
 

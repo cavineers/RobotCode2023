@@ -6,6 +6,8 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
 public class ToggleRaiseIntake extends CommandBase {
+
+    private boolean isDone = false;
     
     public ToggleRaiseIntake() {
         this.addRequirements(Robot.intake);
@@ -17,11 +19,12 @@ public class ToggleRaiseIntake extends CommandBase {
 
     @Override
     public void execute() {
-        if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() > Constants.Intake.RevolutionsToLower) {
+        if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
-        } else if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
-            Robot.m_robotContainer.m_intake.schedule();
+            this.isDone = false;
+        } else {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
+            this.isDone = true;
         }
     }
 

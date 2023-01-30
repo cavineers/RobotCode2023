@@ -7,34 +7,36 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase{
-    
+
+
+    //Intake states
     public enum IntakeMotorState {
         ON,
         OFF,
         REVERSED
     }
-
     public enum IntakeDropMotorState {
         RAISE,
         LOWER,
         OFF
     }
-
     public enum IntakeOrientState {
         ON,
         OFF
     }
 
+        //SparkMax's
     public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
     public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
     public CANSparkMax m_intakeDropMotor = new CANSparkMax(Constants.Intake.IntakeDropMotorID, MotorType.kBrushless);
     public CANSparkMax m_intakeLeftOrient = new CANSparkMax(Constants.Intake.IntakeLeftOrientID, MotorType.kBrushless);
     public CANSparkMax m_intakeRightOrient = new CANSparkMax(Constants.Intake.IntakeRightOrientID, MotorType.kBrushless);
+
+    //Intake states
     public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
     public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
     public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
     public IntakeOrientState m_IntakeOrientState = IntakeOrientState.OFF;
-    //Intake states
 
     public void setIntakeMotorState(IntakeMotorState state) {
         // set the current state
@@ -68,15 +70,14 @@ public class Intake extends SubsystemBase{
 
         switch (state) {
             case LOWER:
-                // turns on intake
+                //lowers intake for begining of match
                 this.m_intakeDropMotor.set(Constants.Intake.IntakeDropSpeed);
                 break;
             case OFF:
-                // turns off intake
                 this.m_intakeDropMotor.set(0.0);
                 break;
             case RAISE:
-                // reverses intake
+                //Raises intake for end of match
                 this.m_intakeDropMotor.set(Constants.Intake.IntakeRaiseSpeed);
                 break;
             default:
@@ -105,18 +106,13 @@ public class Intake extends SubsystemBase{
         return this.m_intakeMotorStateTop;
     }
     
-    public CANSparkMax getIntakeLeftOrient() {
-        return this.m_intakeLeftOrient;
+    public IntakeOrientState getIntakeOrientState() {
+        return this.m_IntakeOrientState;
     }
 
     public IntakeDropMotorState getIntakeDropMotorState() {
         // return the current motor state
         return this.m_intakeDropMotorState;
-    }
-
-    public CANSparkMax getIntakeDropMotor() {
-        // return the current motor state
-        return this.m_intakeDropMotor;
     }
     /**
      * Get the current intake state.
