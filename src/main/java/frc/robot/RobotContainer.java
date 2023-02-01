@@ -44,14 +44,14 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
-      this.b_button.whenPressed(new InstantCommand() {
+      this.b_button.onTrue(new InstantCommand() {
         public void initialize() {
             m_claw = new ClawToggle();
             m_claw.schedule();
         }
       });
 
-      this.b_button.whenPressed(new InstantCommand() {
+      this.b_button.onFalse(new InstantCommand() {
         public void initialize() {
           if (m_claw.isScheduled()) {
             m_claw.cancel();
@@ -60,14 +60,14 @@ public class RobotContainer {
       });
     
 
-      this.r_bump.whenPressed(new InstantCommand() {
+      this.r_bump.onTrue(new InstantCommand() {
         public void initialize() {
           m_intake = new ToggleIntake();
           m_intake.schedule();
         }
       });
 
-      this.r_bump.whenPressed(new InstantCommand() {
+      this.r_bump.onFalse(new InstantCommand() {
         public void initialize() {
           if(m_intake.isScheduled()) {
             m_intake.cancel();
