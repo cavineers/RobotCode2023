@@ -5,10 +5,10 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int IntakeOrientMotor   = 1;
-        public static int IntakeMotorTop      = 2; // IntakeMotor (neo)
+        public static int IntakeMotorTop      = 1; // IntakeMotor (neo)
+        public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
         public static int IntakeDropMotor     = 3;
-        public static int IntakeMotorBottom   = 4; // IntakeMotor (neo)
+        public static int IntakeOrientMotor   = 4;  
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -27,11 +27,11 @@ public final class Constants {
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
         public static int IntakeOrientID = CANIds.IntakeOrientMotor;
 
-        public static double IntakeSpeed = 0.7;
-        public static double IntakeSpeedRev = -0.65; // Intake reverse speed
+        public static double IntakeSpeed = 0.35;
+        public static double IntakeSpeedRev = -0.35; // Intake reverse speed
         public static double IntakeLowerSpeed = 0.2;
         public static double IntakeRaiseSpeed = -0.2;
-        public static double IntakeOrientSpeed = 0.4;
+        public static double IntakeOrientSpeed = 0.2;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)

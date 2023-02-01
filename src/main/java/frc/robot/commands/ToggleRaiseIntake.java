@@ -7,10 +7,6 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Intake.IntakeDropMotorState;
 
 public class ToggleRaiseIntake extends CommandBase {
-
-    private boolean isDone = false;
-
-    private double m_timestamp;
     
     public ToggleRaiseIntake() {
         this.addRequirements(Robot.intake);
@@ -19,30 +15,23 @@ public class ToggleRaiseIntake extends CommandBase {
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
-        if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
-            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
-            this.isDone = false;
-        } else {
-            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
-            this.isDone = true;
-        }
     }
 
     @Override
     public void execute() {
-        Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
+        if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
+            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
+        } else {
+            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.intake.setIntakeDropMotorState(IntakeDropMotorState.OFF);
     }
 
     @Override
     public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0.4 && Robot.m_robotContainer.joy.getRawButton(5)) {
-            this.isDone = true;
-        }
-        return this.isDone;
+        return true;
     }
 }

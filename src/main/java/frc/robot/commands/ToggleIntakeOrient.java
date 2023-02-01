@@ -7,9 +7,6 @@ import frc.robot.subsystems.Intake;
 
 public class ToggleIntakeOrient extends CommandBase{
 
-    private boolean isDone = false;
-    private double m_timestamp;
-    
     public ToggleIntakeOrient() {
         this.addRequirements(Robot.intake);
     }
@@ -17,31 +14,24 @@ public class ToggleIntakeOrient extends CommandBase{
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
-        if (Robot.intake.getIntakeOrientState() == Intake.IntakeOrientState.OFF) {
-            Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.ON);
-            this.isDone = false;
-        } else {
-            Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.OFF);
-            this.isDone = true;
-        }
+        
     }
 
     @Override
     public void execute() {
-        Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.ON);
+        if (Robot.intake.getIntakeOrientState() == Intake.IntakeOrientState.OFF) {
+            Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.ON);
+        } else {
+            Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.OFF);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.intake.setIntakeOrientState(Intake.IntakeOrientState.OFF);
     }
 
     @Override
     public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0.4 && Robot.m_robotContainer.joy.getRawButton(2)) {
-            this.isDone = true;
-        }
-
-        return this.isDone;
+        return true;
     }
 }
