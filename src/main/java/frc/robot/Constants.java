@@ -105,9 +105,6 @@ public final class Constants {
         public static double OutputShelfX = 16.5;
         public static double OutputShelfY = 95;
 
-        public static double IntakeX = 0;
-        public static double IntakeY = 0;
-
         public static double PickupHeight = 0; 
         public static double DropHeight = 0; //
 
@@ -118,7 +115,7 @@ public final class Constants {
         public static double ArmChainSpeedRev = -0.2; // Chain reverse speed
 
         public static double ArmExtensionSpeed = 0.1;
-        public static double ArmExtensionSpeedRev = -0.1; // Intake reverse speed
+        public static double ArmExtensionSpeedRev = -0.1; // Extension reverse speed
 
         //Speed of motor movement in meters per second
         public static double ArmChainSpeedRevMPS = 0; //Not yet known
@@ -130,7 +127,6 @@ public final class Constants {
         public static double MaxChainRevolutions = 89; //89 is temporary
         public static double MaxExtensionRevolutions = 89; //89 is temporary
 
-        public static double RevolutionsToLower = -31;
     }
 
 
