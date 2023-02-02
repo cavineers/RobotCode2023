@@ -128,6 +128,29 @@ public class Arm extends SubsystemBase {
     public CANSparkMax getArmExtensionMotor() {
         return this.m_armExtensionMotor;
     }
+    public double getArmChainMotorPosition() {
+    return this.m_armChainMotor.getEncoder().getPosition();
+  }
+
+  public double getArmChainMotor2Position() {
+    return this.m_armChainMotor2.getEncoder().getPosition();
+  }
+
+   public double getArmExtensionMotorPosition() {
+    return this.m_armExtensionMotor.getEncoder().getPosition();
+  }
+
+  public void setArmChainMotorPosition(double position) {
+    this.m_armChainMotor.getEncoder().setPosition(position);
+  }
+
+  public void setArmChainMotor2Position(double position) {
+    this.m_armChainMotor2.getEncoder().setPosition(position);
+  }
+
+  public void setArmExtensionMotorPosition(double position) {
+    this.m_armExtensionMotor.getEncoder().setPosition(position);
+  }
     
     public boolean getAngleSwitch() {
         return this.m_angleLimitSwitch.get();
@@ -141,18 +164,12 @@ public class Arm extends SubsystemBase {
    
 
 
-    public enum PickupNode {
-        INTAKE,
-        OUTPUT_SHELF
-    }
-
-    public double[] getPickupNodeRotations(PickupNode state) {
-        switch(state){
-            default:
-
-        }
-
-        double[] rotations = {};
+    public int[] getIntakeRotations() {
+        double finalAngle = Constants.Arm.IntakeAngle;
+        double finalDistance = Constants.Arm.IntakeDistance;
+        Long angleRotations = Math.round(finalAngle * Constants.Arm.RotationsPerDegree);
+        Long distanceRotations = Math.round(finalDistance * Constants.Arm.RotationsPerCM);
+        int[] rotations = {angleRotations.intValue(), distanceRotations.intValue()};
         return rotations;
     }
 
@@ -163,7 +180,7 @@ public class Arm extends SubsystemBase {
         MID_SHELF
     }
 
-    public double[] getPlacementNodeRotations(PlacementNode state){
+    public int[] getPlacementNodeRotations(PlacementNode state){
             
         double nodeX, nodeY;
 
@@ -193,16 +210,11 @@ public class Arm extends SubsystemBase {
         //Calculations for Placement and angle
         double distanceY = nodeY + Constants.Arm.DropHeight - Constants.Arm.ArmHeight;
         double distanceX = nodeX + Constants.Arm.ArmDistanceFromFront; 
-        double finalAngle = Math.atan(distanceY/distanceX);
+        double finalAngle = Math.toDegrees(Math.atan(distanceY/distanceX));
         double finalDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
-        double angleTime = finalAngle * Constants.Arm.ArmChainSpeedRevMPS;
-        double distanceTime = finalDistance * Constants.Arm.ArmExtensionSpeedMPS;
-        double[] values = {angleTime, distanceTime, finalDistance, finalAngle};
-        return values;
+        Long angleRotations = Math.round(finalAngle * Constants.Arm.RotationsPerDegree);
+        Long distanceRotations = Math.round(finalDistance * Constants.Arm.RotationsPerCM);
+        int[] rotations = {angleRotations.intValue(), distanceRotations.intValue()};
+        return rotations;
     }
 }
-    
-    
-
-
-//TODO add intake pickup, and shelf pick/ start motors for certain time.  

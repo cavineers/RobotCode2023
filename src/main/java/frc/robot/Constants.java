@@ -104,9 +104,10 @@ public final class Constants {
         public static double MidShelfY = 60;
         public static double OutputShelfX = 16.5;
         public static double OutputShelfY = 95;
+        public static double IntakeAngle = 0; 
+        public static double IntakeDistance = 0; 
 
-        public static double PickupHeight = 0; 
-        public static double DropHeight = 0; //
+        public static double DropHeight = 0; //Not yet known
 
         public static double ArmHeight = 0;//
         public static double ArmDistanceFromFront = 0;//
@@ -118,8 +119,8 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.1; // Extension reverse speed
 
         //Speed of motor movement in meters per second
-        public static double ArmChainSpeedRevMPS = 0; //Not yet known
-        public static double ArmExtensionSpeedMPS = 0; //Not yet known
+        public static double RotationsPerDegree = 0; //Not yet known
+        public static double RotationsPerCM = 0; //Not yet known
         
 
         public static double ArmExtensionMetersPerRevolution = Math.PI / 367.3221; //pi/9.33, then converted into meters
