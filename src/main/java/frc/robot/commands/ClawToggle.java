@@ -5,14 +5,10 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
+import frc.robot.Vision;
 
 
 public class ClawToggle extends CommandBase {
-
-    private boolean isDone = false;
-    private boolean isHolding = false;
-    private double m_timestamp;
-    private Joystick joy;
     
     public ClawToggle() {
         this.addRequirements(Robot.claw);
@@ -21,33 +17,24 @@ public class ClawToggle extends CommandBase {
     // Set Motor On / Off
     @Override
     public void initialize() {
-        
-        if (Robot.claw.getClawMotorState() == Claw.ClawMotorState.OFF) {
-            Robot.claw.setMotorState(Claw.ClawMotorState.ON);
-            this.isDone = false;
-        } else {
-            Robot.claw.setMotorState(Claw.ClawMotorState.OFF);
-            this.isDone = true;
-        }
     }
 
     @Override
     public void execute() {
-    Robot.claw.setMotorState(Claw.ClawMotorState.ON); 
+        if (Robot.claw.getClawMotorState() == Claw.ClawMotorState.OFF) {
+            Robot.claw.setMotorState(Claw.ClawMotorState.ON);
+        } else {
+            Robot.claw.setMotorState(Claw.ClawMotorState.OFF);
+        }
     }
 
 
     @Override 
     public void end(boolean interrupted) {
-    Robot.claw.setMotorState(Claw.ClawMotorState.OFF);
     }
 
     @Override
     public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0.4 && Robot.m_robotContainer.joy.getRawButton(2)) {
-            this.isDone = true;
-        }
-
-        return this.isDone;
+        return true;
     }
 } 
