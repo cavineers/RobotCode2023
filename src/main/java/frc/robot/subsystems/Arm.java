@@ -129,62 +129,68 @@ public class Arm extends SubsystemBase {
 
 
    
-    
-   
 
-    //LimeLight will determine this. How u might ask? No clue 
-    public enum NodeMode {
+
+    public enum PickupNode {
+        INTAKE,
+        OUTPUT_SHELF
+    }
+
+    public double[] getPickupNodeRotations(PickupNode state) {
+        switch(state){
+            default:
+
+        }
+
+        double[] rotations = {};
+        return rotations;
+    }
+
+    public enum PlacementNode {
         TOP_PEG,
         MID_PEG,
         TOP_SHELF,
-        MID_SHELF,
-        OUTPUT_SHELF
-        }
+        MID_SHELF
+    }
 
-        public double[] getNodePlacementTimes(NodeMode state, double currentArmDistance, double currentArmAngle){
+    public double[] getPlacementNodeRotations(PlacementNode state){
             
-            double nodeX, nodeY;
-            double height = Constants.Arm.DropHeight;
+        double nodeX, nodeY;
 
-            //Switches State
-            switch(state){
-                case TOP_PEG:
-                    nodeX = Constants.Arm.TopX;
-                    nodeY = Constants.Arm.TopPegY;
-                    break;
-                case TOP_SHELF:
-                    nodeX = Constants.Arm.TopX;
-                    nodeY = Constants.Arm.TopShelfY;
-                    break;
-                case MID_PEG:
-                    nodeX = Constants.Arm.MidX;
-                    nodeY = Constants.Arm.MidPegY;
-                    break;
-                case MID_SHELF:
-                    nodeX = Constants.Arm.MidX;
-                    nodeY = Constants.Arm.MidShelfY;
-                    break;
-                case OUTPUT_SHELF:
-                    nodeX = Constants.Arm.OutputShelfX;
-                    nodeY = Constants.Arm.OutputShelfY;
-                    height = Constants.Arm.PickupHeight;
-                    break;
-                default:
+        //Switches State
+        switch(state){
+            case TOP_PEG:
+                nodeX = Constants.Arm.TopX;
+                nodeY = Constants.Arm.TopPegY;
+                break;
+            case TOP_SHELF:
+                nodeX = Constants.Arm.TopX;
+                nodeY = Constants.Arm.TopShelfY;
+                break;
+            case MID_PEG:
+                nodeX = Constants.Arm.MidX;
+                nodeY = Constants.Arm.MidPegY;
+                break;
+            case MID_SHELF:
+                nodeX = Constants.Arm.MidX;
+                nodeY = Constants.Arm.MidShelfY;
+                break;
+            default:
                 nodeX = 0;
                 nodeY = 0;
-            }
-            
-            //Calculations for Placement and angle
-             double distanceY = nodeY + height - Constants.Arm.ArmHeight;
-             double distanceX = nodeX + Constants.Arm.ArmDistanceFromFront;
-             double finalAngle = Math.tan(distanceY/distanceX);
-             double finalDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
-             double angleTime = (finalAngle - currentArmAngle) * Constants.Arm.ArmChainSpeedRevMPS;
-             double distanceTime = (finalDistance - currentArmDistance) * Constants.Arm.ArmExtensionSpeedMPS;
-             double[] values = {angleTime, distanceTime, finalDistance, finalAngle};
-             return values;
         }
+            
+        //Calculations for Placement and angle
+        double distanceY = nodeY + Constants.Arm.DropHeight - Constants.Arm.ArmHeight;
+        double distanceX = nodeX + Constants.Arm.ArmDistanceFromFront; 
+        double finalAngle = Math.atan(distanceY/distanceX);
+        double finalDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
+        double angleTime = finalAngle * Constants.Arm.ArmChainSpeedRevMPS;
+        double distanceTime = finalDistance * Constants.Arm.ArmExtensionSpeedMPS;
+        double[] values = {angleTime, distanceTime, finalDistance, finalAngle};
+        return values;
     }
+}
     
     
 
