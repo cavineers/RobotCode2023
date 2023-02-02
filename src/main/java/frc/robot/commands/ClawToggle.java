@@ -21,7 +21,6 @@ public class ClawToggle extends CommandBase {
     // Set Motor On / Off
     @Override
     public void initialize() {
-        this.m_timestamp = Timer.getFPATimestamp();
         
         if (Robot.claw.getClawMotorState() == Claw.ClawMotorState.OFF) {
             Robot.claw.setMotorState(Claw.ClawMotorState.ON);
