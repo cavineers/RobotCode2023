@@ -141,7 +141,7 @@ public class Arm extends SubsystemBase {
         OUTPUT_SHELF
         }
 
-        public double[] getNodePlacementTimes(NodeMode state, double distanceFromGrid, double currentArmDistance, double currentArmAngle){
+        public double[] getNodePlacementTimes(NodeMode state, double currentArmDistance, double currentArmAngle){
             
             double nodeX, nodeY;
             double height = Constants.Arm.DropHeight;
@@ -176,7 +176,7 @@ public class Arm extends SubsystemBase {
             
             //Calculations for Placement and angle
              double distanceY = nodeY + height - Constants.Arm.ArmHeight;
-             double distanceX = nodeX + distanceFromGrid + Constants.Arm.ArmDistanceFromFront;
+             double distanceX = nodeX + Constants.Arm.ArmDistanceFromFront;
              double finalAngle = Math.tan(distanceY/distanceX);
              double finalDistance = Math.sqrt((distanceX * distanceX) + (distanceY * distanceY));
              double angleTime = (finalAngle - currentArmAngle) * Constants.Arm.ArmChainSpeedRevMPS;

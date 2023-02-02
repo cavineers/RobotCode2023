@@ -27,7 +27,8 @@ public class Mid_Shelf_Preset extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.arm.getNodePlacementTimes(Arm.NodeMode.Mid_Shelf);
+        double[] times = Robot.arm.getNodePlacementTimes(Arm.NodeMode.MID_SHELF, );
+        
     }
 
     @Override
