@@ -9,7 +9,7 @@ public final class Constants {
         public static int ArmJointTwo         = 2; // Joint 2 Neo  
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int ClawMotor           = 5; // ClawMotor (BAG)
+        public static int ClawMotor           = 5; // ClawMotor (minineo)
         public static int IntakeMotorTop      = 6; // IntakeMotor (neo)
         public static int IntakeMotorBottom   = 7; // IntakeMotor (neo)
         public static int IntakeDropMotor     = 8;
@@ -111,8 +111,8 @@ public final class Constants {
         public static final int ClawID = CANIds.ClawMotor;
         public static final int ClawSpeed = 2; //unknown variable for now. Once known change int -> double
         public static final int ClawSpeedRev = -1; //unknown variable for now. Once known change int -> double
-        public static final int ClawHighPressure = 3; // Variables will depend on after testing. TBD
-        public static final int ClawLowPressure = 7; // Variables will depend on after testing. TBD
+        public static final double RevolutionsToCube = 2.5; // less revs to get to cube sides
+        public static final double RevolutionsToCone = 5.5; // more revs to get to cone sides
         
     }
 
