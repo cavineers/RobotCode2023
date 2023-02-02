@@ -8,7 +8,7 @@ import frc.robot.subsystems.Claw;
 
 public class ClawToggle extends CommandBase {
 
-    private boolean isFinished = false;
+    private boolean isDone = false;
     private boolean isHolding = false;
     private double m_timestamp;
     
@@ -21,10 +21,10 @@ public class ClawToggle extends CommandBase {
     public void initialize() {
         if (Robot.claw.getClawMotorState() == Claw.ClawMotorState.OFF) {
             Robot.claw.setMotorState(Claw.ClawMotorState.ON);
-            this.isFinished = false;
+            this.isDone = false;
         } else {
             Robot.claw.setMotorState(Claw.ClawMotorState.OFF);
-            this.isFinished = true;
+            this.isDone = true;
         }
     }
 
