@@ -6,13 +6,15 @@ public final class Constants {
     
     public static class CANIds {
         public static int ArmJointOne         = 1; // Joint 1 Neo
-        public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
+        public static int ArmJointTwo         = 2; // Joint 2 Neo  
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int IntakeMotorTop      = 4; // IntakeMotor (neo)
-        public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
-        public static int IntakeDropMotor     = 3;
+        public static int ClawMotor           = 5; // ClawMotor (minineo)
+        public static int IntakeMotorTop      = 6; // IntakeMotor (neo)
+        public static int IntakeMotorBottom   = 7; // IntakeMotor (neo)
+        public static int IntakeDropMotor     = 8;
     }
+    
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kDriveMotorGearRatio = 1 / 5.8462;
@@ -106,5 +108,19 @@ public final class Constants {
         public static final int kDriverJoystickPort = 0;
     }
 
+    public static final class Claw {
+        public static final int ClawID = CANIds.ClawMotor;
+        public static final int ClawSpeed = 2; //unknown variable for now. Once known change int -> double
+        public static final int ClawSpeedRev = -1; //unknown variable for now. Once known change int -> double
+        public static final double RevolutionsToCube = 2.5; // less revs to get to cube sides
+        public static final double RevolutionsToCone = 5.5; // more revs to get to cone sides
+        
+    }
+
+    public static final class IntakeMotorState {
+        public static final boolean ON = true; 
+        public static final boolean OFF = false;
+    }
+    
 }
 
