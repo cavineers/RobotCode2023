@@ -6,13 +6,11 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.ToggleIntake;
 import frc.robot.commands.ClawToggle;
 
 public class RobotContainer {
 
-    public Command m_intake;
-    public Command m_claw;
+    public ClawToggle m_claw;
     
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
@@ -37,7 +35,6 @@ public class RobotContainer {
 
     public RobotContainer() {
 
-      this.m_intake = new ToggleIntake();
       this.m_claw = new ClawToggle();
       configureButtonBindings();
 
@@ -55,22 +52,6 @@ public class RobotContainer {
         public void initialize() {
           if (m_claw.isScheduled()) {
             m_claw.cancel();
-          }
-        }
-      });
-    
-
-      this.r_bump.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_intake = new ToggleIntake();
-          m_intake.schedule();
-        }
-      });
-
-      this.r_bump.onFalse(new InstantCommand() {
-        public void initialize() {
-          if(m_intake.isScheduled()) {
-            m_intake.cancel();
           }
         }
       });
