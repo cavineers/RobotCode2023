@@ -104,14 +104,13 @@ public class RobotContainer {
     });
     this.povDown.onFalse(new InstantCommand() {
       public void initialize() {
-        m_armHome = new HomeArm();
-        m_armHome.schedule();
+        m_armRetractMotor.cancel();
       }
     });
     this.a_button.onTrue(new InstantCommand() {
       public void initialize() {
-        m_armChainMotorDown = new LowerArm();
-        m_armChainMotorDown.schedule();
+        m_armHome = new HomeArm();
+        m_armHome.schedule();
       }
     });
     

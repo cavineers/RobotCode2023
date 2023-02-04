@@ -18,35 +18,29 @@ public class HomeArm extends CommandBase {
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
-        if (Robot.arm.getArmExtensionMotorState() == Arm.ArmExtensionMotorState.OFF) {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
-            this.isDone = false;
-        } else {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-            this.isDone = true;
+        Robot.arm.getArmChainMotor().set(0.0);
+        Robot.arm.getArmChainMotor2().set(0.0);
+        Robot.arm.getArmExtensionMotor().set(0.0);
         }
-    }
+    
 
     @Override
     public void execute() {
-        if(Robot.arm.getArmChainMotorPosition() > 0) {
+        if(Robot.arm.getArmChainMotorPosition() > 0){
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
-        } else {
+        } 
+         else {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-        }
-        if(Robot.arm.getArmExtensionMotorPosition() > 0) {
+        if(Robot.arm.getArmExtensionMotorPosition() > 0){
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         } else {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         }
     }
-
+}
+    
     @Override
     public void end(boolean interrupted) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
