@@ -10,16 +10,16 @@ public class Claw extends SubsystemBase {
     public enum ClawMotorState {
         ON,
         OFF,
-        HIGH_PRESSURE,
-        LOW_PRESSURE,
         REVERSE,
+        CUBEHOLD,
+        CONEHOLD
     }
 
     boolean isOn;
     boolean opening;
     boolean closing;
-    boolean highPressure;
-    boolean lowPressure;
+    boolean holdingCube;
+    boolean holdingCone;
 
     public CANSparkMax m_ClawMotor = new CANSparkMax(Constants.Claw.ClawID, MotorType.kBrushless);
     public ClawMotorState m_ClawMotorState = ClawMotorState.OFF;
@@ -46,7 +46,7 @@ public class Claw extends SubsystemBase {
                 this.m_ClawMotor.set(Constants.Claw.ClawSpeedRev);
                 break;
             default:
+                this.setMotorState(ClawMotorState.OFF);
         }
     }
 }
-
