@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractArm;
 import frc.robot.commands.ExtendArm;
+import frc.robot.commands.HomeArm;
 import frc.robot.commands.LowerArm;
 import frc.robot.subsystems.Arm;
 
@@ -24,6 +25,7 @@ public class RobotContainer {
     public Command m_armChainMotorDown;
     public Command m_armExtendMotor;
     public Command m_armRetractMotor;
+    public Command m_armHome;
     public Command m_arm;
 
     // Driver Controller
@@ -102,7 +104,14 @@ public class RobotContainer {
     });
     this.povDown.onFalse(new InstantCommand() {
       public void initialize() {
-        m_armRetractMotor.cancel();
+        m_armHome = new HomeArm();
+        m_armHome.schedule();
+      }
+    });
+    this.a_button.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armChainMotorDown = new LowerArm();
+        m_armChainMotorDown.schedule();
       }
     });
     

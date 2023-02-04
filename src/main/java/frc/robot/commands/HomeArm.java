@@ -11,7 +11,7 @@ public class HomeArm extends CommandBase {
     private boolean isDone = false;
     private double m_timestamp;
 
-    public ExtendArm() {
+    public HomeArm() {
         this.addRequirements(Robot.arm);
     }
 
@@ -33,14 +33,14 @@ public class HomeArm extends CommandBase {
 
     @Override
     public void execute() {
-        if(Robot.arm.getArmChainMotorPosition > 0) {
+        if(Robot.arm.getArmChainMotorPosition() > 0) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
         } else {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         }
-        if(Robot.arm.getArmExtensionMotorPosition > 0) {
+        if(Robot.arm.getArmExtensionMotorPosition() > 0) {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         } else {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
