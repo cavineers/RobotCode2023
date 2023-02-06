@@ -7,9 +7,9 @@ public final class Constants {
     public static class CANIds {
         public static int IntakeMotorTop      = 1; // IntakeMotor (neo)
         public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
-        public static int IntakeDropMotor     = 3;
-        public static int IntakeOrientMotor   = 4;  
+        public static int IntakeDropMotor     = 3; // IntakeDropMotor (neo)
     }
+    
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kDriveMotorGearRatio = 1 / 5.8462;
@@ -21,17 +21,21 @@ public final class Constants {
         public static final double kPTurning = 0.5;
     }
 
+    public static final class DIO {
+        public static int IntakeSwitch = 0;
+    }
+
     public static final class Intake{
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
-        public static int IntakeOrientID = CANIds.IntakeOrientMotor;
 
-        public static double IntakeSpeed = 0.35;
-        public static double IntakeSpeedRev = -0.35; // Intake reverse speed
+        public static double IntakeSpeed = 0.4;
+        public static double IntakeSpeedRev = -0.4; // Intake reverse speed
         public static double IntakeLowerSpeed = 0.2;
-        public static double IntakeRaiseSpeed = -0.2;
-        public static double IntakeOrientSpeed = 0.2;
+        public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
+        public static double IntakeOrientSpeed = 0.3;
+        public static double IntakeOrientRevSpeed = 0.3;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
@@ -84,13 +88,8 @@ public final class Constants {
         public static final double kFrontRightAbsoluteEncoderOffset = 0; /* Needs to be set */
         public static final double kBackRightAbsoluteEncoderOffset = 0; /* Needs to be set */
 
-
-        
-
         public static final double kTrackWidth = Units.inchesToMeters(19.5); // Needs editing - The distance between the centers of wheels on opposite sides */;
         public static final double kWheelBase = Units.inchesToMeters(23.5); //Needs editing - The distance between the centers of wheels on the same side
-
-
     }
 
     public static final class OIConstants {
