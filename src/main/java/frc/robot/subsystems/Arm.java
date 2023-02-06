@@ -175,8 +175,7 @@ public class Arm extends SubsystemBase {
 
     public enum PlacementNode {
         TOP_PEG,
-        MID_PEG,
-        TOP_SHELF,
+        MID_PEG_AND_TOP_SHELF,
         MID_SHELF
     }
 
