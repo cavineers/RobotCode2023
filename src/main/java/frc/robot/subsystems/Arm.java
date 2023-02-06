@@ -176,7 +176,8 @@ public class Arm extends SubsystemBase {
     public enum PlacementNode {
         TOP_PEG,
         MID_PEG_AND_TOP_SHELF,
-        MID_SHELF
+        MID_SHELF,
+        BOTTOM_NODE
     }
 
     public int[] getPlacementNodeRotations(PlacementNode state){
@@ -189,17 +190,17 @@ public class Arm extends SubsystemBase {
                 nodeX = Constants.Arm.TopX;
                 nodeY = Constants.Arm.TopPegY;
                 break;
-            case TOP_SHELF:
-                nodeX = Constants.Arm.TopX;
-                nodeY = Constants.Arm.TopShelfY;
-                break;
-            case MID_PEG:
+            case MID_PEG_AND_TOP_SHELF:
                 nodeX = Constants.Arm.MidX;
                 nodeY = Constants.Arm.MidPegY;
                 break;
             case MID_SHELF:
                 nodeX = Constants.Arm.MidX;
                 nodeY = Constants.Arm.MidShelfY;
+                break;
+            case BOTTOM_NODE:
+                nodeX = 15;
+                nodeY = 0;
                 break;
             default:
                 nodeX = 0;
