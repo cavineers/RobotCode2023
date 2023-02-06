@@ -30,18 +30,17 @@ public class HomeArm extends CommandBase {
         if(Robot.arm.getArmChainMotorPosition() > 0){
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
-        } else if (Robot.arm.getArmChainMotorPosition() < -5){
+        } else if (Robot.arm.getArmChainMotorPosition() < -3){
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         } 
          else {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-    if (Robot.arm.getArmChainMotorPosition() > 0 && Robot.arm.getArmChainMotorPosition() < -5)
         if(Robot.arm.getArmExtensionMotorPosition() > 0){
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-        }else if(Robot.arm.getArmExtensionMotorPosition() < -5){
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        }else if(Robot.arm.getArmExtensionMotorPosition() < -3){
+            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         } else { 
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         }

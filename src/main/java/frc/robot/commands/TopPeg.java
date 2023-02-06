@@ -6,12 +6,12 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class MidShelf extends CommandBase {
+public class TopPeg extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public MidShelf() {
+    public TopPeg() {
         this.addRequirements(Robot.arm);
     }
 
@@ -27,18 +27,18 @@ public class MidShelf extends CommandBase {
     @Override
     public void execute() {
     
-        if(Robot.arm.getArmChainMotorPosition() > 10){
+        if(Robot.arm.getArmChainMotorPosition() > 20){
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
-        } else if (Robot.arm.getArmChainMotorPosition() < 7){
+        } else if (Robot.arm.getArmChainMotorPosition() < 17){
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         } else {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-        if(Robot.arm.getArmExtensionMotorPosition() > 10){
+        if(Robot.arm.getArmExtensionMotorPosition() > 20){
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-        }else if(Robot.arm.getArmExtensionMotorPosition() < 7){
+        }else if(Robot.arm.getArmExtensionMotorPosition() < 17){
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         } else { 
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);

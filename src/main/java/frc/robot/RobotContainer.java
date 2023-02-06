@@ -10,9 +10,14 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractArm;
+import frc.robot.commands.TopPeg;
+import frc.robot.commands.BottomNode;
 import frc.robot.commands.ExtendArm;
 import frc.robot.commands.HomeArm;
+import frc.robot.commands.HumanPlayerPickup;
 import frc.robot.commands.LowerArm;
+import frc.robot.commands.MidPegTopShelf;
+import frc.robot.commands.MidShelf;
 import frc.robot.subsystems.Arm;
 
 
@@ -26,6 +31,11 @@ public class RobotContainer {
     public Command m_armExtendMotor;
     public Command m_armRetractMotor;
     public Command m_armHome;
+    public Command m_armBottomNode;
+    public Command m_armMidShelf;
+    public Command m_armMidPegTopShelf;
+    public Command m_armTopPeg;
+    public Command m_armHumanPlayerPickup;
     public Command m_arm;
 
     // Driver Controller
@@ -61,56 +71,40 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
         
-    
-    this.povRight.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armChainMotorDown = new LowerArm();
-        m_armChainMotorDown.schedule();
-      }
-    });
-    this.povRight.onFalse(new InstantCommand() {
-      public void initialize() {
-        m_armChainMotorDown.cancel();
-      }
-    });
-
-    this.povLeft.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armChainMotorUp = new RaiseArm();
-        m_armChainMotorUp.schedule();
-      }
-    });
-    this.povLeft.onFalse(new InstantCommand() {
-      public void initialize() {
-        m_armChainMotorUp.cancel();
-      }
-    });
-    this.povUp.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armExtendMotor = new ExtendArm();
-        m_armExtendMotor.schedule();
-      }
-    });
-    this.povUp.onFalse(new InstantCommand() {
-      public void initialize() {
-        m_armExtendMotor.cancel();
-      }
-    });
-    this.povDown.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armRetractMotor = new RetractArm();
-        m_armRetractMotor.schedule();
-      }
-    });
-    this.povDown.onFalse(new InstantCommand() {
-      public void initialize() {
-        m_armRetractMotor.cancel();
-      }
-    });
     this.a_button.onTrue(new InstantCommand() {
       public void initialize() {
         m_armHome = new HomeArm();
         m_armHome.schedule();
+      }
+    });
+    this.povDown.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armBottomNode = new BottomNode();
+        m_armBottomNode.schedule();
+      }
+    });
+    this.povLeft.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armMidShelf = new MidShelf();
+        m_armMidShelf.schedule();
+      }
+    });
+    this.povRight.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armMidPegTopShelf = new MidPegTopShelf();
+        m_armMidPegTopShelf.schedule();
+      }
+    });
+    this.povUp.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armTopPeg = new TopPeg();
+        m_armTopPeg.schedule();
+      }
+    });
+    this.b_button.onTrue(new InstantCommand() {
+      public void initialize() {
+        m_armHumanPlayerPickup = new HumanPlayerPickup();
+        m_armHumanPlayerPickup.schedule();
       }
     });
     
