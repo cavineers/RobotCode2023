@@ -19,6 +19,7 @@ public class ToggleLowerIntake extends CommandBase {
     public void execute() {
         if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.LOWER);
+            Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.ON);
         } else if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.LOWER) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
         }
