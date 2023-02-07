@@ -5,14 +5,13 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int ArmJointOne         = 1; // Joint 1 Neo
-        public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
-        public static int ArmJointThree       = 3; // Joint 3 Neo
-        public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int IntakeMotorTop      = 5; // IntakeMotor (neo)
-        public static int IntakeMotorBottom   = 6; // IntakeMotor (neo)
-        public static int IntakeDropMotor     = 7;
-        public static int IntakeDropMotor2    = 8;
+        public static int IntakeMotorBottom   = 1;
+        public static int IntakeMotorTop      = 2;
+        public static int IntakeDropMotor     = 3;
+        public static int IntakeDropMotor2    = 4;
+        public static int ArmJointOne         = 5; // Joint 1 Neo
+        public static int ArmJointTwo         = 6; // Joint 2 Neo      One of these wil be a mini but is undecided
+        public static int ArmJointThree       = 7; // Joint 3 Neo
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
