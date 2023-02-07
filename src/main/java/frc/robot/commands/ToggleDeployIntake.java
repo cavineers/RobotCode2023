@@ -5,9 +5,10 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
-public class ToggleRaiseIntake extends CommandBase {
+public class ToggleDeployIntake extends CommandBase {
+    private boolean inPosition = false;
     
-    public ToggleRaiseIntake() {
+    public ToggleDeployIntake() {
         this.addRequirements(Robot.intake);
     }
 
@@ -17,11 +18,11 @@ public class ToggleRaiseIntake extends CommandBase {
 
     @Override
     public void execute() {
-        if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() > Constants.Intake.RevolutionsToLower) {
-            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.RAISE);
-        } else if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
-            Robot.m_robotContainer.m_intake.schedule();
+        if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
+            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.DEPLOY);
+        } else if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() >= -1) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
+            this.inPosition = true;
         }
     }
 
@@ -30,6 +31,6 @@ public class ToggleRaiseIntake extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return false;
+        return this.inPosition;
     }
 }

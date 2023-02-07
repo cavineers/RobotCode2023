@@ -9,9 +9,10 @@ public final class Constants {
         public static int ArmJointTwo         = 2; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree       = 3; // Joint 3 Neo
         public static int IntakeMotor         = 4;  // IntakeMotor (neo)
-        public static int IntakeMotorTop      = 4; // IntakeMotor (neo)
-        public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
-        public static int IntakeDropMotor     = 3;
+        public static int IntakeMotorTop      = 5; // IntakeMotor (neo)
+        public static int IntakeMotorBottom   = 6; // IntakeMotor (neo)
+        public static int IntakeDropMotor     = 7;
+        public static int IntakeDropMotor2    = 8;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -24,23 +25,24 @@ public final class Constants {
         public static final double kPTurning = 0.5;
     }
 
+    public static final class DIO {
+        public static int IntakeSwitch = 0;
+    }
+
     public static final class Intake{
-        public static int IntakeID = CANIds.IntakeMotor;
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
+        public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
 
         public static double IntakeSpeed = 0.7;
-        public static double IntakeSpeedRev = -0.65; // Intake reverse speed
-        public static double IntakeDropSpeed = 0.2;
-        public static double IntakeRaiseSpeed = -0.2;
+        public static double IntakeLowerSpeed = -0.2;
+        public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedRevTop = IntakeSpeedRev; // Intake reverse speed
-        public static double IntakeSpeedRevBottom = -(IntakeSpeedRev); // Intake reverse speed
 
-        public static double RevolutionsToLower = -31;
+        public static double RevolutionsToLower= -20;
     }
 
     public static final class DriveConstants {

@@ -1,38 +1,41 @@
 package frc.robot.subsystems;
 
-import com.fasterxml.jackson.databind.introspect.AnnotationCollector.OneAnnotation;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase{
-    
+
+
+    //Intake states
     public enum IntakeMotorState {
         ON,
-        OFF,
-        REVERSED
+        OFF
     }
-
     public enum IntakeDropMotorState {
-        RAISE,
-        LOWER,
+        UNDEPLOY,
+        DEPLOY,
         OFF
     }
 
+    // SparkMax's
     public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
     public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
     public CANSparkMax m_intakeDropMotor = new CANSparkMax(Constants.Intake.IntakeDropMotorID, MotorType.kBrushless);
-    public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
-    public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
+    public CANSparkMax m_intakeDropMotor2 = new CANSparkMax(Constants.Intake.IntakeDropMotor2ID, MotorType.kBrushless);
+
+    // Limit Switch
+    public DigitalInput m_intakeSwitch = new DigitalInput(Constants.DIO.IntakeSwitch);
+
+    // Intake states
+    public IntakeMotorState m_intakeMotorState = IntakeMotorState.OFF;
     public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
-    //Intake states
 
     public void setIntakeMotorState(IntakeMotorState state) {
-        // set the current state
-        this.m_intakeMotorStateTop = state;
-        this.m_intakeMotorStateBottom = state;
+        // set the current state of top and bottom motor
+        this.m_intakeMotorState = state;
         
         // set motor state
         switch (state) {
@@ -46,50 +49,52 @@ public class Intake extends SubsystemBase{
                 this.m_intakeMotorTop.set(0.0);
                 this.m_intakeMotorBottom.set(0.0);
                 break;
-            case REVERSED:
-                // reverses intake
-                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedRevTop);
-                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedRevBottom);
-                break;
             default:
                 this.setIntakeMotorState(IntakeMotorState.OFF);
         }
     }
 
+
     public void setIntakeDropMotorState(IntakeDropMotorState state) {
+
         this.m_intakeDropMotorState = state;
 
         switch (state) {
-            case LOWER:
-                // turns on intake
-                this.m_intakeDropMotor.set(Constants.Intake.IntakeDropSpeed);
-                break;
             case OFF:
-                // turns off intake
                 this.m_intakeDropMotor.set(0.0);
+                this.m_intakeDropMotor2.set(0.0);
                 break;
-            case RAISE:
-                // reverses intake
+            case DEPLOY:
+                //Deploys intake
+                this.m_intakeDropMotor.set(Constants.Intake.IntakeLowerSpeed);
+                this.m_intakeDropMotor2.set(Constants.Intake.IntakeLowerSpeed);
+                break;
+            case UNDEPLOY:
+                //Undeploys intake
                 this.m_intakeDropMotor.set(Constants.Intake.IntakeRaiseSpeed);
+                this.m_intakeDropMotor2.set(Constants.Intake.IntakeRaiseSpeed);
                 break;
             default:
-                this.setIntakeMotorState(IntakeMotorState.OFF);
+                this.setIntakeDropMotorState(IntakeDropMotorState.OFF);
         }
     }
 
+
     public IntakeMotorState getIntakeMotorState() {
-        return this.m_intakeMotorStateTop;
+        return this.m_intakeMotorState;
     }
-    
+
+    public CANSparkMax getIntakeDropMotor() {
+        return this.m_intakeDropMotor;
+    }
+
     public IntakeDropMotorState getIntakeDropMotorState() {
         // return the current motor state
         return this.m_intakeDropMotorState;
     }
-
-    public CANSparkMax getIntakeDropMotor() {
-        // return the current motor state
-        return this.m_intakeDropMotor;
-    }
+    public boolean getIntakeSwitch() {
+        return this.m_intakeSwitch.get();
+      }
     /**
      * Get the current intake state.
      * @return intake state
