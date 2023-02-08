@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ToggleIntake;
-import frc.robot.commands.ToggleDeployIntake;
-import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.ToggleLowerIntake;
+import frc.robot.commands.ToggleRaiseIntake;
 
 public class RobotContainer {
 
@@ -40,33 +40,54 @@ public class RobotContainer {
     public RobotContainer() {
 
       this.m_intake = new ToggleIntake();
-      this.m_raiseIntake = new ToggleUndeployIntake();
-      this.m_lowerIntake = new ToggleDeployIntake();
+      this.m_raiseIntake = new ToggleRaiseIntake();
+      this.m_lowerIntake = new ToggleLowerIntake();
       configureButtonBindings();
 
     };
     
+    //TOGGLE INTAKE ON AND OFF
     private void configureButtonBindings() {
+       this.r_bump.onTrue(new InstantCommand() { 
+        @Override
+         public void initialize() {
+          m_intake = new ToggleIntake();
+          m_intake.schedule();
+        }
+       }
+      );
 
-      //Deploys and Undeploys Intake
-    this.r_bump.onTrue(new InstantCommand() {
+      this.r_bump.onFalse(new InstantCommand() {
+        @Override
+         public void initialize() {
+          if(m_intake.isScheduled()) {
+            m_intake.cancel();
+          }
+        }
+       }
+      );
+
+      //LOWERS AND RAISES INTAKE
+    this.l_bump.onTrue(new InstantCommand() {
         @Override
          public void initialize() {
           if(m_raiseIntake.isScheduled()) {
             m_raiseIntake.cancel();
           }
-          m_lowerIntake = new ToggleDeployIntake();
+          m_lowerIntake = new ToggleLowerIntake();
           m_lowerIntake.schedule();
          }
         });
-        
-      this.r_bump.onFalse(new InstantCommand() {
+
+    
+
+      this.l_bump.onFalse(new InstantCommand() {
         @Override
          public void initialize() {
             if(m_lowerIntake.isScheduled()) {
             m_lowerIntake.cancel();
             } 
-           m_raiseIntake = new ToggleUndeployIntake();
+           m_raiseIntake = new ToggleRaiseIntake();
            m_raiseIntake.schedule();
         }
       }); 
