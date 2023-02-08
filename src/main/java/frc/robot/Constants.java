@@ -123,5 +123,10 @@ public final class Constants {
         public static final double kDeadband = 0.1;
     }
 
+    public static class AprilTagConstants {
+        public static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(23.375);
+        public static final double CAMERA_HEIGHT_METERS = 0; /*needs to be set */
+        public static final double CAMERA_PITCH_RADIANS = 0; /*needs to be set */
+    }
 }
 
