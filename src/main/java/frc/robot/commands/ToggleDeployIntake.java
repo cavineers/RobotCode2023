@@ -6,7 +6,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
 
 public class ToggleDeployIntake extends CommandBase {
-    private boolean inPosition = false;
+    private boolean isFinished = false;
     
     public ToggleDeployIntake() {
         this.addRequirements(Robot.intake);
@@ -18,11 +18,12 @@ public class ToggleDeployIntake extends CommandBase {
 
     @Override
     public void execute() {
-        if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
+        if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.DEPLOY);
-        } else if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() >= -1) {
+            Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.ON);
+        } else if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
-            this.inPosition = true;
+            isFinished = true;
         }
     }
 
@@ -31,6 +32,6 @@ public class ToggleDeployIntake extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return this.inPosition;
+        return isFinished;
     }
 }
