@@ -6,7 +6,6 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.ToggleIntake;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 
@@ -39,7 +38,6 @@ public class RobotContainer {
 
     public RobotContainer() {
 
-      this.m_intake = new ToggleIntake();
       this.m_raiseIntake = new ToggleUndeployIntake();
       this.m_lowerIntake = new ToggleDeployIntake();
       configureButtonBindings();
