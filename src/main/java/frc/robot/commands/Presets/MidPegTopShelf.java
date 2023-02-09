@@ -6,12 +6,12 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class BottomNode extends CommandBase {
+public class MidPegTopShelf extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public BottomNode() {
+    public MidPegTopShelf() {
         this.addRequirements(Robot.arm);
     }
 
