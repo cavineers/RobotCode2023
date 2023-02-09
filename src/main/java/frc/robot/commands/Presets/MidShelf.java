@@ -6,12 +6,12 @@ import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class MidShelf extends CommandBase {
+public class BottomNode extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public MidShelf() {
+    public BottomNode() {
         this.addRequirements(Robot.arm);
     }
 
@@ -26,26 +26,37 @@ public class MidShelf extends CommandBase {
 
     @Override
     public void execute() {
-    
-        if(Robot.arm.getArmChainMotorPosition() > 10){
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
-        } else if (Robot.arm.getArmChainMotorPosition() < 7){
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
-        } else {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-        }
-        if(Robot.arm.getArmExtensionMotorPosition() > 10){
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-        }else if(Robot.arm.getArmExtensionMotorPosition() < 7){
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
-        } else { 
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
-        }
-        }
+    // Called when arm is raising
+    // 5 and 3 are not permenant
+    if(Robot.arm.getArmChainMotorPosition() < 7) {
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
+    } else if (Robot.arm.getExtensionMotorPosition() < 7) {
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
+    } else {
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF)
+        Robot.arm.setArmChainMotorState(Arm.ArmExtensionMotorState.OFF)
+        Robot.arm.setArmChainMotor2State(Arm.ArmExtensionMotorState.OFF)
     }
+    // Called when arm is lowering
+    if(Robot.arm.getArmExtensionMotorPosition() > 10) {      
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
+    } else if (Robot.arm.getChainMotorPosition() > 10) {
+        Robot.arm.setArmExtensionMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+    } else {
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF)
+        Robot.arm.setArmChainMotorState(Arm.ArmExtensionMotorState.OFF)
+        Robot.arm.setArmChainMotor2State(Arm.ArmExtensionMotorState.OFF)
+    }
+}
+
+ 
+        
+
 
     
     @Override
