@@ -1,10 +1,12 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import org.photonvision.PhotonCamera;
+import org.photonvision.PhotonUtils;
 import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
 
@@ -22,7 +24,6 @@ public class AprilTag extends SubsystemBase {
     private int targetID;
     private double poseAmbiguity;
     private Transform3d bestCameraToTarget;
-    
 
     //Use constants
     private static double cameraHeight = Constants.AprilTagConstants.CAMERA_HEIGHT_METERS;
@@ -37,7 +38,9 @@ public class AprilTag extends SubsystemBase {
     }
 
     public void periodic() {
+
         result = camera.getLatestResult();
+
         if (result.hasTargets()) {
             targets = result.getTargets();
             target = result.getBestTarget();
@@ -50,13 +53,10 @@ public class AprilTag extends SubsystemBase {
     }
 
     public boolean atAprilTag() {
+
         //If the distance is below a certain value, return true
         boolean atTag = false;
-        double distanceMeters = PhotonUtils.calculateDistanceToTargetMeters(
-            cameraHeight,
-            targetHeight,
-            cameraPitch,
-            Units.degreesToRadians(result.getBestTarget().getPitch()));
+        double distanceMeters = PhotonUtils.calculateDistanceToTargetMeters(cameraHeight, targetHeight, cameraPitch, Units.degreesToRadians(result.getBestTarget().getPitch()));
 
         if (distanceMeters <= 1) {
             atTag = true;
