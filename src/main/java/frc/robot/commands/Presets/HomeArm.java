@@ -9,6 +9,7 @@ import frc.robot.subsystems.Arm;
 public class HomeArm extends CommandBase {
     
     private boolean isDone = false;
+    private boolean contractionCompleted = false;
     private double m_timestamp;
 
     public HomeArm() {
@@ -28,18 +29,23 @@ public class HomeArm extends CommandBase {
     public void execute() {
         if (Robot.arm.getExtensionSwitch() == true) {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF)
+            Robot.arm.getArmExtensionMotorPosition().set(0.0);
         } else {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         }
-        if (Robot.arm.getAngleSwitch() == true) {
+        if (Robot.arm.getArmExtensionMotorPosition() == 0) {
+            if (Robot.arm.getAngleSwitch() == true) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+            Robot.arm.getArmChainMotorPosition().set(0.0);
+            Robot.arm.getArmChainMotor2Position().set(0.0);
         } else {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+            }
         }
-        
-    }
+    }     
+
 
     
     @Override
