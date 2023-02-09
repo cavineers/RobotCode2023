@@ -8,16 +8,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Presets.MidPegTopShelf;
+import frc.robot.commands.Presets.MidShelf;
+import frc.robot.commands.Presets.TopPeg;
+import frc.robot.commands.Presets.BottomNode;
+import frc.robot.commands.Presets.HomeArm;
+import frc.robot.commands.Presets.HumanPlayerPickup;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractArm;
-import frc.robot.commands.TopPeg;
-import frc.robot.commands.BottomNode;
 import frc.robot.commands.ExtendArm;
-import frc.robot.commands.HomeArm;
-import frc.robot.commands.HumanPlayerPickup;
 import frc.robot.commands.LowerArm;
-import frc.robot.commands.MidPegTopShelf;
-import frc.robot.commands.MidShelf;
 import frc.robot.subsystems.Arm;
 
 
