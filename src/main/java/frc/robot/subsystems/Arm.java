@@ -151,6 +151,7 @@ public class Arm extends SubsystemBase {
   public void setArmExtensionMotorPosition(double position) {
     this.m_armExtensionMotor.getEncoder().setPosition(position);
   }
+  
     
     public boolean getAngleSwitch() {
         return this.m_angleLimitSwitch.get();
