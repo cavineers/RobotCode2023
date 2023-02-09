@@ -36,6 +36,7 @@ public class TopPeg extends CommandBase {
         } else {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+        }
         if(Robot.arm.getArmExtensionMotorPosition() > 20){
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         }else if(Robot.arm.getArmExtensionMotorPosition() < 17){
