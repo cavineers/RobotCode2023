@@ -38,14 +38,14 @@ public final class Constants {
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
         public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
 
-        public static double IntakeSpeed = 0.7;
-        public static double IntakeLowerSpeed = -0.2;
+        public static double IntakeSpeed = 0.35;
+        public static double IntakeLowerSpeed = 0.2;
         public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
 
-        public static double RevolutionsToLower= -20;
+        public static double RevolutionsToLower= 20;
     }
 
     public static final class DriveConstants {
@@ -55,14 +55,14 @@ public final class Constants {
         
 
         public static final int kFrontLeftDriveCanID = 8;
-        public static final int kBackLeftDriveCanID = 2;
-        public static final int kFrontRightDriveCanID = 6;
-        public static final int kBackRightDriveCanID = 4;
+        public static final int kBackLeftDriveCanID = 9;
+        public static final int kFrontRightDriveCanID = 10;
+        public static final int kBackRightDriveCanID = 11;
 
-        public static final int kFrontLeftTurningCanID = 7;
-        public static final int kBackLeftTurningCanID = 1;
-        public static final int kFrontRightTurningCanID = 5;
-        public static final int kBackRightTurningCanID = 3;
+        public static final int kFrontLeftTurningCanID = 12;
+        public static final int kBackLeftTurningCanID = 13;
+        public static final int kFrontRightTurningCanID = 14;
+        public static final int kBackRightTurningCanID = 15;
 
         public static final int kFrontLeftAbsoluteEncoderPort = 0; //TBD
         public static final int kBackLeftAbsoluteEncoderPort = 1; //TBD
@@ -117,7 +117,7 @@ public final class Constants {
 
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
-        public static final int kDriverRotAxis = 4;
+        public static final int kDriverRotAxis = 2;
         public static final int kDriverFieldOrientedButtonIdx = 1;
 
         public static final double kDeadband = 0.1;

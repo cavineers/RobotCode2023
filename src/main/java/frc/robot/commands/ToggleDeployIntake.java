@@ -21,8 +21,9 @@ public class ToggleDeployIntake extends CommandBase {
         if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.DEPLOY);
             Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.ON);
-        } else if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() <= Constants.Intake.RevolutionsToLower) {
+        } if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() >= Constants.Intake.RevolutionsToLower) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
+            Robot.intake.getIntakeDropMotor().getEncoder().setPosition(0);
             isFinished = true;
         }
     }
