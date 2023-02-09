@@ -20,6 +20,7 @@ public class AprilTag extends SubsystemBase {
     private int targetID;
     private double poseAmbiguity;
     private Transform3d bestCameraToTarget;
+    
 
     //Use constants
     private static double cameraHeight = Constants.AprilTagConstants.CAMERA_HEIGHT_METERS;

@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -56,7 +57,7 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void robotInit() {
-
+    PortForwarder.add(8888, "wpilibpi.local", 80);
   }
 
   /**
