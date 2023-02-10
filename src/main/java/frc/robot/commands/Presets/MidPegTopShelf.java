@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -31,26 +31,26 @@ public class MidPegTopShelf extends CommandBase {
     if(Robot.arm.getArmChainMotorPosition() < 13) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
-    } else if (Robot.arm.getExtensionMotorPosition() < 13) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 13) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
     } else {
-        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF)
-        Robot.arm.setArmChainMotorState(Arm.ArmExtensionMotorState.OFF)
-        Robot.arm.setArmChainMotor2State(Arm.ArmExtensionMotorState.OFF)
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
     }
     // Called when arm is lowering
     if(Robot.arm.getArmExtensionMotorPosition() > 15) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-    } else if (Robot.arm.getChainMotorPosition() > 15) {
-        Robot.arm.setArmExtensionMotorState(Arm.ArmChainMotorState.OFF);
+    } else if (Robot.arm.getArmChainMotorPosition() > 15) {
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
     } else {
-        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF)
-        Robot.arm.setArmChainMotorState(Arm.ArmExtensionMotorState.OFF)
-        Robot.arm.setArmChainMotor2State(Arm.ArmExtensionMotorState.OFF)
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
     }
 }
 

@@ -1,4 +1,4 @@
-package frc.robot.commands;
+package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -9,7 +9,6 @@ import frc.robot.subsystems.Arm;
 public class HomeArm extends CommandBase {
     
     private boolean isDone = false;
-    private boolean contractionCompleted = false;
     private double m_timestamp;
 
     public HomeArm() {
@@ -28,7 +27,7 @@ public class HomeArm extends CommandBase {
     @Override
     public void execute() {
         if (Robot.arm.getExtensionSwitch() == true) {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF)
+            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
             Robot.arm.getArmExtensionMotorPosition().set(0.0);
         } else {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
