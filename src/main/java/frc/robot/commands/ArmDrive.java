@@ -22,6 +22,13 @@ public class ArmDrive extends CommandBase {
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
+        // 70 not permenant
+        if (Robot.arm.getArmChainMotorPosition <= 70) {
+            Robot.arm.getArmChainMotor().set(DriveMotion.add(this.joy.getRawAxis(1) / 1.4, 0.05));
+            Robot.arm.getArmChainMotor2().set(DriveMotion.add(this.joy.getRawAxis(1) / 1.4, 0.05));
+        } else {
+            Robot.arm.getArmChainMotor().set(0.0);
+        }
     }
 
     @Override
