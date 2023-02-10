@@ -139,6 +139,5 @@ public final class Constants {
         public static int ArmAngleSwitch = 0;
         public static int ArmExtensionSwitch = 1;
     }
-
 }
 
