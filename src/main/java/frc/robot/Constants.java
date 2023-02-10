@@ -45,7 +45,7 @@ public final class Constants {
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
 
-        public static double RevolutionsToLower= 20;
+        public static double RevolutionsToLower= 3.35;
     }
 
     public static final class DriveConstants {
