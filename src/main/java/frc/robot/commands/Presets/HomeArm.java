@@ -29,10 +29,12 @@ public class HomeArm extends CommandBase {
         if (Robot.arm.getExtensionSwitch() == true) {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
             Robot.arm.setArmExtensionMotorPosition(0.0);
-        } else {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-        }
-        if (Robot.arm.getArmExtensionMotorPosition() == 0) {
+        }else {
+                Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
+            }
+        
+    
+        /*if (Robot.arm.getArmExtensionMotorPosition() == 0) {
             if (Robot.arm.getAngleSwitch() == true) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
@@ -42,8 +44,8 @@ public class HomeArm extends CommandBase {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
             }
-        }
-    }     
+        } */
+
 
 
     

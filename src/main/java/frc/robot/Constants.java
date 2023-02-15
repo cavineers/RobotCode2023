@@ -136,8 +136,8 @@ public final class Constants {
         public static final int kDriverJoystickPort = 0;
     }
     public static class DIO {
-        public static int ArmAngleSwitch = 0;
-        public static int ArmExtensionSwitch = 1;
+        public static int ArmAngleSwitch = 1;
+        public static int ArmExtensionSwitch = 0;
     }
 }
 
