@@ -2,6 +2,7 @@ package frc.robot;
 
 import com.kauailabs.navx.frc.AHRS;
 
+import edu.wpi.first.wpilibj.SPI.Port;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -21,6 +22,8 @@ public class Robot extends TimedRobot {
 
   //Container
   public static RobotContainer m_robotContainer;
+
+  public static AHRS gyro;
 
   //Subsystems
   public static SwerveDriveSubsystem m_swerveDriveSubsystem;
@@ -52,6 +55,8 @@ public class Robot extends TimedRobot {
         } catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
+
+        gyro = new AHRS(Port.kMXP);
 
   }
   @Override
