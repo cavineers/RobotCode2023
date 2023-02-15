@@ -56,17 +56,26 @@ public class RobotContainer {
   public POVButton povDown = new POVButton(joy, 180, 0);
   public POVButton povLeft = new POVButton(joy, 270, 0); 
 
-
+  public enum CurrentMode {
+    DRIVE,
+    ARM
+  }
+  
+  public CurrentMode mode = CurrentMode.DRIVE; 
     
-
-    private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
+  private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
     public RobotContainer() {
+      if(this.mode == CurrentMode.DRIVE) {
+        configureButtonBindings();
+      } else {
+        configureButtonBindingsArm();
+      }
 
         configureButtonBindings();
-
+        configureButtonBindingsArm();
     };
 
     private void configureButtonBindings() {
@@ -108,6 +117,9 @@ public class RobotContainer {
       }
     });
     
+    }
+    private void configureButtonBindingsArm() {
+
     }   
 
     public double getJoystickRawAxis(int id) {
