@@ -21,11 +21,14 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     private int targetID;
 
     private PhotonCamera camera;
+
     
-    public AprilTagHoming() { //Initi
+    
+    public AprilTagHoming() { 
         this.camera = new PhotonCamera("HD_Pro_Webcam_C920");
     }
     
+
     public void periodic() {
         // This method will be called once per scheduler run
         var results = this.camera.getLatestResult();
@@ -43,5 +46,10 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
             var distance = this.target.getDistanceMeters();
             var yaw = this.target.getYaw();
             var targetID = this.target.getFiducialId();
+        }
+    }
+
+    public void home() {
+
     }
 }

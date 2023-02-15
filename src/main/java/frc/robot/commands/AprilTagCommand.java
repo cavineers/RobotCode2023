@@ -1,14 +1,10 @@
 package frc.robot.commands;
 import org.photonvision.PhotonCamera;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.RobotContainer;
-import frc.robot.subsystems.AprilTag;
 
 public class AprilTagCommand extends CommandBase {
 
-    private PhotonCamera camera;
     boolean atPosition;
     boolean atRotation;
 
@@ -19,7 +15,7 @@ public class AprilTagCommand extends CommandBase {
 
     @Override
     public void initialize() {
-       
+        new PhotonCamera("HD_Pro_Webcam_C920");
     }
 
     
