@@ -2,7 +2,6 @@ package frc.robot.commands.Presets;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
@@ -26,15 +25,13 @@ public class HomeArm extends CommandBase {
 
     @Override
     public void execute() {
-        if (Robot.arm.getExtensionSwitch() == true) {
+        if (Robot.arm.getExtensionSwitch() == false) {
+            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
+        }else if (Robot.arm.getExtensionSwitch() == true) {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
             Robot.arm.setArmExtensionMotorPosition(0.0);
-        }else {
-                Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-            }
-        
-    
-        /*if (Robot.arm.getArmExtensionMotorPosition() == 0) {
+        }
+        if (Robot.arm.getArmExtensionMotorPosition() == 0) {
             if (Robot.arm.getAngleSwitch() == true) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
@@ -44,8 +41,8 @@ public class HomeArm extends CommandBase {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
             }
-        } */
-
+        }
+    }     
 
 
     
