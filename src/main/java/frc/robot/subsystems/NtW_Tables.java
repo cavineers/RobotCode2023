@@ -33,10 +33,6 @@ public class NtW_Tables extends SubsystemBase{
         return this.photonVisionTable.getEntry("targetPose").getDoubleArray(getTargetPose());
     }
 
-    public double getTargetSkew(){
-        return this.photonVisionTable.getEntry("targetSkew").getDouble(0.0);
-    }
-
     public double getTargetYaw(){
         return this.photonVisionTable.getEntry("targetYaw").getDouble(0.0);
     }

@@ -11,6 +11,7 @@ import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.AprilTagHoming;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,6 +29,7 @@ public class Robot extends TimedRobot {
   public static SwerveDriveSubsystem m_swerveDriveSubsystem;
   public static Arm arm;
   public static Intake intake;
+  public static AprilTagHoming taghoming;
 
 
   //Navx
@@ -45,6 +47,7 @@ public class Robot extends TimedRobot {
     m_swerveDriveSubsystem = new SwerveDriveSubsystem();
     arm = new Arm();
     intake = new Intake();
+    taghoming = new AprilTagHoming();
     //Container
     m_robotContainer = new RobotContainer();
 
