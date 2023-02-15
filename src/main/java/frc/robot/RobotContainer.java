@@ -16,6 +16,7 @@ import frc.robot.commands.Presets.HomeArm;
 import frc.robot.commands.Presets.HumanPlayerPickup;
 import frc.robot.commands.RaiseArm;
 import frc.robot.commands.RetractArm;
+import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ExtendArm;
 import frc.robot.commands.LowerArm;
 import frc.robot.subsystems.Arm;
@@ -79,6 +80,8 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
+
+    this.right_menu.onTrue(new SwitchMode(this));
         
     this.a_button.onTrue(new InstantCommand() {
       public void initialize() {
@@ -110,7 +113,7 @@ public class RobotContainer {
         m_armTopPeg.schedule();
       }
     });
-    this.b_button.onTrue(new InstantCommand() {
+    this.right_menu.onTrue(new InstantCommand() {
       public void initialize() {
         m_armHumanPlayerPickup = new HumanPlayerPickup();
         m_armHumanPlayerPickup.schedule();
@@ -122,7 +125,35 @@ public class RobotContainer {
     }
     private void configureButtonBindingsArm() {
 
+    /*   this.right_menu.onTrue(new SwitchMode(this));
+
+      this.povLeft.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armChainMotorDown = new LowerArm();
+          m_armChainMotorDown.schedule();
+        }
+      });
+      this.povRight.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armChainMotorUp = new RaiseArm();
+          m_armChainMotorUp.schedule();
+        }
+      });
+      this.povUp.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armExtendMotor = new ExtendArm();
+          m_armExtendMotor.schedule();
+        }
+      });
+      this.povDown.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armRetractMotor = new RetractArm();
+          m_armRetractMotor.schedule();
+        }
+      });
+       */
     }   
+   
 
     public double getJoystickRawAxis(int id) {
         return -m_joy.getRawAxis(id);
