@@ -16,15 +16,9 @@ public class LowerArm extends CommandBase {
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
-        if (Robot.arm.getArmChainMotorState() == Arm.ArmChainMotorState.OFF) {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
-            this.isDone = false;
-        } else {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-            this.isDone = true;
-        }
+        Robot.arm.getArmChainMotor().set(0.0);
+        Robot.arm.getArmChainMotor2().set(0.0);
+        Robot.arm.getArmExtensionMotor().set(0.0);
     }
 
     @Override

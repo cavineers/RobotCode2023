@@ -17,13 +17,9 @@ public class ExtendArm extends CommandBase {
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
-        if (Robot.arm.getArmExtensionMotorState() == Arm.ArmExtensionMotorState.OFF) {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
-            this.isDone = false;
-        } else {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
-            this.isDone = true;
-        }
+        Robot.arm.getArmChainMotor().set(0.0);
+        Robot.arm.getArmChainMotor2().set(0.0);
+        Robot.arm.getArmExtensionMotor().set(0.0);
     }
 
     @Override
