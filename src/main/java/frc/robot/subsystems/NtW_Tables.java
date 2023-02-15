@@ -1,17 +1,18 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.networktables.NetworkTable;
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class NtW_Tables extends SubsystemBase{
 
-    private NetworkTable phtonVisionTable;
+    private NetworkTable photonVisionTable;
 
-    public PhotonVision(){
+    public void PhotonVision(){
         this.photonVisionTable = NetworkTableInstance.getDefault().getTable("Photon Vision");
     }
     public NetworkTable getTable(){
-        return this.table;
+        return this.photonVisionTable;
     }
 
     public boolean validTargets() {
@@ -52,4 +53,3 @@ public class NtW_Tables extends SubsystemBase{
     }
 }
 //!false - its funny because its true
->>>>>>> 875fdce6d00ff31a81190c51a0852840148b1dc3
