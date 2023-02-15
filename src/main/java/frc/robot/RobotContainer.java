@@ -83,7 +83,7 @@ public class RobotContainer {
 
     this.right_menu.onTrue(new SwitchMode(this));
         
-    this.a_button.onTrue(new InstantCommand() {
+    this.left_menu.onTrue(new InstantCommand() {
       public void initialize() {
         m_armHome = new HomeArm();
         m_armHome.schedule();
@@ -113,7 +113,7 @@ public class RobotContainer {
         m_armTopPeg.schedule();
       }
     });
-    this.right_menu.onTrue(new InstantCommand() {
+    this.b_button.onTrue(new InstantCommand() {
       public void initialize() {
         m_armHumanPlayerPickup = new HumanPlayerPickup();
         m_armHumanPlayerPickup.schedule();
