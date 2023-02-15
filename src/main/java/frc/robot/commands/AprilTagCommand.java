@@ -12,33 +12,24 @@ public class AprilTagCommand extends CommandBase {
     boolean atPosition;
     boolean atRotation;
 
-
-    public AprilTagCommand(PhotonCamera c) {
-        this.camera = c;
+    public AprilTagCommand() {
         atPosition = false;
         atRotation = false;
     }
 
     @Override
     public void initialize() {
-        AprilTag tag = new AprilTag(camera);
-        this.execute(tag);
+       
     }
 
     
-    public void execute(AprilTag t) {
-        //call drives
-        atPosition = t.atAprilTag();
-        atRotation = t.alignedWithAprilTag();
-        if (!atPosition || !atRotation) {
-            //Drive towards target / orientate the bot
-        }
+    public void execute() {
+        Robot.taghoming.home();
     }
-
     //Called by the scheduler automatically
     @Override
     public boolean isFinished() {
-        return atPosition && atRotation;
+        return atPosition && atRotation; // Stop if the robot is at the target OR if there is no result
     }
 
     @Override
