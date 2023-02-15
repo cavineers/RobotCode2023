@@ -16,7 +16,7 @@ public class NtW_Tables extends SubsystemBase{
     }
 
     public boolean validTargets() {
-        return this.photonVisionTable.getEntry("hasTarget").getBoolean();
+        return this.photonVisionTable.getEntry("hasTarget").getBoolean(true);
     }
 
     public double getTargetPixX() {
@@ -25,11 +25,12 @@ public class NtW_Tables extends SubsystemBase{
     }
 
     public double getTargetPxY() {
-        return this.photonVisionTable.getEntry("targetPixelsY").getDouble(0.0);
+        double ty = this.photonVisionTable.getEntry("targetPixelsY").getDouble(0.0);
+        return ty;
     }
 
     public double[] getTargetPose(){
-        return this.photonVisionTable.getEntry("targetPose").getDouble([]);
+        return this.photonVisionTable.getEntry("targetPose").getDoubleArray(getTargetPose());
     }
 
     public double getTargetSkew(){
@@ -42,10 +43,6 @@ public class NtW_Tables extends SubsystemBase{
 
     public double getTargetArea(){
         return this.photonVisionTable.getEntry("targetArea").getDouble(0.0);
-    }
-
-    public rawBytes[] getRawBytes(){
-        return this.photonVisionTable.getEntry("rawBytes").getRawBytes(0.0);
     }
 
     public double getLatencyMillis(){
