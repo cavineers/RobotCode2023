@@ -111,8 +111,8 @@ public final class Constants {
         public static final int ClawID = CANIds.ClawMotor;
         public static final int ClawSpeed = 2; //unknown variable for now. Once known change int -> double
         public static final int ClawSpeedRev = -1; //unknown variable for now. Once known change int -> double
-        public static final double RevolutionsToCube = 2.5; // less revs to get to cube sides
-        public static final double RevolutionsToCone = 5.5; // more revs to get to cone sides
+        public static final double RevolutionsToCube = 5.5; // less revs to get to cube sides
+        public static final double RevolutionsToCone = 10.5; // more revs to get to cone sides
         
     }
 
