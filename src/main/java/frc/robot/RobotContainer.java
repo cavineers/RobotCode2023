@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.ClawReverseToggle;
@@ -25,7 +26,7 @@ public class RobotContainer {
     public JoystickButton right_menu = new JoystickButton(joy, 8);
     public JoystickButton left_stick = new JoystickButton(joy, 9);
     public JoystickButton right_stick = new JoystickButton(joy, 10);
-  
+
     public POVButton povUp = new POVButton(joy, 0, 0);
     public POVButton povRight = new POVButton(joy, 90, 0);
     public POVButton povDown = new POVButton(joy, 180, 0);
@@ -42,7 +43,7 @@ public class RobotContainer {
       configureButtonBindings();
 
     };
-
+    
     private void configureButtonBindings() {
       this.b_button.onTrue(new InstantCommand() {
         public void initialize() {
