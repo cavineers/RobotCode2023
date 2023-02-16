@@ -20,6 +20,7 @@ public class Claw extends SubsystemBase {
     boolean closing;
     boolean holdingCube;
     boolean holdingCone;
+    private static boolean isClosed = false;
 
     public CANSparkMax m_ClawMotor = new CANSparkMax(Constants.Claw.ClawID, MotorType.kBrushless);
     public ClawMotorState m_ClawMotorState = ClawMotorState.OFF;
@@ -45,8 +46,13 @@ public class Claw extends SubsystemBase {
                 // reverses intake
                 this.m_ClawMotor.set(Constants.Claw.ClawSpeedRev);
                 break;
-            default:
+
+            default: 
                 this.setMotorState(ClawMotorState.OFF);
         }
+    }
+
+    public CANSparkMax getClawMotor() {
+        return this.m_ClawMotor;
     }
 }
