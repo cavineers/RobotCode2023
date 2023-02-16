@@ -1,16 +1,16 @@
-package frc.robot.commands;
+package frc.robot.commands.manualOverrideCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class ExtendArm extends CommandBase {
+public class RaiseArm extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public ExtendArm() {
+    public RaiseArm() {
         this.addRequirements(Robot.arm);
     }
 
@@ -24,12 +24,14 @@ public class ExtendArm extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
     }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
     }
 
     @Override
