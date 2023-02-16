@@ -61,11 +61,13 @@ public class RobotContainer {
     ARM
   }
   
-  public CurrentMode mode = CurrentMode.DRIVE; 
+  
     
   private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
+    
+    public CurrentMode mode = CurrentMode.DRIVE; 
 
     public RobotContainer() {
       if(this.mode == CurrentMode.DRIVE) {
@@ -73,14 +75,11 @@ public class RobotContainer {
       } else {
         configureButtonBindingsArm();
       }
-
-        configureButtonBindings();
-        configureButtonBindingsArm();
     };
 
     private void configureButtonBindings() {
 
-    this.right_menu.onTrue(new SwitchMode(this));
+      this.right_menu.onTrue(new SwitchMode(this));
         
     this.a_button.onTrue(new InstantCommand() {
       public void initialize() {
@@ -112,7 +111,7 @@ public class RobotContainer {
         m_armTopPeg.schedule();
       }
     });
-    this.right_menu.onTrue(new InstantCommand() {
+    this.left_menu.onTrue(new InstantCommand() {
       public void initialize() {
         m_armHumanPlayerPickup = new HumanPlayerPickup();
         m_armHumanPlayerPickup.schedule();
@@ -124,33 +123,14 @@ public class RobotContainer {
     }
     private void configureButtonBindingsArm() {
 
-    /*   this.right_menu.onTrue(new SwitchMode(this));
+      this.right_menu.onTrue(new SwitchMode(this));
 
-      this.povLeft.onTrue(new InstantCommand() {
+      this.x_button.onTrue(new InstantCommand() {
         public void initialize() {
           m_armChainMotorDown = new LowerArm();
           m_armChainMotorDown.schedule();
         }
       });
-      this.povRight.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armChainMotorUp = new RaiseArm();
-          m_armChainMotorUp.schedule();
-        }
-      });
-      this.povUp.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armExtendMotor = new ExtendArm();
-          m_armExtendMotor.schedule();
-        }
-      });
-      this.povDown.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armRetractMotor = new RetractArm();
-          m_armRetractMotor.schedule();
-        }
-      });
-       */
     }   
    
 
