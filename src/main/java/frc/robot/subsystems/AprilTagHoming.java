@@ -19,6 +19,8 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     private Transform2d currentDistance;
     private double yaw;
     private int targetID;
+    
+    private PIDController xPIDController = new PIDController(Constants.kP, Constants.kI, Constants.kD);
 
     private PhotonCamera camera;
     
@@ -37,11 +39,10 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
         }
     }
 
+
     public void driveToTarget() {
         if (this.target != null) {
             // Drive to the target
-            var distance = this.target.getDistanceMeters();
-            var yaw = this.target.getYaw();
-            var targetID = this.target.getFiducialId();
+            
     }
 }

@@ -16,6 +16,12 @@ public final class Constants {
         public static int ArmJointTwo         = 6; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree       = 7; // Joint 3 Neo
     }
+
+    public static final class PIDController {
+        public static final double kP = 0.1;
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+    }
     
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -105,6 +111,7 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
     }
+
 
     public static class Arm {
         // Joint one is closest to chassis and joint two is the furthest
