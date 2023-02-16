@@ -7,10 +7,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.ClawToggle;
+import frc.robot.commands.ClawReverseToggle;
 
 public class RobotContainer {
 
     public ClawToggle m_claw;
+    public ClawReverseToggle m_clawrev;
     
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
@@ -36,6 +38,7 @@ public class RobotContainer {
     public RobotContainer() {
 
       this.m_claw = new ClawToggle();
+      this.m_clawrev = new ClawReverseToggle();
       configureButtonBindings();
 
     };
@@ -50,9 +53,24 @@ public class RobotContainer {
 
       this.b_button.onFalse(new InstantCommand() {
         public void initialize() {
-          if (m_claw.isScheduled()) {
-            m_claw.cancel();
-          }
+            if (m_claw.isScheduled()) {
+              m_claw.cancel();
+            }
+        }
+      });
+
+       this.a_button.onTrue(new InstantCommand() {
+        public void initialize() {
+            m_clawrev = new ClawReverseToggle();
+            m_clawrev.schedule();
+        }
+      });
+
+      this.a_button.onFalse(new InstantCommand() {
+        public void initialize() {
+            if (m_clawrev.isScheduled()) {
+              m_clawrev.cancel();
+            }
         }
       });
     }   
