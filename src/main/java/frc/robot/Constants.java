@@ -17,7 +17,7 @@ public final class Constants {
         public static int ArmJointThree       = 7; // Joint 3 Neo
     }
 
-    public static final class PIDController {
+    public static final class PIDControllerConstants {
         public static final double kP = 0.1;
         public static final double kI = 0.0;
         public static final double kD = 0.0;
@@ -130,10 +130,6 @@ public final class Constants {
         public static final double kDeadband = 0.1;
     }
 
-    public static class AprilTagConstants {
-        public static final double TARGET_HEIGHT_METERS = Units.inchesToMeters(23.375);
-        public static final double CAMERA_HEIGHT_METERS = 0; /*needs to be set */
-        public static final double CAMERA_PITCH_RADIANS = 0; /*needs to be set */
-    }
+    
 }
 
