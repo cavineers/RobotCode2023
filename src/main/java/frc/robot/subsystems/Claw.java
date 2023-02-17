@@ -6,7 +6,9 @@ import frc.robot.Constants.CANIds;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
-public class Claw {
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
+
+public class Claw extends SubsystemBase{
     
     public boolean isClosed = false;
     
