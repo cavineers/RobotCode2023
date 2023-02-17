@@ -7,13 +7,16 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.ClawToggle;
-import frc.robot.commands.ClawReverseToggle;
+import frc.robot.commands.ConeClose;
+import frc.robot.commands.CubeClose;
+import frc.robot.commands.OpenClaw;
 
 public class RobotContainer {
 
-    public ClawToggle m_claw;
-    public ClawReverseToggle m_clawrev;
+  public Command m_coneClose;
+  public Command m_cubeClose;
+  public Command m_openClaw;
+
     
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
@@ -38,40 +41,27 @@ public class RobotContainer {
 
     public RobotContainer() {
 
-      this.m_claw = new ClawToggle();
-      this.m_clawrev = new ClawReverseToggle();
       configureButtonBindings();
 
     };
     
     private void configureButtonBindings() {
+      this.a_button.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_openClaw = new OpenClaw();
+          m_openClaw.schedule();
+        }
+      });
       this.b_button.onTrue(new InstantCommand() {
         public void initialize() {
-            m_claw = new ClawToggle();
-            m_claw.schedule();
+          m_cubeClose = new CubeClose();
+          m_cubeClose.schedule();
         }
       });
-
-      this.b_button.onFalse(new InstantCommand() {
+      this.x_button.onTrue(new InstantCommand() {
         public void initialize() {
-            if (m_claw.isScheduled()) {
-              m_claw.cancel();
-            }
-        }
-      });
-
-       this.a_button.onTrue(new InstantCommand() {
-        public void initialize() {
-            m_clawrev = new ClawReverseToggle();
-            m_clawrev.schedule();
-        }
-      });
-
-      this.a_button.onFalse(new InstantCommand() {
-        public void initialize() {
-            if (m_clawrev.isScheduled()) {
-              m_clawrev.cancel();
-            }
+          m_coneClose = new ConeClose();
+          m_coneClose.schedule();
         }
       });
     }   

@@ -37,7 +37,6 @@ public final class Constants {
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
-        public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
 
         public static double IntakeSpeed = 0.35;
         public static double IntakeLowerSpeed = 0.2;
@@ -126,8 +125,8 @@ public final class Constants {
 
     public static final class Claw {
         public static final int ClawID = CANIds.ClawMotor;
-        public static final int ClawSpeed = 2; //unknown variable for now. Once known change int -> double
-        public static final int ClawSpeedRev = -1; //unknown variable for now. Once known change int -> double
+        public static final double ClawSpeed = 0.09; //unknown variable for now. Once known change int -> double
+        public static final double ClawSpeedRev = -0.09; //unknown variable for now. Once known change int -> double
         public static final double RevolutionsToCube = 5.5; // less revs to get to cube sides
         public static final double RevolutionsToCone = 10.5; // more revs to get to cone sides
         
