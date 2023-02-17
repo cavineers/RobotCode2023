@@ -8,16 +8,32 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 public class Claw {
     
-    private boolean isClosed = false;
+    public boolean isClosed = false;
     
-    private CANSparkMax m_clawMotor = new CANSparkMax(CANIds.ClawMotor, MotorType.kBrushless);
+    public CANSparkMax m_clawMotor = new CANSparkMax(CANIds.ClawMotor, MotorType.kBrushless);
 
-    private clawMotorState m_clawMotorState = clawMotorState.OFF;
+    public CANSparkMax getMotor() {
+        return this.m_clawMotor;
+    }
 
-    private enum clawMotorState {
+    public clawMotorState m_clawMotorState = clawMotorState.OFF;
+
+    public enum clawMotorState {
         ON,
         OFF,
         REVERSE
+    }
+
+    public clawMotorState getMotorState() {
+        return this.m_clawMotorState;
+    }
+
+    public boolean isClosed() {
+        return isClosed;
+    }
+
+    public void setClosed(boolean isClosed) {
+        this.isClosed = isClosed;
     }
 
     public void setMotorState(clawMotorState state) {
@@ -26,7 +42,7 @@ public class Claw {
         // set motor state
         switch (state) {
             case ON:
-                // turns on motor
+                // turns motor on forward
                 this.m_clawMotor.set(Constants.Claw.kClawSpeed);
                 break;
             case OFF:

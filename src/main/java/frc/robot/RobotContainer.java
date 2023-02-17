@@ -7,8 +7,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.ToggleDeployIntake;
-import frc.robot.commands.ToggleUndeployIntake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
@@ -40,32 +38,13 @@ public class RobotContainer {
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
     public RobotContainer() {
-      this.m_raiseIntake = new ToggleUndeployIntake();
-      this.m_lowerIntake = new ToggleDeployIntake();
       configureButtonBindings();
 
     };
     
     private void configureButtonBindings() {
-  
-     this.r_bump.onTrue(new InstantCommand(){
-      public void initialize() {
-        if(m_raiseIntake.isScheduled()) {
-          m_raiseIntake.cancel();
-        }
-      m_lowerIntake = new ToggleDeployIntake();
-      m_lowerIntake.schedule();
-      }
-    });
-    this.l_bump.onTrue(new InstantCommand(){
-      public void initialize() {
-        if(m_lowerIntake.isScheduled()) {
-          m_lowerIntake.cancel();
-          }
-      m_raiseIntake = new ToggleUndeployIntake();
-      m_raiseIntake.schedule();
-      }
-    });
+
+
 }
 
     public double getJoystickRawAxis(int id) {

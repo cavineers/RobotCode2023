@@ -15,6 +15,7 @@ public final class Constants {
         public static int ArmJointOne         = 5; // Joint 1 Neo
         public static int ArmJointTwo         = 6; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree       = 7; // Joint 3 Neo
+        public static int ClawMotor           = 8; 
     }
     
     public static final class ModuleConstants {
@@ -110,6 +111,12 @@ public final class Constants {
         // Joint one is closest to chassis and joint two is the furthest
         public static int ArmJointOne = CANIds.ArmJointOne;
         public static int ArmJointTwo = CANIds.ArmJointTwo;
+    }
+
+    public static final class Claw {
+        public static final double kClawSpeed = 2;
+        public static final double kRevolutionsToCube = 5.5; // less revs to get to cube sides
+        public static final double kRevolutionsToCone = 10.5; // more revs to get to cone sides 
     }
 
     public static final class OIConstants {
