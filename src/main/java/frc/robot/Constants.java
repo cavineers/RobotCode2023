@@ -112,11 +112,11 @@ public final class Constants {
         public static double ArmHeight = 0;//
         public static double ArmDistanceFromFront = 0;//
         
-        public static double ArmChainSpeed = 0.09;
-        public static double ArmChainSpeedRev = -0.09; // Chain reverse speed
+        public static double ArmChainSpeed = 1;
+        public static double ArmChainSpeedRev = -1; // Chain reverse speed
 
-        public static double ArmExtensionSpeed = 0.09;
-        public static double ArmExtensionSpeedRev = -0.09;
+        public static double ArmExtensionSpeed = 1;
+        public static double ArmExtensionSpeedRev = -1;
         ; // Extension reverse speed
 
         //Speed of motor movement in meters per second

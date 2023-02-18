@@ -5,12 +5,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class HumanPlayerPickup extends CommandBase {
+public class MidNode extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public HumanPlayerPickup() {
+    public MidNode() {
         this.addRequirements(Robot.arm);
     }
 
@@ -25,21 +25,21 @@ public class HumanPlayerPickup extends CommandBase {
 
     @Override
     public void execute() {
-    // Called when arm is raising
-    // 5 and 3 are not permenant
-    if(Robot.arm.getArmChainMotorPosition() < 23) {
+    // This is mid shelf
+    // 12.36 is angle rotations and 45.81 is extension rotations
+    if(Robot.arm.getArmChainMotorPosition() < 12.36) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < 23) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 45.81) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > 25) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 45.81) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > 25) {
+    } else if (Robot.arm.getArmChainMotorPosition() > 12.36) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
@@ -50,13 +50,34 @@ public class HumanPlayerPickup extends CommandBase {
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         this.isDone = true;
     }
+
+    // Mid peg (add if statement that states whether holding cube or cone)
+    // 14.16 is angle rotations and 41.71 is extension rotations
+    /*if(Robot.arm.getArmChainMotorPosition() < 14.16) {
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
+        this.isDone = false;
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 41.71) {
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
+        this.isDone = false;
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 41.71) {      
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
+        this.isDone = false;
+    } else if (Robot.arm.getArmChainMotorPosition() > 14.16) {
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+        this.isDone = false;
+    }else {
+        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+        this.isDone = true;
+    }*/
 }
 
- 
-        
-
-
-    
     @Override
     public void end(boolean interrupted) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);

@@ -7,12 +7,10 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.Presets.MidPegTopShelf;
-import frc.robot.commands.Presets.MidShelf;
-import frc.robot.commands.Presets.TopPeg;
+import frc.robot.commands.Presets.TopNode;
+import frc.robot.commands.Presets.MidNode;
 import frc.robot.commands.Presets.BottomNode;
 import frc.robot.commands.Presets.HomeArm;
-import frc.robot.commands.Presets.HumanPlayerPickup;
 import frc.robot.commands.manualOverrideCommands.ExtendArm;
 import frc.robot.commands.manualOverrideCommands.RaiseArm;
 import frc.robot.commands.manualOverrideCommands.RetractArm;
@@ -32,10 +30,8 @@ public class RobotContainer {
     public Command m_armRetractMotor;
     public Command m_armHome;
     public Command m_armBottomNode;
-    public Command m_armMidShelf;
-    public Command m_armMidPegTopShelf;
-    public Command m_armTopPeg;
-    public Command m_armHumanPlayerPickup;
+    public Command m_armMidNode;
+    public Command m_armTopNode;
     public Command m_arm;
 
     // Driver Controller
@@ -81,7 +77,7 @@ public class RobotContainer {
 
       this.right_menu.onTrue(new SwitchMode(this));
         
-    this.a_button.onTrue(new InstantCommand() {
+    this.left_menu.onTrue(new InstantCommand() {
       public void initialize() {
         m_armHome = new HomeArm();
         m_armHome.schedule();
@@ -93,28 +89,16 @@ public class RobotContainer {
         m_armBottomNode.schedule();
       }
     });
-    this.povLeft.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armMidShelf = new MidShelf();
-        m_armMidShelf.schedule();
-      }
-    });
     this.povRight.onTrue(new InstantCommand() {
       public void initialize() {
-        m_armMidPegTopShelf = new MidPegTopShelf();
-        m_armMidPegTopShelf.schedule();
+        m_armMidNode = new MidNode();
+        m_armMidNode.schedule();
       }
     });
     this.povUp.onTrue(new InstantCommand() {
       public void initialize() {
-        m_armTopPeg = new TopPeg();
-        m_armTopPeg.schedule();
-      }
-    });
-    this.left_menu.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armHumanPlayerPickup = new HumanPlayerPickup();
-        m_armHumanPlayerPickup.schedule();
+        m_armTopNode = new TopNode();
+        m_armTopNode.schedule();
       }
     });
     

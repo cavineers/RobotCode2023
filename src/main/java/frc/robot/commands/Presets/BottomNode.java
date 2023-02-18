@@ -25,20 +25,20 @@ public class BottomNode extends CommandBase {
 
     @Override
     public void execute() {
-    // 5 and 3 are not permenant
-    if(Robot.arm.getArmChainMotorPosition() < 3) {
+    // 7.2 is angle rotations and 46 is extension rotations
+    if(Robot.arm.getArmChainMotorPosition() < 7.2) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < 3) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 46) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > 5) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 46) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > 5) {
+    } else if (Robot.arm.getArmChainMotorPosition() > 7.2) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
@@ -51,11 +51,6 @@ public class BottomNode extends CommandBase {
     }
 }
 
- 
-        
-
-
-    
     @Override
     public void end(boolean interrupted) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
