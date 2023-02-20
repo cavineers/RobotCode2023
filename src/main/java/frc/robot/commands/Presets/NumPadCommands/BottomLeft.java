@@ -1,16 +1,16 @@
-package frc.robot.commands.Presets;
+package frc.robot.commands.Presets.NumPadCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class BottomNode extends CommandBase {
+public class BottomLeft extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public BottomNode() {
+    public BottomLeft() {
         this.addRequirements(Robot.arm);
     }
 

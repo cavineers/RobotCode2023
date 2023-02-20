@@ -11,11 +11,6 @@ import frc.robot.commands.Presets.TopNode;
 import frc.robot.commands.Presets.MidNode;
 import frc.robot.commands.Presets.BottomNode;
 import frc.robot.commands.Presets.HomeArm;
-import frc.robot.commands.manualOverrideCommands.ExtendArm;
-import frc.robot.commands.manualOverrideCommands.RaiseArm;
-import frc.robot.commands.manualOverrideCommands.RetractArm;
-import frc.robot.commands.manualOverrideCommands.SwitchMode;
-import frc.robot.commands.manualOverrideCommands.LowerArm;
 import frc.robot.subsystems.Arm;
 
 
@@ -68,14 +63,10 @@ public class RobotContainer {
     public RobotContainer() {
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
-      } else {
-        configureButtonBindingsArm();
-      }
+      } 
     };
 
     private void configureButtonBindings() {
-
-      this.right_menu.onTrue(new SwitchMode(this));
         
     this.left_menu.onTrue(new InstantCommand() {
       public void initialize() {
@@ -105,17 +96,6 @@ public class RobotContainer {
     
     
     }
-    private void configureButtonBindingsArm() {
-
-      this.right_menu.onTrue(new SwitchMode(this));
-
-      this.x_button.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armChainMotorDown = new LowerArm();
-          m_armChainMotorDown.schedule();
-        }
-      });
-    }   
    
 
     public double getJoystickRawAxis(int id) {

@@ -27,19 +27,19 @@ public class MidNode extends CommandBase {
     public void execute() {
     // This is mid shelf
     // 12.36 is angle rotations and 45.81 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < 12.36) {
+    if(Robot.arm.getArmChainMotorPosition() < 12.26) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < 45.81) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 45.71) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > 45.81) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 45.91) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > 12.36) {
+    } else if (Robot.arm.getArmChainMotorPosition() > 12.46) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
