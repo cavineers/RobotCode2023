@@ -7,11 +7,16 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.Presets.TopNode;
-import frc.robot.commands.Presets.MidNode;
-import frc.robot.commands.Presets.BottomNode;
-import frc.robot.commands.Presets.HomeArm;
 import frc.robot.subsystems.Arm;
+import frc.robot.commands.NumPad.BottomLeft;
+import frc.robot.commands.NumPad.BottomMid;
+import frc.robot.commands.NumPad.BottomRight;
+import frc.robot.commands.NumPad.MidLeft;
+import frc.robot.commands.NumPad.MidMid;
+import frc.robot.commands.NumPad.MidRight;
+import frc.robot.commands.NumPad.TopLeft;
+import frc.robot.commands.NumPad.TopMid;
+import frc.robot.commands.NumPad.TopRight;
 
 
 public class RobotContainer {
@@ -19,14 +24,15 @@ public class RobotContainer {
     public Command m_autoCommand;
     public SendableChooser<Command> auto = new SendableChooser<Command>();
 
-    public Command m_armChainMotorUp;
-    public Command m_armChainMotorDown;
-    public Command m_armExtendMotor;
-    public Command m_armRetractMotor;
-    public Command m_armHome;
-    public Command m_armBottomNode;
-    public Command m_armMidNode;
-    public Command m_armTopNode;
+    public Command m_armBottomLeft;
+    public Command m_armBottomMid;
+    public Command m_armBottomRight;
+    public Command m_armMidLeft;
+    public Command m_armMidMid;
+    public Command m_armMidRight;
+    public Command m_armTopLeft;
+    public Command m_armTopMid;
+    public Command m_armTopRight;
     public Command m_arm;
 
     // Driver Controller
@@ -67,34 +73,7 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
-        
-    this.left_menu.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armHome = new HomeArm();
-        m_armHome.schedule();
-      }
-    });
-    this.povDown.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armBottomNode = new BottomNode();
-        m_armBottomNode.schedule();
-      }
-    });
-    this.povRight.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armMidNode = new MidNode();
-        m_armMidNode.schedule();
-      }
-    });
-    this.povUp.onTrue(new InstantCommand() {
-      public void initialize() {
-        m_armTopNode = new TopNode();
-        m_armTopNode.schedule();
-      }
-    });
-    
-    
-    
+      
     }
    
 

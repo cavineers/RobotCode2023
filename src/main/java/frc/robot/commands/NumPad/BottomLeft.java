@@ -1,4 +1,4 @@
-package frc.robot.commands.Presets.NumPadCommands;
+package frc.robot.commands.NumPad;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;

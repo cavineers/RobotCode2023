@@ -1,16 +1,16 @@
-package frc.robot.commands.Presets;
+package frc.robot.commands.NumPad;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class BottomNode extends CommandBase {
+public class TopRight extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public BottomNode() {
+    public TopRight() {
         this.addRequirements(Robot.arm);
     }
 
@@ -25,20 +25,20 @@ public class BottomNode extends CommandBase {
 
     @Override
     public void execute() {
-    // 7.2 is angle rotations and 46 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < 7.1) {
+    // 16.41 is angle rotations and 60.41 is extension rotations
+    if(Robot.arm.getArmChainMotorPosition() < 16.31) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < 45.9) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 60.31) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > 46.1) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 60.51) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > 7.3) {
+    } else if (Robot.arm.getArmChainMotorPosition() > 16.51) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
