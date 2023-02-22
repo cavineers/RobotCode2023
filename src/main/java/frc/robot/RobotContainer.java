@@ -17,7 +17,7 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
-
+import java.awt.event.KeyEvent;
 
 public class RobotContainer {
     
@@ -72,9 +72,45 @@ public class RobotContainer {
       } 
     };
 
-    private void configureButtonBindings() {
+    public void keyPressed(KeyEvent e) {
+		
+      int code = e.getKeyCode();
+      switch (code) {
+        case 49: //1
+        new InstantCommand() {
+          public void initialize() {
+            m_armBottomLeft = new BottomLeft();
+            m_armBottomLeft.schedule();
+          }
+        };
+        case 50: //2
+       
+        case 51: //3
+     
+        case 52: //4
+        
+        case 53: //5
+
+        case 54: //6
       
+        case 55: //7
+  
+        case 56: //8
+   
+        case 57: //9
+    
+        default:
+        //wrong button idiot
+      }
+
     }
+
+    private void configureButtonBindings() {
+
+    }
+
+
+    
    
 
     public double getJoystickRawAxis(int id) {
