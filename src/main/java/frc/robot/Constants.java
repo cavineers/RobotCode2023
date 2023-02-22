@@ -6,7 +6,7 @@ public final class Constants {
     
     public static class CANIds {
         public static int ArmChainMotor = 1; // Chain Neo
-        public static int ArmChainMotor2 = 2; // Chain Neo 2 same as firt but
+        public static int ArmChainMotor2 = 8; // Chain Neo 2 same as firt but
         public static int ArmExtensionMotor = 3; // Chain Neo 2 same as firt but
        
     }
@@ -97,11 +97,11 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
         
-        public static double ArmChainSpeed = 1;
-        public static double ArmChainSpeedRev = -1; // Chain reverse speed
+        public static double ArmChainSpeed = 0.1;
+        public static double ArmChainSpeedRev = -0.1; // Chain reverse speed
 
-        public static double ArmExtensionSpeed = 1;
-        public static double ArmExtensionSpeedRev = -1;
+        public static double ArmExtensionSpeed = 0.1;
+        public static double ArmExtensionSpeedRev = -0.1;
         // Extension reverse speed
     }
 
