@@ -5,17 +5,13 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
-import frc.robot.subsystems.AprilTag;
 
-public class AprilTagCommand extends CommandBase {
+public class AprilTagHomingCommand extends CommandBase {
 
     private PhotonCamera camera;
-    boolean atPosition;
-    boolean atRotation;
 
-    public AprilTagCommand() {
-        atPosition = false;
-        atRotation = false;
+    public AprilTagHomingCommand() {
+        addRequirements(Robot.taghoming);
     }
 
     @Override
@@ -25,16 +21,17 @@ public class AprilTagCommand extends CommandBase {
 
     
     public void execute() {
-        Robot.taghoming.home();
+        //Robot.taghoming.driveToTarget(goal=Trajectory.Sta);
     }
     //Called by the scheduler automatically
     @Override
     public boolean isFinished() {
-        return atPosition && atRotation; // Stop if the robot is at the target OR if there is no result
+        return Robot.taghoming.checkFinished(); // Stop if the robot is at the target OR if there is no result
     }
 
     @Override
     public void end(boolean interrupted) {
-
+        // set the motors to 0
+        Robot.m_swerveDriveSubsystem.stopModules();
     }
 }
