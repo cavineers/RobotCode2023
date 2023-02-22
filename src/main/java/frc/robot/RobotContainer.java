@@ -73,12 +73,7 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
-      this.povUp.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armTopPeg = new TopPeg();
-          m_armTopPeg.schedule();
-        }
-      });
+      
     }
    
 
