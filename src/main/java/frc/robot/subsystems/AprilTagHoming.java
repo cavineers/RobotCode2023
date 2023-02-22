@@ -48,7 +48,7 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     }
 
     public ChassisSpeeds calculatePID(Trajectory.State goal) {
-        if (this.target != null) {
+        if (this.target != null && this.currentDistance != null) {
             this.chassisSpeeds = this.holonomicDriverController.calculate(new Pose2d(new Translation2d(this.currentDistance.getX(), this.currentDistance.getY()), new Rotation2d(this.yaw)),
              goal,
              new Rotation2d(0));
