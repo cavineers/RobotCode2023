@@ -20,7 +20,8 @@ import frc.robot.commands.NumPad.TopRight;
 import java.awt.event.KeyEvent;
 
 public class RobotContainer {
-    
+    public String node;
+
     public Command m_autoCommand;
     public SendableChooser<Command> auto = new SendableChooser<Command>();
 
@@ -71,42 +72,72 @@ public class RobotContainer {
         configureButtonBindings();
       } 
     };
-
+  
     public void keyPressed(KeyEvent e) {
 		
-      int code = e.getKeyCode();
+    int code = e.getKeyCode();
       switch (code) {
         case 49: //1
-        new InstantCommand() {
-          public void initialize() {
-            m_armBottomLeft = new BottomLeft();
-            m_armBottomLeft.schedule();
-          }
-        };
+        node = "bottomLeft";
+        break;
         case 50: //2
-       
+        node = "bottomMid";
+        break;
         case 51: //3
-     
+        node = "bottomRight";
+        break;
         case 52: //4
-        
+        node = "midLeft";
+        break;
         case 53: //5
-
+        node = "midMid";
+        break;
         case 54: //6
-      
+        node = "midRight";
+        break;
         case 55: //7
-  
+        node = "topLeft";
+        break;
         case 56: //8
-   
+        node = "topMid";
+        break;
         case 57: //9
-    
+        node = "topRight";
+        break;
         default:
+        break;
         //wrong button idiot
       }
 
     }
 
     private void configureButtonBindings() {
-
+      switch (node) {
+        case"bottomLeft":
+        new InstantCommand() {
+          public void initialize() {
+            m_armBottomLeft = new BottomLeft();
+            m_armBottomLeft.schedule();
+          }
+        };
+        break;
+        case"bottomMid":
+        break;
+        case"bottomRight":
+        break;
+        case"midLeft":
+        break;
+        case"midMid":
+        break;
+        case"midRight":
+        break;
+        case"topLeft":
+        break;
+        case"topMid":
+        break;
+        case"topRight":
+        break;
+      }
     }
 
 
