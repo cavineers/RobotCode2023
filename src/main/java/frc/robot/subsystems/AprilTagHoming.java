@@ -3,11 +3,9 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.ProfiledPIDController;
@@ -15,10 +13,7 @@ import edu.wpi.first.math.controller.HolonomicDriveController;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
 import frc.robot.Constants;
 import org.photonvision.PhotonCamera;
-import org.photonvision.PhotonUtils;
-import org.photonvision.targeting.PhotonPipelineResult;
 import org.photonvision.targeting.PhotonTrackedTarget;
-import java.util.Arrays;
 //Drive imports
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
@@ -65,11 +60,11 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
             this.currentDistance = target.getBestCameraToTarget(); // Distance from the camera to the target (X = forward, Y = left, Z = up)
             this.yaw = target.getYaw();
             this.targetID = target.getFiducialId();
+            SmartDashboard.putNumber("TargetID", this.targetID);
+            SmartDashboard.putNumber("X", this.currentDistance.getX());
+            SmartDashboard.putNumber("Y", this.currentDistance.getY());
+            SmartDashboard.putNumber("Yaw", this.yaw);
         }
-        SmartDashboard.putNumber("TargetID", this.targetID);
-        SmartDashboard.putNumber("X", this.currentDistance.getX());
-        SmartDashboard.putNumber("Y", this.currentDistance.getY());
-        SmartDashboard.putNumber("Yaw", this.yaw);
     }
 
     public boolean checkFinished() {
