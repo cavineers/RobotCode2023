@@ -123,5 +123,13 @@ public final class Constants {
         public static final double kDeadband = 0.1;
     }
 
+    public static final class TrajectoryConstants {
+        //Set later based on the decision of where out starting position will be for autonmous and the proper value for the constants
+        public static final distanceAutonomous = 5; 
+        public static final ksVolts = 0;
+        public static final kvVoltSecondsPerMeter = 0;
+        public static final kaVoltSecondsSquaredPerMeter = 0;
+        public static final initialPoseInches = new Pose2d(0, 0, new Rotation2d(0));
+    }
 }
 
