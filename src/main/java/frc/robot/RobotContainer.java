@@ -75,7 +75,11 @@ public class RobotContainer {
 
     private void configureButtonBindings() {
 
-      this.right_menu.onTrue(new SwitchMode(this));
+      this.right_menu.onTrue(new InstantCommand() {
+        public void initialize() {
+          mode = CurrentMode.ARM;
+        }
+      });
         
     this.left_menu.onTrue(new InstantCommand() {
       public void initialize() {
@@ -106,8 +110,12 @@ public class RobotContainer {
     
     }
     private void configureButtonBindingsArm() {
-
-      this.right_menu.onTrue(new SwitchMode(this));
+    
+      this.right_menu.onTrue(new InstantCommand() {
+        public void initialize() {
+          mode = CurrentMode.DRIVE;
+        }
+      });
 
       this.x_button.onTrue(new InstantCommand() {
         public void initialize() {

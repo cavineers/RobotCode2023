@@ -1,29 +1,23 @@
 package frc.robot.commands.manualOverrideCommands;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 
 public class SwitchMode extends CommandBase {
+    private boolean isDone = false;
+    private double m_timestamp;
     private RobotContainer rc;
 
-    /**
-     * Sets the safety mode.
-     * @param container Robot container.
-     */
     public SwitchMode(RobotContainer container) {
         this.rc = container;
     }
 
-    public SwitchMode() {
-    }
-
     @Override
     public void initialize() {
-        this.rc.joy.setRumble(RumbleType.kLeftRumble, 1);
-        this.rc.joy.setRumble(RumbleType.kRightRumble, 1);
 
-        
     }
 
     @Override
@@ -37,12 +31,15 @@ public class SwitchMode extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        this.rc.joy.setRumble(RumbleType.kLeftRumble, 0);
-        this.rc.joy.setRumble(RumbleType.kRightRumble, 0);
+
     }
 
     @Override
     public boolean isFinished() {
-        return true;
+        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
+            this.isDone = true;
+        }
+
+        return this.isDone;
     }
 }
