@@ -9,13 +9,13 @@ public final class Constants {
     
     public static class CANIds {
         public static int IntakeMotorBottom   = 1;
-        public static int IntakeMotorTop      = 2;
+        public static int IntakeMotorTop      = 8;
         public static int IntakeDropMotor     = 3;
         public static int IntakeDropMotor2    = 4;
         public static int ArmJointOne         = 5; // Joint 1 Neo
         public static int ArmJointTwo         = 6; // Joint 2 Neo      One of these wil be a mini but is undecided
         public static int ArmJointThree       = 7; // Joint 3 Neo
-        public static int ClawMotor           = 8; 
+        public static int ClawMotor           = 2; 
     }
     
     public static final class ModuleConstants {
