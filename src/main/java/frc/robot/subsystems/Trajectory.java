@@ -58,12 +58,13 @@ public class Trajectory {
         return newTrajectory;
     }  
     
-    public void applyTrajectory() {
+    //Return the command to run during autonomous relating to trajectory
+    public Command autonomousTrajectoryCommand() {
         RamseteCommand ramsete..Command =
         new RamseteCommand(
-            trajectory,
+            this.trajectory,
             m_robotDrive::getPose,
-            new RamseteController(AutoConstants.kRamseteB, AutoConstants.kRamseteZeta),
+            new RamseteController(Constants.TrajectoryConstants.kRamseteB, Constants.TrajectoryConstants.kRamseteZeta),
             new SimpleMotorFeedforward(
                 Constants.DriveConstants.ksVolts,
                 Constants.DriveConstants.kvVoltSecondsPerMeter,

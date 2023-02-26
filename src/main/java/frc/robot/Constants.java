@@ -130,6 +130,10 @@ public final class Constants {
         public static final kvVoltSecondsPerMeter = 0;
         public static final kaVoltSecondsSquaredPerMeter = 0;
         public static final initialPoseInches = new Pose2d(0, 0, new Rotation2d(0));
+
+        //Ramsete command constants
+        double kRamseteB = 2;
+        double kRamseteZeta = 0.7;
     }
 }
 
