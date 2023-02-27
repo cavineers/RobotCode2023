@@ -14,13 +14,15 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Trajectory {
 
     private double distanceAutonomous;
-    private boolean returning;
+    private boolean returning = false;
     private Trajectory trajectory;
+    private Pose2d desiredPose;
 
     public Trajectory() {
         this.trajectory = generateTrajectory();
-        returning = false;
+        returning = checkReturning();
         distanceAustonomous = Constants.TrajectoryConstants.distanceAutonomous;
+        desiredPose =  new Pose2d(distanceAutonomous, 0, new Rotation2d(0));
     }
 
     public Trajectory generateTrajectory() {
@@ -28,10 +30,10 @@ public class Trajectory {
        var autoVoltageConstraint =
         new DifferentialDriveVoltageConstraint(
             new SimpleMotorFeedforward(
-                Constants.DriveConstants.ksVolts,
-                Constants.DriveConstants.kvVoltSecondsPerMeter,
-                Constants.DriveConstants.kaVoltSecondsSquaredPerMeter),
-                Constants.DriveConstants.SwerveDriveKinematics,
+                Constants.TrajectoryConstants.ksVolts,
+                Constants.TrajectoryConstants.kvVoltSecondsPerMeter,
+                Constants.TrajectoryConstants.kaVoltSecondsSquaredPerMeter),
+                Constants.TrajectoryConstants.SwerveDriveKinematics,
             10);
 
         TrajectoryConfig config =
@@ -45,10 +47,10 @@ public class Trajectory {
 
             Trajectory newTrajectory = TrajectoryGenerator.generateTrajectory(
             //Start facing the direction that we want to go. Consider the robot's starting position as (0,0)
-            Constants.DriveConstants.initialPoseInches,
+            Constants.TrajectoryConstants.initialPoseInches,
             //Have two waypoints - one 1/3 into the journey and one 2/3 into the journey
             List.of(new Translation2d(distanceAutonomous/3, 1), new Translation2d((2*distanceAutonomous)/3, -1)),
-            new Pose2d(distanceAutonomous, 0, new Rotation2d(0)),
+            desiredPose,
             config);
 
         if (returning == true) {
@@ -66,21 +68,28 @@ public class Trajectory {
             m_robotDrive::getPose,
             new RamseteController(Constants.TrajectoryConstants.kRamseteB, Constants.TrajectoryConstants.kRamseteZeta),
             new SimpleMotorFeedforward(
-                Constants.DriveConstants.ksVolts,
-                Constants.DriveConstants.kvVoltSecondsPerMeter,
-                Constants.DriveConstants.kaVoltSecondsSquaredPerMeter),
-                Constants.DriveConstants.SwerveDriveKinematics,
+                Constants.TrajectoryConstants.ksVolts,
+                Constants.TrajectoryConstants.kvVoltSecondsPerMeter,
+                Constants.TrajectoryConstants.kaVoltSecondsSquaredPerMeter),
+                Constants.TrajectoryConstants.SwerveDriveKinematics,
             m_robotDrive::getWheelSpeeds,
-            new PIDController(DriveConstants.kPDriveVel, 0, 0),
+            new PIDController(Constants.kPDriveVel, 0, 0),
             new PIDController(DriveConstants.kPDriveVel, 0, 0),
             // RamseteCommand passes volts to the callback
             m_robotDrive::swerveDriveVolts,
             m_robotDrive);
 
-         //Create a command that, when executed, will follow the trajectory
          m_robotDrive.resetOdometry(Constants.TrajectoryConstants.initialPoseInches);
      
+         //Create a command that, when executed, will follow the trajectory
          return ramseteCommand.andThen(() -> m_robotDrive.swerveDriveVolts(0, 0));
+    }
+
+    public boolean checkReturning() {
+        if (Robot.m_swerveDriveSubsystem.getPose() == desiredPose) {
+            returning = true;
+        }
+        return returning;
     }
 
     public Trajectory getTrajectory() {

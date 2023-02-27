@@ -125,15 +125,16 @@ public final class Constants {
 
     public static final class TrajectoryConstants {
         //Set later based on the decision of where out starting position will be for autonmous and the proper value for the constants
-        public static final distanceAutonomous = 5; 
-        public static final ksVolts = 0;
-        public static final kvVoltSecondsPerMeter = 0;
-        public static final kaVoltSecondsSquaredPerMeter = 0;
-        public static final initialPoseInches = new Pose2d(0, 0, new Rotation2d(0));
+        public static final double distanceAutonomous = 5; 
+        public static final double ksVolts = 0;
+        public static final double kvVoltSecondsPerMeter = 0;
+        public static final double kaVoltSecondsSquaredPerMeter = 0;
+        public static final double kPDriveVel = 0;
 
         //Ramsete command constants
-        double kRamseteB = 2;
-        double kRamseteZeta = 0.7;
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
+        public static final Pose2d initialPoseInches = new Pose2d(0, 0, new Rotation2d(0));
     }
 }
 
