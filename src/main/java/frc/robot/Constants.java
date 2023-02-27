@@ -115,8 +115,9 @@ public final class Constants {
 
     public static final class Claw {
         public static final double kClawSpeed = 2;
-        public static final double kRevolutionsToCube = 5.5; // less revs to get to cube sides
-        public static final double kRevolutionsToCone = 10.5; // more revs to get to cone sides 
+        public static final double kRevolutionsToCube = 5.5;
+        public static final double kRevolutionsToCone = 10.5; 
+        public static final double kClawLimitSwitchPort = 1; 
     }
 
     public static final class OIConstants {

@@ -5,17 +5,31 @@ import frc.robot.Constants.CANIds;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.revrobotics.RelativeEncoder;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase{
-    
-    public boolean isClosed = false;
-    
-    public CANSparkMax m_clawMotor = new CANSparkMax(CANIds.ClawMotor, MotorType.kBrushless);
 
-    public CANSparkMax getMotor() {
-        return this.m_clawMotor;
+    public boolean isClosed;
+
+    public CANSparkMax m_clawMotor;
+
+    public DigitalInput clawLimitSwitch;
+
+    public RelativeEncoder clawEncoder;
+
+    public Claw (){
+
+        isClosed = false;
+    
+        m_clawMotor = new CANSparkMax(CANIds.ClawMotor, MotorType.kBrushless);
+
+        clawEncoder = m_clawMotor.getEncoder();
+    
+        clawLimitSwitch = new DigitalInput(Constants.Claw.kClawLimitSwitchPort);
     }
 
     public clawMotorState m_clawMotorState = clawMotorState.OFF;
@@ -24,6 +38,18 @@ public class Claw extends SubsystemBase{
         ON,
         OFF,
         REVERSE
+    }
+
+    public CANSparkMax getMotor() {
+        return this.m_clawMotor;
+    }
+
+    public double getEncoderPostion(){
+        return this.clawEncoder.getPosition();
+    }
+
+    public boolean getLimitSwitch() {
+        return this.clawLimitSwitch.get();
     }
 
     public clawMotorState getMotorState() {
@@ -58,6 +84,11 @@ public class Claw extends SubsystemBase{
             default: 
                 this.setMotorState(clawMotorState.OFF);
         }
+    }
+
+    public void periodic(){
+        SmartDashboard.putBoolean("Claw Limit Switch", this.getLimitSwitch());
+        SmartDashboard.putNumber("Claw Encoder", clawEncoder.getPosition());
     }
 
 

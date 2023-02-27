@@ -51,13 +51,13 @@ public class RobotContainer {
       }
     });
 
-    this.a_button.onFalse(new InstantCommand() {
+    /*this.a_button.onFalse(new InstantCommand() {
       public void initialize() {
         if (m_claw.isScheduled()) {
           m_claw.cancel();
         }
       }
-    });
+    }); */
 
 }
 
