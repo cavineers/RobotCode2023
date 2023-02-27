@@ -47,7 +47,7 @@ public class Trajectory {
 
             Trajectory newTrajectory = TrajectoryGenerator.generateTrajectory(
             //Start facing the direction that we want to go. Consider the robot's starting position as (0,0)
-            Constants.TrajectoryConstants.initialPoseInches,
+            Constants.TrajectoryConstants.initialPoseMeters,
             //Have two waypoints - one 1/3 into the journey and one 2/3 into the journey
             List.of(new Translation2d(distanceAutonomous/3, 1), new Translation2d((2*distanceAutonomous)/3, -1)),
             desiredPose,
@@ -79,7 +79,7 @@ public class Trajectory {
             m_robotDrive::swerveDriveVolts,
             m_robotDrive);
 
-         m_robotDrive.resetOdometry(Constants.TrajectoryConstants.initialPoseInches);
+         m_robotDrive.resetOdometry(Constants.TrajectoryConstants.initialPoseMeters);
      
          //Create a command that, when executed, will follow the trajectory
          return ramseteCommand.andThen(() -> m_robotDrive.swerveDriveVolts(0, 0));
