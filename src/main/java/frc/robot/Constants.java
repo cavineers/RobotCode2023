@@ -6,7 +6,7 @@ public final class Constants {
     
     public static class CANIds {
         public static int ArmChainMotor = 1; // Chain Neo
-        public static int ArmChainMotor2 = 8; // Chain Neo 2 same as firt but
+        public static int ArmChainMotor2 = 2; // Chain Neo 2 same as firt but
         public static int ArmExtensionMotor = 3; // Chain Neo 2 same as firt but
        
     }

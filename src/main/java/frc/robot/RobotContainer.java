@@ -107,14 +107,6 @@ public class RobotContainer {
     }
     private void configureButtonBindingsArm() {
 
-      this.right_menu.onTrue(new SwitchMode(this));
-
-      this.x_button.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armChainMotorDown = new LowerArm();
-          m_armChainMotorDown.schedule();
-        }
-      });
     }   
    
 
