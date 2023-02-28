@@ -12,12 +12,14 @@ public final class Constants {
         public static int ArmChainMotor = 5; // Chain Neo
         public static int ArmChainMotor2 = 6; // Chain Neo 2 same as firt but
         public static int ArmExtensionMotor = 7; // Chain Neo 2 same as firt but
+        public static int ClawMotor = 8;
        
     }
     public static class DIO {
         public static int ArmAngleSwitch = 0;
         public static int ArmExtensionSwitch = 1;
         public static int IntakeSwitch = 2;
+        public static int clawLimitSwitch = 3;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -109,6 +111,12 @@ public final class Constants {
         public static double ArmExtensionSpeed = 0.1;
         public static double ArmExtensionSpeedRev = -0.1;
         // Extension reverse speed
+    }
+    public static final class Claw {
+        public static final double kClawSpeed = 2;
+        public static final double kRevolutionsToCube = 5.5;
+        public static final double kRevolutionsToCone = 10.5; 
+        public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
     }
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;
