@@ -117,7 +117,7 @@ public final class Constants {
         public static final double kClawSpeed = 2;
         public static final double kRevolutionsToCube = 5.5;
         public static final double kRevolutionsToCone = 10.5; 
-        public static final double kClawLimitSwitchPort = 1; 
+        public static final int kClawLimitSwitchPort = 1; 
     }
 
     public static final class OIConstants {
