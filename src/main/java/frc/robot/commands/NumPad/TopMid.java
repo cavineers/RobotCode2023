@@ -25,20 +25,20 @@ public class TopMid extends CommandBase {
 
     @Override
     public void execute() {
-    // 14.89 is angle rotations and 61.65 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < 14.79) {
+    // 16.41 is angle rotations and 60.41 is extension rotations
+    if(Robot.arm.getArmChainMotorPosition() < 16.21) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < 61.55) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 60.21) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > 61.75) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 60.61) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > 14.99) {
+    } else if (Robot.arm.getArmChainMotorPosition() > 16.61) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);

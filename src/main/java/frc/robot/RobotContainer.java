@@ -17,11 +17,10 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
-import java.awt.event.KeyEvent;
 
-public class RobotContainer {
-    public String node;
 
+public class RobotContainer  {
+    
     public Command m_autoCommand;
     public SendableChooser<Command> auto = new SendableChooser<Command>();
 
@@ -54,6 +53,24 @@ public class RobotContainer {
   public POVButton povDown = new POVButton(joy, 180, 0);
   public POVButton povLeft = new POVButton(joy, 270, 0); 
 
+  // Driver Numpad
+  public Joystick joy2 = new Joystick(1);
+  public JoystickButton a_button2 = new JoystickButton(joy2, 1);
+  public JoystickButton b_button2 = new JoystickButton(joy2, 2);
+  public JoystickButton x_button2 = new JoystickButton(joy2, 3);
+  public JoystickButton y_button2 = new JoystickButton(joy2, 4);
+  public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
+  public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
+  public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
+  public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
+  public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
+  public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
+
+  public POVButton povUp2 = new POVButton(joy2, 0, 0);
+  public POVButton povRight2 = new POVButton(joy2, 90, 0);
+  public POVButton povDown2 = new POVButton(joy2, 180, 0);
+  public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
+
   public enum CurrentMode {
     DRIVE,
     ARM
@@ -70,77 +87,71 @@ public class RobotContainer {
     public RobotContainer() {
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
+        configureButtonBindingsNumPad();
       } 
     };
-  
-    public void keyPressed(KeyEvent e) {
-		
-    int code = e.getKeyCode();
-      switch (code) {
-        case 49: //1
-        node = "bottomLeft";
-        break;
-        case 50: //2
-        node = "bottomMid";
-        break;
-        case 51: //3
-        node = "bottomRight";
-        break;
-        case 52: //4
-        node = "midLeft";
-        break;
-        case 53: //5
-        node = "midMid";
-        break;
-        case 54: //6
-        node = "midRight";
-        break;
-        case 55: //7
-        node = "topLeft";
-        break;
-        case 56: //8
-        node = "topMid";
-        break;
-        case 57: //9
-        node = "topRight";
-        break;
-        default:
-        break;
-        //wrong button idiot
-      }
-
-    }
 
     private void configureButtonBindings() {
-      switch (node) {
-        case"bottomLeft":
-        new InstantCommand() {
+      
+    }
+
+    private void configureButtonBindingsNumPad() {
+      
+      this.a_button2.onTrue(new InstantCommand() {
           public void initialize() {
             m_armBottomLeft = new BottomLeft();
             m_armBottomLeft.schedule();
           }
-        };
-        break;
-        case"bottomMid":
-        break;
-        case"bottomRight":
-        break;
-        case"midLeft":
-        break;
-        case"midMid":
-        break;
-        case"midRight":
-        break;
-        case"topLeft":
-        break;
-        case"topMid":
-        break;
-        case"topRight":
-        break;
-      }
+        });
+        this.b_button2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armBottomMid = new BottomMid();
+            m_armBottomMid.schedule();
+          }
+        });
+        this.x_button2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armBottomRight = new BottomRight();
+            m_armBottomRight.schedule();
+          }
+        });
+        this.y_button2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armMidLeft = new MidLeft();
+            m_armMidLeft.schedule();
+          }
+        });
+        this.povUp2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armMidMid = new MidMid();
+            m_armMidMid.schedule();
+          }
+        });
+        this.povRight2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armMidRight = new MidRight();
+            m_armMidRight.schedule();
+          }
+        });
+        this.povLeft2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armTopLeft = new TopLeft();
+            m_armTopLeft.schedule();
+          }
+        });
+        this.povDown2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armTopMid = new TopMid();
+            m_armTopMid.schedule();
+          }
+        });
+        this.left_menu2.onTrue(new InstantCommand() {
+          public void initialize() {
+            m_armTopRight = new TopRight();
+            m_armTopRight.schedule();
+          }
+        });
     }
-
-
     
    
 

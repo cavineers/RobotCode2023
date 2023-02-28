@@ -26,19 +26,19 @@ public class BottomRight extends CommandBase {
     @Override
     public void execute() {
     // 7.2 is angle rotations and 46 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < 7.1) {
+    if(Robot.arm.getArmChainMotorPosition() < 7.0) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < 45.9) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < 45.8) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > 46.1) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > 46.2) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > 7.3) {
+    } else if (Robot.arm.getArmChainMotorPosition() > 7.4) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);

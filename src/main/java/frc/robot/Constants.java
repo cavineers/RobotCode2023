@@ -96,38 +96,13 @@ public final class Constants {
         public static int ArmChainMotor = CANIds.ArmChainMotor;
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
-        public static double TopX = 101;
-        public static double MidX = 58;
-        public static double TopPegY = 117;
-        public static double MidPegY = 87;
-        public static double TopShelfY = 90;
-        public static double MidShelfY = 60;
-        public static double OutputShelfX = 16.5;
-        public static double OutputShelfY = 95;
-        public static double IntakeAngle = 0; 
-        public static double IntakeDistance = 0; 
-
-        public static double DropHeight = 0; //Not yet known
-
-        public static double ArmHeight = 0;//
-        public static double ArmDistanceFromFront = 0;//
         
-        public static double ArmChainSpeed = 1;
-        public static double ArmChainSpeedRev = -1; // Chain reverse speed
+        public static double ArmChainSpeed = 0.1;
+        public static double ArmChainSpeedRev = -0.1; // Chain reverse speed
 
-        public static double ArmExtensionSpeed = 1;
-        public static double ArmExtensionSpeedRev = -1;
-        ; // Extension reverse speed
-
-        //Speed of motor movement in meters per second
-        public static double RotationsPerDegree = 0; //Not yet known
-        public static double RotationsPerCM = 0; //Not yet known
-        
-
-        public static double ArmExtensionMetersPerRevolution = Math.PI / 367.3221; //pi/9.33, then converted into meters
-
-        public static double MaxChainRevolutions = 89; //89 is temporary
-        public static double MaxExtensionRevolutions = 89; //89 is temporary
+        public static double ArmExtensionSpeed = 0.1;
+        public static double ArmExtensionSpeedRev = -0.1;
+         // Extension reverse speed
 
     }
 
