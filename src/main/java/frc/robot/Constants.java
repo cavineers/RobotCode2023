@@ -5,12 +5,20 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int ArmChainMotor = 1; // Chain Neo
-        public static int ArmChainMotor2 = 2; // Chain Neo 2 same as firt but
-        public static int ArmExtensionMotor = 3; // Chain Neo 2 same as firt but
+        public static int IntakeMotorBottom   = 1;
+        public static int IntakeMotorTop      = 2;
+        public static int IntakeDropMotor     = 3;
+        public static int IntakeDropMotor2    = 4;
+        public static int ArmChainMotor = 5; // Chain Neo
+        public static int ArmChainMotor2 = 6; // Chain Neo 2 same as firt but
+        public static int ArmExtensionMotor = 7; // Chain Neo 2 same as firt but
        
     }
-
+    public static class DIO {
+        public static int ArmAngleSwitch = 0;
+        public static int ArmExtensionSwitch = 1;
+        public static int IntakeSwitch = 2;
+    }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
         public static final double kDriveMotorGearRatio = 1 / 5.8462;
@@ -21,22 +29,21 @@ public final class Constants {
         public static final double kTurningEncoderRPM2RadPerSec = kTurningEncoderRot2Rad / 60;
         public static final double kPTurning = 0.5;
     }
-
     public static final class Intake{
+        public static int IntakeTopID = CANIds.IntakeMotorTop;
+        public static int IntakeBottomID = CANIds.IntakeMotorBottom;
+        public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
+        public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
 
         public static double IntakeSpeed = 0.35;
         public static double IntakeLowerSpeed = 0.2;
         public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
         
-        public static double IntakeSpeedRight = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedLeft = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedRevRight = IntakeSpeedRev; // Intake reverse speed
-        public static double IntakeSpeedRevLeft = -(IntakeSpeedRev); // Intake reverse speed
+        public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower= 3.35;
-
     }
-
     public static final class DriveConstants {
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
@@ -103,8 +110,6 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.1;
         // Extension reverse speed
     }
-
-
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;
 
@@ -115,10 +120,6 @@ public final class Constants {
 
         public static final double kDeadband = 0.1;
 
-    }
-    public static class DIO {
-        public static int ArmAngleSwitch = 0;
-        public static int ArmExtensionSwitch = 1;
     }
 }
 

@@ -1,6 +1,5 @@
 package frc.robot;
 
-import frc.robot.Constants.OIConstants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -8,25 +7,31 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import frc.robot.commands.ToggleDeployIntake;
-import frc.robot.commands.ToggleUndeployIntake;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import frc.robot.commands.Presets.TopNode;
-import frc.robot.commands.Presets.MidNode;
-import frc.robot.commands.Presets.BottomNode;
-import frc.robot.commands.Presets.HomeArm;
+
+import frc.robot.commands.ToggleDeployIntake;
+import frc.robot.commands.ToggleUndeployIntake;
+
+import frc.robot.commands.presets.TopNode;
+import frc.robot.commands.presets.MidNode;
+import frc.robot.commands.presets.BottomNode;
+import frc.robot.commands.presets.HomeArm;
+
 import frc.robot.commands.manualOverrideCommands.ExtendArm;
 import frc.robot.commands.manualOverrideCommands.RaiseArm;
 import frc.robot.commands.manualOverrideCommands.RetractArm;
 import frc.robot.commands.manualOverrideCommands.SwitchMode;
 import frc.robot.commands.manualOverrideCommands.LowerArm;
+
+import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 
 public class RobotContainer {
 
     public Command m_autoCommand;
 
+    //Arm Commands
     public Command m_armChainMotorUp;
     public Command m_armChainMotorDown;
     public Command m_armExtendMotor;
@@ -36,6 +41,11 @@ public class RobotContainer {
     public Command m_armMidNode;
     public Command m_armTopNode;
     public Command m_arm;
+
+    //Intake Commands
+    public Command m_intake;
+    public Command m_lowerIntake;
+    public Command m_raiseIntake;
 
     // Driver Controller
   public Joystick joy = new Joystick(0);
@@ -81,25 +91,28 @@ public class RobotContainer {
     };
 
     private void configureButtonBindings() {
-  
-     this.r_bump.onTrue(new InstantCommand(){
-      public void initialize() {
-        if(m_raiseIntake.isScheduled()) {
-          m_raiseIntake.cancel();
-        }
-      m_lowerIntake = new ToggleDeployIntake();
-      m_lowerIntake.schedule();
-      }
-    });
-    this.l_bump.onTrue(new InstantCommand(){
-      public void initialize() {
-        if(m_lowerIntake.isScheduled()) {
-          m_lowerIntake.cancel();
+      
+      //Intake Buttons
+      this.r_bump.onTrue(new InstantCommand(){
+        public void initialize() {
+          if(m_raiseIntake.isScheduled()) {
+            m_raiseIntake.cancel();
           }
-      m_raiseIntake = new ToggleUndeployIntake();
-      m_raiseIntake.schedule();
-      }
-    });
+        m_lowerIntake = new ToggleDeployIntake();
+        m_lowerIntake.schedule();
+        }
+      });
+      this.l_bump.onTrue(new InstantCommand(){
+        public void initialize() {
+          if(m_lowerIntake.isScheduled()) {
+            m_lowerIntake.cancel();
+            }
+        m_raiseIntake = new ToggleUndeployIntake();
+        m_raiseIntake.schedule();
+        }
+      });
+
+      //Arm Buttons
       this.right_menu.onTrue(new InstantCommand() {
         public void initialize() {
           mode = CurrentMode.ARM;
