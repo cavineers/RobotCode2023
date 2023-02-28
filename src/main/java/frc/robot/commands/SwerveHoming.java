@@ -3,12 +3,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
-public class TestCommand extends CommandBase{
+public class SwerveHoming extends CommandBase{
 
     private SwerveDriveSubsystem swerveSubsystem;
     private boolean isFinished;
 
-    public TestCommand (SwerveDriveSubsystem swerveSubsystem) {
+    public SwerveHoming (SwerveDriveSubsystem swerveSubsystem) {
         this.swerveSubsystem = swerveSubsystem;
         addRequirements(swerveSubsystem);
 
