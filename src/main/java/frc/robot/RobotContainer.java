@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
 import frc.robot.commands.ClawToggle;
 
+import frc.robot.commands.SwerveCommand;
+
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 
@@ -28,8 +30,12 @@ import frc.robot.commands.manualOverrideCommands.LowerArm;
 
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class RobotContainer {
+
+    //Swerve Subsystem
+    private final SwerveDriveSubsystem swerveSubsystem = new SwerveDriveSubsystem();
 
     public Command m_autoCommand;
 
@@ -87,11 +93,21 @@ public class RobotContainer {
       this.m_lowerIntake = new ToggleDeployIntake();
       this.m_claw = new ClawToggle();
 
+      //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
+
+      swerveSubsystem.setDefaultCommand(new SwerveCommand(
+          swerveSubsystem,
+          () -> -joy.getRawAxis(OIConstants.kDriverYAxis),
+          () -> joy.getRawAxis(OIConstants.kDriverXAxis),
+          () -> joy.getRawAxis(OIConstants.kDriverRotAxis),
+          () -> !joy.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
+
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
       } else {
         configureButtonBindingsArm();
       }
+
     };
 
     private void configureButtonBindings() {
@@ -147,6 +163,21 @@ public class RobotContainer {
           m_armTopNode.schedule();
         }
       });
+      //Claw Buttons
+      this.a_button.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_claw = new ClawToggle();
+          m_claw.schedule();
+        }
+      });
+  
+      /*this.a_button.onFalse(new InstantCommand() {
+        public void initialize() {
+          if (m_claw.isScheduled()) {
+            m_claw.cancel();
+          }
+        }
+      }); */
     
     }
     private void configureButtonBindingsArm() {
@@ -163,22 +194,6 @@ public class RobotContainer {
           m_armChainMotorDown.schedule();
         }
       });
-
-      //Claw Buttons
-      this.a_button.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_claw = new ClawToggle();
-          m_claw.schedule();
-        }
-      });
-  
-      /*this.a_button.onFalse(new InstantCommand() {
-        public void initialize() {
-          if (m_claw.isScheduled()) {
-            m_claw.cancel();
-          }
-        }
-      }); */
     }   
 
     public double getJoystickRawAxis(int id) {
