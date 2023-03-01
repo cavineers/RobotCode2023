@@ -22,9 +22,11 @@ import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ControllerPresets.HomeArm;
+import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ControllerPresets.BottomNode;
 import frc.robot.commands.ControllerPresets.MidNode;
 import frc.robot.commands.ControllerPresets.TopNode;
+
 
 
 public class RobotContainer  {
@@ -50,6 +52,7 @@ public class RobotContainer  {
     public Command m_armMidNode;
     public Command m_armTopNode;
     public Command m_arm;
+    public Command m_switchMode;
 
     // Driver Controller
   public Joystick joy = new Joystick(0);
@@ -87,36 +90,28 @@ public class RobotContainer  {
   public POVButton povDown2 = new POVButton(joy2, 180, 0);
   public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
 
-  public enum CurrentMode {
-    DRIVE,
-    ARM
-  }
-  
-  
-    
   private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
-    
+
+    public enum CurrentMode {
+      DRIVE,
+      ARM
+    }
+  
     public CurrentMode mode = CurrentMode.DRIVE; 
 
     public RobotContainer() {
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
-        configureButtonBindingsNumPad();
       } else {
         configureButtonBindingsArm();
-        configureButtonBindingsNumPad();
-      }
-    };
+    }
+  }
 
-    private void configureButtonBindings() {
-      this.right_menu.onTrue(new InstantCommand() {
-        public void initialize() {
-          mode = CurrentMode.ARM;
-        }
-      });
-        
+    private void configureButtonBindings(){
+      this.right_menu.onTrue(new SwitchMode(this));
+     
       this.left_menu.onTrue(new InstantCommand() {
         public void initialize() {
           m_armHome = new HomeArm();
@@ -203,7 +198,7 @@ public class RobotContainer  {
     private void configureButtonBindingsArm() {
       this.right_menu.onTrue(new InstantCommand() {
         public void initialize() {
-          mode = CurrentMode.DRIVE;
+          configureButtonBindings();
         }
       });
     }
