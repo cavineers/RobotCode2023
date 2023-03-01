@@ -52,14 +52,6 @@ public class AutoPath extends CommandBase {
       this.swerveSubsystem = swerveSubsystem;
       addRequirements(swerveSubsystem);
     }
-
-    private InstantCommand createInitialCommand(){
-        return new InstantCommand(() -> {
-            this.m_placeTop.schedule();
-            this.isActive = false;
-        });
-    }
-    
     
     public void initialize(){
       SequentialCommandGroup autoCommandGroup = new SequentialCommandGroup();
