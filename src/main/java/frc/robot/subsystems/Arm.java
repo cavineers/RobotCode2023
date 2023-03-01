@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -39,6 +40,18 @@ public class Arm extends SubsystemBase {
     public ArmChainMotorState m_armChainMotorState = ArmChainMotorState.OFF;
     public ArmChainMotor2State m_armChainMotor2State = ArmChainMotor2State.OFF;
     public ArmExtensionMotorState m_armExtensionMotorState = ArmExtensionMotorState.OFF;
+
+    public Arm() {
+        this.m_armChainMotor.setIdleMode(IdleMode.kBrake);
+        this.m_armChainMotor2.setIdleMode(IdleMode.kBrake);
+        this.m_armExtensionMotor.setIdleMode(IdleMode.kBrake);
+
+
+        this.m_armChainMotor.setSmartCurrentLimit(39);
+        this.m_armChainMotor2.setSmartCurrentLimit(39);
+        this.m_armExtensionMotor.setSmartCurrentLimit(39);
+       
+    }
     
     public void setArmChainMotorState(ArmChainMotorState state) {
         // set the current state
