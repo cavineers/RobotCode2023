@@ -25,7 +25,6 @@ public class MidRight extends CommandBase {
 
     @Override
     public void execute() {
-    // 14.16 is angle rotations and 41.71 is extension rotations
     if(Robot.arm.getArmChainMotorPosition() < 13.96) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
