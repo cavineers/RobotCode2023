@@ -1,5 +1,7 @@
 package frc.robot;
 
+import java.nio.file.Path;
+
 import edu.wpi.first.math.util.Units;
 
 public final class Constants {
@@ -98,6 +100,13 @@ public final class Constants {
         public static final double kWheelBase = Units.inchesToMeters(23.5); //Needs editing - The distance between the centers of wheels on the same side
 
 
+    }
+    public static final class PathPlanning {
+        public static final double kMaxSpeedMetersPerSecond = 1.5;
+        public static final double kMaxAccelerationMetersPerSecond = 1.5;
+        
+        public static final String kPathLocation = "src/main/deploy/pathplanner/";
+        
     }
     public static class Arm {
         // Joint one is closest to chassis and joint two is the furthest
