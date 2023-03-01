@@ -193,7 +193,7 @@ public class RobotContainer  {
             m_armTopMid.schedule();
           }
         });
-        this.left_menu2.onTrue(new InstantCommand() {
+        this.r_bump2.onTrue(new InstantCommand() {
           public void initialize() {
             m_armTopRight = new TopRight();
             m_armTopRight.schedule();
