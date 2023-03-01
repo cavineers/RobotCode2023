@@ -17,10 +17,10 @@ import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 
-import frc.robot.commands.presets.TopNode;
-import frc.robot.commands.presets.MidNode;
-import frc.robot.commands.presets.BottomNode;
-import frc.robot.commands.presets.HomeArm;
+import frc.robot.commands.Presets.TopNode;
+import frc.robot.commands.Presets.MidNode;
+import frc.robot.commands.Presets.BottomNode;
+import frc.robot.commands.Presets.HomeArm;
 
 import frc.robot.commands.manualOverrideCommands.ExtendArm;
 import frc.robot.commands.manualOverrideCommands.RaiseArm;
