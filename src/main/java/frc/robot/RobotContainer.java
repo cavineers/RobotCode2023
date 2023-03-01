@@ -1,7 +1,10 @@
 package frc.robot;
 
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -76,6 +79,10 @@ public class RobotContainer {
     public POVButton povDown = new POVButton(joy, 180, 0);
     public POVButton povLeft = new POVButton(joy, 270, 0); 
 
+    // FOR AUTO
+
+    SendableChooser<String> m_chooser;
+
     public enum CurrentMode {
       DRIVE,
       ARM
@@ -108,6 +115,7 @@ public class RobotContainer {
         configureButtonBindingsArm();
       }
 
+      configureSendableChooser();
     };
 
     private void configureButtonBindings() {
@@ -180,6 +188,27 @@ public class RobotContainer {
       }); */
     
     }
+
+    // FOR AUTO CHOOSER
+
+    
+    public String getAutoPath(){
+      return this.m_chooser.getSelected();
+    }
+
+    private void configureSendableChooser() {
+      this.m_chooser = new SendableChooser<>();
+      m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
+      m_chooser.addOption("Bottom", "Bottom");
+      m_chooser.addOption("Middle Charge", "Middle Charge");
+      m_chooser.addOption("Middle", "Middle");
+      m_chooser.addOption("Top Charge", "Top Charge");
+      m_chooser.addOption("Top", "Top");
+      
+
+      SmartDashboard.putData("Auto Path Selector", this.m_chooser);
+    }
+
     private void configureButtonBindingsArm() {
     
       this.right_menu.onTrue(new InstantCommand() {
