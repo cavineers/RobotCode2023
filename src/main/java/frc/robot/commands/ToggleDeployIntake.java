@@ -1,13 +1,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.subsystems.Intake;
 
-public class ToggleLowerIntake extends CommandBase {
+public class ToggleDeployIntake extends CommandBase {
+    private boolean isFinished = false;
     
-    public ToggleLowerIntake() {
+    public ToggleDeployIntake() {
         this.addRequirements(Robot.intake);
     }
 
@@ -18,9 +19,12 @@ public class ToggleLowerIntake extends CommandBase {
     @Override
     public void execute() {
         if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
-            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.LOWER);
-        } else if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.LOWER) {
+            Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.DEPLOY);
+            Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.ON);
+        } if (Robot.intake.getIntakeDropMotor().getEncoder().getPosition() >= Constants.Intake.RevolutionsToLower) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
+            Robot.intake.getIntakeDropMotor().getEncoder().setPosition(0);
+            isFinished = true;
         }
     }
 
@@ -29,6 +33,6 @@ public class ToggleLowerIntake extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return true;
+        return isFinished;
     }
 }

@@ -12,31 +12,30 @@ public class Intake extends SubsystemBase{
     //Intake states
     public enum IntakeMotorState {
         ON,
-        OFF,
-        REVERSED
+        OFF
     }
     public enum IntakeDropMotorState {
-        RAISE,
-        LOWER,
+        UNDEPLOY,
+        DEPLOY,
         OFF
     }
 
-    //SparkMax's
+    // SparkMax's
     public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
     public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
     public CANSparkMax m_intakeDropMotor = new CANSparkMax(Constants.Intake.IntakeDropMotorID, MotorType.kBrushless);
+    public CANSparkMax m_intakeDropMotor2 = new CANSparkMax(Constants.Intake.IntakeDropMotor2ID, MotorType.kBrushless);
 
+    // Limit Switch
     public DigitalInput m_intakeSwitch = new DigitalInput(Constants.DIO.IntakeSwitch);
 
-    //Intake states
-    public IntakeMotorState m_intakeMotorStateTop = IntakeMotorState.OFF;
-    public IntakeMotorState m_intakeMotorStateBottom = IntakeMotorState.OFF;
+    // Intake states
+    public IntakeMotorState m_intakeMotorState = IntakeMotorState.OFF;
     public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
 
     public void setIntakeMotorState(IntakeMotorState state) {
-        // set the current state
-        this.m_intakeMotorStateTop = state;
-        this.m_intakeMotorStateBottom = state;
+        // set the current state of top and bottom motor
+        this.m_intakeMotorState = state;
         
         // set motor state
         switch (state) {
@@ -50,30 +49,30 @@ public class Intake extends SubsystemBase{
                 this.m_intakeMotorTop.set(0.0);
                 this.m_intakeMotorBottom.set(0.0);
                 break;
-            case REVERSED:
-                // reverses intake
-                this.m_intakeMotorTop.set(Constants.Intake.IntakeSpeedRevTop);
-                this.m_intakeMotorBottom.set(Constants.Intake.IntakeSpeedRevBottom);
-                break;
             default:
                 this.setIntakeMotorState(IntakeMotorState.OFF);
         }
     }
 
+
     public void setIntakeDropMotorState(IntakeDropMotorState state) {
+
         this.m_intakeDropMotorState = state;
 
         switch (state) {
             case OFF:
                 this.m_intakeDropMotor.set(0.0);
+                this.m_intakeDropMotor2.set(0.0);
                 break;
-            case LOWER:
-                //lowers intake for begining of match
+            case DEPLOY:
+                //Deploys intake
                 this.m_intakeDropMotor.set(Constants.Intake.IntakeLowerSpeed);
+                this.m_intakeDropMotor2.set(Constants.Intake.IntakeLowerSpeed);
                 break;
-            case RAISE:
-                //Raises intake for end of match
+            case UNDEPLOY:
+                //Undeploys intake
                 this.m_intakeDropMotor.set(Constants.Intake.IntakeRaiseSpeed);
+                this.m_intakeDropMotor2.set(Constants.Intake.IntakeRaiseSpeed);
                 break;
             default:
                 this.setIntakeDropMotorState(IntakeDropMotorState.OFF);
@@ -82,7 +81,11 @@ public class Intake extends SubsystemBase{
 
 
     public IntakeMotorState getIntakeMotorState() {
-        return this.m_intakeMotorStateTop;
+        return this.m_intakeMotorState;
+    }
+
+    public CANSparkMax getIntakeDropMotor() {
+        return this.m_intakeDropMotor;
     }
 
     public IntakeDropMotorState getIntakeDropMotorState() {

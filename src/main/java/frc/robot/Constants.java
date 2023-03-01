@@ -8,6 +8,7 @@ public final class Constants {
         public static int IntakeMotorTop      = 1; // IntakeMotor (neo)
         public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
         public static int IntakeDropMotor     = 3; // IntakeDropMotor (neo)
+        public static int IntakeDropMotor2    = 4;
     }
     
     public static final class ModuleConstants {
@@ -29,18 +30,16 @@ public final class Constants {
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
+        public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
 
-        public static double IntakeSpeed = 0.4;
-        public static double IntakeSpeedRev = -0.4; // Intake reverse speed
+        public static double IntakeSpeed = 0.35;
         public static double IntakeLowerSpeed = 0.2;
         public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
-        public static double IntakeOrientSpeed = 0.3;
-        public static double IntakeOrientRevSpeed = 0.3;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedRevTop = IntakeSpeedRev; // Intake reverse speed
-        public static double IntakeSpeedRevBottom = -(IntakeSpeedRev); // Intake reverse speed
+
+        public static double RevolutionsToLower= 3.35;
     }
 
     public static final class DriveConstants {
