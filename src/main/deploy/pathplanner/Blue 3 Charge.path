@@ -57,16 +57,18 @@
         "y": 1.6031793204123135
       },
       "nextControl": {
-        "x": 1.766501190976994,
+        "x": 1.7625759925304805,
         "y": 1.6031793204123135
       },
       "holonomicAngle": 0.0,
-      "isReversal": false,
+      "isReversal": true,
       "velOverride": null,
       "isLocked": false,
-      "isStopPoint": false,
+      "isStopPoint": true,
       "stopEvent": {
-        "names": [],
+        "names": [
+          "PlaceCone"
+        ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
         "waitTime": 0
