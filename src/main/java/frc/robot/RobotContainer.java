@@ -104,6 +104,7 @@ public class RobotContainer  {
     public RobotContainer() {
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
+        configureButtonBindingsNumPad();
       } else {
         configureButtonBindingsArm();
     }
