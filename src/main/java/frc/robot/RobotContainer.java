@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-
+import frc.robot.commands.AutoPath;
 import frc.robot.commands.ClawToggle;
 
 import frc.robot.commands.SwerveCommand;
@@ -20,10 +20,10 @@ import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 
-import frc.robot.commands.presets.TopNode;
-import frc.robot.commands.presets.MidNode;
-import frc.robot.commands.presets.BottomNode;
-import frc.robot.commands.presets.HomeArm;
+import frc.robot.commands.Presets.TopNode;
+import frc.robot.commands.Presets.MidNode;
+import frc.robot.commands.Presets.BottomNode;
+import frc.robot.commands.Presets.HomeArm;
 
 import frc.robot.commands.manualOverrideCommands.ExtendArm;
 import frc.robot.commands.manualOverrideCommands.RaiseArm;
@@ -60,6 +60,10 @@ public class RobotContainer {
 
     //Claw Commands
     public Command m_claw;
+
+    //AUTO COMMAND
+
+    public Command m_auto;
 
     // Driver Controller
     public Joystick joy = new Joystick(0);
@@ -99,6 +103,8 @@ public class RobotContainer {
       this.m_raiseIntake = new ToggleUndeployIntake();
       this.m_lowerIntake = new ToggleDeployIntake();
       this.m_claw = new ClawToggle();
+
+      this.m_auto = new AutoPath(swerveSubsystem);
 
       //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
 
@@ -191,7 +197,9 @@ public class RobotContainer {
 
     // FOR AUTO CHOOSER
 
-    
+    public Command getAutonomousCommand(){
+      return this.m_auto;
+    }
     public String getAutoPath(){
       return this.m_chooser.getSelected();
     }
