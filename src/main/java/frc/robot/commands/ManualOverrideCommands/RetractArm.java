@@ -23,8 +23,10 @@ public class RetractArm extends CommandBase {
 
     @Override
     public void execute() {
+    if(Robot.arm.getArmExtensionMotorPosition() >= 0) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
     }
+}
 
     @Override
     public void end(boolean interrupted) {
