@@ -17,6 +17,14 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
+import frc.robot.commands.ManualOverrideCommands.ExtendArm;
+import frc.robot.commands.ManualOverrideCommands.RetractArm;
+import frc.robot.commands.ManualOverrideCommands.RaiseArm;
+import frc.robot.commands.ManualOverrideCommands.LowerArm;
+import frc.robot.commands.ControllerPresets.HomeArm;
+import frc.robot.commands.ControllerPresets.BottomNode;
+import frc.robot.commands.ControllerPresets.MidNode;
+import frc.robot.commands.ControllerPresets.TopNode;
 
 
 public class RobotContainer  {
@@ -33,6 +41,14 @@ public class RobotContainer  {
     public Command m_armTopLeft;
     public Command m_armTopMid;
     public Command m_armTopRight;
+    public Command m_armRaise;
+    public Command m_armLower;
+    public Command m_armExtend;
+    public Command m_armRetract;
+    public Command m_armHome;
+    public Command m_armBottomNode;
+    public Command m_armMidNode;
+    public Command m_armTopNode;
     public Command m_arm;
 
     // Driver Controller
@@ -88,11 +104,43 @@ public class RobotContainer  {
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
         configureButtonBindingsNumPad();
-      } 
+      } else {
+        configureButtonBindingsArm();
+        configureButtonBindingsNumPad();
+      }
     };
 
     private void configureButtonBindings() {
-      
+      this.right_menu.onTrue(new InstantCommand() {
+        public void initialize() {
+          mode = CurrentMode.ARM;
+        }
+      });
+        
+      this.left_menu.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armHome = new HomeArm();
+          m_armHome.schedule();
+        }
+      });
+      this.povDown.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armBottomNode = new BottomNode();
+          m_armBottomNode.schedule();
+        }
+      });
+      this.povRight.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armMidNode = new MidNode();
+          m_armMidNode.schedule();
+        }
+      });
+      this.povUp.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armTopNode = new TopNode();
+          m_armTopNode.schedule();
+        }
+      });
     }
 
     private void configureButtonBindingsNumPad() {
@@ -151,6 +199,13 @@ public class RobotContainer  {
             m_armTopRight.schedule();
           }
         });
+    }
+    private void configureButtonBindingsArm() {
+      this.right_menu.onTrue(new InstantCommand() {
+        public void initialize() {
+          mode = CurrentMode.DRIVE;
+        }
+      });
     }
     
    
