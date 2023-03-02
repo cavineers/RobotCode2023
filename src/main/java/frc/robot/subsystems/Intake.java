@@ -28,6 +28,7 @@ public class Intake extends SubsystemBase{
 
     // Limit Switch
     public DigitalInput m_intakeSwitch = new DigitalInput(Constants.DIO.IntakeSwitch);
+    public boolean m_irSensor = false;
 
     // Intake states
     public IntakeMotorState m_intakeMotorState = IntakeMotorState.OFF;
@@ -95,6 +96,37 @@ public class Intake extends SubsystemBase{
     public boolean getIntakeSwitch() {
         return this.m_intakeSwitch.get();
       }
+
+          //Sensor states
+    public enum sensorState {
+        DETECTED,
+        NOTDETECTED
+    }
+
+    // Intake states
+    public sensorState m_sensorState = sensorState.DETECTED;
+    
+
+    public void setSensor(sensorState state) {
+        // set the current state of top and bottom motor
+        this.m_sensorState = state;
+        
+        // set motor state
+        switch (state) {
+            case DETECTED:
+                // turns on intake
+                this.setIntakeMotorState(IntakeMotorState.ON);
+                break;
+            case NOTDETECTED:
+                // turns off intake
+                this.setIntakeMotorState(IntakeMotorState.OFF);
+                break;
+            default:
+            this.setIntakeMotorState(IntakeMotorState.ON);
+                
+        }
+    }
+
     /**
      * Get the current intake state.
      * @return intake state
