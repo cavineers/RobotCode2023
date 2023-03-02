@@ -31,13 +31,11 @@ import frc.robot.RobotContainer;
 
 public class AutoPath extends CommandBase {
     boolean isActive;
-
-    Command m_lowerIntake;
-    Command m_placeTop;
-    Command m_autoCommand; 
   
     String pathName; // Name of the path file
     String pathPath; // Path to the path file
+
+    Command m_autoCommand;
   
     List<PathPlannerTrajectory> pathGroup;
   
@@ -46,8 +44,7 @@ public class AutoPath extends CommandBase {
     SwerveAutoBuilder builder;
   
     public AutoPath(SwerveDriveSubsystem swerveSubsystem) {
-      this.m_lowerIntake = new ToggleDeployIntake();
-      this.m_placeTop = new TopNode();
+
       this.builder = this.createAutoBuilder();
       this.swerveSubsystem = swerveSubsystem;
       addRequirements(swerveSubsystem);
@@ -61,7 +58,7 @@ public class AutoPath extends CommandBase {
       this.isActive = true;
       configCommand(this.pathGroup);
       autoCommandGroup.addCommands(
-        this.m_placeTop,
+        // this.m_placeTop,
         this.m_autoCommand,
         // Schedule Balance command here
         new InstantCommand(() -> {
@@ -79,8 +76,8 @@ public class AutoPath extends CommandBase {
   
     private HashMap<String, Command> generateEventMapping(){
       HashMap<String, Command> eventMap = new HashMap<>();
-      eventMap.put("ToggleIntake", this.m_lowerIntake);
-      eventMap.put("PlaceCone", this.m_placeTop);
+      // eventMap.put("ToggleIntake", this.m_lowerIntake);
+      // eventMap.put("PlaceCone", this.m_placeTop);
       return eventMap;
     }
       
