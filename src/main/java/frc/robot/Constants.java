@@ -130,10 +130,10 @@ public final class Constants {
         public static double ArmChainSpeed = -0.1;
         public static double ArmChainSpeedRev = 0.1; // Chain reverse speed
 
-        public static double ArmExtensionSpeed = 0.05;
-        public static double ArmExtensionSpeedRev = -0.05;
+        public static double ArmExtensionSpeed = 0.1;
+        public static double ArmExtensionSpeedRev = -0.1;
         
-    //Node Rotations
+    //Node Preset Rotation amounts
         
         // Bottom Node 7.2 is angle rotations and 46 is extension rotations
         public static double BottomNodeAngleRotations = 7.2;
