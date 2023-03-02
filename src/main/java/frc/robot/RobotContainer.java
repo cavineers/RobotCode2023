@@ -17,10 +17,6 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
-import frc.robot.commands.ManualOverrideCommands.ExtendArm;
-import frc.robot.commands.ManualOverrideCommands.RetractArm;
-import frc.robot.commands.ManualOverrideCommands.RaiseArm;
-import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ControllerPresets.HomeArm;
 import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ControllerPresets.BottomNode;
@@ -43,10 +39,6 @@ public class RobotContainer  {
     public Command m_armTopLeft;
     public Command m_armTopMid;
     public Command m_armTopRight;
-    public Command m_armRaise;
-    public Command m_armLower;
-    public Command m_armExtend;
-    public Command m_armRetract;
     public Command m_armHome;
     public Command m_armBottomNode;
     public Command m_armMidNode;
@@ -197,11 +189,7 @@ public class RobotContainer  {
         });
     }
     private void configureButtonBindingsArm() {
-      this.right_menu.onTrue(new InstantCommand() {
-        public void initialize() {
-          configureButtonBindings();
-        }
-      });
+      
     }
     
    
