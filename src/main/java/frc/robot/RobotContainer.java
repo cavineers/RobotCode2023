@@ -1,11 +1,11 @@
 package frc.robot;
 
-import frc.robot.Constants.OIConstants;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.NumPad.BottomLeft;
 import frc.robot.commands.NumPad.BottomMid;
@@ -21,14 +21,34 @@ import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ControllerPresets.BottomNode;
 import frc.robot.commands.ControllerPresets.MidNode;
 import frc.robot.commands.ControllerPresets.TopNode;
-
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+import frc.robot.commands.ClawToggle;
+import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.ToggleDeployIntake;
+import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.SwerveDriveSubsystem;
 
 
 public class RobotContainer  {
     
-    public Command m_autoCommand;
     public SendableChooser<Command> auto = new SendableChooser<Command>();
 
+    //Swerve Subsystem
+    private final SwerveDriveSubsystem swerveSubsystem = new SwerveDriveSubsystem();
+
+    public Command m_autoCommand;
+
+    //Arm Commands
+    public Command m_armHome;
+    public Command m_armBottomNode;
+    public Command m_armMidNode;
+    public Command m_armTopNode;
+    public Command m_switchMode;
+
+    //NumPad Commands
     public Command m_armBottomLeft;
     public Command m_armBottomMid;
     public Command m_armBottomRight;
@@ -38,30 +58,32 @@ public class RobotContainer  {
     public Command m_armTopLeft;
     public Command m_armTopMid;
     public Command m_armTopRight;
-    public Command m_armHome;
-    public Command m_armBottomNode;
-    public Command m_armMidNode;
-    public Command m_armTopNode;
-    public Command m_arm;
-    public Command m_switchMode;
+
+    //Intake Commands
+    public Command m_intake;
+    public Command m_lowerIntake;
+    public Command m_raiseIntake;
+
+    //Claw Commands
+    public Command m_claw;
 
     // Driver Controller
-  public Joystick joy = new Joystick(0);
-  public JoystickButton a_button = new JoystickButton(joy, 1);
-  public JoystickButton b_button = new JoystickButton(joy, 2);
-  public JoystickButton x_button = new JoystickButton(joy, 3);
-  public JoystickButton y_button = new JoystickButton(joy, 4);
-  public JoystickButton l_bump = new JoystickButton(joy, 5);
-  public JoystickButton r_bump = new JoystickButton(joy, 6);
-  public JoystickButton left_menu = new JoystickButton(joy, 7);
-  public JoystickButton right_menu = new JoystickButton(joy, 8);
-  public JoystickButton left_stick = new JoystickButton(joy, 9);
-  public JoystickButton right_stick = new JoystickButton(joy, 10);
+    public Joystick joy = new Joystick(0);
+    public JoystickButton a_button = new JoystickButton(joy, 1);
+    public JoystickButton b_button = new JoystickButton(joy, 2);
+    public JoystickButton x_button = new JoystickButton(joy, 3);
+    public JoystickButton y_button = new JoystickButton(joy, 4);
+    public JoystickButton l_bump = new JoystickButton(joy, 5);
+    public JoystickButton r_bump = new JoystickButton(joy, 6);
+    public JoystickButton left_menu = new JoystickButton(joy, 7);
+    public JoystickButton right_menu = new JoystickButton(joy, 8);
+    public JoystickButton left_stick = new JoystickButton(joy, 9);
+    public JoystickButton right_stick = new JoystickButton(joy, 10);
 
-  public POVButton povUp = new POVButton(joy, 0, 0);
-  public POVButton povRight = new POVButton(joy, 90, 0);
-  public POVButton povDown = new POVButton(joy, 180, 0);
-  public POVButton povLeft = new POVButton(joy, 270, 0); 
+    public POVButton povUp = new POVButton(joy, 0, 0);
+    public POVButton povRight = new POVButton(joy, 90, 0);
+    public POVButton povDown = new POVButton(joy, 180, 0);
+    public POVButton povLeft = new POVButton(joy, 270, 0); 
 
   // Driver Numpad
   public Joystick joy2 = new Joystick(1);
@@ -80,8 +102,8 @@ public class RobotContainer  {
   public POVButton povRight2 = new POVButton(joy2, 90, 0);
   public POVButton povDown2 = new POVButton(joy2, 180, 0);
   public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
-
-  private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
+  
+    private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
@@ -93,18 +115,53 @@ public class RobotContainer  {
     public CurrentMode mode = CurrentMode.DRIVE; 
 
     public RobotContainer() {
+
+      this.m_raiseIntake = new ToggleUndeployIntake();
+      this.m_lowerIntake = new ToggleDeployIntake();
+      this.m_claw = new ClawToggle();
+
+      //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
+
+      swerveSubsystem.setDefaultCommand(new SwerveCommand(
+          swerveSubsystem,
+          () -> -joy.getRawAxis(OIConstants.kDriverYAxis),
+          () -> joy.getRawAxis(OIConstants.kDriverXAxis),
+          () -> joy.getRawAxis(OIConstants.kDriverRotAxis),
+          () -> !joy.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
+
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
         configureButtonBindingsNumPad();
       } else {
         configureButtonBindingsArm();
-    }
-  }
+      }
 
-    private void configureButtonBindings(){
-      this.right_menu.onTrue(new SwitchMode(this));
-     
-      this.left_menu.onTrue(new InstantCommand() {
+    };
+
+    private void configureButtonBindings() {
+      
+      //Intake Buttons
+      this.r_bump.onTrue(new InstantCommand(){
+        public void initialize() {
+          if(m_raiseIntake.isScheduled()) {
+            m_raiseIntake.cancel();
+          }
+        m_lowerIntake = new ToggleDeployIntake();
+        m_lowerIntake.schedule();
+        }
+      });
+      this.l_bump.onTrue(new InstantCommand(){
+        public void initialize() {
+          if(m_lowerIntake.isScheduled()) {
+            m_lowerIntake.cancel();
+            }
+        m_raiseIntake = new ToggleUndeployIntake();
+        m_raiseIntake.schedule();
+        }
+      });
+
+      //Arm Buttons
+      this.right_menu.onTrue(new InstantCommand() {
         public void initialize() {
           m_armHome = new HomeArm();
           m_armHome.schedule();
@@ -127,7 +184,23 @@ public class RobotContainer  {
           m_armTopNode = new TopNode();
           m_armTopNode.schedule();
         }
+      });      
+      
+      //Claw Buttons
+      this.a_button.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_claw = new ClawToggle();
+          m_claw.schedule();
+        }
       });
+  
+      /*this.a_button.onFalse(new InstantCommand() {
+        public void initialize() {
+          if (m_claw.isScheduled()) {
+            m_claw.cancel();
+          }
+        }
+      }); */
     }
 
     private void configureButtonBindingsNumPad() {
@@ -186,6 +259,8 @@ public class RobotContainer  {
             m_armTopRight.schedule();
           }
         });
+
+    
     }
     private void configureButtonBindingsArm() {
       
