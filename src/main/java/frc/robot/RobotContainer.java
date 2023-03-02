@@ -16,6 +16,8 @@ public class RobotContainer {
     public Command m_lowerIntake;
     public Command m_raiseIntake;
     
+    public int intakeState = 1;
+    
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
     public JoystickButton b_button = new JoystickButton(joy, 2);
@@ -71,24 +73,23 @@ public class RobotContainer {
       this.l_bump.onTrue(new InstantCommand() {
         @Override
          public void initialize() {
-          if(m_raiseIntake.isScheduled()) {
-            m_raiseIntake.cancel();
+          if (intakeState == 1) {
+            if (m_raiseIntake.isScheduled()) {
+              m_raiseIntake.cancel();
+            }
+            m_lowerIntake = new ToggleDeployIntake();
+            m_lowerIntake.schedule();
+            intakeState = intakeState + 1;
+          } else if (intakeState == 2) {
+            if (m_lowerIntake.isScheduled()) {
+              m_lowerIntake.cancel();
+            }
+            m_raiseIntake = new ToggleUndeployIntake();
+            m_raiseIntake.schedule();
+            intakeState = intakeState - 1;
           }
-          m_lowerIntake = new ToggleDeployIntake();
-          m_lowerIntake.schedule();
          }
         });
-
-      this.l_bump.onFalse(new InstantCommand() {
-        @Override
-         public void initialize() {
-            if(m_lowerIntake.isScheduled()) {
-            m_lowerIntake.cancel();
-            } 
-           m_raiseIntake = new ToggleUndeployIntake();
-           m_raiseIntake.schedule();
-        }
-      }); 
     }   
 
     public double getJoystickRawAxis(int id) {

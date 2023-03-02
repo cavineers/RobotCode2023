@@ -32,14 +32,14 @@ public final class Constants {
         public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
         public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
 
-        public static double IntakeSpeed = 0.35;
+        public static double IntakeSpeed = 0.15;
         public static double IntakeLowerSpeed = 0.2;
-        public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
+        public static double IntakeRaiseSpeed = -0.2;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
 
-        public static double RevolutionsToLower= 3.35;
+        public static double RevolutionsToLower= 10;
     }
 
     public static final class DriveConstants {
