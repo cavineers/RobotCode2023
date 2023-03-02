@@ -67,7 +67,7 @@ public class AutoPath extends CommandBase {
         new InstantCommand(() -> {
           this.isActive = false;
         }));
-        autoCommandGroup.schedule();
+      autoCommandGroup.schedule();
     }
   
   
