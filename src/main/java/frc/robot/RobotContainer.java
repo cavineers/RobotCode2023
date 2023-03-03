@@ -69,13 +69,7 @@ public class RobotContainer  {
   public JoystickButton b_button2 = new JoystickButton(joy2, 2);
   public JoystickButton x_button2 = new JoystickButton(joy2, 3);
   public JoystickButton y_button2 = new JoystickButton(joy2, 4);
-  public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
   public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
-  public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
-  public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
-  public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
-  public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
-
   public POVButton povUp2 = new POVButton(joy2, 0, 0);
   public POVButton povRight2 = new POVButton(joy2, 90, 0);
   public POVButton povDown2 = new POVButton(joy2, 180, 0);
@@ -98,6 +92,7 @@ public class RobotContainer  {
         configureButtonBindingsNumPad();
       } else {
         configureButtonBindingsArm();
+        configureButtonBindingsNumPad();
     }
   }
 
@@ -188,7 +183,7 @@ public class RobotContainer  {
         });
     }
     private void configureButtonBindingsArm() {
-      
+      this.right_menu.onTrue(new SwitchMode(this));
     }
     
    

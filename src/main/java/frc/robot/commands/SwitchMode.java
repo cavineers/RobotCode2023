@@ -18,26 +18,22 @@ public class SwitchMode extends CommandBase {
     @Override
     public void initialize() {
         this.rc.joy.setRumble(RumbleType.kLeftRumble, 1);
-        this.rc.joy.setRumble(RumbleType.kRightRumble, 1); 
+        this.rc.joy.setRumble(RumbleType.kRightRumble, 1);
+
         if (this.rc.mode == RobotContainer.CurrentMode.DRIVE) {
             this.rc.mode = RobotContainer.CurrentMode.ARM;
         } else {
             this.rc.mode = RobotContainer.CurrentMode.DRIVE;
         }
- 
     }
 
     @Override
-    public void execute() {
-       
-    }
+    public void execute() {}
 
     @Override
     public void end(boolean interrupted) {
         this.rc.joy.setRumble(RumbleType.kLeftRumble, 0);
         this.rc.joy.setRumble(RumbleType.kRightRumble, 0);
-
-
     }
 
     @Override
