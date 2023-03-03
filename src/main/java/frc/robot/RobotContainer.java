@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
+
 import frc.robot.commands.AutoPath;
 import frc.robot.commands.ClawToggle;
 
@@ -19,6 +20,7 @@ import frc.robot.commands.SwerveCommand;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.AprilTagHomingCommand;
 
 import frc.robot.commands.Presets.TopNode;
 import frc.robot.commands.Presets.MidNode;
@@ -66,6 +68,8 @@ public class RobotContainer {
     public Command m_auto;
 
     // Driver Controller
+    public Command m_tagHoming;
+    
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
     public JoystickButton b_button = new JoystickButton(joy, 2);
@@ -103,10 +107,9 @@ public class RobotContainer {
       this.m_raiseIntake = new ToggleUndeployIntake();
       this.m_lowerIntake = new ToggleDeployIntake();
       this.m_claw = new ClawToggle();
+      configureButtonBindings();
 
       this.m_auto = new AutoPath(swerveSubsystem);
-
-      //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
@@ -229,6 +232,18 @@ public class RobotContainer {
         public void initialize() {
           m_armChainMotorDown = new LowerArm();
           m_armChainMotorDown.schedule();
+        }
+      });
+
+      //For April Tag Homing 
+      this.x_button.onTrue(new InstantCommand() {
+        @Override
+        public void initialize() {
+          if(m_tagHoming.isScheduled()) {
+            m_tagHoming.cancel();
+            } 
+            m_tagHoming = new AprilTagHomingCommand();
+            m_tagHoming.schedule();
         }
       });
     }   
