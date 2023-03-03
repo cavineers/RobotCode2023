@@ -27,19 +27,19 @@ public class BottomNode extends CommandBase {
     @Override
     public void execute() {
     // 7.2 is angle rotations and 46 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.BottomNodeAngleRotations) - Constants.Arm.EncoderDeadzone) {
+    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.BottomNodeAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.BottomNodeExtensionRotations) - Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.BottomNodeExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.BottomNodeExtensionRotations) + Constants.Arm.EncoderDeadzone) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.BottomNodeExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.BottomNodeAngleRotations) + Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.BottomNodeAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);

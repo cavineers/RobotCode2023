@@ -97,11 +97,11 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
         
-        public static double ArmChainSpeed = -0.1;
-        public static double ArmChainSpeedRev = 0.1; // Chain reverse speed
+        public static double ArmChainSpeed = 0.18;
+        public static double ArmChainSpeedRev = -0.18; // Chain reverse speed
 
-        public static double ArmExtensionSpeed = 0.05;
-        public static double ArmExtensionSpeedRev = -0.05;
+        public static double ArmExtensionSpeed = 0.75;
+        public static double ArmExtensionSpeedRev = -0.75;
         
     //Node Rotations
         
@@ -120,8 +120,9 @@ public final class Constants {
         // Top Peg 16.41 is angle rotations and 60.41 is extension rotations
         public static double TopNodePegAngleRotations = 16.41;
         public static double TopNodePegExtensionRotations = 60.41;
-        // Encoder deadzone
-        public static double EncoderDeadzone = 0.2;
+        // Encoder deadzones
+        public static double ExtensionEncoderDeadzone = 1.8;
+        public static double AngleEncoderDeadzone = 0.3;
 
     }
 

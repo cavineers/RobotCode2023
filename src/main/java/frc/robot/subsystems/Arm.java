@@ -5,10 +5,15 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
+
+    public void periodic(){
+        SmartDashboard.putNumber("Rotations", getArmChainMotorPosition());
+    }
 
      public enum ArmChainMotorState {
         ON,
@@ -45,6 +50,9 @@ public class Arm extends SubsystemBase {
         this.m_armChainMotor.setIdleMode(IdleMode.kBrake);
         this.m_armChainMotor2.setIdleMode(IdleMode.kBrake);
         this.m_armExtensionMotor.setIdleMode(IdleMode.kBrake);
+
+        this.m_armChainMotor.setInverted(true);
+        this.m_armChainMotor2.setInverted(true);
 
 
         this.m_armChainMotor.setSmartCurrentLimit(39);

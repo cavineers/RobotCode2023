@@ -28,19 +28,19 @@ public class TopNode extends CommandBase {
     public void execute() {
     // This is top shelf
     // 14.89 is angle rotations and 61.65 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.TopNodeShelfAngleRotations) - Constants.Arm.EncoderDeadzone) {
+    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.TopNodeShelfAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.TopNodeShelfExtensionRotations) - Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.TopNodeShelfExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.TopNodeShelfExtensionRotations) + Constants.Arm.EncoderDeadzone) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.TopNodeShelfExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.TopNodeShelfAngleRotations) + Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.TopNodeShelfAngleRotations) + Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
@@ -54,19 +54,19 @@ public class TopNode extends CommandBase {
 
     // Top peg (add if statement that states whether holding cube or cone)
     // 16.41 is angle rotations and 60.41 is extension rotations
-    /*if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.TopNodePegAngleRotations) - Constants.Arm.EncoderDeadzone) {
+    /*if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.TopNodePegAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.TopNodePegExtensionRotations) - Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.TopNodePegExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.TopNodePegExtensionRotations) + Constants.Arm.EncoderDeadzone) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.TopNodePegExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.TopNodePegAngleRotations) + Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.TopNodePegAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
