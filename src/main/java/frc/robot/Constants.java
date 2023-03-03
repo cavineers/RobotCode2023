@@ -7,7 +7,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 public final class Constants {
     
     public static class CANIds {
-        public static final int kFrontLeftDriveCanID = 1;
+        public static final int kFrontLeftDriveCanID = 20;
         public static final int kFrontLeftTurningCanID = 2;
         public static final int kBackLeftDriveCanID = 3;
         public static final int kBackLeftTurningCanID = 4;
@@ -30,14 +30,14 @@ public final class Constants {
         public static final int ArmChainMotor2 = 18; // Chain Neo 2 same as firt but
         public static final int ArmExtensionMotor = 19; // Chain Neo 2 same as firt but
 
-        public static final int ClawMotor = 20;
+        public static final int ClawMotor = 1;
        
     }
     public static class DIO {
         public static int ArmAngleSwitch = 0;
-        public static int ArmExtensionSwitch = 1;
+        public static int ArmExtensionSwitch = 3;
         public static int IntakeSwitch = 2;
-        public static int clawLimitSwitch = 3;
+        public static int clawLimitSwitch = 1;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -155,10 +155,10 @@ public final class Constants {
 
     }
     public static final class Claw {
-        public static final double kClawSpeed = 2;
-        public static final double kRevolutionsToCube = 5.5;
-        public static final double kRevolutionsToCone = 10.5; 
+        public static final double kClawSpeed = .2;
+        public static final double kRevolutions = 1;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
+        public static final int kCurrentLimit = 10; //limit in amps
     }
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;
