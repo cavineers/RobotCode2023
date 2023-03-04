@@ -33,7 +33,7 @@ public class Robot extends TimedRobot {
   public static Arm arm;
   public static Intake intake;
   public static Claw claw;
-  public static AprilTagHoming taghoming;
+  public static AprilTagHoming aprilTagHoming;
 
 
   //Navx
@@ -52,7 +52,8 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     claw = new Claw();
 
-    taghoming = new AprilTagHoming();
+    aprilTagHoming = new AprilTagHoming();
+    
     //Container
     m_robotContainer = new RobotContainer();
 

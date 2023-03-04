@@ -67,6 +67,7 @@ public class RobotContainer {
 
     public Command m_auto;
 
+  
     // Driver Controller
     public Command m_tagHoming;
     
@@ -236,14 +237,15 @@ public class RobotContainer {
       });
 
       //For April Tag Homing 
-      this.x_button.onTrue(new InstantCommand() {
+      this.left_stick.onTrue(new InstantCommand() {
         @Override
         public void initialize() {
           if(m_tagHoming.isScheduled()) {
             m_tagHoming.cancel();
-            } 
-            m_tagHoming = new AprilTagHomingCommand();
-            m_tagHoming.schedule();
+          } 
+
+          m_tagHoming = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kLeftPosition);
+          m_tagHoming.schedule();
         }
       });
     }   
