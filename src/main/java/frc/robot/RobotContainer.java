@@ -113,7 +113,6 @@ public class RobotContainer  {
     }
 
     private void configureButtonBindingsNumPad() {
-      
       this.a_button2.onTrue(new InstantCommand() {
           public void initialize() {
             m_armBottomLeft = new BottomLeft();
