@@ -1,6 +1,5 @@
 package frc.robot;
 
-import java.nio.file.Path;
 
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -143,6 +142,18 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.1;
         // Extension reverse speed
     }
+
+    public static final class PresetTranslations {
+        //IN METERS needs to be adjusted 
+
+        public static final Translation2d kLeftPosition = new Translation2d(0.1, 0.1); 
+        public static final Translation2d kShelfPosition = new Translation2d(0.1, 0.1); 
+        public static final Translation2d kRightPosition = new Translation2d(0.1, 0.1); 
+
+        public static final Translation2d kSubstationPosition = new Translation2d(0.1, 0.1); 
+
+    }
+
     public static final class Claw {
         public static final double kClawSpeed = 2;
         public static final double kRevolutionsToCube = 5.5;
@@ -158,6 +169,18 @@ public final class Constants {
         public static final int kDriverFieldOrientedButtonIdx = 1;
 
         public static final double kDeadband = 0.1;
+    }
+
+    public static final class HomingDrivePIDControllerConstants {
+        public static final double kP = 3; //ADJUST
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+    }
+
+    public static final class HomingRotationalPIDControllerConstants {
+        public static final double kP = 2; //ADJUST
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
     }
 
     
