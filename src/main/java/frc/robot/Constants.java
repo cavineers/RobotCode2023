@@ -123,6 +123,11 @@ public final class Constants {
         // Encoder deadzones
         public static double ExtensionEncoderDeadzone = 1.8;
         public static double AngleEncoderDeadzone = 0.3;
+        // Min and Max Rotations 
+        public static double MaxExtensionRotations = 50;
+        public static double MinExtensionRotations = 0;
+        public static double MaxAngleRotations = 17;
+        public static double MinAngleRotations = -20;
 
     }
 

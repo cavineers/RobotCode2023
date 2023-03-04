@@ -91,10 +91,20 @@ public class RobotContainer  {
           m_armRaise.schedule();
         }
       });
+      this.povUp.onFalse(new InstantCommand() {
+        public void initialize() {
+          m_armRaise.cancel();
+        }
+      });
       this.povDown.onTrue(new InstantCommand() {
         public void initialize() {
           m_armLower = new LowerArm();
           m_armLower.schedule();
+        }
+      });
+      this.povDown.onFalse(new InstantCommand() {
+        public void initialize() {
+          m_armLower.cancel();
         }
       });
       this.povLeft.onTrue(new InstantCommand() {
@@ -103,10 +113,20 @@ public class RobotContainer  {
           m_armRetract.schedule();
         }
       });
+      this.povLeft.onFalse(new InstantCommand() {
+        public void initialize() {
+          m_armRetract.cancel();
+        }
+      });
       this.povRight.onTrue(new InstantCommand() {
         public void initialize() {
           m_armExtend = new ExtendArm();
           m_armExtend.schedule();
+        }
+      });
+      this.povRight.onFalse(new InstantCommand() {
+        public void initialize() {
+          m_armExtend.cancel();
         }
       });
     

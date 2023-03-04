@@ -2,6 +2,7 @@ package frc.robot.commands.ControllerArmCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
@@ -23,8 +24,13 @@ public class LowerArm extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
-        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+        if (Robot.arm.getArmChainMotorPosition() > Constants.Arm.MinAngleRotations) {
+            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+        } else {
+            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+        }
     }
 
     @Override

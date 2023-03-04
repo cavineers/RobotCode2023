@@ -12,7 +12,9 @@ import frc.robot.Constants;
 public class Arm extends SubsystemBase {
 
     public void periodic(){
-        SmartDashboard.putNumber("Rotations", getArmChainMotorPosition());
+        SmartDashboard.putNumber("AngleRotations", getArmChainMotorPosition());
+        SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position());
+        SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
     }
 
      public enum ArmChainMotorState {

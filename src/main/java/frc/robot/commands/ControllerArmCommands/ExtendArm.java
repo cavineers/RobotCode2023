@@ -2,6 +2,7 @@ package frc.robot.commands.ControllerArmCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
@@ -24,8 +25,14 @@ public class ExtendArm extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
-    }
+        if (Robot.arm.getArmExtensionMotorPosition() <= Constants.Arm.MaxExtensionRotations) {
+            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
+        } else {
+            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+        }
+    }   
+
+
 
     @Override
     public void end(boolean interrupted) {

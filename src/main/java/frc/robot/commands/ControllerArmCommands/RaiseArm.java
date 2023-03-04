@@ -2,6 +2,7 @@ package frc.robot.commands.ControllerArmCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
@@ -24,9 +25,14 @@ public class RaiseArm extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
-        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
+        if (Robot.arm.getArmChainMotorPosition() < Constants.Arm.MaxAngleRotations) {
+            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
+    }   else {
+            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
+            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
     }
+}
 
     @Override
     public void end(boolean interrupted) {
