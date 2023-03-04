@@ -49,7 +49,7 @@ public class Claw extends SubsystemBase{
         return this.m_clawMotor;
     }
 
-    public double getEncoderPostion(){
+    public double getEncoderPosition(){
         return this.clawEncoder.getPosition();
     }
 
@@ -93,7 +93,7 @@ public class Claw extends SubsystemBase{
 
     public void periodic(){
         SmartDashboard.putBoolean("Claw Limit Switch", this.getLimitSwitch());
-        SmartDashboard.putNumber("Claw Encoder", clawEncoder.getPosition());
+        SmartDashboard.putNumber("Claw Encoder Position", clawEncoder.getPosition());
     }
 
 }

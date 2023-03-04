@@ -22,6 +22,8 @@ import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ControllerPresets.BottomNode;
 import frc.robot.commands.ControllerPresets.MidNode;
 import frc.robot.commands.ControllerPresets.TopNode;
+import frc.robot.commands.ClawClose;
+import frc.robot.commands.ClawOpen;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
@@ -69,6 +71,8 @@ public class RobotContainer  {
 
     //Claw Commands
     public Command m_claw;
+    public Command m_clawClose;
+    public Command m_clawOpen;
 
     // Driver Controller
     public Joystick joy = new Joystick(0);
@@ -122,6 +126,8 @@ public class RobotContainer  {
       this.m_raiseIntake = new ToggleUndeployIntake();
       this.m_lowerIntake = new ToggleDeployIntake();
       this.m_claw = new ClawToggle();
+      this.m_clawClose = new ClawClose();
+      this.m_clawOpen = new ClawOpen();
 
       //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
 
@@ -142,9 +148,14 @@ public class RobotContainer  {
     };
 
     private void configureButtonBindings() {
-      
+
       //Claw Buttons
-      this.a_button.onTrue(m_claw);
+      //this.a_button.onTrue(m_claw);
+      if(Robot.claw.isClosed()){
+        this.a_button.onTrue(m_clawClose);
+      } else {
+        this.a_button.onTrue(m_clawOpen);
+      }
       
       //Intake Buttons
       this.r_bump.onTrue(new InstantCommand(){
