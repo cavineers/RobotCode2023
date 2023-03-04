@@ -50,11 +50,12 @@ public class AutoPath extends CommandBase {
     public AutoPath(SwerveDriveSubsystem swerveSubsystem) {
       this.m_lowerIntake = new ToggleDeployIntake();
       this.m_placeTop = new TopNode();
-      this.builder = this.createAutoBuilder();
+      this.swerveSubsystem = swerveSubsystem;
+      this.builder = this.createAutoBuilder(); // requires swerveSubsystem
       if (swerveSubsystem == null) {
         System.out.println("SwerveSubsystem is null in AutoPath constructor");
       }
-      this.swerveSubsystem = swerveSubsystem;
+
       addRequirements(swerveSubsystem);
     }
     
@@ -77,7 +78,7 @@ public class AutoPath extends CommandBase {
   
   
     private List<PathPlannerTrajectory> generateAutonomousPath() {
-      this.pathPath = "src/main/deploy/paths/" + pathName + ".path";
+      this.pathPath = pathName;
       List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(this.pathPath, new PathConstraints(Constants.PathPlanning.kMaxSpeedMetersPerSecond, Constants.PathPlanning.kMaxAccelerationMetersPerSecond));
       return pathGroup;
     }
