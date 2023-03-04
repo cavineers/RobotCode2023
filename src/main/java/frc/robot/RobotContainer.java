@@ -187,20 +187,7 @@ public class RobotContainer  {
       });      
       
       //Claw Buttons
-      this.a_button.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_claw = new ClawToggle();
-          m_claw.schedule();
-        }
-      });
-  
-      /*this.a_button.onFalse(new InstantCommand() {
-        public void initialize() {
-          if (m_claw.isScheduled()) {
-            m_claw.cancel();
-          }
-        }
-      }); */
+      this.a_button.onTrue(m_claw);
     }
 
     private void configureButtonBindingsNumPad() {
