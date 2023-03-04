@@ -7,6 +7,11 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.commands.ControllerArmCommands.ExtendArm;
+import frc.robot.commands.ControllerArmCommands.HomeArm;
+import frc.robot.commands.ControllerArmCommands.LowerArm;
+import frc.robot.commands.ControllerArmCommands.RaiseArm;
+import frc.robot.commands.ControllerArmCommands.RetractArm;
 import frc.robot.commands.NumPad.BottomLeft;
 import frc.robot.commands.NumPad.BottomMid;
 import frc.robot.commands.NumPad.BottomRight;
@@ -16,13 +21,6 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
-import frc.robot.commands.ControllerPresets.HomeArm;
-import frc.robot.commands.SwitchMode;
-import frc.robot.commands.ControllerPresets.BottomNode;
-import frc.robot.commands.ControllerPresets.MidNode;
-import frc.robot.commands.ControllerPresets.TopNode;
-
-
 
 public class RobotContainer  {
     
@@ -39,11 +37,10 @@ public class RobotContainer  {
     public Command m_armTopMid;
     public Command m_armTopRight;
     public Command m_armHome;
-    public Command m_armBottomNode;
-    public Command m_armMidNode;
-    public Command m_armTopNode;
-    public Command m_arm;
-    public Command m_switchMode;
+    public Command m_armRaise;
+    public Command m_armLower;
+    public Command m_armExtend;
+    public Command m_armRetract;
 
     // Driver Controller
   public Joystick joy = new Joystick(0);
@@ -79,49 +76,40 @@ public class RobotContainer  {
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
-    public enum CurrentMode {
-      DRIVE,
-      ARM
-    }
-  
-    public CurrentMode mode = CurrentMode.DRIVE; 
-
     public RobotContainer() {
 
       m_armHome = new HomeArm();
 
-      if(this.mode == CurrentMode.DRIVE) {
-        configureButtonBindings();
-        configureButtonBindingsNumPad();
-      } else {
-        configureButtonBindingsArm();
-        configureButtonBindingsNumPad();
-    }
+      configureButtonBindings();
+      configureButtonBindingsNumPad();
   }
 
     private void configureButtonBindings(){
-      this.right_menu.onTrue(new SwitchMode(this));
-     
-      this.left_menu.onTrue(m_armHome); 
-      
+      this.povUp.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armRaise = new RaiseArm();
+          m_armRaise.schedule();
+        }
+      });
       this.povDown.onTrue(new InstantCommand() {
         public void initialize() {
-          m_armBottomNode = new BottomNode();
-          m_armBottomNode.schedule();
+          m_armLower = new LowerArm();
+          m_armLower.schedule();
+        }
+      });
+      this.povLeft.onTrue(new InstantCommand() {
+        public void initialize() {
+          m_armRetract = new RetractArm();
+          m_armRetract.schedule();
         }
       });
       this.povRight.onTrue(new InstantCommand() {
         public void initialize() {
-          m_armMidNode = new MidNode();
-          m_armMidNode.schedule();
+          m_armExtend = new ExtendArm();
+          m_armExtend.schedule();
         }
       });
-      this.povUp.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armTopNode = new TopNode();
-          m_armTopNode.schedule();
-        }
-      });
+    
     }
 
     private void configureButtonBindingsNumPad() {
@@ -181,12 +169,6 @@ public class RobotContainer  {
           }
         });
     }
-    private void configureButtonBindingsArm() {
-      this.right_menu.onTrue(new SwitchMode(this));
-    }
-    
-   
-
     public double getJoystickRawAxis(int id) {
         return -m_joy.getRawAxis(id);
     };
