@@ -19,7 +19,7 @@ public class ClawToggle extends CommandBase {
     public void initialize() {
         if (!Robot.claw.isClosed()) {
             Robot.claw.setMotorState(Claw.clawMotorState.ON);
-            requestedRevs = Constants.Claw.kRevolutionsToCube;
+            requestedRevs = Constants.Claw.kRevolutions;
         } else if (Robot.claw.isClosed()) {
             Robot.claw.setMotorState(Claw.clawMotorState.REVERSE);
             requestedRevs = 0;
@@ -30,7 +30,7 @@ public class ClawToggle extends CommandBase {
     public void execute() {
         //stop opening claw if it is open
         if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE) {
-            if (Robot.claw.getEncoderPostion() <= requestedRevs) {
+            if (Robot.claw.getEncoderPostion() <= requestedRevs||Robot.claw.getLimitSwitch()) {
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
                 Robot.claw.setClosed(false);
                 isFinished = true;
