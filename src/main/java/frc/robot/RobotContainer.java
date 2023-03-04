@@ -79,114 +79,63 @@ public class RobotContainer  {
     public RobotContainer() {
 
       m_armHome = new HomeArm();
+      m_armRaise = new RaiseArm();
+      m_armLower = new LowerArm();
+      m_armExtend = new ExtendArm();
+      m_armRetract = new RetractArm();
+      m_armBottomLeft = new BottomLeft();
+      m_armBottomMid = new BottomMid();
+      m_armBottomRight = new BottomRight();
+      m_armMidLeft = new MidLeft();
+      m_armMidMid = new MidMid();
+      m_armMidRight = new MidRight();
+      m_armTopLeft = new TopLeft();
+      m_armTopMid = new TopMid();
+      m_armTopRight = new TopRight();
 
       configureButtonBindings();
       configureButtonBindingsNumPad();
   }
 
     private void configureButtonBindings(){
-      this.povUp.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armRaise = new RaiseArm();
-          m_armRaise.schedule();
-        }
-      });
+      this.povUp.onTrue(m_armRaise);
       this.povUp.onFalse(new InstantCommand() {
         public void initialize() {
           m_armRaise.cancel();
         }
       });
-      this.povDown.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armLower = new LowerArm();
-          m_armLower.schedule();
-        }
-      });
+      this.povDown.onTrue(m_armLower);
       this.povDown.onFalse(new InstantCommand() {
         public void initialize() {
           m_armLower.cancel();
         }
       });
-      this.povLeft.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armRetract = new RetractArm();
-          m_armRetract.schedule();
-        }
-      });
+      this.povLeft.onTrue(m_armRetract);
       this.povLeft.onFalse(new InstantCommand() {
         public void initialize() {
           m_armRetract.cancel();
         }
       });
-      this.povRight.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armExtend = new ExtendArm();
-          m_armExtend.schedule();
-        }
-      });
+      this.povRight.onTrue(m_armExtend);
       this.povRight.onFalse(new InstantCommand() {
         public void initialize() {
           m_armExtend.cancel();
         }
       });
+      this.left_menu.onTrue(m_armHome);
     
     }
 
     private void configureButtonBindingsNumPad() {
-      this.a_button2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armBottomLeft = new BottomLeft();
-            m_armBottomLeft.schedule();
-          }
-        });
-        this.b_button2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armBottomMid = new BottomMid();
-            m_armBottomMid.schedule();
-          }
-        });
-        this.x_button2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armBottomRight = new BottomRight();
-            m_armBottomRight.schedule();
-          }
-        });
-        this.y_button2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armMidLeft = new MidLeft();
-            m_armMidLeft.schedule();
-          }
-        });
-        this.povUp2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armMidMid = new MidMid();
-            m_armMidMid.schedule();
-          }
-        });
-        this.povRight2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armMidRight = new MidRight();
-            m_armMidRight.schedule();
-          }
-        });
-        this.povLeft2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armTopLeft = new TopLeft();
-            m_armTopLeft.schedule();
-          }
-        });
-        this.povDown2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armTopMid = new TopMid();
-            m_armTopMid.schedule();
-          }
-        });
-        this.r_bump2.onTrue(new InstantCommand() {
-          public void initialize() {
-            m_armTopRight = new TopRight();
-            m_armTopRight.schedule();
-          }
-        });
+      this.a_button2.onTrue(m_armBottomLeft);
+      this.b_button2.onTrue(m_armBottomMid);
+      this.x_button2.onTrue(m_armBottomRight);
+      this.y_button2.onTrue(m_armMidLeft);
+      this.povUp2.onTrue(m_armMidMid);
+      this.povRight2.onTrue(m_armMidRight);
+      this.povLeft2.onTrue(m_armTopLeft);
+      this.povDown2.onTrue(m_armTopMid);
+      this.r_bump2.onTrue(m_armTopRight);
     }
     public double getJoystickRawAxis(int id) {
         return -m_joy.getRawAxis(id);
