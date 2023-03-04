@@ -87,6 +87,9 @@ public class RobotContainer  {
     public CurrentMode mode = CurrentMode.DRIVE; 
 
     public RobotContainer() {
+
+      m_armHome = new HomeArm();
+
       if(this.mode == CurrentMode.DRIVE) {
         configureButtonBindings();
         configureButtonBindingsNumPad();
@@ -99,12 +102,8 @@ public class RobotContainer  {
     private void configureButtonBindings(){
       this.right_menu.onTrue(new SwitchMode(this));
      
-      this.left_menu.onTrue(new InstantCommand() {
-        public void initialize() {
-          m_armHome = new HomeArm();
-          m_armHome.schedule();
-        }
-      });
+      this.left_menu.onTrue(m_armHome); 
+      
       this.povDown.onTrue(new InstantCommand() {
         public void initialize() {
           m_armBottomNode = new BottomNode();
