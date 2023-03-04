@@ -40,7 +40,7 @@ public class Arm extends SubsystemBase {
     public CANSparkMax m_armChainMotor2 = new CANSparkMax(Constants.Arm.ArmChainMotor2, MotorType.kBrushless);
     public CANSparkMax m_armExtensionMotor = new CANSparkMax(Constants.Arm.ArmExtensionMotor, MotorType.kBrushless);
 
-    private DigitalInput m_angleLimitSwitch = new DigitalInput(Constants.DIO.ArmAngleSwitch);
+    private DigitalInput m_angleIrSensor = new DigitalInput(Constants.DIO.ArmIrSensor);
     private DigitalInput m_extensionLimitSwitch = new DigitalInput(Constants.DIO.ArmExtensionSwitch);
     
     
@@ -173,8 +173,8 @@ public class Arm extends SubsystemBase {
   }
   
     
-    public boolean getAngleSwitch() {
-        return this.m_angleLimitSwitch.get();
+    public boolean getAngleIrSensor() {
+        return this.m_angleIrSensor.get();
       }
     
       public boolean getExtensionSwitch() {

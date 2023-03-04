@@ -32,7 +32,7 @@ public class HomeArm extends CommandBase {
             Robot.arm.setArmExtensionMotorPosition(0.0);
         }
         if (Robot.arm.getArmExtensionMotorPosition() == 0) {
-            if (Robot.arm.getAngleSwitch() == true) {
+            if (Robot.arm.getAngleIrSensor() == true) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
             Robot.arm.setArmChainMotorPosition(0.0);
