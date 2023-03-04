@@ -27,6 +27,8 @@ import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.pathplanner.lib.PathConstraints;
 
+import frc.robot.subsystems.SwerveDriveSubsystem;
+
 import frc.robot.RobotContainer;
 
 public class AutoPath extends CommandBase {
@@ -49,6 +51,9 @@ public class AutoPath extends CommandBase {
       this.m_lowerIntake = new ToggleDeployIntake();
       this.m_placeTop = new TopNode();
       this.builder = this.createAutoBuilder();
+      if (swerveSubsystem == null) {
+        System.out.println("SwerveSubsystem is null in AutoPath constructor");
+      }
       this.swerveSubsystem = swerveSubsystem;
       addRequirements(swerveSubsystem);
     }
@@ -87,12 +92,12 @@ public class AutoPath extends CommandBase {
   
     public SwerveAutoBuilder createAutoBuilder(){
       SwerveAutoBuilder autoBuilder = new SwerveAutoBuilder(
-      this.swerveSubsystem::getPose, // Pose2d supplier
-      this.swerveSubsystem::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
+      swerveSubsystem::getPose, // Pose2d supplier
+      swerveSubsystem::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
       Constants.DriveConstants.kDriveKinematics, // SwerveDriveKinematics
       new PIDConstants(5, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers)
       new PIDConstants(0.5, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
-      this.swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
+      swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
       generateEventMapping(),
       true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
       swerveSubsystem // The drive subsystem. Used to properly set the requirements of path following commands

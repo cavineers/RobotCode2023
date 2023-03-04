@@ -65,7 +65,6 @@ public class RobotContainer {
 
     //AUTO COMMAND
 
-    public Command m_auto;
 
   
     // Driver Controller
@@ -202,8 +201,7 @@ public class RobotContainer {
     // FOR AUTO CHOOSER
 
     public Command getAutonomousCommand(){
-      this.m_auto = new AutoPath(swerveSubsystem);
-      return this.m_auto;
+      return new AutoPath(swerveSubsystem);
     }
 
 
