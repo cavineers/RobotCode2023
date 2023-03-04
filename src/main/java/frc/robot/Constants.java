@@ -6,6 +6,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 public final class Constants {
     
+    
     public static class CANIds {
         public static final int kFrontLeftDriveCanID = 1;
         public static final int kFrontLeftTurningCanID = 2;
@@ -38,6 +39,7 @@ public final class Constants {
         public static int ArmExtensionSwitch = 1;
         public static int IntakeSwitch = 2;
         public static int clawLimitSwitch = 3;
+        public static int m_irSensor = 4;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);

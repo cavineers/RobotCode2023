@@ -26,13 +26,13 @@ public class Intake extends SubsystemBase{
     public CANSparkMax m_intakeDropMotor = new CANSparkMax(Constants.Intake.IntakeDropMotorID, MotorType.kBrushless);
     public CANSparkMax m_intakeDropMotor2 = new CANSparkMax(Constants.Intake.IntakeDropMotor2ID, MotorType.kBrushless);
 
-    // Limit Switch
+    // Sensors
     public DigitalInput m_intakeSwitch = new DigitalInput(Constants.DIO.IntakeSwitch);
-    public boolean m_irSensor = false;
-
+    public DigitalInput m_irSensor = new DigitalInput(Constants.DIO.m_irSensor);
     // Intake states
     public IntakeMotorState m_intakeMotorState = IntakeMotorState.OFF;
     public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
+
 
     public void setIntakeMotorState(IntakeMotorState state) {
         // set the current state of top and bottom motor
@@ -97,35 +97,12 @@ public class Intake extends SubsystemBase{
         return this.m_intakeSwitch.get();
       }
 
+      public boolean getIRSensor() {
+        return this.m_irSensor.get();
+      }
+
           //Sensor states
-    public enum sensorState {
-        DETECTED,
-        NOTDETECTED
-    }
-
-    // Intake states
-    public sensorState m_sensorState = sensorState.DETECTED;
-    
-
-    public void setSensor(sensorState state) {
-        // set the current state of top and bottom motor
-        this.m_sensorState = state;
-        
-        // set motor state
-        switch (state) {
-            case DETECTED:
-                // turns on intake
-                this.setIntakeMotorState(IntakeMotorState.ON);
-                break;
-            case NOTDETECTED:
-                // turns off intake
-                this.setIntakeMotorState(IntakeMotorState.OFF);
-                break;
-            default:
-            this.setIntakeMotorState(IntakeMotorState.ON);
-                
-        }
-    }
+   
 
     /**
      * Get the current intake state.
