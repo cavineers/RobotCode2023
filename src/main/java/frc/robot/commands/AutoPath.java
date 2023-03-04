@@ -30,18 +30,18 @@ import com.pathplanner.lib.PathConstraints;
 import frc.robot.RobotContainer;
 
 public class AutoPath extends CommandBase {
-    boolean isActive;
+    private boolean isActive;
 
-    Command m_lowerIntake;
-    Command m_placeTop;
-    Command m_autoCommand; 
+    private Command m_lowerIntake;
+    private Command m_placeTop;
+    private Command m_autoCommand; 
   
-    String pathName; // Name of the path file
-    String pathPath; // Path to the path file
+    private String pathName; // Name of the path file
+    private String pathPath; // Path to the path file
   
-    List<PathPlannerTrajectory> pathGroup;
+    private List<PathPlannerTrajectory> pathGroup;
   
-    SwerveDriveSubsystem swerveSubsystem;
+    private final SwerveDriveSubsystem swerveSubsystem;
   
     SwerveAutoBuilder builder;
   

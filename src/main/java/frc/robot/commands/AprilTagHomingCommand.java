@@ -19,7 +19,7 @@ public class AprilTagHomingCommand extends CommandBase {
     private SwerveDriveSubsystem swerveSubsystem;
     private AprilTagHoming tagHomingSubsystem;
 
-    PPSwerveControllerCommand trajFollower;
+    private PPSwerveControllerCommand trajFollower;
 
     private Translation2d goalOffset; // The peg/shelf/substation that is selected
 

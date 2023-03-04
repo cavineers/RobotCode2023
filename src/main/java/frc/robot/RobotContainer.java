@@ -110,7 +110,6 @@ public class RobotContainer {
       this.m_claw = new ClawToggle();
       configureButtonBindings();
 
-      this.m_auto = new AutoPath(swerveSubsystem);
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
@@ -126,6 +125,7 @@ public class RobotContainer {
       }
 
       configureSendableChooser();
+
     };
 
     private void configureButtonBindings() {
@@ -202,8 +202,11 @@ public class RobotContainer {
     // FOR AUTO CHOOSER
 
     public Command getAutonomousCommand(){
+      this.m_auto = new AutoPath(swerveSubsystem);
       return this.m_auto;
     }
+
+
     public String getAutoPath(){
       return this.m_chooser.getSelected();
     }
