@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+
 import frc.robot.commands.NumPad.BottomLeft;
 import frc.robot.commands.NumPad.BottomMid;
 import frc.robot.commands.NumPad.BottomRight;
@@ -21,12 +22,14 @@ import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ControllerPresets.BottomNode;
 import frc.robot.commands.ControllerPresets.MidNode;
 import frc.robot.commands.ControllerPresets.TopNode;
-import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
+
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
+
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.Arm;
 import frc.robot.subsystems.SwerveDriveSubsystem;
@@ -140,6 +143,9 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
       
+      //Claw Buttons
+      this.a_button.onTrue(m_claw);
+      
       //Intake Buttons
       this.r_bump.onTrue(new InstantCommand(){
         public void initialize() {
@@ -185,9 +191,6 @@ public class RobotContainer  {
           m_armTopNode.schedule();
         }
       });      
-      
-      //Claw Buttons
-      this.a_button.onTrue(m_claw);
     }
 
     private void configureButtonBindingsNumPad() {
