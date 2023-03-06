@@ -23,11 +23,12 @@ public class ClawClose extends CommandBase {
 
     @Override
     public void execute() {
-        Robot.claw.setClosed(true);
     }
 
     @Override
-    public void end(boolean interrupted) {}
+    public void end(boolean interrupted) {
+        Robot.claw.setClosed(true);
+    }
 
     @Override
     public boolean isFinished() {

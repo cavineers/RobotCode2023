@@ -46,6 +46,8 @@ public class RobotContainer  {
 
     public Command m_autoCommand;
 
+    public boolean clawState = false;
+
     //Arm Commands
     public Command m_armHome;
     public Command m_armBottomNode;
@@ -151,11 +153,14 @@ public class RobotContainer  {
 
       //Claw Buttons
       //this.a_button.onTrue(m_claw);
-      if(Robot.claw.isClosed()){
-        this.a_button.onTrue(m_clawClose);
-      } else {
+      if(clawState){
         this.a_button.onTrue(m_clawOpen);
+        this.clawState = false;
+      } else {
+        this.a_button.onTrue(m_clawClose);
+        this.clawState = true;
       }
+      
       
       //Intake Buttons
       this.r_bump.onTrue(new InstantCommand(){
