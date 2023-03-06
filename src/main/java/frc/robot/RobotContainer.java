@@ -27,6 +27,15 @@ public class RobotContainer  {
     public Command m_autoCommand;
     public SendableChooser<Command> auto = new SendableChooser<Command>();
 
+    public int intakeState = 1;
+
+    //Swerve Subsystem
+    private final SwerveDriveSubsystem swerveSubsystem = new SwerveDriveSubsystem();
+
+
+
+
+    //Arm Commands
     public Command m_armBottomLeft;
     public Command m_armBottomMid;
     public Command m_armBottomRight;
@@ -112,6 +121,56 @@ public class RobotContainer  {
       });
       this.povLeft.onTrue(m_armRetract);
       this.povLeft.onFalse(new InstantCommand() {
+      swerveSubsystem.setDefaultCommand(new SwerveCommand(
+          swerveSubsystem,
+          () -> -joy.getRawAxis(OIConstants.kDriverYAxis),
+          () -> joy.getRawAxis(OIConstants.kDriverXAxis),
+          () -> joy.getRawAxis(OIConstants.kDriverRotAxis),
+          () -> !joy.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)))};
+
+      if(this.mode == CurrentMode.DRIVE) {
+        configureButtonBindings();
+        configureButtonBindingsNumPad();
+      } else {
+        configureButtonBindingsArm();
+      }
+
+    };
+
+    private void configureButtonBindings() {
+
+      //Claw Buttons
+      //this.a_button.onTrue(m_claw);
+      if(Robot.claw.isClosed()){
+        this.a_button.onTrue(m_clawClose);
+      } else {
+        this.a_button.onTrue(m_clawOpen);
+      }
+      
+      //Intake Buttons
+      this.l_bump.onTrue(new InstantCommand() {
+        @Override
+         public void initialize() {
+          if (intakeState == 1) {
+            if (m_raiseIntake.isScheduled()) {
+              m_raiseIntake.cancel();
+            }
+            m_lowerIntake = new ToggleDeployIntake();
+            m_lowerIntake.schedule();
+            intakeState = intakeState + 1;
+          } else if (intakeState == 2) {
+            if (m_lowerIntake.isScheduled()) {
+              m_lowerIntake.cancel();
+            }
+            m_raiseIntake = new ToggleUndeployIntake();
+            m_raiseIntake.schedule();
+            intakeState = intakeState - 1;
+          }
+         }
+        });
+        
+      //Arm Buttons
+      this.right_menu.onTrue(new InstantCommand() {
         public void initialize() {
           m_armRetract.cancel();
         }
