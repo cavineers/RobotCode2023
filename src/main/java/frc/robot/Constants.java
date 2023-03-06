@@ -8,7 +8,7 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 public final class Constants {
     
     public static class CANIds {
-        public static final int kFrontLeftDriveCanID = 1;
+        public static final int kFrontLeftDriveCanID = 20;
         public static final int kFrontLeftTurningCanID = 2;
         public static final int kBackLeftDriveCanID = 3;
         public static final int kBackLeftTurningCanID = 4;
@@ -31,14 +31,15 @@ public final class Constants {
         public static final int ArmChainMotor2 = 18; // Chain Neo 2 same as firt but
         public static final int ArmExtensionMotor = 19; // Chain Neo 2 same as firt but
 
-        public static final int ClawMotor = 20;
+        public static final int ClawMotor = 1;
        
     }
     public static class DIO {
         public static int ArmAngleSwitch = 0;
-        public static int ArmExtensionSwitch = 1;
+        public static int ArmExtensionSwitch = 3;
         public static int IntakeSwitch = 2;
-        public static int clawLimitSwitch = 3;
+        public static int clawLimitSwitch = 1;
+        public static int intakeInfaredSensor = 4;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -135,12 +136,32 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
         
-        public static double ArmChainSpeed = 0.1;
-        public static double ArmChainSpeedRev = -0.1; // Chain reverse speed
+        public static double ArmChainSpeed = -0.1;
+        public static double ArmChainSpeedRev = 0.1; // Chain reverse speed
 
         public static double ArmExtensionSpeed = 0.1;
         public static double ArmExtensionSpeedRev = -0.1;
-        // Extension reverse speed
+        
+    //Node Preset Rotation amounts
+        
+        // Bottom Node 7.2 is angle rotations and 46 is extension rotations
+        public static double BottomNodeAngleRotations = 7.2;
+        public static double BottomNodeExtensionRotations = 46;
+        // Mid Node Shelf 12.36 is angle rotations and 45.81 is extension rotations
+        public static double MidNodeShelfAngleRotations = 12.36;
+        public static double MidNodeShelfExtensionRotations = 45.81;
+        // Mid Node Peg 14.16 is angle rotations and 41.71 is extension rotations
+        public static double MidNodePegAngleRotations = 14.16;
+        public static double MidNodePegExtensionRotations = 41.71;
+        // Top Shelf 14.89 is angle rotations and 61.65 is extension rotations
+        public static double TopNodeShelfAngleRotations = 14.89;
+        public static double TopNodeShelfExtensionRotations = 61.65;
+        // Top Peg 16.41 is angle rotations and 60.41 is extension rotations
+        public static double TopNodePegAngleRotations = 16.41;
+        public static double TopNodePegExtensionRotations = 60.41;
+        // Encoder deadzone
+        public static double EncoderDeadzone = 0.2;
+
     }
 
     public static final class PresetTranslations {
@@ -155,10 +176,10 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static final double kClawSpeed = 2;
-        public static final double kRevolutionsToCube = 5.5;
-        public static final double kRevolutionsToCone = 10.5; 
+        public static final double kClawSpeed = .2;
+        public static final double kRevolutions = 1;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
+        public static final int kCurrentLimit = 10; //limit in amps
     }
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;

@@ -8,18 +8,19 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClawToggle extends CommandBase {
 
+    private boolean isFinished;
+    private double requestedRevs;
+
     public ClawToggle() {
         this.addRequirements(Robot.claw);
+        isFinished = false;
     }
-    
-    private boolean isFinished = false;
-    private double requestedRevs;
     
     @Override
     public void initialize() {
         if (!Robot.claw.isClosed()) {
             Robot.claw.setMotorState(Claw.clawMotorState.ON);
-            requestedRevs = Constants.Claw.kRevolutionsToCube;
+            requestedRevs = Constants.Claw.kRevolutions;
         } else if (Robot.claw.isClosed()) {
             Robot.claw.setMotorState(Claw.clawMotorState.REVERSE);
             requestedRevs = 0;
@@ -29,8 +30,8 @@ public class ClawToggle extends CommandBase {
     @Override
     public void execute() {
         //stop opening claw if it is open
-        if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE) {
-            if (Robot.claw.getEncoderPostion() <= requestedRevs) {
+        if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE|| Robot.claw.getLimitSwitch()) {
+            if (Robot.claw.getEncoderPosition() <= requestedRevs||Robot.claw.getLimitSwitch()) {
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
                 Robot.claw.setClosed(false);
                 isFinished = true;
@@ -38,7 +39,7 @@ public class ClawToggle extends CommandBase {
         }
         //stop closing claw if it is closed
         if (Robot.claw.getMotorState()==Claw.clawMotorState.ON) {
-            if (Robot.claw.getEncoderPostion() >= requestedRevs) {
+            if (Robot.claw.getEncoderPosition() >= requestedRevs) {
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
                 Robot.claw.setClosed(true);
                 isFinished = true;
