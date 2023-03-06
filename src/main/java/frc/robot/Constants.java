@@ -5,30 +5,9 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static final int kFrontLeftDriveCanID = 20;
-        public static final int kFrontLeftTurningCanID = 2;
-        public static final int kBackLeftDriveCanID = 3;
-        public static final int kBackLeftTurningCanID = 4;
-        public static final int kFrontRightDriveCanID = 5;
-        public static final int kFrontRightTurningCanID = 6;
-        public static final int kBackRightDriveCanID = 7;
-        public static final int kBackRightTurningCanID = 8;
-
-        public static final int kFrontLeftAbsoluteEncoderCanID = 12;
-        public static final int kBackLeftAbsoluteEncoderCanID = 9;
-        public static final int kFrontRightAbsoluteEncoderCanID = 11;
-        public static final int kBackRightAbsoluteEncoderCanID = 10;
-
-        public static final int IntakeMotorBottom = 13;
-        public static final int IntakeMotorTop = 14;
-        public static final int IntakeRightDropMotor = 15;
-        public static final int IntakeLeftDropMotor = 16;
-
-        public static final int ArmChainMotor = 17; // Chain Neo
-        public static final int ArmChainMotor2 = 18; // Chain Neo 2 same as firt but
-        public static final int ArmExtensionMotor = 19; // Chain Neo 2 same as firt but
-
-        public static final int ClawMotor = 1;
+        public static int ArmChainMotor = 1; // Chain Neo
+        public static int ArmChainMotor2 = 2; // Chain Neo 2 same as firt but
+        public static int ArmExtensionMotor = 3; // Chain Neo 2 same as firt but
        
     }
 
@@ -44,16 +23,9 @@ public final class Constants {
     }
 
     public static final class Intake{
-        public static int IntakeTopID = CANIds.IntakeMotorTop;
-        public static int IntakeBottomID = CANIds.IntakeMotorBottom;
-        public static int IntakeRightDropMotorID = CANIds.IntakeRightDropMotor;
-        public static int IntakeLeftDropMotorID = CANIds.IntakeLeftDropMotor;
 
-        public static double IntakeSpeed = 0.15;
-        public static double IntakeLowerLeftSpeed = 0.2;
-        public static double IntakeRaiseLeftSpeed = -0.2;
-        public static double IntakeLowerRightSpeed = -0.2;
-        public static double IntakeRaiseRightSpeed = 0.2;
+        public static double IntakeSpeed = 0.7;
+        public static double IntakeSpeedRev = -0.65; // Intake reverse speed
         
         public static double IntakeSpeedRight = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedLeft = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
