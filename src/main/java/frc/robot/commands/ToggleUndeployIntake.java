@@ -20,7 +20,7 @@ public class ToggleUndeployIntake extends CommandBase {
         if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
             Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.UNDEPLOY);
             Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.OFF);
-        } if (Robot.intake.getIntakeSwitch()) {
+        } if (Robot.intake.getIntakeSwitch() == true) {
             isFinished = true;
         }
     }
@@ -28,7 +28,8 @@ public class ToggleUndeployIntake extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
-        Robot.intake.getIntakeDropMotor().getEncoder().setPosition(0);
+        Robot.intake.getIntakeLeftDropMotor().getEncoder().setPosition(0);
+        Robot.intake.getIntakeRightDropMotor().getEncoder().setPosition(0);
     }
 
     @Override

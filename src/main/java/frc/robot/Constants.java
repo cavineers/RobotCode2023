@@ -5,10 +5,10 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int IntakeMotorTop      = 1; // IntakeMotor (neo)
-        public static int IntakeMotorBottom   = 2; // IntakeMotor (neo)
-        public static int IntakeDropMotor     = 3; // IntakeDropMotor (neo)
-        public static int IntakeDropMotor2    = 4;
+        public static int IntakeMotorTop        = 1; // IntakeMotor (neo)
+        public static int IntakeMotorBottom     = 2; // IntakeMotor (neo)
+        public static int IntakeRightDropMotor  = 3; // IntakeDropMotor (neo)
+        public static int IntakeLeftDropMotor   = 4;
     }
     
     public static final class ModuleConstants {
@@ -23,23 +23,25 @@ public final class Constants {
     }
 
     public static final class DIO {
-        public static int IntakeSwitch = 0;
+        public static int IntakeSwitch = 1;
     }
 
     public static final class Intake{
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
-        public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
-        public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
+        public static int IntakeRightDropMotorID = CANIds.IntakeRightDropMotor;
+        public static int IntakeLeftDropMotorID = CANIds.IntakeLeftDropMotor;
 
         public static double IntakeSpeed = 0.15;
-        public static double IntakeLowerSpeed = 0.2;
-        public static double IntakeRaiseSpeed = -0.2;
+        public static double IntakeLowerLeftSpeed = 0.2;
+        public static double IntakeRaiseLeftSpeed = -0.2;
+        public static double IntakeLowerRightSpeed = -0.2;
+        public static double IntakeRaiseRightSpeed = 0.2;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
 
-        public static double RevolutionsToLower= 10;
+        public static double RevolutionsToLower= 3.36;
     }
 
     public static final class DriveConstants {
