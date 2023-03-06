@@ -2,7 +2,11 @@ package frc.robot;
 
 
 import edu.wpi.first.math.util.Units;
+
+import com.pathplanner.lib.auto.PIDConstants;
+
 import edu.wpi.first.math.geometry.Translation2d;
+import com.pathplanner.lib.auto.PIDConstants;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 public final class Constants {
@@ -126,6 +130,9 @@ public final class Constants {
     public static final class PathPlanning {
         public static final double kMaxSpeedMetersPerSecond = 1.5;
         public static final double kMaxAccelerationMetersPerSecond = 1.5;
+
+        public static final PIDConstants kAutoDriveVelocityPID = new PIDConstants(1, 0, 0);
+        public static final PIDConstants kAutoDriveTurnPID = new PIDConstants(0.5, 0, 0);
         
         public static final String kPathLocation = "src/main/deploy/pathplanner/";
         
@@ -167,9 +174,9 @@ public final class Constants {
     public static final class PresetTranslations {
         //IN METERS needs to be adjusted 
 
-        public static final Translation2d kLeftPosition = new Translation2d(0.1, 0.1); 
-        public static final Translation2d kShelfPosition = new Translation2d(0.1, 0.1); 
-        public static final Translation2d kRightPosition = new Translation2d(0.1, 0.1); 
+        public static final Translation2d kLeftPosition = new Translation2d(0.10, Units.inchesToMeters(22.4)); 
+        public static final Translation2d kShelfPosition = new Translation2d(0.10, Units.inchesToMeters(22.4)); 
+        public static final Translation2d kRightPosition = new Translation2d(0.10, Units.inchesToMeters(22.4)); 
 
         public static final Translation2d kSubstationPosition = new Translation2d(0.1, 0.1); 
 
