@@ -27,19 +27,19 @@ public class MidLeft extends CommandBase {
     @Override
     public void execute() {
     // 14.16 is angle rotations and 41.71 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.MidNodePegAngleRotations) - Constants.Arm.EncoderDeadzone) {
+    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.MidNodePegAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.MidNodePegExtensionRotations) - Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.MidNodePegExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.MidNodePegExtensionRotations) + Constants.Arm.EncoderDeadzone) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.MidNodePegExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.MidNodePegAngleRotations) + Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.MidNodePegAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);

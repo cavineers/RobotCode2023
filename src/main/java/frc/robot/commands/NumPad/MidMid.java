@@ -27,19 +27,19 @@ public class MidMid extends CommandBase {
     @Override
     public void execute() {
     // 12.36 is angle rotations and 45.81 is extension rotations
-    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.MidNodeShelfAngleRotations) - Constants.Arm.EncoderDeadzone) {
+    if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.MidNodeShelfAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.MidNodeShelfExtensionRotations) - Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmExtensionMotorPosition() < (Constants.Arm.MidNodeShelfExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.MidNodeShelfExtensionRotations) + Constants.Arm.EncoderDeadzone) {      
+    } else if(Robot.arm.getArmExtensionMotorPosition() > (Constants.Arm.MidNodeShelfExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.MidNodeShelfAngleRotations) + Constants.Arm.EncoderDeadzone) {
+    } else if (Robot.arm.getArmChainMotorPosition() > (Constants.Arm.MidNodeShelfAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
