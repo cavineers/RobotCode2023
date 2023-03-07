@@ -174,11 +174,11 @@ public final class Constants {
     public static final class PresetTranslations {
         //IN METERS needs to be adjusted 
 
-        public static final Translation2d kLeftPosition = new Translation2d(0.10, Units.inchesToMeters(22.4)); 
-        public static final Translation2d kShelfPosition = new Translation2d(0.10, Units.inchesToMeters(22.4)); 
-        public static final Translation2d kRightPosition = new Translation2d(0.10, Units.inchesToMeters(22.4)); 
+        public static final Translation2d kLeftPosition = new Translation2d(.80, Units.inchesToMeters(-22.15)); 
+        public static final Translation2d kShelfPosition = new Translation2d(.80, 0); 
+        public static final Translation2d kRightPosition = new Translation2d(.80, Units.inchesToMeters(22.15)); 
 
-        public static final Translation2d kSubstationPosition = new Translation2d(0.1, 0.1); 
+        public static final Translation2d kSubstationPosition = new Translation2d(0.5, 0); 
 
     }
 

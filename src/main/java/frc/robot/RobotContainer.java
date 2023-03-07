@@ -34,10 +34,10 @@ import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 import frc.robot.commands.AprilTagHomingCommand;
 
-import frc.robot.commands.Presets.TopNode;
-import frc.robot.commands.Presets.MidNode;
-import frc.robot.commands.Presets.BottomNode;
-import frc.robot.commands.Presets.HomeArm;
+import frc.robot.commands.ControllerPresets.TopNode;
+import frc.robot.commands.ControllerPresets.MidNode;
+import frc.robot.commands.ControllerPresets.BottomNode;
+import frc.robot.commands.ControllerPresets.HomeArm;
 
 import frc.robot.commands.manualOverrideCommands.ExtendArm;
 import frc.robot.commands.manualOverrideCommands.RaiseArm;
