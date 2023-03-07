@@ -37,6 +37,8 @@ public class AutoPath extends CommandBase {
     private Command m_lowerIntake;
     private Command m_placeTop;
     private Command m_autoCommand; 
+
+    private SequentialCommandGroup autoCommandGroup;
   
     private String pathName; // Name of the path file
     private String pathPath; // Path to the path file
@@ -60,20 +62,24 @@ public class AutoPath extends CommandBase {
     }
     
     public void initialize(){
-      SequentialCommandGroup autoCommandGroup = new SequentialCommandGroup();
+      this.autoCommandGroup = new SequentialCommandGroup();
       this.pathName = Robot.m_robotContainer.getAutoPath();
       this.pathGroup = generateAutonomousPath();
   
       this.isActive = true;
       configCommand(this.pathGroup);
-      autoCommandGroup.addCommands(
+      this.autoCommandGroup.addCommands(
         this.m_placeTop,
-        this.m_autoCommand,
+        this.m_autoCommand
         // Schedule Balance command here
-        new InstantCommand(() -> {
-          this.isActive = false;
-        }));
-      autoCommandGroup.schedule();
+      );
+      this.autoCommandGroup.schedule();
+    }
+
+    public void execute(){
+      if (this.autoCommandGroup.isFinished()) {
+        this.isActive = false;
+      }
     }
   
   
@@ -96,8 +102,8 @@ public class AutoPath extends CommandBase {
       swerveSubsystem::getPose, // Pose2d supplier
       swerveSubsystem::resetOdometry, // Pose2d consumer, used to reset odometry at the beginning of auto
       Constants.DriveConstants.kDriveKinematics, // SwerveDriveKinematics
-      new PIDConstants(5, 0.0, 0.0), // PID constants to correct for translation error (used to create the X and Y PID controllers)
-      new PIDConstants(0.5, 0.0, 0.0), // PID constants to correct for rotation error (used to create the rotation controller)
+      Constants.PathPlanning.kAutoDriveVelocityPID, // PID constants to correct for translation error (used to create the X and Y PID controllers)
+      Constants.PathPlanning.kAutoDriveTurnPID, // PID constants to correct for rotation error (used to create the rotation controller)
       swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
       generateEventMapping(),
       true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true

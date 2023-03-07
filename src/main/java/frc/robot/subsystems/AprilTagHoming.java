@@ -71,7 +71,7 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
         PathPlannerTrajectory traj = PathPlanner.generatePath(
           new PathConstraints(4, 3),
           new PathPoint(new Translation2d(0,0), new Rotation2d(0), holonomicRotation), // INITIAL position, heading(direction of travel), holonomic rotation 
-          new PathPoint(getTranslationWithOffset(goalOffset), goalHeading, goalRotation) // position, heading(direction of travel), holonomic rotation
+          new PathPoint(getTranslationWithOffset(goalOffset), new Rotation2d(0), new Rotation2d(0)) // position, heading(direction of travel), holonomic rotation
         );
         return traj;
     }
