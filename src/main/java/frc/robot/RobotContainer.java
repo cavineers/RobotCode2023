@@ -56,6 +56,8 @@ public class RobotContainer  {
     
     public SendableChooser<Command> auto = new SendableChooser<Command>();
 
+    public int intakeState = 1;
+
     //Swerve Subsystem
     private final SwerveDriveSubsystem swerveSubsystem = new SwerveDriveSubsystem();
 
@@ -183,25 +185,27 @@ public class RobotContainer  {
       }
       
       //Intake Buttons
-      this.r_bump.onTrue(new InstantCommand(){
-        public void initialize() {
-          if(m_raiseIntake.isScheduled()) {
-            m_raiseIntake.cancel();
-          }
-        m_lowerIntake = new ToggleDeployIntake();
-        m_lowerIntake.schedule();
-        }
-      });
-      this.l_bump.onTrue(new InstantCommand(){
-        public void initialize() {
-          if(m_lowerIntake.isScheduled()) {
-            m_lowerIntake.cancel();
+      this.l_bump.onTrue(new InstantCommand() {
+        @Override
+         public void initialize() {
+          if (intakeState == 1) {
+            if (m_raiseIntake.isScheduled()) {
+              m_raiseIntake.cancel();
             }
-        m_raiseIntake = new ToggleUndeployIntake();
-        m_raiseIntake.schedule();
-        }
-      });
-
+            m_lowerIntake = new ToggleDeployIntake();
+            m_lowerIntake.schedule();
+            intakeState = intakeState + 1;
+          } else if (intakeState == 2) {
+            if (m_lowerIntake.isScheduled()) {
+              m_lowerIntake.cancel();
+            }
+            m_raiseIntake = new ToggleUndeployIntake();
+            m_raiseIntake.schedule();
+            intakeState = intakeState - 1;
+          }
+         }
+        });
+        
       //Arm Buttons
       this.right_menu.onTrue(new InstantCommand() {
         public void initialize() {

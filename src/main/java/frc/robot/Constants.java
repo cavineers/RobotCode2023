@@ -28,8 +28,8 @@ public final class Constants {
 
         public static final int IntakeMotorBottom = 13;
         public static final int IntakeMotorTop = 14;
-        public static final int IntakeDropMotor = 15;
-        public static final int IntakeDropMotor2 = 16;
+        public static final int IntakeRightDropMotor = 15;
+        public static final int IntakeLeftDropMotor = 16;
 
         public static final int ArmChainMotor = 17; // Chain Neo
         public static final int ArmChainMotor2 = 18; // Chain Neo 2 same as firt but
@@ -59,17 +59,19 @@ public final class Constants {
     public static final class Intake{
         public static int IntakeTopID = CANIds.IntakeMotorTop;
         public static int IntakeBottomID = CANIds.IntakeMotorBottom;
-        public static int IntakeDropMotorID = CANIds.IntakeDropMotor;
-        public static int IntakeDropMotor2ID = CANIds.IntakeDropMotor2;
+        public static int IntakeRightDropMotorID = CANIds.IntakeRightDropMotor;
+        public static int IntakeLeftDropMotorID = CANIds.IntakeLeftDropMotor;
 
-        public static double IntakeSpeed = 0.35;
-        public static double IntakeLowerSpeed = 0.2;
-        public static double IntakeRaiseSpeed = -(IntakeLowerSpeed);
+        public static double IntakeSpeed = 0.15;
+        public static double IntakeLowerLeftSpeed = 0.2;
+        public static double IntakeRaiseLeftSpeed = -0.2;
+        public static double IntakeLowerRightSpeed = -0.2;
+        public static double IntakeRaiseRightSpeed = 0.2;
         
         public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
 
-        public static double RevolutionsToLower= 3.35;
+        public static double RevolutionsToLower= 3.36;
     }
     public static final class DriveConstants {
 
