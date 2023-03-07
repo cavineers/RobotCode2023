@@ -5,10 +5,17 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Arm extends SubsystemBase {
+
+    public void periodic(){
+        SmartDashboard.putNumber("AngleRotations", getArmChainMotorPosition());
+        SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position());
+        SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
+    }
 
      public enum ArmChainMotorState {
         ON,
@@ -33,7 +40,7 @@ public class Arm extends SubsystemBase {
     public CANSparkMax m_armChainMotor2 = new CANSparkMax(Constants.Arm.ArmChainMotor2, MotorType.kBrushless);
     public CANSparkMax m_armExtensionMotor = new CANSparkMax(Constants.Arm.ArmExtensionMotor, MotorType.kBrushless);
 
-    private DigitalInput m_angleLimitSwitch = new DigitalInput(Constants.DIO.ArmAngleSwitch);
+    private DigitalInput m_angleIrSensor = new DigitalInput(Constants.DIO.ArmIrSensor);
     private DigitalInput m_extensionLimitSwitch = new DigitalInput(Constants.DIO.ArmExtensionSwitch);
     
     
@@ -45,6 +52,9 @@ public class Arm extends SubsystemBase {
         this.m_armChainMotor.setIdleMode(IdleMode.kBrake);
         this.m_armChainMotor2.setIdleMode(IdleMode.kBrake);
         this.m_armExtensionMotor.setIdleMode(IdleMode.kBrake);
+
+        this.m_armChainMotor.setInverted(true);
+        this.m_armChainMotor2.setInverted(true);
 
 
         this.m_armChainMotor.setSmartCurrentLimit(39);
@@ -163,8 +173,8 @@ public class Arm extends SubsystemBase {
   }
   
     
-    public boolean getAngleSwitch() {
-        return this.m_angleLimitSwitch.get();
+    public boolean getAngleIrSensor() {
+        return this.m_angleIrSensor.get();
       }
     
       public boolean getExtensionSwitch() {
