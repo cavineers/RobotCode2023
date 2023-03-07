@@ -10,40 +10,39 @@ public class ClawToggle extends CommandBase {
 
     private boolean isFinished;
     private double requestedRevs;
+    private boolean close;
 
-    public ClawToggle() {
+    public ClawToggle(boolean close) {
         this.addRequirements(Robot.claw);
+        this.close = close;
         isFinished = false;
     }
     
     @Override
     public void initialize() {
-        if (!Robot.claw.isClosed()) {
+        if (close) {
             Robot.claw.setMotorState(Claw.clawMotorState.ON);
-            requestedRevs = Constants.Claw.kRevolutions;
-        } else if (Robot.claw.isClosed()) {
+        } else if (!close) {
             Robot.claw.setMotorState(Claw.clawMotorState.REVERSE);
-            requestedRevs = 0;
+            requestedRevs = Robot.claw.getEncoderPosition();
         }
     }
 
     @Override
     public void execute() {
-        //stop opening claw if it is open
-        if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE|| Robot.claw.getLimitSwitch()) {
+        //open claw to starting position which is zero
+        if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE) {
+            //Note -- negative value will break
             if (Robot.claw.getEncoderPosition() <= requestedRevs||Robot.claw.getLimitSwitch()) {
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
-                Robot.claw.setClosed(false);
                 isFinished = true;
+                System.out.println("Claw is open");
             }
         }
-        //stop closing claw if it is closed
+        //close claw constant pressure
         if (Robot.claw.getMotorState()==Claw.clawMotorState.ON) {
-            if (Robot.claw.getEncoderPosition() >= requestedRevs) {
-                Robot.claw.setMotorState(Claw.clawMotorState.OFF);
-                Robot.claw.setClosed(true);
-                isFinished = true;
-            }
+            isFinished = true;
+            System.out.println("Claw is closing");
         }
     }
 

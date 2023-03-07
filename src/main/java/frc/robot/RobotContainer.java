@@ -48,8 +48,6 @@ public class RobotContainer  {
 
     public Command m_autoCommand;
 
-    public boolean clawState = false;
-
     //Arm Commands
     public Command m_armHome;
     public Command m_armBottomNode;
@@ -75,8 +73,6 @@ public class RobotContainer  {
 
     //Claw Commands
     public Command m_claw;
-    public Command m_clawClose;
-    public Command m_clawOpen;
 
     // Driver Controller
     public Joystick joy = new Joystick(0);
@@ -125,13 +121,12 @@ public class RobotContainer  {
   
     public CurrentMode mode = CurrentMode.DRIVE; 
 
+    public boolean clawState = true;
+
     public RobotContainer() {
 
       this.m_raiseIntake = new ToggleUndeployIntake();
       this.m_lowerIntake = new ToggleDeployIntake();
-      this.m_claw = new ClawToggle();
-      this.m_clawClose = new ClawClose();
-      this.m_clawOpen = new ClawOpen();
 
       //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
 
@@ -154,15 +149,12 @@ public class RobotContainer  {
     private void configureButtonBindings() {
 
       //Claw Buttons
-      //this.a_button.onTrue(m_claw);
-      if(clawState){
-        this.a_button.onTrue(m_clawOpen);
-        this.clawState = false;
-      } else {
-        this.a_button.onTrue(m_clawClose);
-        this.clawState = true;
-      }
-      
+      this.a_button.onTrue(new ClawToggle(clawState).andThen(new InstantCommand() {
+        @Override
+        public void initialize() {
+          clawState = !clawState;
+        }
+      }));
       
       //Intake Buttons
       this.l_bump.onTrue(new InstantCommand() {
