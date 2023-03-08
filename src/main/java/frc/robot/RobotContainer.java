@@ -34,16 +34,7 @@ import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 import frc.robot.commands.AprilTagHomingCommand;
 
-import frc.robot.commands.ControllerPresets.TopNode;
-import frc.robot.commands.ControllerPresets.MidNode;
-import frc.robot.commands.ControllerPresets.BottomNode;
-import frc.robot.commands.ControllerPresets.HomeArm;
 
-import frc.robot.commands.manualOverrideCommands.ExtendArm;
-import frc.robot.commands.manualOverrideCommands.RaiseArm;
-import frc.robot.commands.manualOverrideCommands.RetractArm;
-import frc.robot.commands.manualOverrideCommands.SwitchMode;
-import frc.robot.commands.manualOverrideCommands.LowerArm;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
@@ -81,6 +72,12 @@ public class RobotContainer  {
     public Command m_armTopMid;
     public Command m_armTopRight;
 
+    //April Tag Presets
+    
+    public Command m_aprilTagLeft;
+    public Command m_aprilTagCenter;
+    public Command m_aprilTagRight;
+
     //Intake Commands
     public Command m_intake;
     public Command m_lowerIntake;
@@ -96,7 +93,6 @@ public class RobotContainer  {
 
   
     // Driver Controller
-    public Command m_tagHoming;
     
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
@@ -163,6 +159,11 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
+      this.m_aprilTagLeft = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kLeftPosition);
+      this.m_aprilTagCenter = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kShelfPosition);
+      this.m_aprilTagRight = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kRightPosition);
+
+
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
@@ -173,6 +174,7 @@ public class RobotContainer  {
 
       configureButtonBindings();
       configureButtonBindingsNumPad();
+      configureSendableChooser();
     };
 
     private void configureButtonBindings() {
@@ -237,16 +239,15 @@ public class RobotContainer  {
     }
 
     private void configureButtonBindingsNumPad() {
-      
-      this.a_button2.onTrue(m_armBottomLeft);
-      this.b_button2.onTrue(m_armBottomMid);
-      this.x_button2.onTrue(m_armBottomRight);
-      this.y_button2.onTrue(m_armMidLeft);
-      this.povUp2.onTrue(m_armMidMid);
-      this.povRight2.onTrue(m_armMidRight);
-      this.povLeft2.onTrue(m_armTopLeft);
-      this.povDown2.onTrue(m_armTopMid);
-      this.r_bump2.onTrue(m_armTopRight);
+      this.a_button2.onTrue(m_aprilTagLeft.andThen(m_armBottomLeft));
+      this.b_button2.onTrue(m_aprilTagCenter.andThen(m_armBottomMid));
+      this.x_button2.onTrue(m_aprilTagRight.andThen(m_armBottomRight));
+      this.y_button2.onTrue(m_aprilTagLeft.andThen(m_armMidLeft));
+      this.povUp2.onTrue(m_aprilTagCenter.andThen(m_armMidMid));
+      this.povRight2.onTrue(m_aprilTagRight.andThen(m_armMidRight));
+      this.povLeft2.onTrue(m_aprilTagLeft.andThen(m_armTopLeft));
+      this.povDown2.onTrue(m_aprilTagCenter.andThen(m_armTopMid));
+      this.r_bump2.onTrue(m_aprilTagRight.andThen(m_armTopRight));
     }
 
     // FOR AUTO CHOOSER

@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.Subsystem;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-import frc.robot.commands.ControllerPresets.TopNode;
+import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 
@@ -51,7 +51,7 @@ public class AutoPath extends CommandBase {
   
     public AutoPath(SwerveDriveSubsystem swerveSubsystem) {
       this.m_lowerIntake = new ToggleDeployIntake();
-      this.m_placeTop = new TopNode();
+      this.m_placeTop = new TopLeft();
       this.swerveSubsystem = swerveSubsystem;
       this.builder = this.createAutoBuilder(); // requires swerveSubsystem
       if (swerveSubsystem == null) {
