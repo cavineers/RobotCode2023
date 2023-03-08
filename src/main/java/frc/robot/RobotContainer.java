@@ -153,13 +153,17 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
 
-      //Claw Buttons
-      //this.a_button.onTrue(m_claw);
-      if(Robot.claw.isClosed()){
-        this.a_button.onTrue(m_clawClose);
-      } else {
-        this.a_button.onTrue(m_clawOpen);
-      }
+      // Claw Buttons
+      this.a_button.onTrue(new InstantCommand() {
+        @Override
+        public void initialize() {
+          if(Robot.claw.isClosed()) {
+            m_clawOpen.schedule();
+          } else {
+            m_clawClose.schedule();
+          }
+        }
+      });
       
       //Intake Buttons
       this.l_bump.onTrue(new InstantCommand() {
