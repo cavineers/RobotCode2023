@@ -1,16 +1,16 @@
-package frc.robot.commands.ControllerPresets;
+package frc.robot.commands.ManualOverrideCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Arm;
 
-public class HomeArm extends CommandBase {
-    
+public class RetractArm extends CommandBase {
     private boolean isDone = false;
     private double m_timestamp;
 
-    public HomeArm() {
+    public RetractArm() {
         this.addRequirements(Robot.arm);
     }
 
@@ -20,37 +20,20 @@ public class HomeArm extends CommandBase {
         Robot.arm.getArmChainMotor().set(0.0);
         Robot.arm.getArmChainMotor2().set(0.0);
         Robot.arm.getArmExtensionMotor().set(0.0);
-        }
-    
+    }
 
     @Override
     public void execute() {
-        if (Robot.arm.getExtensionSwitch() == false) {
+        if (Robot.arm.getArmExtensionMotorPosition() > Constants.Arm.MinExtensionRotations) {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
-        }else if (Robot.arm.getExtensionSwitch() == true) {
+    }   else {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
-            Robot.arm.setArmExtensionMotorPosition(0.0);
-        }
-        if (Robot.arm.getArmExtensionMotorPosition() == 0) {
-            if (Robot.arm.getAngleSwitch() == true) {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
-            Robot.arm.setArmChainMotorPosition(0.0);
-            Robot.arm.setArmChainMotor2Position(0.0);
-        } else {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
-            }
-        }
-    }     
-
-
+    }
+}
     
     @Override
     public void end(boolean interrupted) {
         Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
-        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
     }
 
     @Override
