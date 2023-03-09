@@ -7,14 +7,16 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 public final class Constants {
     
     public static class CANIds {
-        public static final int kFrontLeftDriveCanID = 20;
-        public static final int kFrontLeftTurningCanID = 2;
+
+        public static final int kFrontLeftDriveCanID = 1;
         public static final int kBackLeftDriveCanID = 3;
+        public static final int kFrontRightDriveCanID = 7;
+        public static final int kBackRightDriveCanID = 5;
+
+        public static final int kFrontLeftTurningCanID = 2;
         public static final int kBackLeftTurningCanID = 4;
-        public static final int kFrontRightDriveCanID = 5;
-        public static final int kFrontRightTurningCanID = 6;
-        public static final int kBackRightDriveCanID = 7;
-        public static final int kBackRightTurningCanID = 8;
+        public static final int kFrontRightTurningCanID = 8;
+        public static final int kBackRightTurningCanID = 6;
 
         public static final int kFrontLeftAbsoluteEncoderCanID = 12;
         public static final int kBackLeftAbsoluteEncoderCanID = 9;
@@ -88,20 +90,20 @@ public final class Constants {
         public static final int kFrontRightAbsoluteEncoderPort = CANIds.kFrontRightAbsoluteEncoderCanID;
         public static final int kBackRightAbsoluteEncoderPort = CANIds.kBackRightAbsoluteEncoderCanID;
 
-        public static final boolean kFrontLeftTurningEncoderReversed = false;
+         public static final boolean kFrontLeftTurningEncoderReversed = false;
         public static final boolean kBackLeftTurningEncoderReversed = false;
         public static final boolean kFrontRightTurningEncoderReversed = false;
         public static final boolean kBackRightTurningEncoderReversed = false;
 
         public static final boolean kFrontLeftDriveEncoderReversed = false;
         public static final boolean kBackLeftDriveEncoderReversed = false;
-        public static final boolean kFrontRightDriveEncoderReversed = true;
-        public static final boolean kBackRightDriveEncoderReversed = true;
+        public static final boolean kFrontRightDriveEncoderReversed = false;
+        public static final boolean kBackRightDriveEncoderReversed = false;
 
         public static final boolean kFrontLeftAbsoluteEncoderReversed = true;
-        public static final boolean kBackLeftAbsoluteEncoderReversed = true; 
+        public static final boolean kBackLeftAbsoluteEncoderReversed = true;
         public static final boolean kFrontRightAbsoluteEncoderReversed = false;
-        public static final boolean kBackRightAbsoluteEncoderReversed = false; 
+        public static final boolean kBackRightAbsoluteEncoderReversed = false;
 
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
