@@ -93,23 +93,23 @@ public class RobotContainer  {
     public POVButton povDown = new POVButton(joy, 180, 0);
     public POVButton povLeft = new POVButton(joy, 270, 0); 
 
-  // Driver Numpad
-  public Joystick joy2 = new Joystick(1);
-  public JoystickButton a_button2 = new JoystickButton(joy2, 1);
-  public JoystickButton b_button2 = new JoystickButton(joy2, 2);
-  public JoystickButton x_button2 = new JoystickButton(joy2, 3);
-  public JoystickButton y_button2 = new JoystickButton(joy2, 4);
-  public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
-  public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
-  public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
-  public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
-  public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
-  public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
+    // Driver Numpad
+    public Joystick joy2 = new Joystick(1);
+    public JoystickButton a_button2 = new JoystickButton(joy2, 1);
+    public JoystickButton b_button2 = new JoystickButton(joy2, 2);
+    public JoystickButton x_button2 = new JoystickButton(joy2, 3);
+    public JoystickButton y_button2 = new JoystickButton(joy2, 4);
+    public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
+    public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
+    public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
+    public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
+    public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
+    public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
 
-  public POVButton povUp2 = new POVButton(joy2, 0, 0);
-  public POVButton povRight2 = new POVButton(joy2, 90, 0);
-  public POVButton povDown2 = new POVButton(joy2, 180, 0);
-  public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
+    public POVButton povUp2 = new POVButton(joy2, 0, 0);
+    public POVButton povRight2 = new POVButton(joy2, 90, 0);
+    public POVButton povDown2 = new POVButton(joy2, 180, 0);
+    public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
   
     private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
@@ -118,11 +118,11 @@ public class RobotContainer  {
 
     public RobotContainer() {
 
-      this.m_raiseIntake = new ToggleUndeployIntake();
-      this.m_lowerIntake = new ToggleDeployIntake();
-      this.m_claw = new ClawToggle();
-      this.m_clawClose = new ClawClose();
-      this.m_clawOpen = new ClawOpen();
+      m_raiseIntake = new ToggleUndeployIntake();
+      m_lowerIntake = new ToggleDeployIntake();
+      m_claw = new ClawToggle();
+      m_clawClose = new ClawClose();
+      m_clawOpen = new ClawOpen();
       m_armHome = new HomeArm();
       m_armRaise = new RaiseArm();
       m_armLower = new LowerArm();
