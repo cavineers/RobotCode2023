@@ -26,7 +26,7 @@ public class HomeArm extends CommandBase {
     @Override
     public void execute() {
         if (Robot.arm.getExtensionSwitch() == false) {
-            Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.REVERSED);
+            Robot.arm.getArmExtensionMotor().set(-0.05);
         }else if (Robot.arm.getExtensionSwitch() == true) {
             Robot.arm.setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
             Robot.arm.setArmExtensionMotorPosition(0.0);
