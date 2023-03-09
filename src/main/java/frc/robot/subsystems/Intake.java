@@ -34,6 +34,14 @@ public class Intake extends SubsystemBase{
     public IntakeMotorState m_intakeMotorState = IntakeMotorState.OFF;
     public IntakeDropMotorState m_intakeDropMotorState = IntakeDropMotorState.OFF;
 
+    public Intake(){
+        m_intakeMotorTop.setInverted(true);
+        m_intakeMotorBottom.setInverted(true);
+        m_intakeRightDropMotor.setInverted(true);
+        m_intakeLeftDropMotor.setInverted(true);
+
+    }
+
     public void setIntakeMotorState(IntakeMotorState state) {
         // set the current state of top and bottom motor
         this.m_intakeMotorState = state;

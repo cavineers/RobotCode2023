@@ -5,10 +5,10 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     
     public static class CANIds {
-        public static int IntakeMotorTop        = 1; // IntakeMotor (neo)
-        public static int IntakeMotorBottom     = 2; // IntakeMotor (neo)
-        public static int IntakeRightDropMotor  = 3; // IntakeDropMotor (neo)
-        public static int IntakeLeftDropMotor   = 4;
+        public static int IntakeMotorTop        = 16; // IntakeMotor (neo)
+        public static int IntakeMotorBottom     = 17; // IntakeMotor (neo)
+        public static int IntakeRightDropMotor  = 18; // IntakeDropMotor (neo)
+        public static int IntakeLeftDropMotor   = 15;
     }
     
     public static final class ModuleConstants {
