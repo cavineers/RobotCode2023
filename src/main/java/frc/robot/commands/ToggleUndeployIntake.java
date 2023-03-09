@@ -6,14 +6,16 @@ import frc.robot.subsystems.Intake;
 
 public class ToggleUndeployIntake extends CommandBase {
 
-    boolean isFinished = false;
+    boolean isFinished;
 
     public ToggleUndeployIntake() {
         this.addRequirements(Robot.intake);
     }
 
     @Override
-    public void initialize() {}
+    public void initialize() {
+        this.isFinished = false;
+    }
 
     @Override
     public void execute() {
@@ -28,8 +30,10 @@ public class ToggleUndeployIntake extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.OFF);
-        Robot.intake.getIntakeLeftDropMotor().getEncoder().setPosition(0);
-        Robot.intake.getIntakeRightDropMotor().getEncoder().setPosition(0);
+        if(!interrupted){
+            Robot.intake.getIntakeLeftDropMotor().getEncoder().setPosition(0);
+            Robot.intake.getIntakeRightDropMotor().getEncoder().setPosition(0);
+        }
     }
 
     @Override

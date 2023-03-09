@@ -68,9 +68,11 @@ public class RobotContainer {
         }
        }
       );
-
+      
+      this.l_bump.onTrue(new ToggleDeployIntake());
+      this.l_bump.onFalse(new ToggleUndeployIntake());
       //LOWERS AND RAISES INTAKE
-      this.l_bump.onTrue(new InstantCommand() {
+      /*this.l_bump.onTrue(new InstantCommand() {
         @Override
          public void initialize() {
           if (intakeState == 1) {
@@ -89,7 +91,7 @@ public class RobotContainer {
             intakeState = intakeState - 1;
           }
          }
-        });
+        });*/
     }   
 
     public double getJoystickRawAxis(int id) {
