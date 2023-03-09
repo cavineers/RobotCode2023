@@ -15,17 +15,18 @@ public class ClawToggle extends CommandBase {
     public ClawToggle(boolean close) {
         this.addRequirements(Robot.claw);
         this.close = close;
-        isFinished = false;
     }
     
+    //true makes claw close and false makes claw open
     @Override
     public void initialize() {
         if (close) {
             Robot.claw.setMotorState(Claw.clawMotorState.ON);
         } else if (!close) {
             Robot.claw.setMotorState(Claw.clawMotorState.REVERSE);
-            requestedRevs = Robot.claw.getEncoderPosition();
+            requestedRevs = 0;
         }
+        isFinished = false;
     }
 
     @Override

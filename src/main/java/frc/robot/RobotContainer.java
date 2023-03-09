@@ -121,7 +121,7 @@ public class RobotContainer  {
   
     public CurrentMode mode = CurrentMode.DRIVE; 
 
-    public boolean clawState = true;
+    public boolean clawState = false;
 
     public RobotContainer() {
 
@@ -149,12 +149,20 @@ public class RobotContainer  {
     private void configureButtonBindings() {
 
       //Claw Buttons
-      this.a_button.onTrue(new ClawToggle(clawState).andThen(new InstantCommand() {
+      /*this.a_button.onTrue(new ClawToggle(clawState).andThen(new InstantCommand() {
         @Override
         public void initialize() {
           clawState = !clawState;
         }
-      }));
+      }));*/
+
+      //opens and closes claw
+      this.a_button.onTrue(new InstantCommand() {
+        @Override
+         public void initialize() {
+          clawState=!clawState;
+         }
+        }.andThen(new ClawToggle(clawState)));   
       
       //Intake Buttons
       this.l_bump.onTrue(new InstantCommand() {
