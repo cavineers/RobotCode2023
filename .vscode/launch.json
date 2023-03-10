@@ -12,13 +12,6 @@
       "projectName": "RobotCode2023"
     },
     {
-      "type": "java",
-      "name": "Launch Main",
-      "request": "launch",
-      "mainClass": "frc.robot.Main",
-      "projectName": "SwerveDrive2023"
-    },
-    {
       "type": "wpilib",
       "name": "WPILib Desktop Debug",
       "request": "launch",
