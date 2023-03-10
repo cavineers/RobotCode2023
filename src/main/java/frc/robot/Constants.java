@@ -74,7 +74,6 @@ public final class Constants {
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
-
         public static final boolean kFrontLeftTurningEncoderReversed = false;
         public static final boolean kBackLeftTurningEncoderReversed = false;
         public static final boolean kFrontRightTurningEncoderReversed = false;
@@ -82,15 +81,16 @@ public final class Constants {
 
         public static final boolean kFrontLeftDriveEncoderReversed = false;
         public static final boolean kBackLeftDriveEncoderReversed = false;
-        public static final boolean kFrontRightDriveEncoderReversed = false;
-        public static final boolean kBackRightDriveEncoderReversed = false;
+        public static final boolean kFrontRightDriveEncoderReversed = true;
+        public static final boolean kBackRightDriveEncoderReversed = true;
+
 
         public static final boolean kFrontLeftAbsoluteEncoderReversed = true;
-        public static final boolean kBackLeftAbsoluteEncoderReversed = true;
-        public static final boolean kFrontRightAbsoluteEncoderReversed = false;
-        public static final boolean kBackRightAbsoluteEncoderReversed = false;
+        public static final boolean kBackLeftAbsoluteEncoderReversed = true; //TBD
+        public static final boolean kFrontRightAbsoluteEncoderReversed = false; //TBD
+        public static final boolean kBackRightAbsoluteEncoderReversed = false; //TBD
 
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 3;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
