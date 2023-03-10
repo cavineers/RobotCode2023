@@ -79,6 +79,7 @@ public class SwerveCommand extends CommandBase {
     @Override
     public void end(boolean interrupted) {
         swerveSubsystem.stopModules();
+        swerveSubsystem.toggleIdleMode();
     }
 
     @Override
