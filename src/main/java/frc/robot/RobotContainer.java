@@ -25,6 +25,7 @@ import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.SwerveHoming;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -147,6 +148,8 @@ public class RobotContainer  {
     };
 
     private void configureButtonBindings() {
+
+      this.y_button.onTrue(new SwerveHoming(swerveSubsystem));
 
       //opens and closes claw
       this.a_button.onTrue(new ClawToggle());

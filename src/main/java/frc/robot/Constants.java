@@ -112,8 +112,8 @@ public final class Constants {
 
         public static final double kFrontLeftAbsoluteEncoderOffset = 176.49; //185.97 offset //-5.97 +80.63
         public static final double kBackLeftAbsoluteEncoderOffset = 180.44; //178.41 //-178.41 -224.03
-        public static final double kFrontRightAbsoluteEncoderOffset = -171.56; //170.94 //-170.94
-        public static final double kBackRightAbsoluteEncoderOffset = -57.65; //58.79 //-58.79
+        public static final double kFrontRightAbsoluteEncoderOffset = -171.56+180; //170.94 //-170.94
+        public static final double kBackRightAbsoluteEncoderOffset = -57.65+180; //58.79 //-58.79
         
         // Distance between right and left wheels
         public static final double kTrackWidth = Units.inchesToMeters(23.75); 

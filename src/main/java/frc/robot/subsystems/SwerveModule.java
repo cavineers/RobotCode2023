@@ -160,8 +160,8 @@ this.id = absoluteEncoderId;
     }
 
     public boolean checkZeroed(){
-        if ( //((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
-             ((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
+        if (((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
+            // ((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
         ) {
             return true;
         }
