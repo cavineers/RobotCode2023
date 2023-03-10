@@ -73,8 +73,7 @@ public class SwerveCommand extends CommandBase {
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         
         // Output each module states to wheels
-        //swerveSubsystem.setModuleStates(moduleStates);
-        swerveSubsystem.testStates();
+        swerveSubsystem.setModuleStates(moduleStates);
     }
 
     @Override
