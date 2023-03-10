@@ -132,11 +132,11 @@ public final class Constants {
      public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
      public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
      
-     public static double ArmChainSpeed = 0.18;
-     public static double ArmChainSpeedRev = -0.18; // Chain reverse speed
+     public static double ArmChainSpeed = 0.1;
+     public static double ArmChainSpeedRev = -0.1; // Chain reverse speed
 
-     public static double ArmExtensionSpeed = 0.75;
-     public static double ArmExtensionSpeedRev = -0.75;
+     public static double ArmExtensionSpeed = 0.05;
+     public static double ArmExtensionSpeedRev = -0.05;
      
  //Node Rotations
      
