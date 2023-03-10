@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.CANIds;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -18,35 +19,35 @@ import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 public class SwerveDriveSubsystem extends SubsystemBase {
     private final SwerveModule frontLeft = new SwerveModule(
-        DriveConstants.kFrontLeftDriveCanID, 
-        DriveConstants.kFrontLeftTurningCanID, 
+        CANIds.kFrontLeftDriveCanID, 
+        CANIds.kFrontLeftTurningCanID, 
         DriveConstants.kFrontLeftDriveEncoderReversed, 
         DriveConstants.kFrontLeftTurningEncoderReversed,
-        DriveConstants.kFrontLeftAbsoluteEncoderPort, 
+        CANIds.kFrontLeftAbsoluteEncoderCanID, 
         DriveConstants.kFrontLeftAbsoluteEncoderOffset);
     
     private final SwerveModule frontRight = new SwerveModule(
-        DriveConstants.kFrontRightDriveCanID, 
-        DriveConstants.kFrontRightTurningCanID, 
+        CANIds.kFrontRightDriveCanID, 
+        CANIds.kFrontRightTurningCanID, 
         DriveConstants.kFrontRightDriveEncoderReversed, 
         DriveConstants.kFrontRightTurningEncoderReversed,
-        DriveConstants.kFrontRightAbsoluteEncoderPort, 
+        CANIds.kFrontRightAbsoluteEncoderCanID, 
         DriveConstants.kFrontRightAbsoluteEncoderOffset);
 
     private final SwerveModule backLeft = new SwerveModule(
-        DriveConstants.kBackLeftDriveCanID, 
-        DriveConstants.kBackLeftTurningCanID, 
+        CANIds.kBackLeftDriveCanID, 
+        CANIds.kBackLeftTurningCanID, 
         DriveConstants.kBackLeftDriveEncoderReversed, 
         DriveConstants.kBackLeftTurningEncoderReversed,
-        DriveConstants.kBackLeftAbsoluteEncoderPort, 
+        CANIds.kBackLeftAbsoluteEncoderCanID, 
         DriveConstants.kBackLeftAbsoluteEncoderOffset);
 
     private final SwerveModule backRight = new SwerveModule(
-        DriveConstants.kBackRightDriveCanID, 
-        DriveConstants.kBackRightTurningCanID, 
+        CANIds.kBackRightDriveCanID, 
+        CANIds.kBackRightTurningCanID, 
         DriveConstants.kBackRightDriveEncoderReversed, 
         DriveConstants.kBackRightTurningEncoderReversed,
-        DriveConstants.kBackRightAbsoluteEncoderPort, 
+        CANIds.kBackRightAbsoluteEncoderCanID, 
         DriveConstants.kBackRightAbsoluteEncoderOffset);
 
     private final AHRS gyro = new AHRS(SPI.Port.kMXP); 

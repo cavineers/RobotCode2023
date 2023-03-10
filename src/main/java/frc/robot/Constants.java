@@ -23,16 +23,16 @@ public final class Constants {
         public static final int kFrontRightAbsoluteEncoderCanID = 11;
         public static final int kBackRightAbsoluteEncoderCanID = 10;
 
-        public static final int IntakeMotorBottom = 13;
-        public static final int IntakeMotorTop = 14;
-        public static final int IntakeRightDropMotor = 15;
-        public static final int IntakeLeftDropMotor = 16;
+        public static final int IntakeMotorBottom = 17;
+        public static final int IntakeMotorTop = 16;
+        public static final int IntakeRightDropMotor = 18;
+        public static final int IntakeLeftDropMotor = 15;
 
-        public static final int ArmChainMotor = 17; // Chain Neo
-        public static final int ArmChainMotor2 = 18; // Chain Neo 2 same as firt but
-        public static final int ArmExtensionMotor = 19; // Chain Neo 2 same as firt but
+        public static final int ArmChainMotor = 14; // left side
+        public static final int ArmChainMotor2 = 20; // right side
+        public static final int ArmExtensionMotor = 19;
 
-        public static final int ClawMotor = 1;
+        public static final int ClawMotor = 13;
        
     }
     public static class DIO {
@@ -75,22 +75,7 @@ public final class Constants {
         public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
-        public static final int kFrontLeftDriveCanID = CANIds.kFrontLeftDriveCanID;
-        public static final int kBackLeftDriveCanID = CANIds.kBackLeftDriveCanID;
-        public static final int kFrontRightDriveCanID = CANIds.kFrontRightDriveCanID;
-        public static final int kBackRightDriveCanID = CANIds.kBackRightDriveCanID;
-
-        public static final int kFrontLeftTurningCanID = CANIds.kFrontLeftTurningCanID;
-        public static final int kBackLeftTurningCanID = CANIds.kBackLeftTurningCanID;
-        public static final int kFrontRightTurningCanID = CANIds.kFrontRightTurningCanID;
-        public static final int kBackRightTurningCanID = CANIds.kBackRightTurningCanID;
-
-        public static final int kFrontLeftAbsoluteEncoderPort = CANIds.kFrontLeftAbsoluteEncoderCanID;
-        public static final int kBackLeftAbsoluteEncoderPort = CANIds.kBackLeftAbsoluteEncoderCanID;
-        public static final int kFrontRightAbsoluteEncoderPort = CANIds.kFrontRightAbsoluteEncoderCanID;
-        public static final int kBackRightAbsoluteEncoderPort = CANIds.kBackRightAbsoluteEncoderCanID;
-
-         public static final boolean kFrontLeftTurningEncoderReversed = false;
+        public static final boolean kFrontLeftTurningEncoderReversed = false;
         public static final boolean kBackLeftTurningEncoderReversed = false;
         public static final boolean kFrontRightTurningEncoderReversed = false;
         public static final boolean kBackRightTurningEncoderReversed = false;
