@@ -74,6 +74,22 @@ public final class Constants {
 
         public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
+
+        public static final int kFrontLeftDriveCanID = CANIds.kFrontLeftDriveCanID;
+        public static final int kBackLeftDriveCanID = CANIds.kBackLeftDriveCanID;
+        public static final int kFrontRightDriveCanID = CANIds.kFrontRightDriveCanID;
+        public static final int kBackRightDriveCanID = CANIds.kBackRightDriveCanID;
+
+        public static final int kFrontLeftTurningCanID = CANIds.kFrontLeftTurningCanID;
+        public static final int kBackLeftTurningCanID = CANIds.kBackLeftTurningCanID;
+        public static final int kFrontRightTurningCanID = CANIds.kFrontRightTurningCanID;
+        public static final int kBackRightTurningCanID = CANIds.kBackRightTurningCanID;
+
+        public static final int kFrontLeftAbsoluteEncoderPort = CANIds.kFrontLeftAbsoluteEncoderCanID;
+        public static final int kBackLeftAbsoluteEncoderPort = CANIds.kBackLeftAbsoluteEncoderCanID;
+        public static final int kFrontRightAbsoluteEncoderPort = CANIds.kFrontRightAbsoluteEncoderCanID;
+        public static final int kBackRightAbsoluteEncoderPort = CANIds.kBackRightAbsoluteEncoderCanID;
+
         public static final boolean kFrontLeftTurningEncoderReversed = false;
         public static final boolean kBackLeftTurningEncoderReversed = false;
         public static final boolean kFrontRightTurningEncoderReversed = false;
@@ -83,7 +99,6 @@ public final class Constants {
         public static final boolean kBackLeftDriveEncoderReversed = false;
         public static final boolean kFrontRightDriveEncoderReversed = true;
         public static final boolean kBackRightDriveEncoderReversed = true;
-
 
         public static final boolean kFrontLeftAbsoluteEncoderReversed = true;
         public static final boolean kBackLeftAbsoluteEncoderReversed = true; //TBD
