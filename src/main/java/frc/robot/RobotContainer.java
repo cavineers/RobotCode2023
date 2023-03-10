@@ -119,8 +119,6 @@ public class RobotContainer  {
   
     public CurrentMode mode = CurrentMode.DRIVE; 
 
-    public boolean clawState = false;
-
     public RobotContainer() {
 
       this.m_raiseIntake = new ToggleUndeployIntake();
@@ -145,14 +143,6 @@ public class RobotContainer  {
     };
 
     private void configureButtonBindings() {
-
-      //Claw Buttons
-      /*this.a_button.onTrue(new ClawToggle(clawState).andThen(new InstantCommand() {
-        @Override
-        public void initialize() {
-          clawState = !clawState;
-        }
-      }));*/
 
       //opens and closes claw
       this.a_button.onTrue(new ClawToggle());
