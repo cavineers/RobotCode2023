@@ -22,7 +22,7 @@ public class ClawToggle extends CommandBase {
     public void initialize() {
         if (close) {
             Robot.claw.setMotorState(Claw.clawMotorState.ON);
-        } else if (!close) {
+        } else {
             Robot.claw.setMotorState(Claw.clawMotorState.REVERSE);
             requestedRevs = 0;
         }
