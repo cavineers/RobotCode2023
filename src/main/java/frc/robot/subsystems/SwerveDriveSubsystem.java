@@ -172,7 +172,6 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backRight.resetEncoders();
     }
 
-
     public boolean checkFinished() {
         if (frontLeft.checkZeroed()&&backLeft.checkZeroed()&&backRight.checkZeroed()&&frontRight.checkZeroed())
             return true;
