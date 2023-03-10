@@ -22,8 +22,6 @@ import frc.robot.commands.SwitchMode;
 import frc.robot.commands.ControllerPresets.BottomNode;
 import frc.robot.commands.ControllerPresets.MidNode;
 import frc.robot.commands.ControllerPresets.TopNode;
-import frc.robot.commands.ClawClose;
-import frc.robot.commands.ClawOpen;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
@@ -157,12 +155,7 @@ public class RobotContainer  {
       }));*/
 
       //opens and closes claw
-      this.a_button.onTrue(new InstantCommand() {
-        @Override
-         public void initialize() {
-          clawState=!clawState;
-         }
-        }.andThen(new ClawToggle(clawState)));   
+      this.a_button.onTrue(new ClawToggle());
       
       //Intake Buttons
       this.l_bump.onTrue(new InstantCommand() {
