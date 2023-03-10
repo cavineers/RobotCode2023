@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+
 import frc.robot.commands.NumPad.BottomLeft;
 import frc.robot.commands.NumPad.BottomMid;
 import frc.robot.commands.NumPad.BottomRight;
@@ -16,15 +17,20 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
+
 import frc.robot.commands.ManualOverrideCommands.ExtendArm;
 import frc.robot.commands.ManualOverrideCommands.HomeArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
+
 import frc.robot.commands.ClawToggle;
+
 import frc.robot.commands.SwerveCommand;
+
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.ToggleIntake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
