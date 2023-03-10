@@ -39,7 +39,7 @@ public final class Constants {
         public static int ArmIrSensor = 0;
         public static int ArmExtensionSwitch = 3;
         public static int IntakeSwitch = 2;
-        public static int clawLimitSwitch = 1;
+        public static int clawLimitSwitch = 6;
         public static int intakeInfaredSensor = 4;
     }
     public static final class ModuleConstants {

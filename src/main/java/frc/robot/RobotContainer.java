@@ -42,7 +42,7 @@ public class RobotContainer  {
     public int intakeState = 1;
 
     //Swerve Subsystem
-    private final SwerveDriveSubsystem swerveSubsystem = new SwerveDriveSubsystem();
+    private final SwerveDriveSubsystem swerveSubsystem;
 
     public Command m_autoCommand;
 
@@ -117,6 +117,8 @@ public class RobotContainer  {
 
     public RobotContainer() {
 
+      swerveSubsystem = new SwerveDriveSubsystem();
+
       m_raiseIntake = new ToggleUndeployIntake();
       m_lowerIntake = new ToggleDeployIntake();
       m_armHome = new HomeArm();
@@ -133,8 +135,6 @@ public class RobotContainer  {
       m_armTopLeft = new TopLeft();
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
-
-      //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,

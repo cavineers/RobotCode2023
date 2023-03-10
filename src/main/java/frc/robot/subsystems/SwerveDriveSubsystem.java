@@ -1,7 +1,6 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.CANIds;
 import frc.robot.Constants.DriveConstants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -113,9 +112,22 @@ public class SwerveDriveSubsystem extends SubsystemBase {
             backLeft.getPosition(),
             backRight.getPosition()};
     }
-
     public void resetOdometry(Pose2d pose) {
         m_odometer.resetPosition(getRotation2d(), getPositions(), pose);
+    }
+
+    public void stopModules() {
+        frontLeft.stop();
+        frontRight.stop();
+        backLeft.stop();
+        backRight.stop();
+    }
+
+    public void resetEncoders(){
+        frontLeft.resetEncoders();
+        frontRight.resetEncoders();
+        backLeft.resetEncoders();
+        backRight.resetEncoders();
     }
 
     public void periodic(){
@@ -156,20 +168,7 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         frontRight.toggleIdleMode();
         backLeft.toggleIdleMode();
         backRight.toggleIdleMode();
-    }
 
-    public void stopModules() {
-        frontLeft.stop();
-        frontRight.stop();
-        backLeft.stop();
-        backRight.stop();
-    }
-
-    public void resetEncoders(){
-        frontLeft.resetEncoders();
-        frontRight.resetEncoders();
-        backLeft.resetEncoders();
-        backRight.resetEncoders();
     }
 
     public boolean checkFinished() {
