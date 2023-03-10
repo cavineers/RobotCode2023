@@ -21,8 +21,6 @@ import frc.robot.commands.ManualOverrideCommands.HomeArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
-import frc.robot.commands.ClawClose;
-import frc.robot.commands.ClawOpen;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
@@ -120,9 +118,6 @@ public class RobotContainer  {
 
       m_raiseIntake = new ToggleUndeployIntake();
       m_lowerIntake = new ToggleDeployIntake();
-      m_claw = new ClawToggle();
-      m_clawClose = new ClawClose();
-      m_clawOpen = new ClawOpen();
       m_armHome = new HomeArm();
       m_armRaise = new RaiseArm();
       m_armLower = new LowerArm();
@@ -153,14 +148,9 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
 
-      //Claw Buttons
-      //this.a_button.onTrue(m_claw);
-      if(Robot.claw.isClosed()){
-        this.a_button.onTrue(m_clawClose);
-      } else {
-        this.a_button.onTrue(m_clawOpen);
-      }
-      
+      //opens and closes claw
+      this.a_button.onTrue(new ClawToggle());
+
       //Intake Buttons
       this.l_bump.onTrue(new InstantCommand() {
         @Override
