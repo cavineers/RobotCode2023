@@ -19,8 +19,10 @@ public class ClawToggle extends CommandBase {
     public void initialize() {
         if (!Claw.isClosing()) {
             Robot.claw.setMotorState(Claw.clawMotorState.ON);
+            Claw.setClosing(true);
         } else {
             Robot.claw.setMotorState(Claw.clawMotorState.REVERSE);
+            Claw.setClosing(false);
         }
         this.isFinished = false;
     }
