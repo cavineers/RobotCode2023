@@ -142,10 +142,6 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());
         SmartDashboard.putNumber("BackLeft Cancoder", backLeft.getAbsolutePosition());
         SmartDashboard.putNumber("BackRight Cancoder", backRight.getAbsolutePosition());
-
-        SmartDashboard.putBoolean("HomingFinished", checkFinished());
-
-        SmartDashboard.putBoolean("Front Left", frontLeft.checkZeroed());
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -156,11 +152,11 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backRight.setDesiredState(desiredStates[3]);
     }
 
-    public void testStates() {
-        frontLeft.setState();
-        frontRight.setState();
-        backLeft.setState();
-        backRight.setState();
+    public void setEncoders() {
+        frontLeft.setEncoder();
+        frontRight.setEncoder();
+        backLeft.setEncoder();
+        backRight.setEncoder();
     }
 
     public void toggleIdleMode() {
@@ -169,11 +165,5 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backLeft.toggleIdleMode();
         backRight.toggleIdleMode();
 
-    }
-
-    public boolean checkFinished() {
-        if (frontLeft.checkZeroed()&&backLeft.checkZeroed()&&backRight.checkZeroed()&&frontRight.checkZeroed())
-            return true;
-        return false;
     }
 }
