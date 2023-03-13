@@ -191,9 +191,9 @@ public final class Constants {
     public static final class PresetTranslations {
         //IN METERS needs to be adjusted 
 
-        public static final Translation2d kLeftPosition = new Translation2d(1.24, Units.inchesToMeters(22.15)); 
-        public static final Translation2d kShelfPosition = new Translation2d(1.24, 0); 
-        public static final Translation2d kRightPosition = new Translation2d(1.24, Units.inchesToMeters(-22.15)); 
+        public static final Translation2d kLeftPosition = new Translation2d(Units.inchesToMeters(50), Units.inchesToMeters(22.15)); 
+        public static final Translation2d kShelfPosition = new Translation2d(Units.inchesToMeters(50), 0); 
+        public static final Translation2d kRightPosition = new Translation2d(Units.inchesToMeters(50), Units.inchesToMeters(-22.15)); 
 
         public static final Translation2d kSubstationPosition = new Translation2d(0.5, 0); 
 
