@@ -139,19 +139,7 @@ public class SwerveModule {
         driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     }
-
-    public void setState() {
-        double results = MathUtil.clamp(test.calculate(absoluteEncoder.getAbsolutePosition(),0),-.1,.1);
-        // SmartDashboard.putNumber(id + "Unclamped Results", test.calculate(absoluteEncoder.getAbsolute(), 0));
-        SmartDashboard.putNumber(id + "Results", results);
-        
-        if (!checkZeroed()){
-            turningMotor.set(results);
-        }
-        else{
-            stop();
-        }
-    }
+    
 
     public boolean checkZeroed(){
         if ( //((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
