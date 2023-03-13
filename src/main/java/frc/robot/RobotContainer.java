@@ -21,12 +21,11 @@ import frc.robot.commands.ManualOverrideCommands.HomeArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
-import frc.robot.commands.ClawClose;
-import frc.robot.commands.ClawOpen;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.SwerveHoming;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -93,23 +92,23 @@ public class RobotContainer  {
     public POVButton povDown = new POVButton(joy, 180, 0);
     public POVButton povLeft = new POVButton(joy, 270, 0); 
 
-  // Driver Numpad
-  public Joystick joy2 = new Joystick(1);
-  public JoystickButton a_button2 = new JoystickButton(joy2, 1);
-  public JoystickButton b_button2 = new JoystickButton(joy2, 2);
-  public JoystickButton x_button2 = new JoystickButton(joy2, 3);
-  public JoystickButton y_button2 = new JoystickButton(joy2, 4);
-  public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
-  public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
-  public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
-  public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
-  public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
-  public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
+    // Driver Numpad
+    public Joystick joy2 = new Joystick(1);
+    public JoystickButton a_button2 = new JoystickButton(joy2, 1);
+    public JoystickButton b_button2 = new JoystickButton(joy2, 2);
+    public JoystickButton x_button2 = new JoystickButton(joy2, 3);
+    public JoystickButton y_button2 = new JoystickButton(joy2, 4);
+    public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
+    public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
+    public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
+    public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
+    public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
+    public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
 
-  public POVButton povUp2 = new POVButton(joy2, 0, 0);
-  public POVButton povRight2 = new POVButton(joy2, 90, 0);
-  public POVButton povDown2 = new POVButton(joy2, 180, 0);
-  public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
+    public POVButton povUp2 = new POVButton(joy2, 0, 0);
+    public POVButton povRight2 = new POVButton(joy2, 90, 0);
+    public POVButton povDown2 = new POVButton(joy2, 180, 0);
+    public POVButton povLeft2 = new POVButton(joy2, 270, 0); 
   
     private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
@@ -118,11 +117,8 @@ public class RobotContainer  {
 
     public RobotContainer() {
 
-      this.m_raiseIntake = new ToggleUndeployIntake();
-      this.m_lowerIntake = new ToggleDeployIntake();
-      this.m_claw = new ClawToggle();
-      this.m_clawClose = new ClawClose();
-      this.m_clawOpen = new ClawOpen();
+      m_raiseIntake = new ToggleUndeployIntake();
+      m_lowerIntake = new ToggleDeployIntake();
       m_armHome = new HomeArm();
       m_armRaise = new RaiseArm();
       m_armLower = new LowerArm();
@@ -153,14 +149,11 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
 
-      //Claw Buttons
-      //this.a_button.onTrue(m_claw);
-      if(Robot.claw.isClosed()){
-        this.a_button.onTrue(m_clawClose);
-      } else {
-        this.a_button.onTrue(m_clawOpen);
-      }
-      
+      this.y_button.onTrue(new SwerveHoming(swerveSubsystem));
+
+      //opens and closes claw
+      this.a_button.onTrue(new ClawToggle());
+
       //Intake Buttons
       this.l_bump.onTrue(new InstantCommand() {
         @Override

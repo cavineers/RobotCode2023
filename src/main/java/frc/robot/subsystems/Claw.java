@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Claw extends SubsystemBase{
 
-    public boolean isClosed;
+    public static boolean isClosing;
 
     public CANSparkMax m_clawMotor;
 
@@ -24,13 +24,13 @@ public class Claw extends SubsystemBase{
 
     public Claw (){
 
-        isClosed = false;
+        isClosing = false;
     
         m_clawMotor = new CANSparkMax(CANIds.ClawMotor, MotorType.kBrushless);
 
         clawEncoder = m_clawMotor.getEncoder();
 
-        m_clawMotor.setInverted(true);
+        m_clawMotor.setInverted(Constants.Claw.kSetClawMotorInverted);
         m_clawMotor.setIdleMode(IdleMode.kCoast);
         m_clawMotor.setSmartCurrentLimit(Constants.Claw.kCurrentLimit);
     
@@ -61,12 +61,12 @@ public class Claw extends SubsystemBase{
         return this.m_clawMotorState;
     }
 
-    public boolean isClosed() {
-        return isClosed;
+    public static boolean isClosing() {
+        return isClosing;
     }
 
-    public void setClosed(boolean isClosed) {
-        this.isClosed = isClosed;
+    public static void setClosing(boolean closed) {
+        isClosing = closed;
     }
 
     public void setMotorState(clawMotorState state) {
@@ -93,6 +93,7 @@ public class Claw extends SubsystemBase{
 
     public void periodic(){
         SmartDashboard.putBoolean("Claw Limit Switch", this.getLimitSwitch());
+        SmartDashboard.putBoolean("Closing?", isClosing());
         SmartDashboard.putNumber("Claw Encoder Position", clawEncoder.getPosition());
     }
 

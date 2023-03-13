@@ -7,30 +7,32 @@ import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 public final class Constants {
     
     public static class CANIds {
-        public static final int kFrontLeftDriveCanID = 20;
-        public static final int kFrontLeftTurningCanID = 2;
+
+        public static final int kFrontLeftDriveCanID = 1;
         public static final int kBackLeftDriveCanID = 3;
+        public static final int kFrontRightDriveCanID = 7;
+        public static final int kBackRightDriveCanID = 5;
+
+        public static final int kFrontLeftTurningCanID = 2;
         public static final int kBackLeftTurningCanID = 4;
-        public static final int kFrontRightDriveCanID = 5;
-        public static final int kFrontRightTurningCanID = 6;
-        public static final int kBackRightDriveCanID = 7;
-        public static final int kBackRightTurningCanID = 8;
+        public static final int kFrontRightTurningCanID = 8;
+        public static final int kBackRightTurningCanID = 6;
 
         public static final int kFrontLeftAbsoluteEncoderCanID = 12;
         public static final int kBackLeftAbsoluteEncoderCanID = 9;
         public static final int kFrontRightAbsoluteEncoderCanID = 11;
         public static final int kBackRightAbsoluteEncoderCanID = 10;
 
-        public static final int IntakeMotorBottom = 13;
-        public static final int IntakeMotorTop = 14;
-        public static final int IntakeRightDropMotor = 15;
-        public static final int IntakeLeftDropMotor = 16;
+        public static final int IntakeMotorBottom = 17;
+        public static final int IntakeMotorTop = 16;
+        public static final int IntakeRightDropMotor = 18;
+        public static final int IntakeLeftDropMotor = 15;
 
-        public static final int ArmChainMotor = 17; // Chain Neo
-        public static final int ArmChainMotor2 = 18; // Chain Neo 2 same as firt but
-        public static final int ArmExtensionMotor = 19; // Chain Neo 2 same as firt but
+        public static final int ArmChainMotor = 14; // left side
+        public static final int ArmChainMotor2 = 20; // right side
+        public static final int ArmExtensionMotor = 19;
 
-        public static final int ClawMotor = 1;
+        public static final int ClawMotor = 13;
        
     }
     public static class DIO {
@@ -99,19 +101,19 @@ public final class Constants {
         public static final boolean kBackRightDriveEncoderReversed = true;
 
         public static final boolean kFrontLeftAbsoluteEncoderReversed = true;
-        public static final boolean kBackLeftAbsoluteEncoderReversed = true; 
-        public static final boolean kFrontRightAbsoluteEncoderReversed = false;
-        public static final boolean kBackRightAbsoluteEncoderReversed = false; 
+        public static final boolean kBackLeftAbsoluteEncoderReversed = true; //TBD
+        public static final boolean kFrontRightAbsoluteEncoderReversed = false; //TBD
+        public static final boolean kBackRightAbsoluteEncoderReversed = false; //TBD
 
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 4;
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 3;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
 
         public static final double kFrontLeftAbsoluteEncoderOffset = 176.49; //185.97 offset //-5.97 +80.63
         public static final double kBackLeftAbsoluteEncoderOffset = 180.44; //178.41 //-178.41 -224.03
-        public static final double kFrontRightAbsoluteEncoderOffset = -171.56; //170.94 //-170.94
-        public static final double kBackRightAbsoluteEncoderOffset = -57.65; //58.79 //-58.79
+        public static final double kFrontRightAbsoluteEncoderOffset = -171.56+180; //170.94 //-170.94
+        public static final double kBackRightAbsoluteEncoderOffset = -57.65+180; //58.79 //-58.79
         
         // Distance between right and left wheels
         public static final double kTrackWidth = Units.inchesToMeters(23.75); 
@@ -168,6 +170,7 @@ public final class Constants {
         public static final double kRevolutions = 1;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
         public static final int kCurrentLimit = 10; //limit in amps
+        public static final boolean kSetClawMotorInverted = true;
     }
     public static final class OIConstants {
         public static final int kDriverJoystickPort = 0;
