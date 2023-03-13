@@ -23,6 +23,7 @@ import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.SwerveHomingTest;
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 import frc.robot.commands.SwerveHoming;
@@ -203,4 +204,8 @@ public class RobotContainer  {
     public double getJoystickRawAxis(int id) {
         return -m_joy.getRawAxis(id);
     };
+
+    public Command getHomingCommand() {
+      return new SwerveHomingTest(swerveSubsystem);
+    }
 }

@@ -163,6 +163,13 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backRight.setState();
     }
 
+    public void setEncoders() {
+        frontLeft.setEncoder();
+        frontRight.setEncoder();
+        backLeft.setEncoder();
+        backRight.setEncoder();
+    }
+
     public void toggleIdleMode() {
         frontLeft.toggleIdleMode();
         frontRight.toggleIdleMode();

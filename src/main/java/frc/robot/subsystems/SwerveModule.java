@@ -99,6 +99,15 @@ public class SwerveModule {
         return driveEncoder.getVelocity();
     }
 
+    private double getDistanceToHome(){ //Rotations
+        return ((180 - absoluteEncoder.getAbsolutePosition()) / 360) * (Math.PI/180);
+    }
+
+    public void setEncoder() {
+        double distance = this.getDistanceToHome();
+        turningEncoder.setPosition(distance);
+    }
+
     public void toggleIdleMode() {
         if (turningMotor.getIdleMode() == IdleMode.kCoast) {
             turningMotor.setIdleMode(IdleMode.kBrake);
