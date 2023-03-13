@@ -139,29 +139,29 @@ public final class Constants {
      public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
      public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
      
-     public static double ArmChainSpeed = 0.18;
-     public static double ArmChainSpeedRev = -0.18; // Chain reverse speed
+     public static double ArmChainSpeed = 0.1;
+     public static double ArmChainSpeedRev = -0.1; // Chain reverse speed
 
-     public static double ArmExtensionSpeed = 0.75;
-     public static double ArmExtensionSpeedRev = -0.75;
+     public static double ArmExtensionSpeed = 0.1;
+     public static double ArmExtensionSpeedRev = -0.1;
      
  //Node Rotations
      
      // Bottom Node 7.2 is angle rotations and 46 is extension rotations
-     public static double BottomNodeAngleRotations = 7.2;
-     public static double BottomNodeExtensionRotations = 46;
+     public static double BottomNodeAngleRotations = 7.12;
+     public static double BottomNodeExtensionRotations = 73;
      // Mid Node Shelf 12.36 is angle rotations and 45.81 is extension rotations
-     public static double MidNodeShelfAngleRotations = 12.36;
-     public static double MidNodeShelfExtensionRotations = 45.81;
+     public static double MidNodeShelfAngleRotations = 13.55;
+     public static double MidNodeShelfExtensionRotations = 77.57;
      // Mid Node Peg 14.16 is angle rotations and 41.71 is extension rotations
-     public static double MidNodePegAngleRotations = 14.16;
-     public static double MidNodePegExtensionRotations = 41.71;
+     public static double MidNodePegAngleRotations = 16;
+     public static double MidNodePegExtensionRotations = 64;
      // Top Shelf 14.89 is angle rotations and 61.65 is extension rotations
-     public static double TopNodeShelfAngleRotations = 14.89;
-     public static double TopNodeShelfExtensionRotations = 61.65;
+     public static double TopNodeShelfAngleRotations = 16.6;
+     public static double TopNodeShelfExtensionRotations = 144.74;
      // Top Peg 16.41 is angle rotations and 60.41 is extension rotations
-     public static double TopNodePegAngleRotations = 16.41;
-     public static double TopNodePegExtensionRotations = 60.41;
+     public static double TopNodePegAngleRotations = 17.86;
+     public static double TopNodePegExtensionRotations = 137.38;
      // Encoder deadzones
      public static double ExtensionEncoderDeadzone = 1.8;
      public static double AngleEncoderDeadzone = 0.3;

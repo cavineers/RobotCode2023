@@ -53,8 +53,8 @@ public class Arm extends SubsystemBase {
         this.m_armChainMotor2.setIdleMode(IdleMode.kBrake);
         this.m_armExtensionMotor.setIdleMode(IdleMode.kBrake);
 
-        this.m_armChainMotor.setInverted(true);
-        this.m_armChainMotor2.setInverted(true);
+        this.m_armChainMotor.setInverted(false);
+        this.m_armChainMotor2.setInverted(false);
 
 
         this.m_armChainMotor.setSmartCurrentLimit(39);
