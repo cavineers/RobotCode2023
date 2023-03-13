@@ -38,7 +38,7 @@ public final class Constants {
     public static class DIO {
         public static int AngleProxSensor = 9;
         public static int ArmExtensionSwitch = 0;
-        public static int IntakeSwitch = 2;
+        public static int IntakeSwitch = 7;
         public static int clawLimitSwitch = 1;
         public static int intakeInfaredSensor = 4;
     }
