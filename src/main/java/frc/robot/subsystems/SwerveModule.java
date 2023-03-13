@@ -145,9 +145,17 @@ public class SwerveModule {
         }
     }
 
+    private double clampSign(double val) {
+        if (Math.signum(val) == -1) {
+            return MathUtil.clamp(val, -.1, -.02);
+        }else {
+            return MathUtil.clamp(val, .02, 0.1);
+        }
+    }
+
     public void setState() {
         double unclampedResults = test.calculate(absoluteEncoder.getAbsolutePosition(),0);
-        double results = clampPrecise(unclampedResults);
+        double results = clampSign(unclampedResults);
         SmartDashboard.putNumber(id + "Unclamped Results", test.calculate(absoluteEncoder.getAbsolutePosition(), 0));
         SmartDashboard.putNumber(id + "Results", results);
         
