@@ -15,6 +15,8 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("AngleRotations", getArmChainMotorPosition());
         SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position());
         SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
+        SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
+        SmartDashboard.putBoolean("ExtensionSwitch", getExtensionSwitch());
     }
 
      public enum ArmChainMotorState {
@@ -40,7 +42,7 @@ public class Arm extends SubsystemBase {
     public CANSparkMax m_armChainMotor2 = new CANSparkMax(Constants.Arm.ArmChainMotor2, MotorType.kBrushless);
     public CANSparkMax m_armExtensionMotor = new CANSparkMax(Constants.Arm.ArmExtensionMotor, MotorType.kBrushless);
 
-    private DigitalInput m_angleIrSensor = new DigitalInput(Constants.DIO.ArmIrSensor);
+    private DigitalInput m_angleProxSensor = new DigitalInput(Constants.DIO.AngleProxSensor);
     private DigitalInput m_extensionLimitSwitch = new DigitalInput(Constants.DIO.ArmExtensionSwitch);
     
     
@@ -53,8 +55,10 @@ public class Arm extends SubsystemBase {
         this.m_armChainMotor2.setIdleMode(IdleMode.kBrake);
         this.m_armExtensionMotor.setIdleMode(IdleMode.kBrake);
 
-        this.m_armChainMotor.setInverted(true);
-        this.m_armChainMotor2.setInverted(true);
+        this.m_armChainMotor.setInverted(false);
+        this.m_armChainMotor2.setInverted(false);
+        this.m_armExtensionMotor.setInverted(false);
+
 
 
         this.m_armChainMotor.setSmartCurrentLimit(39);
@@ -173,8 +177,8 @@ public class Arm extends SubsystemBase {
   }
   
     
-    public boolean getAngleIrSensor() {
-        return this.m_angleIrSensor.get();
+    public boolean getAngleProxSensor() {
+        return this.m_angleProxSensor.get();
       }
     
       public boolean getExtensionSwitch() {

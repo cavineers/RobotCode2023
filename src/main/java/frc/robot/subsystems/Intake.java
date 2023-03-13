@@ -1,6 +1,7 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -9,7 +10,29 @@ import frc.robot.Constants;
 
 public class Intake extends SubsystemBase{
 
+    public CANSparkMax m_intakeMotorTop;
+    public CANSparkMax m_intakeMotorBottom;
+    public CANSparkMax m_intakeRightDropMotor;
+    public CANSparkMax m_intakeLeftDropMotor;
 
+    public Intake(){
+
+        m_intakeRightDropMotor = new CANSparkMax(Constants.Intake.IntakeRightDropMotorID, MotorType.kBrushless);
+        m_intakeLeftDropMotor = new CANSparkMax(Constants.Intake.IntakeLeftDropMotorID, MotorType.kBrushless);
+        m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
+        m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
+
+        m_intakeMotorTop.setInverted(true);
+        m_intakeMotorBottom.setInverted(false);
+        m_intakeRightDropMotor.setInverted(false);
+        m_intakeLeftDropMotor.setInverted(true);
+
+        m_intakeMotorTop.setIdleMode(IdleMode.kCoast);
+        m_intakeMotorBottom.setIdleMode(IdleMode.kCoast);
+        m_intakeRightDropMotor.setIdleMode(IdleMode.kCoast);
+        m_intakeLeftDropMotor.setIdleMode(IdleMode.kCoast);
+
+    }
     //Intake states
     public enum IntakeMotorState {
         ON,
@@ -20,12 +43,6 @@ public class Intake extends SubsystemBase{
         DEPLOY,
         OFF
     }
-
-    // SparkMax's
-    public CANSparkMax m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
-    public CANSparkMax m_intakeMotorBottom = new CANSparkMax(Constants.Intake.IntakeBottomID, MotorType.kBrushless);
-    public CANSparkMax m_intakeRightDropMotor = new CANSparkMax(Constants.Intake.IntakeRightDropMotorID, MotorType.kBrushless);
-    public CANSparkMax m_intakeLeftDropMotor = new CANSparkMax(Constants.Intake.IntakeLeftDropMotorID, MotorType.kBrushless);
 
     // Limit Switch
     public DigitalInput m_intakeSwitch = new DigitalInput(Constants.DIO.IntakeSwitch);
@@ -72,8 +89,8 @@ public class Intake extends SubsystemBase{
                 break;
             case UNDEPLOY:
                 //Undeploys intake
-                this.m_intakeRightDropMotor.set(Constants.Intake.IntakeRaiseRightSpeed);
-                this.m_intakeLeftDropMotor.set(Constants.Intake.IntakeRaiseLeftSpeed);
+                this.m_intakeRightDropMotor.set(-Constants.Intake.IntakeRaiseRightSpeed);
+                this.m_intakeLeftDropMotor.set(-Constants.Intake.IntakeRaiseLeftSpeed);
                 break;
             default:
                 this.setIntakeDropMotorState(IntakeDropMotorState.OFF);
@@ -102,6 +119,9 @@ public class Intake extends SubsystemBase{
     
     public void periodic(){
         SmartDashboard.putBoolean("Intake Limit Switch", getIntakeSwitch());
+        SmartDashboard.putNumber("Left Position", m_intakeLeftDropMotor.getEncoder().getPosition());
+        SmartDashboard.putNumber("Right Position", m_intakeRightDropMotor.getEncoder().getPosition());
+        SmartDashboard.putString("State", ""+getIntakeDropMotorState());
     }
     /**
      * Get the current intake state.
