@@ -23,7 +23,7 @@ import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
-import frc.robot.commands.SwerveHomingTest;
+
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 import frc.robot.commands.SwerveHoming;
@@ -115,7 +115,7 @@ public class RobotContainer  {
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
-    public SwerveHomingTest swerveHomingCommand;
+    public SwerveHoming swerveHomingCommand;
 
 
     public RobotContainer() {
@@ -139,7 +139,7 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
-      swerveHomingCommand = new SwerveHomingTest(swerveSubsystem);
+      swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
@@ -154,7 +154,6 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
 
-      this.y_button.onTrue(this.swerveHomingCommand); //new SwerveHoming(swerveSubsystem)
 
       //opens and closes claw
       this.a_button.onTrue(new ClawToggle());

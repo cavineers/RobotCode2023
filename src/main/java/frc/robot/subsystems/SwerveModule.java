@@ -141,15 +141,6 @@ public class SwerveModule {
     }
     
 
-    public boolean checkZeroed(){
-        if ( //((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
-             ((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
-        ) {
-            return true;
-        }
-        return false;
-    }
-
     public void stop() {
         driveMotor.set(0);
         turningMotor.set(0);
