@@ -32,14 +32,14 @@ public class HomeArm extends CommandBase {
             Robot.arm.setArmExtensionMotorPosition(0.0);
         }
         if (Robot.arm.getArmExtensionMotorPosition() == 0) {
-            if (Robot.arm.getAngleIrSensor() == true) {
+            if (Robot.arm.getAngleProxSensor() == true) {
             Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
             Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
             Robot.arm.setArmChainMotorPosition(0.0);
             Robot.arm.setArmChainMotor2Position(0.0);
         } else {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.REVERSED);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.REVERSED);
+            Robot.arm.getArmChainMotor().set(-0.05);
+            Robot.arm.getArmChainMotor2().set(-0.05);
             }
         }
     }     
