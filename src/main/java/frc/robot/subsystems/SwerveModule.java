@@ -5,13 +5,13 @@ import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.sensors.CANCoderConfiguration;
 
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
@@ -37,11 +37,11 @@ public class SwerveModule {
     public SwerveModule(int driveMotorId, int turningMotorId, boolean driveMotorReversed, boolean turningMotorReversed,
             int absoluteEncoderId, double absoluteEncoderOffset) {
         
-this.id = absoluteEncoderId;
+        this.id = absoluteEncoderId;
         this.absoluteEncoderOffsetDeg = absoluteEncoderOffset;
         this.absoluteEncoder = new CANCoder(absoluteEncoderId);
 
-        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDeg);
+        absoluteEncoder.configMagnetOffset(absoluteEncoderOffset);
         
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -114,7 +114,7 @@ this.id = absoluteEncoderId;
 
     public void resetEncoders() {
         driveEncoder.setPosition(0);
-        turningEncoder.setPosition(0);
+        turningEncoder.setPosition(0 /*absoluteEncoder.getPosition()*Constants.ModuleConstants.kTurningDegreesToRad*/);
     }
 
     public SwerveModuleState getState() {
@@ -145,9 +145,17 @@ this.id = absoluteEncoderId;
         }
     }
 
+    private double clampSign(double val) {
+        if (Math.signum(val) == -1) {
+            return MathUtil.clamp(val, -.1, -.02);
+        }else {
+            return MathUtil.clamp(val, .02, 0.1);
+        }
+    }
+
     public void setState() {
         double unclampedResults = test.calculate(absoluteEncoder.getAbsolutePosition(),0);
-        double results = clampPrecise(unclampedResults);
+        double results = clampSign(unclampedResults);
         SmartDashboard.putNumber(id + "Unclamped Results", test.calculate(absoluteEncoder.getAbsolutePosition(), 0));
         SmartDashboard.putNumber(id + "Results", results);
         
@@ -160,8 +168,8 @@ this.id = absoluteEncoderId;
     }
 
     public boolean checkZeroed(){
-        if (((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
-            // ((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
+        if ( ((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
+             //((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
         ) {
             return true;
         }

@@ -59,16 +59,23 @@ public final class Constants {
         public static int IntakeRightDropMotorID = CANIds.IntakeRightDropMotor;
         public static int IntakeLeftDropMotorID = CANIds.IntakeLeftDropMotor;
 
-        public static double IntakeSpeed = 0.15;
-        public static double IntakeLowerLeftSpeed = 0.2;
-        public static double IntakeRaiseLeftSpeed = -0.2;
-        public static double IntakeLowerRightSpeed = -0.2;
-        public static double IntakeRaiseRightSpeed = 0.2;
-        
-        public static double IntakeSpeedTop = IntakeSpeed; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = -(IntakeSpeed); // Intake motor speed (-1.0 -- 1.0)
+        public static boolean kInvertRightDeployMotor = false;
+        public static boolean kInvertLeftDeployMotor = false;
+        public static boolean kInvertTopFlyWheel = false;
+        public static boolean kInvertBottom = false;
 
-        public static double RevolutionsToLower= 3.36;
+        public static double IntakeSpeed = 0.4;
+        public static double FlyWheelSpeed = 0.25;
+
+        public static double IntakeLowerLeftSpeed = IntakeSpeed;
+        public static double IntakeRaiseLeftSpeed = IntakeSpeed;
+        public static double IntakeLowerRightSpeed = IntakeSpeed;
+        public static double IntakeRaiseRightSpeed = IntakeSpeed;
+        
+        public static double IntakeSpeedTop = FlyWheelSpeed; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = FlyWheelSpeed+.1; // Intake motor speed (-1.0 -- 1.0)
+
+        public static double RevolutionsToLower = 48;
     }
     public static final class DriveConstants {
 
@@ -112,8 +119,8 @@ public final class Constants {
 
         public static final double kFrontLeftAbsoluteEncoderOffset = 176.49; //185.97 offset //-5.97 +80.63
         public static final double kBackLeftAbsoluteEncoderOffset = 180.44; //178.41 //-178.41 -224.03
-        public static final double kFrontRightAbsoluteEncoderOffset = -171.56+180; //170.94 //-170.94
-        public static final double kBackRightAbsoluteEncoderOffset = -57.65+180; //58.79 //-58.79
+        public static final double kFrontRightAbsoluteEncoderOffset = -171.56; //170.94 //-170.94
+        public static final double kBackRightAbsoluteEncoderOffset = -57.65; //58.79 //-58.79
         
         // Distance between right and left wheels
         public static final double kTrackWidth = Units.inchesToMeters(23.75); 

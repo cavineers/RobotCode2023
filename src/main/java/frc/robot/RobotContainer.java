@@ -42,7 +42,7 @@ public class RobotContainer  {
     public int intakeState = 1;
 
     //Swerve Subsystem
-    private final SwerveDriveSubsystem swerveSubsystem = new SwerveDriveSubsystem();
+    private final SwerveDriveSubsystem swerveSubsystem;
 
     public Command m_autoCommand;
 
@@ -117,6 +117,8 @@ public class RobotContainer  {
 
     public RobotContainer() {
 
+      swerveSubsystem = new SwerveDriveSubsystem();
+
       m_raiseIntake = new ToggleUndeployIntake();
       m_lowerIntake = new ToggleDeployIntake();
       m_armHome = new HomeArm();
@@ -133,8 +135,6 @@ public class RobotContainer  {
       m_armTopLeft = new TopLeft();
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
-
-      //swerveSubsystem.setDefaultCommand(new SwerveHoming(swerveSubsystem));
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
@@ -154,28 +154,10 @@ public class RobotContainer  {
       //opens and closes claw
       this.a_button.onTrue(new ClawToggle());
 
-      //Intake Buttons
-      this.l_bump.onTrue(new InstantCommand() {
-        @Override
-         public void initialize() {
-          if (intakeState == 1) {
-            if (m_raiseIntake.isScheduled()) {
-              m_raiseIntake.cancel();
-            }
-            m_lowerIntake = new ToggleDeployIntake();
-            m_lowerIntake.schedule();
-            intakeState = intakeState + 1;
-          } else if (intakeState == 2) {
-            if (m_lowerIntake.isScheduled()) {
-              m_lowerIntake.cancel();
-            }
-            m_raiseIntake = new ToggleUndeployIntake();
-            m_raiseIntake.schedule();
-            intakeState = intakeState - 1;
-          }
-         }
-        });
-        
+      //deploys intake on button hold and undeploys on release
+      this.l_bump.onTrue(new ToggleDeployIntake());
+      this.l_bump.onFalse(new ToggleUndeployIntake());
+
       //Arm Buttons
       this.povUp.onTrue(m_armRaise);
       this.povUp.onFalse(new InstantCommand() {
