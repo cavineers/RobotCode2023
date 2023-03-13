@@ -36,8 +36,8 @@ public final class Constants {
        
     }
     public static class DIO {
-        public static int ArmIrSensor = 0;
-        public static int ArmExtensionSwitch = 3;
+        public static int AngleProxSensor = 9;
+        public static int ArmExtensionSwitch = 0;
         public static int IntakeSwitch = 2;
         public static int clawLimitSwitch = 1;
         public static int intakeInfaredSensor = 4;
@@ -161,8 +161,8 @@ public final class Constants {
      // Min and Max Rotations 
      public static double MaxExtensionRotations = 50;
      public static double MinExtensionRotations = 0;
-     public static double MaxAngleRotations = 17;
-     public static double MinAngleRotations = -20;
+     public static double MaxAngleRotations = 19;
+     public static double MinAngleRotations = -1;
 
     }
     public static final class Claw {
