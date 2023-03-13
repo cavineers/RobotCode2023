@@ -28,6 +28,7 @@ import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
+
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
 import frc.robot.commands.AprilTagHomingCommand;
@@ -135,6 +136,8 @@ public class RobotContainer  {
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
+    public SwerveHoming swerveHomingCommand;
+
 
     public RobotContainer() {
 
@@ -162,6 +165,7 @@ public class RobotContainer  {
       this.m_aprilTagRight = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kRightPosition);
 
 
+      swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
@@ -177,7 +181,6 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
 
-      this.y_button.onTrue(new SwerveHoming(swerveSubsystem));
 
       //opens and closes claw
       this.a_button.onTrue(new ClawToggle());
@@ -256,4 +259,8 @@ public class RobotContainer  {
     public double getJoystickRawAxis(int id) {
         return -m_joy.getRawAxis(id);
     };
+
+    public Command getHomingCommand() {
+      return this.swerveHomingCommand;
+    }
 }
