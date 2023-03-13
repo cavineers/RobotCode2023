@@ -5,13 +5,13 @@ import com.ctre.phoenix.sensors.CANCoder;
 import com.revrobotics.RelativeEncoder;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import com.ctre.phoenix.sensors.CANCoderConfiguration;
 
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import frc.robot.Constants;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.ModuleConstants;
@@ -41,7 +41,7 @@ public class SwerveModule {
         this.absoluteEncoderOffsetDeg = absoluteEncoderOffset;
         this.absoluteEncoder = new CANCoder(absoluteEncoderId);
 
-        absoluteEncoder.configMagnetOffset(absoluteEncoderOffset);
+        absoluteEncoder.configMagnetOffset(absoluteEncoderOffsetDeg);
         
         driveMotor = new CANSparkMax(driveMotorId, MotorType.kBrushless);
         turningMotor = new CANSparkMax(turningMotorId, MotorType.kBrushless);
@@ -63,7 +63,7 @@ public class SwerveModule {
         turningPidController = new PIDController(ModuleConstants.kPTurning, 0, 0);
         turningPidController.enableContinuousInput(-Math.PI, Math.PI);
 
-        test = new PIDController(0.0005, 0, 0);
+        test = new PIDController(0.03, 0, 0);
         test.enableContinuousInput(0, 360);
 
 
@@ -99,15 +99,6 @@ public class SwerveModule {
         return driveEncoder.getVelocity();
     }
 
-    private double getDistanceToHome(){ //Rotations
-        return ((180 - absoluteEncoder.getAbsolutePosition()) / 360) * (Math.PI/180);
-    }
-
-    public void setEncoder() {
-        double distance = this.getDistanceToHome();
-        turningEncoder.setPosition(distance);
-    }
-
     public void toggleIdleMode() {
         if (turningMotor.getIdleMode() == IdleMode.kCoast) {
             turningMotor.setIdleMode(IdleMode.kBrake);
@@ -123,7 +114,16 @@ public class SwerveModule {
 
     public void resetEncoders() {
         driveEncoder.setPosition(0);
-        turningEncoder.setPosition(0 /*absoluteEncoder.getPosition()*Constants.ModuleConstants.kTurningDegreesToRad*/);
+        turningEncoder.setPosition(0);
+    }
+
+    private double getDistanceToHome(){ //Rotations
+        return Math.PI - absoluteEncoder.getAbsolutePosition() * (Math.PI/180);
+    }
+
+    public void setEncoder() {
+        double distance = this.getDistanceToHome();
+        turningEncoder.setPosition(distance);
     }
 
     public SwerveModuleState getState() {
@@ -140,24 +140,9 @@ public class SwerveModule {
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     }
 
-    private double clampPrecise(double val) {
-        if ((this.absoluteEncoder.getAbsolutePosition() >= 170) && (this.absoluteEncoder.getAbsolutePosition() <= 190)) {
-            if (Math.signum(val) == 1){
-                return MathUtil.clamp(val, .01, 0.02);
-            }
-            else {
-                return MathUtil.clamp(val, -.02, -.01);
-            }
-        }
-        else {
-            return val;
-        }
-    }
-
     public void setState() {
-        double unclampedResults = test.calculate(absoluteEncoder.getAbsolutePosition(),0);
-        double results = clampPrecise(unclampedResults);
-        SmartDashboard.putNumber(id + "Unclamped Results", test.calculate(absoluteEncoder.getAbsolutePosition(), 0));
+        double results = MathUtil.clamp(test.calculate(absoluteEncoder.getAbsolutePosition(),0),-.1,.1);
+        // SmartDashboard.putNumber(id + "Unclamped Results", test.calculate(absoluteEncoder.getAbsolute(), 0));
         SmartDashboard.putNumber(id + "Results", results);
         
         if (!checkZeroed()){
@@ -169,8 +154,8 @@ public class SwerveModule {
     }
 
     public boolean checkZeroed(){
-        if ( ((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
-             //((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
+        if ( //((absoluteEncoder.getAbsolutePosition() > 179) && (absoluteEncoder.getAbsolutePosition() < 181))
+             ((absoluteEncoder.getAbsolutePosition() > 359) || (absoluteEncoder.getAbsolutePosition() < 1))
         ) {
             return true;
         }

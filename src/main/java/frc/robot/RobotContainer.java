@@ -115,6 +115,8 @@ public class RobotContainer  {
 
     public POVButton m_povUp = new POVButton(m_joy, 0, 0);
 
+    public SwerveHomingTest swerveHomingCommand;
+
 
     public RobotContainer() {
 
@@ -137,6 +139,8 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
+      swerveHomingCommand = new SwerveHomingTest(swerveSubsystem);
+
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
           swerveSubsystem,
           () -> -joy.getRawAxis(OIConstants.kDriverYAxis),
@@ -150,7 +154,7 @@ public class RobotContainer  {
 
     private void configureButtonBindings() {
 
-      this.y_button.onTrue(new SwerveHoming(swerveSubsystem));
+      this.y_button.onTrue(this.swerveHomingCommand); //new SwerveHoming(swerveSubsystem)
 
       //opens and closes claw
       this.a_button.onTrue(new ClawToggle());
@@ -206,6 +210,6 @@ public class RobotContainer  {
     };
 
     public Command getHomingCommand() {
-      return new SwerveHomingTest(swerveSubsystem);
+      return this.swerveHomingCommand;
     }
 }
