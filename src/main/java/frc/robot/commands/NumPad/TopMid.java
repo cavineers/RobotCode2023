@@ -26,7 +26,7 @@ public class TopMid extends CommandBase {
 
     @Override
     public void execute() {
-    // 14.89 is angle rotations and 61.65 is extension rotations
+    // 12.36 is angle rotations and 45.81 is extension rotations
     if(Robot.arm.getArmChainMotorPosition() < (Constants.Arm.TopNodeShelfAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
         Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
