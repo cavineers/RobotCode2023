@@ -157,33 +157,33 @@ public class RobotContainer  {
 
 
       //opens and closes claw
-      this.a_button.onTrue(new ClawToggle());
+      this.povDown.onTrue(new ClawToggle());
 
       //deploys intake on button hold and undeploys on release
       this.l_bump.onTrue(new ToggleDeployIntake());
       this.l_bump.onFalse(new ToggleUndeployIntake());
 
       //Arm Buttons
-      this.povUp.onTrue(m_armRaise);
-      this.povUp.onFalse(new InstantCommand() {
+      this.y_button.onTrue(m_armRaise);
+      this.y_button.onFalse(new InstantCommand() {
         public void initialize() {
           m_armRaise.cancel();
         }
       });
-      this.povDown.onTrue(m_armLower);
-      this.povDown.onFalse(new InstantCommand() {
+      this.a_button.onTrue(m_armLower);
+      this.a_button.onFalse(new InstantCommand() {
         public void initialize() {
           m_armLower.cancel();
         }
       });
-      this.povLeft.onTrue(m_armRetract);
-      this.povLeft.onFalse(new InstantCommand() {
+      this.x_button.onTrue(m_armRetract);
+      this.x_button.onFalse(new InstantCommand() {
         public void initialize() {
           m_armRetract.cancel();
         }
       });
-      this.povRight.onTrue(m_armExtend);
-      this.povRight.onFalse(new InstantCommand() {
+      this.b_button.onTrue(m_armExtend);
+      this.b_button.onFalse(new InstantCommand() {
         public void initialize() {
           m_armExtend.cancel();
         }
