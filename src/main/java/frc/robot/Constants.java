@@ -148,19 +148,19 @@ public final class Constants {
      
      // Bottom Node 7.2 is angle rotations and 46 is extension rotations
      public static double BottomNodeAngleRotations = 9;
-     public static double BottomNodeExtensionRotations = 66;
+     public static double BottomNodeExtensionRotations = 50;
      // Mid Node Shelf 12.36 is angle rotations and 45.81 is extension rotations
      public static double MidNodeShelfAngleRotations = 16;
      public static double MidNodeShelfExtensionRotations = 80;
      // Mid Node Peg 14.16 is angle rotations and 41.71 is extension rotations
-     public static double MidNodePegAngleRotations = 20;
-     public static double MidNodePegExtensionRotations = 64;
+     public static double MidNodePegAngleRotations = 18;
+     public static double MidNodePegExtensionRotations = 55;
      // Top Shelf 14.89 is angle rotations and 61.65 is extension rotations
-     public static double TopNodeShelfAngleRotations = 16.6;
-     public static double TopNodeShelfExtensionRotations = 144.74;
+     public static double TopNodeShelfAngleRotations = 19.5;
+     public static double TopNodeShelfExtensionRotations = 131;
      // Top Peg 16.41 is angle rotations and 60.41 is extension rotations
-     public static double TopNodePegAngleRotations = 17.86;
-     public static double TopNodePegExtensionRotations = 137.38;
+     public static double TopNodePegAngleRotations = 20;
+     public static double TopNodePegExtensionRotations = 131;
      // Encoder deadzones
      public static double ExtensionEncoderDeadzone = 1.8;
      public static double AngleEncoderDeadzone = 0.005;
@@ -168,7 +168,7 @@ public final class Constants {
      public static double MaxExtensionRotations = 137.38;
      public static double MinExtensionRotations = 0;
      public static double MaxAngleRotations = 19;
-     public static double MinAngleRotations = -1;
+     public static double MinAngleRotations = -0.25;
 
     }
     public static final class Claw {

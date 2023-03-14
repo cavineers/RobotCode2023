@@ -18,6 +18,15 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
         SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
         SmartDashboard.putBoolean("ExtensionSwitch", getExtensionSwitch());
+
+        if (getExtensionSwitch() == true) {
+            setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+            setArmExtensionMotorPosition(0.0);
+        }
+        if (getAngleProxSensor() == true) {
+            setArmChainMotorPosition(0.0);
+            setArmChainMotor2Position(0.0);
+        }
     }
 
      public enum ArmChainMotorState {
