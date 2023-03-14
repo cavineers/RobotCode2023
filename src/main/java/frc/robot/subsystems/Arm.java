@@ -18,6 +18,15 @@ public class Arm extends SubsystemBase {
         SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
         SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
         SmartDashboard.putBoolean("ExtensionSwitch", getExtensionSwitch());
+
+        if (getExtensionSwitch() == true) {
+            setArmExtensionMotorState(Arm.ArmExtensionMotorState.OFF);
+            setArmExtensionMotorPosition(0.0);
+        }
+        if (getAngleProxSensor() == true) {
+            setArmChainMotorPosition(0.0);
+            setArmChainMotor2Position(0.0);
+        }
     }
 
      public enum ArmChainMotorState {
@@ -60,10 +69,8 @@ public class Arm extends SubsystemBase {
         this.m_armChainMotor2.setInverted(false);
         this.m_armExtensionMotor.setInverted(false);
 
-
-
-        this.m_armChainMotor.setSmartCurrentLimit(39);
-        this.m_armChainMotor2.setSmartCurrentLimit(39);
+        this.m_armChainMotor.setSmartCurrentLimit(51);
+        this.m_armChainMotor2.setSmartCurrentLimit(51);
         this.m_armExtensionMotor.setSmartCurrentLimit(39);
        
     }
@@ -80,7 +87,12 @@ public class Arm extends SubsystemBase {
                 break;
             case OFF:
                 // Off
-                this.m_armChainMotor.set(0.0);
+                if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
+                    this.m_armChainMotor.set(0.03);
+                }
+                else {
+                    this.m_armChainMotor.set(0);
+                }
                 break;
             case REVERSED:
                 // Reversed
@@ -102,7 +114,12 @@ public class Arm extends SubsystemBase {
                 break;
             case OFF:
                 // Off
-                this.m_armChainMotor2.set(0.0);
+                if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
+                    this.m_armChainMotor2.set(-0.03);
+                }
+                else {
+                    this.m_armChainMotor2.set(0);
+                }
                 break;
             case REVERSED:
                 // Reversed
