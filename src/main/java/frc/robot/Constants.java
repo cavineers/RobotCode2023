@@ -166,9 +166,9 @@ public final class Constants {
      public static double ExtensionEncoderDeadzone = 1.8;
      public static double AngleEncoderDeadzone = 0.005;
      // Min and Max Rotations 
-     public static double MaxExtensionRotations = 137.38;
+     public static double MaxExtensionRotations = 32;
      public static double MinExtensionRotations = 0;
-     public static double MaxAngleRotations = 19;
+     public static double MaxAngleRotations = 21;
      public static double MinAngleRotations = -0.25;
 
     }
