@@ -6,6 +6,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -73,16 +74,19 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
             this.yaw = target.getYaw();
             
             this.targetID = target.getFiducialId();
-            SmartDashboard.putNumber("TargetID", this.targetID);
             SmartDashboard.putNumber("X To Target", this.currentDistance.getX());
             SmartDashboard.putNumber("Y To Target", this.currentDistance.getY());
-            SmartDashboard.putNumber("Yaw", this.yaw);
-            SmartDashboard.putBoolean("AprilTagHoming", checkFinished());
-            SmartDashboard.putBoolean("HasTags", hasTargets);
+
             
         }else {
             this.hasTargets = false;
         }
+        SmartDashboard.putNumber("TargetID", this.targetID);
+        
+        SmartDashboard.putNumber("Yaw", this.yaw);
+        SmartDashboard.putBoolean("AprilTagHoming", checkFinished());
+        SmartDashboard.putBoolean("HasTags", hasTargets);
+        SmartDashboard.putString("Goal", ""+this.goal);
     }
     int counter = 0;
     public boolean checkFinished() {
@@ -129,8 +133,13 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
         return distgoal;
     }
 
+    public Pose2d getPoseFromTag() {
+        return new Pose2d(getTranslationToTag(), new Rotation2d().fromDegrees(getYaw()));
+    }
+
     public PathPlannerTrajectory onTheFlyGenerationRelative(Rotation2d holonomicRotation, Translation2d goalOffset){
         this.goal = goalOffset;
+        
         PathPlannerTrajectory traj = PathPlanner.generatePath(
           new PathConstraints(Constants.PathPlanning.kMaxSpeedMetersPerSecond, Constants.PathPlanning.kMaxAccelerationMetersPerSecond),
           new PathPoint(getTranslationToTag(), new Rotation2d(0), holonomicRotation), // INITIAL position, heading(direction of travel), holonomic rotation 

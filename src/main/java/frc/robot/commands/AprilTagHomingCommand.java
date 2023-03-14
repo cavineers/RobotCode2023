@@ -47,15 +47,15 @@ public class AprilTagHomingCommand extends CommandBase {
                 this.goalOffset
             ), // Trajectory to follow.
 
-            this.swerveSubsystem::getPose, // Pose supplier
+            this.tagHomingSubsystem::getPoseFromTag, // Pose supplier
             DriveConstants.kDriveKinematics, // SwerveDriveKinematics
 
-            new PIDController(-Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // X controller
-            new PIDController(-Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // Y controller
+            new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // X controller
+            new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // Y controller
             new PIDController(Constants.HomingRotationalPIDControllerConstants.kP, Constants.HomingRotationalPIDControllerConstants.kI, Constants.HomingRotationalPIDControllerConstants.kD), // Rotation controller
 
             this.swerveSubsystem::setModuleStates,
-            false,// Mirror path depending on alliance clr
+            true,// Mirror path depending on alliance clr
             this.swerveSubsystem // required sub
         );
 
@@ -66,7 +66,7 @@ public class AprilTagHomingCommand extends CommandBase {
     
     
     public boolean isFinished() {
-        return (this.swerveTrajFollower.isFinished()); //tagHomingSubsystem.checkFinished()
+        return (this.swerveTrajFollower.isFinished() || tagHomingSubsystem.checkFinished()); //tagHomingSubsystem.checkFinished()
     }
 
     

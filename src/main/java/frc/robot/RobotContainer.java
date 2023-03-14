@@ -217,9 +217,9 @@ public class RobotContainer  {
       });
       this.left_menu.onTrue(m_armHome);
 
-      this.a_button2.onTrue(m_aprilTagLeft); //.andThen(m_armBottomLeft)
-      this.b_button2.onTrue(m_aprilTagCenter); //.andThen(m_armBottomMid)
-      this.x_button2.onTrue(m_aprilTagRight); // .andThen(m_armBottomRight)
+      this.a_button2.onTrue(m_aprilTagLeft); //.andThen(m_armBottomLeft) 1
+      this.b_button2.onTrue(m_aprilTagCenter); //.andThen(m_armBottomMid) 2
+      this.x_button2.onTrue(m_aprilTagRight); // .andThen(m_armBottomRight) 3
       // this.y_button2.onTrue(m_aprilTagLeft.andThen(m_armMidLeft));
       // this.povUp2.onTrue(m_aprilTagCenter.andThen(m_armMidMid));
       // this.povRight2.onTrue(m_aprilTagRight.andThen(m_armMidRight));
