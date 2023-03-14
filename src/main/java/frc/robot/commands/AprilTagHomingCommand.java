@@ -1,8 +1,10 @@
 package frc.robot.commands;
 
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
+import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -34,25 +36,29 @@ public class AprilTagHomingCommand extends CommandBase {
 
     }
 
+
     
     public void initialize() {
+        swerveSubsystem.toggleIdleMode(IdleMode.kCoast);
+        new Rotation2d();
         this.swerveTrajFollower = new PPSwerveControllerCommand(
             this.tagHomingSubsystem.onTheFlyGenerationRelative( // Trajectory generator
-                swerveSubsystem.getRotation2d(), // Current robot holonomic rotation
+                Rotation2d.fromDegrees(tagHomingSubsystem.getYaw()), // Current robot holonomic rotation
                 this.goalOffset
             ), // Trajectory to follow.
 
             this.swerveSubsystem::getPose, // Pose supplier
             DriveConstants.kDriveKinematics, // SwerveDriveKinematics
 
-            new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // X controller
-            new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // Y controller
+            new PIDController(-Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // X controller
+            new PIDController(-Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD), // Y controller
             new PIDController(Constants.HomingRotationalPIDControllerConstants.kP, Constants.HomingRotationalPIDControllerConstants.kI, Constants.HomingRotationalPIDControllerConstants.kD), // Rotation controller
 
             this.swerveSubsystem::setModuleStates,
-            true,// Mirror path depending on alliance clr
+            false,// Mirror path depending on alliance clr
             this.swerveSubsystem // required sub
         );
+
 
         swerveTrajFollower.schedule();
     }
@@ -60,12 +66,15 @@ public class AprilTagHomingCommand extends CommandBase {
     
     
     public boolean isFinished() {
-        return (tagHomingSubsystem.checkFinished()); // Stop if the robot is at the target OR if there is no result
+        return (this.swerveTrajFollower.isFinished()); //tagHomingSubsystem.checkFinished()
     }
 
     
     public void end(boolean interrupted) {
         this.swerveTrajFollower.cancel();
         swerveSubsystem.stopModules();
+        if (!interrupted) {
+            swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
+        }
     }
 }

@@ -139,8 +139,8 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
     }
     public static final class PathPlanning {
-        public static final double kMaxSpeedMetersPerSecond = 1;
-        public static final double kMaxAccelerationMetersPerSecond = .3;
+        public static final double kMaxSpeedMetersPerSecond = .1;
+        public static final double kMaxAccelerationMetersPerSecond = .1;
 
         public static final PIDConstants kAutoDriveVelocityPID = new PIDConstants(1, 0, 0);
         public static final PIDConstants kAutoDriveTurnPID = new PIDConstants(0.5, 0, 0);
@@ -192,9 +192,9 @@ public final class Constants {
     public static final class PresetTranslations {
         //IN METERS needs to be adjusted 
 
-        public static final Translation2d kLeftPosition = new Translation2d(Units.inchesToMeters(50), Units.inchesToMeters(22.15)); 
-        public static final Translation2d kShelfPosition = new Translation2d(Units.inchesToMeters(50), 0); 
-        public static final Translation2d kRightPosition = new Translation2d(Units.inchesToMeters(50), Units.inchesToMeters(-22.15)); 
+        public static final Translation2d kLeftPosition = new Translation2d(1.2, Units.inchesToMeters(57.15)); 
+        public static final Translation2d kShelfPosition = new Translation2d(1.2, 0); 
+        public static final Translation2d kRightPosition = new Translation2d(1.2, Units.inchesToMeters(-57.15)); 
 
         public static final Translation2d kSubstationPosition = new Translation2d(0.5, 0); 
 
@@ -219,7 +219,7 @@ public final class Constants {
     }
 
     public static final class HomingDrivePIDControllerConstants {
-        public static final double kP = 1; //ADJUST
+        public static final double kP = 0.05; //ADJUST
         public static final double kI = 0.0;
         public static final double kD = 0.0;
     }

@@ -99,13 +99,9 @@ public class SwerveModule {
         return driveEncoder.getVelocity();
     }
 
-    public void toggleIdleMode() {
-        if (turningMotor.getIdleMode() == IdleMode.kCoast) {
-            turningMotor.setIdleMode(IdleMode.kBrake);
-        }
-        else{
-            turningMotor.setIdleMode(IdleMode.kBrake);
-        }
+    public void toggleIdleMode(IdleMode mode) {
+        turningMotor.setIdleMode(mode);
+        driveMotor.setIdleMode(mode);
     }
 
     public double getTurningVelocity() {

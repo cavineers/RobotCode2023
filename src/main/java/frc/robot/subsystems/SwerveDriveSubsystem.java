@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.SPI;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 
@@ -142,6 +144,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());
         SmartDashboard.putNumber("BackLeft Cancoder", backLeft.getAbsolutePosition());
         SmartDashboard.putNumber("BackRight Cancoder", backRight.getAbsolutePosition());
+
+        SmartDashboard.putNumber("Heading", getHeading());
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -159,11 +163,11 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backRight.setEncoder();
     }
 
-    public void toggleIdleMode() {
-        frontLeft.toggleIdleMode();
-        frontRight.toggleIdleMode();
-        backLeft.toggleIdleMode();
-        backRight.toggleIdleMode();
+    public void toggleIdleMode(IdleMode mode) {
+        frontLeft.toggleIdleMode(mode);
+        frontRight.toggleIdleMode(mode);
+        backLeft.toggleIdleMode(mode);
+        backRight.toggleIdleMode(mode);
 
     }
 }
