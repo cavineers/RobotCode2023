@@ -37,6 +37,10 @@ public class Claw extends SubsystemBase{
         clawLimitSwitch = new DigitalInput(Constants.Claw.kClawLimitSwitchPort);
     }
 
+    public void resetEncoder(){
+        clawEncoder.setPosition(0);
+    }
+
     public clawMotorState m_clawMotorState = clawMotorState.OFF;
 
     public enum clawMotorState {
@@ -76,7 +80,7 @@ public class Claw extends SubsystemBase{
         switch (state) {
             case ON:
                 // turns motor on forward
-                this.m_clawMotor.set(Constants.Claw.kClawSpeed);
+                this.m_clawMotor.set(Constants.Claw.kCLawCloseSpeed);
                 break;
             case OFF:
                 // turns off motor
@@ -84,7 +88,7 @@ public class Claw extends SubsystemBase{
                 break;
             case REVERSE:
                 // reverses claw
-                this.m_clawMotor.set(-Constants.Claw.kClawSpeed);
+                this.m_clawMotor.set(-Constants.Claw.kClawHomeSpeed);
                 break;
             default: 
                 this.setMotorState(clawMotorState.OFF);

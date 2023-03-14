@@ -87,7 +87,12 @@ public class Arm extends SubsystemBase {
                 break;
             case OFF:
                 // Off
-                this.m_armChainMotor.set(0.0);
+                if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
+                    this.m_armChainMotor.set(0.03);
+                }
+                else {
+                    this.m_armChainMotor.set(0);
+                }
                 break;
             case REVERSED:
                 // Reversed
@@ -109,7 +114,12 @@ public class Arm extends SubsystemBase {
                 break;
             case OFF:
                 // Off
-                this.m_armChainMotor2.set(0.0);
+                if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
+                    this.m_armChainMotor2.set(-0.03);
+                }
+                else {
+                    this.m_armChainMotor2.set(0);
+                }
                 break;
             case REVERSED:
                 // Reversed
