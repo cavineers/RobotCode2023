@@ -32,7 +32,7 @@ public class ClawToggle extends CommandBase {
         //open claw to starting position which is zero
         if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE) {
             //Note -- negative value will break
-            if (Robot.claw.getLimitSwitch()) {
+            if (Robot.claw.getEncoderPosition()<=0) {
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
                 this.isFinished = true;
                 System.out.println("Claw is open");

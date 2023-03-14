@@ -23,6 +23,7 @@ import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.ClawHoming;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
@@ -188,6 +189,7 @@ public class RobotContainer  {
         }
       });
       this.left_menu.onTrue(m_armHome);
+      this.right_menu.onTrue(new ClawHoming());
        
     }
 
