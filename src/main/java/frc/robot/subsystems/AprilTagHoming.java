@@ -5,6 +5,8 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Robot;
+import frc.robot.RobotContainer;
 import edu.wpi.first.math.geometry.Rotation2d;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -14,7 +16,10 @@ import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPoint;
 
+import edu.wpi.first.wpilibj.DriverStation;
+
 import java.lang.Math;
+import java.sql.Time;
 
 
 
@@ -28,10 +33,27 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
 
     private Rotation2d goalRotation;
     private Rotation2d goalHeading;
-
     
-    public AprilTagHoming() { //Initi
-        this.camera = new PhotonCamera("HD_Pro_Webcam_C920");
+    public AprilTagHoming() { 
+        int counter = 0;
+        camera = null;
+
+        while ( (camera == null) && (counter <= 10) ) {
+            try {
+                camera = new PhotonCamera("HD_Pro_Webcam_C920");
+              } catch (RuntimeException ex ) {
+                  DriverStation.reportError("Error instantiating PhotonCamera  " + ex.getMessage(), true);
+                 
+              }
+              
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex){}
+
+            counter += 1;
+            
+        }
+
     }
     
     public void periodic() {
@@ -46,6 +68,8 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
             SmartDashboard.putNumber("X To Target", this.currentDistance.getX());
             SmartDashboard.putNumber("Y To Target", this.currentDistance.getY());
             SmartDashboard.putNumber("Yaw", this.yaw);
+            SmartDashboard.putBoolean("AprilTagHoming", checkFinished());
+            
         }
     }
 

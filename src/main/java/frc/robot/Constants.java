@@ -139,8 +139,8 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
     }
     public static final class PathPlanning {
-        public static final double kMaxSpeedMetersPerSecond = 1.5;
-        public static final double kMaxAccelerationMetersPerSecond = 1.5;
+        public static final double kMaxSpeedMetersPerSecond = 1;
+        public static final double kMaxAccelerationMetersPerSecond = .3;
 
         public static final PIDConstants kAutoDriveVelocityPID = new PIDConstants(1, 0, 0);
         public static final PIDConstants kAutoDriveTurnPID = new PIDConstants(0.5, 0, 0);
@@ -218,13 +218,13 @@ public final class Constants {
     }
 
     public static final class HomingDrivePIDControllerConstants {
-        public static final double kP = 3; //ADJUST
+        public static final double kP = 1; //ADJUST
         public static final double kI = 0.0;
         public static final double kD = 0.0;
     }
 
     public static final class HomingRotationalPIDControllerConstants {
-        public static final double kP = 2; //ADJUST
+        public static final double kP = .5; //ADJUST
         public static final double kI = 0.0;
         public static final double kD = 0.0;
     }

@@ -160,9 +160,9 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
-      this.m_aprilTagLeft = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kLeftPosition);
-      this.m_aprilTagCenter = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kShelfPosition);
-      this.m_aprilTagRight = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kRightPosition);
+      m_aprilTagLeft = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kLeftPosition);
+      m_aprilTagCenter = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kShelfPosition);
+      m_aprilTagRight = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kRightPosition);
 
 
       swerveHomingCommand = new SwerveHoming(swerveSubsystem);
@@ -175,7 +175,7 @@ public class RobotContainer  {
           () -> !joy.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
 
       configureButtonBindings();
-      configureButtonBindingsNumPad();
+      
       configureSendableChooser();
     };
 
@@ -215,20 +215,19 @@ public class RobotContainer  {
         }
       });
       this.left_menu.onTrue(m_armHome);
+
+      this.a_button2.onTrue(m_aprilTagLeft); //.andThen(m_armBottomLeft)
+      this.b_button2.onTrue(m_aprilTagCenter); //.andThen(m_armBottomMid)
+      this.x_button2.onTrue(m_aprilTagRight); // .andThen(m_armBottomRight)
+      // this.y_button2.onTrue(m_aprilTagLeft.andThen(m_armMidLeft));
+      // this.povUp2.onTrue(m_aprilTagCenter.andThen(m_armMidMid));
+      // this.povRight2.onTrue(m_aprilTagRight.andThen(m_armMidRight));
+      // this.povLeft2.onTrue(m_aprilTagLeft.andThen(m_armTopLeft));
+      // this.povDown2.onTrue(m_aprilTagCenter.andThen(m_armTopMid));
+      // this.r_bump2.onTrue(m_aprilTagRight.andThen(m_armTopRight));
        
     }
 
-    private void configureButtonBindingsNumPad() {
-      this.a_button2.onTrue(m_aprilTagLeft.andThen(m_armBottomLeft));
-      this.b_button2.onTrue(m_aprilTagCenter.andThen(m_armBottomMid));
-      this.x_button2.onTrue(m_aprilTagRight.andThen(m_armBottomRight));
-      this.y_button2.onTrue(m_aprilTagLeft.andThen(m_armMidLeft));
-      this.povUp2.onTrue(m_aprilTagCenter.andThen(m_armMidMid));
-      this.povRight2.onTrue(m_aprilTagRight.andThen(m_armMidRight));
-      this.povLeft2.onTrue(m_aprilTagLeft.andThen(m_armTopLeft));
-      this.povDown2.onTrue(m_aprilTagCenter.andThen(m_armTopMid));
-      this.r_bump2.onTrue(m_aprilTagRight.andThen(m_armTopRight));
-    }
 
     // FOR AUTO CHOOSER
 

@@ -2,6 +2,8 @@ package frc.robot;
 
 import javax.swing.text.StyleContext.SmallAttributeSet;
 
+import org.photonvision.PhotonCamera;
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -39,6 +41,8 @@ public class Robot extends TimedRobot {
   //Navx
   public static AHRS m_ahrs;
 
+  public static PhotonCamera photonCamera;
+
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -63,6 +67,8 @@ public class Robot extends TimedRobot {
         } catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
+      
+    
 
   }
   @Override
