@@ -5,8 +5,7 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Robot;
-import frc.robot.RobotContainer;
+import frc.robot.Constants;
 import edu.wpi.first.math.geometry.Rotation2d;
 import org.photonvision.PhotonCamera;
 import org.photonvision.targeting.PhotonTrackedTarget;
@@ -19,22 +18,24 @@ import com.pathplanner.lib.PathPoint;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import java.lang.Math;
-import java.sql.Time;
 
 
 
 public class AprilTagHoming extends SubsystemBase { // Drive and orient to the tag
 
     private PhotonTrackedTarget target;
-    private Transform3d currentDistance; // Distance from the camera to the target 
-    private double yaw;
-    private int targetID;
     private PhotonCamera camera;
 
-    private Rotation2d goalRotation;
-    private Rotation2d goalHeading;
+    private Transform3d currentDistance; // Distance from the camera to the target 
+    private double yaw; // Yaw of camera relative to target
+    private Translation2d goal; // The peg/shelf/substation translation2d that is selected
 
-    private Translation2d goal;
+    private int targetID;
+    
+
+    private boolean hasTargets;
+
+    
     
     public AprilTagHoming() { 
         int counter = 0;
@@ -43,10 +44,10 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
         while ( (camera == null) && (counter <= 10) ) {
             try {
                 camera = new PhotonCamera("HD_Pro_Webcam_C920");
-              } catch (RuntimeException ex ) {
+            } catch (RuntimeException ex ) {
                   DriverStation.reportError("Error instantiating PhotonCamera  " + ex.getMessage(), true);
                  
-              }
+            }
               
             try {
                 Thread.sleep(10);
@@ -61,6 +62,8 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     public void periodic() {
         var results = this.camera.getLatestResult();
         if (results.hasTargets()) {
+            this.hasTargets = true;
+
             this.target = results.getBestTarget(); // Target that photon vision is focused on
             this.currentDistance = target.getBestCameraToTarget(); // Distance from the camera to the target (X = forward, Y = left/right, Z = Vertical (Ignored) )
             this.yaw = target.getYaw();
@@ -72,18 +75,20 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
             SmartDashboard.putNumber("Yaw", this.yaw);
             SmartDashboard.putBoolean("AprilTagHoming", checkFinished());
             
+        }else {
+            this.hasTargets = false;
         }
     }
 
     public boolean checkFinished() {
         
         if (
-            (Math.abs(currentDistance.getY() - this.goal.getY()) < 0.05) && 
-            (Math.abs(currentDistance.getX() - this.goal.getX()) < 0.05) && 
-            (Math.abs(yaw-180) <= 2) ) {
+            (Math.abs(currentDistance.getY() - this.goal.getY()) < Constants.PathPlanning.positionalTolerance) && 
+            (Math.abs(currentDistance.getX() - this.goal.getX()) < Constants.PathPlanning.positionalTolerance) && 
+            (Math.abs(yaw-180) <= Constants.PathPlanning.angularTolerance) ) {
             return true;
         }
-        return false;
+        return hasTargets; // If the bot is not in the position, and we don't have a target, return false
     }
 
     private Translation2d getTranslationToTag() {
@@ -99,9 +104,9 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     public PathPlannerTrajectory onTheFlyGenerationRelative(Rotation2d holonomicRotation, Translation2d goalOffset){
         this.goal = goalOffset;
         PathPlannerTrajectory traj = PathPlanner.generatePath(
-          new PathConstraints(4, 3),
-          new PathPoint(new Translation2d(0,0), new Rotation2d(0), holonomicRotation), // INITIAL position, heading(direction of travel), holonomic rotation 
-          new PathPoint(getTranslationWithOffset(goalOffset), new Rotation2d(0), new Rotation2d(0)) // position, heading(direction of travel), holonomic rotation
+          new PathConstraints(Constants.PathPlanning.kMaxSpeedMetersPerSecond, Constants.PathPlanning.kMaxAccelerationMetersPerSecond),
+          new PathPoint(getTranslationToTag(), new Rotation2d(0), holonomicRotation), // INITIAL position, heading(direction of travel), holonomic rotation 
+          new PathPoint(goalOffset, new Rotation2d(0), new Rotation2d(0)) // position, heading(direction of travel), holonomic rotation
         );
         return traj;
     }
