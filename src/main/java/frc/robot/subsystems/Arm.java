@@ -69,10 +69,8 @@ public class Arm extends SubsystemBase {
         this.m_armChainMotor2.setInverted(false);
         this.m_armExtensionMotor.setInverted(false);
 
-
-
-        this.m_armChainMotor.setSmartCurrentLimit(39);
-        this.m_armChainMotor2.setSmartCurrentLimit(39);
+        this.m_armChainMotor.setSmartCurrentLimit(51);
+        this.m_armChainMotor2.setSmartCurrentLimit(51);
         this.m_armExtensionMotor.setSmartCurrentLimit(39);
        
     }
