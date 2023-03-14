@@ -145,7 +145,8 @@ public final class Constants {
         public static final PIDConstants kAutoDriveVelocityPID = new PIDConstants(1, 0, 0);
         public static final PIDConstants kAutoDriveTurnPID = new PIDConstants(0.5, 0, 0);
         
-        public static final String kPathLocation = "src/main/deploy/pathplanner/";
+        public static final double positionalTolerance = 0.05; // meters
+        public static final double angularTolerance = 2; // degrees
         
     }
     public static class Arm {
