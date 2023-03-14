@@ -168,7 +168,7 @@ public final class Constants {
      // Min and Max Rotations 
      public static double MaxExtensionRotations = 137.38;
      public static double MinExtensionRotations = 0;
-     public static double MaxAngleRotations = 19;
+     public static double MaxAngleRotations = 21;
      public static double MinAngleRotations = -1;
 
     }
