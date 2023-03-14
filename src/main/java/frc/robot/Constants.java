@@ -149,13 +149,13 @@ public final class Constants {
      
      // Bottom Node 7.2 is angle rotations and 46 is extension rotations
      public static double BottomNodeAngleRotations = 9;
-     public static double BottomNodeExtensionRotations = 66;
+     public static double BottomNodeExtensionRotations = 50;
      // Mid Node Shelf 12.36 is angle rotations and 45.81 is extension rotations
      public static double MidNodeShelfAngleRotations = 16;
      public static double MidNodeShelfExtensionRotations = 80;
      // Mid Node Peg 14.16 is angle rotations and 41.71 is extension rotations
-     public static double MidNodePegAngleRotations = 20;
-     public static double MidNodePegExtensionRotations = 64;
+     public static double MidNodePegAngleRotations = 22;
+     public static double MidNodePegExtensionRotations = 66;
      // Top Shelf 14.89 is angle rotations and 61.65 is extension rotations
      public static double TopNodeShelfAngleRotations = 16.6;
      public static double TopNodeShelfExtensionRotations = 144.74;
