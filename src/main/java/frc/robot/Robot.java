@@ -2,7 +2,7 @@ package frc.robot;
 
 import javax.swing.text.StyleContext.SmallAttributeSet;
 
-import org.photonvision.PhotonCamera;
+
 
 import com.kauailabs.navx.frc.AHRS;
 
@@ -40,9 +40,6 @@ public class Robot extends TimedRobot {
 
   //Navx
   public static AHRS m_ahrs;
-
-  public static PhotonCamera photonCamera;
-
 
   /**
    * This function is run when the robot is first started up and should be used for any

@@ -33,6 +33,8 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
 
     private Rotation2d goalRotation;
     private Rotation2d goalHeading;
+
+    private Translation2d goal;
     
     public AprilTagHoming() { 
         int counter = 0;
@@ -57,12 +59,12 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     }
     
     public void periodic() {
-        // This method will be called once per scheduler run
         var results = this.camera.getLatestResult();
         if (results.hasTargets()) {
             this.target = results.getBestTarget(); // Target that photon vision is focused on
             this.currentDistance = target.getBestCameraToTarget(); // Distance from the camera to the target (X = forward, Y = left/right, Z = Vertical (Ignored) )
             this.yaw = target.getYaw();
+            
             this.targetID = target.getFiducialId();
             SmartDashboard.putNumber("TargetID", this.targetID);
             SmartDashboard.putNumber("X To Target", this.currentDistance.getX());
@@ -74,7 +76,11 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     }
 
     public boolean checkFinished() {
-        if (currentDistance.getX() < 0.05 && currentDistance.getY() < 0.05 && Math.abs(yaw) < 2) {
+        
+        if (
+            (Math.abs(currentDistance.getY() - this.goal.getY()) < 0.05) && 
+            (Math.abs(currentDistance.getX() - this.goal.getX()) < 0.05) && 
+            (Math.abs(yaw-180) <= 2) ) {
             return true;
         }
         return false;
@@ -84,14 +90,14 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
         return new Translation2d(currentDistance.getX(), currentDistance.getY());
     }
 
-    private Translation2d getTranslationWithOffset(Translation2d offset){
+    private Translation2d getTranslationWithOffset(Translation2d goal){
         Translation2d translation = getTranslationToTag();
-
-        return translation.minus(offset);
+        Translation2d distgoal = goal.minus(translation);
+        return distgoal;
     }
 
     public PathPlannerTrajectory onTheFlyGenerationRelative(Rotation2d holonomicRotation, Translation2d goalOffset){
-
+        this.goal = goalOffset;
         PathPlannerTrajectory traj = PathPlanner.generatePath(
           new PathConstraints(4, 3),
           new PathPoint(new Translation2d(0,0), new Rotation2d(0), holonomicRotation), // INITIAL position, heading(direction of travel), holonomic rotation 

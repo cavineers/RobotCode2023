@@ -3,33 +3,18 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.Subsystem;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
 import frc.robot.commands.NumPad.TopLeft;
-import frc.robot.commands.ToggleDeployIntake;
-import frc.robot.commands.ToggleUndeployIntake;
-
 import frc.robot.Robot;
 
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
-import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
-import com.pathplanner.lib.auto.PIDConstants;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.pathplanner.lib.PathConstraints;
-
-import frc.robot.subsystems.SwerveDriveSubsystem;
-
-import frc.robot.RobotContainer;
 
 public class AutoPath extends CommandBase {
     private boolean isActive;
