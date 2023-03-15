@@ -33,7 +33,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
 import frc.robot.Constants.OIConstants;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ArmExtension;
+import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
 
@@ -190,7 +191,6 @@ public class RobotContainer  {
       });
       this.left_menu.onTrue(m_armHome);
       this.right_menu.onTrue(new ClawHoming());
-       
     }
 
     private void configureButtonBindingsNumPad() {
