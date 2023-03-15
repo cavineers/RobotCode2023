@@ -3,14 +3,14 @@ package frc.robot.commands.ManualOverrideCommands;
 import frc.robot.Robot;
 import frc.robot.subsystems.Claw;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class ClawOpen extends CommandBase {
 
     private boolean isFinished;
-    private double requestedRevs;
-    private boolean limitHit;
+    private double m_timestamp;
 
     public ClawOpen() {
         this.addRequirements(Robot.claw);
@@ -18,7 +18,7 @@ public class ClawOpen extends CommandBase {
     
     @Override
     public void initialize() {
-        this.isFinished = true;
+        this.isFinished = false;
         if (Robot.claw.getEncoderPosition()<=0){
             Robot.claw.setMotorState(Claw.clawMotorState.OFF);
         } else {
@@ -38,6 +38,9 @@ public class ClawOpen extends CommandBase {
 
     @Override
     public boolean isFinished() {
+        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
+            this.isFinished = true;
+        }
         return isFinished;
     }
 }
