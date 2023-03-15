@@ -142,10 +142,7 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     public void periodic(){
         m_odometer.update(getRotation2d(), getPositions());
 
-        SmartDashboard.putNumber("FrontLeft Position", frontLeft.getEncoderPosition());
-        SmartDashboard.putNumber("FrontRight Position", frontRight.getEncoderPosition());
-        SmartDashboard.putNumber("BackLeft Position", backLeft.getEncoderPosition());
-        SmartDashboard.putNumber("BackRight Position", backRight.getEncoderPosition());
+        SmartDashboard.putString("SwervePOSE", getPose()+"");
 
         SmartDashboard.putNumber("FrontLeft Cancoder", frontLeft.getAbsolutePosition());
         SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());

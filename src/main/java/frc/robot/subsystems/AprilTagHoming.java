@@ -35,7 +35,7 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
     private int targetID;
     
     
-    private boolean hasTargets;
+    public boolean hasTargets;
 
     
     public AprilTagHoming() { 
