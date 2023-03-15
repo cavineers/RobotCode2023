@@ -176,7 +176,7 @@ public final class Constants {
     public static final class Claw {
         public static final double kCLawCloseSpeed = .1;
         public static final double kClawHomeSpeed = .05;
-        public static final double kRevolutionsToHome = 2.5;
+        public static final double kRevolutionsToHome = 0.285714238882065; //2.5
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
         public static final int kCurrentLimit = 10; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
