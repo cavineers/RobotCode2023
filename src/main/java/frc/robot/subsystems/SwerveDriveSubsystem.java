@@ -86,6 +86,13 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         return backLeft.getAbsolutePosition();
     }
 
+    public SwerveDriveOdometry getNewOdometer(){
+        return new SwerveDriveOdometry(
+            m_kinematics, 
+            getRotation2d(), 
+            getPositions());
+    }
+
     SwerveDriveOdometry m_odometer = m_odometry;
 
     public SwerveDriveSubsystem() {
