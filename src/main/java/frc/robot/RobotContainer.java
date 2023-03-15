@@ -16,7 +16,6 @@ import frc.robot.commands.NumPad.MidRight;
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
-import frc.robot.commands.ManualOverrideCommands.ArmIntakePickup;
 import frc.robot.commands.ManualOverrideCommands.ExtendArm;
 import frc.robot.commands.ManualOverrideCommands.HomeArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
@@ -56,7 +55,6 @@ public class RobotContainer  {
     public Command m_armLower;
     public Command m_armExtend;
     public Command m_armRetract;
-    public Command m_armIntakePickup;
 
     //NumPad Commands
     public Command m_armBottomLeft;
@@ -142,7 +140,6 @@ public class RobotContainer  {
       m_armTopLeft = new TopLeft();
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
-      m_armIntakePickup = new ArmIntakePickup();
 
       swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
@@ -194,8 +191,6 @@ public class RobotContainer  {
       });
       this.left_menu.onTrue(m_armHome);
       this.right_menu.onTrue(new ClawHoming());
-      this.povUp.onTrue(m_armIntakePickup);
-       
     }
 
     private void configureButtonBindingsNumPad() {

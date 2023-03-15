@@ -169,7 +169,7 @@ public final class Constants {
         public static double MinExtensionRotations = 0;
         public static double ExtensionLowerSpeedRotations = 9;
         public static double MaxAngleRotations = 21;
-        public static double MinAngleRotations = -0.1;
+        public static double MinAngleRotations = -0.025;
 
     }
     public static final class Claw {
