@@ -138,11 +138,11 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
      
-        public static double ArmChainSpeedUp = 0.18;
+        public static double ArmChainSpeedUp = 0.25;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = 0.5;
-        public static double ArmExtensionSpeedRev = -0.30;
+        public static double ArmExtensionSpeed = 0.95;
+        public static double ArmExtensionSpeedRev = -0.95;
 
         public static double ArmRotationsAddPower = 11.1190;
         public static double ArmRotationsAddPowerBottom = 7;
@@ -158,15 +158,16 @@ public final class Constants {
         public static double MidNodePegAngleRotations = 18;
         public static double MidNodePegExtensionRotations = 53;
         public static double TopNodeShelfAngleRotations = 19.5;
-        public static double TopNodeShelfExtensionRotations = 131;
+        public static double TopNodeShelfExtensionRotations = 130;
         public static double TopNodePegAngleRotations = 22;
-        public static double TopNodePegExtensionRotations = 131;
+        public static double TopNodePegExtensionRotations = 130;
     // Encoder deadzones
      public static double ExtensionEncoderDeadzone = 1.8;
         public static double AngleEncoderDeadzone = 0.15;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
         public static double MinExtensionRotations = 0;
+        public static double ExtensionLowerSpeedRotations = 9;
         public static double MaxAngleRotations = 21;
         public static double MinAngleRotations = -0.1;
 
