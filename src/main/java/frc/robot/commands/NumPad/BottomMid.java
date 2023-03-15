@@ -49,7 +49,7 @@ public class BottomMid extends CommandBase {
         Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
         Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);
-        this.isDone = false;
+        this.isDone = true;
     }
 }
 
@@ -63,7 +63,7 @@ public class BottomMid extends CommandBase {
     @Override
     public boolean isFinished() {
         if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
-
+            this.isDone = true;
         }
 
         return this.isDone;

@@ -145,29 +145,30 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.30;
 
         public static double ArmRotationsAddPower = 11.1190;
+        public static double ArmRotationsAddPowerBottom = 7;
      
     //Node Rotations
      
         public static double ArmIntakeAngleRotations = 0;
         public static double ArmIntakeExtensionRotations = 0;
-        public static double BottomNodeAngleRotations = 9;
-        public static double BottomNodeExtensionRotations = 50;
+        public static double BottomNodeAngleRotations = 10;
+        public static double BottomNodeExtensionRotations = 56;
         public static double MidNodeShelfAngleRotations = 16;
-        public static double MidNodeShelfExtensionRotations = 80;
+        public static double MidNodeShelfExtensionRotations = 64;
         public static double MidNodePegAngleRotations = 18;
-        public static double MidNodePegExtensionRotations = 55;
+        public static double MidNodePegExtensionRotations = 53;
         public static double TopNodeShelfAngleRotations = 19.5;
         public static double TopNodeShelfExtensionRotations = 131;
-        public static double TopNodePegAngleRotations = 20;
+        public static double TopNodePegAngleRotations = 21;
         public static double TopNodePegExtensionRotations = 131;
     // Encoder deadzones
      public static double ExtensionEncoderDeadzone = 1.8;
-        public static double AngleEncoderDeadzone = 0.005;
+        public static double AngleEncoderDeadzone = 0.15;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
         public static double MinExtensionRotations = 0;
         public static double MaxAngleRotations = 21;
-        public static double MinAngleRotations = -0.25;
+        public static double MinAngleRotations = -0.025;
 
     }
     public static final class Claw {

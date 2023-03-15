@@ -69,6 +69,8 @@ public class ArmAngle extends SubsystemBase {
                 // Off
                 if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
                     this.m_armChainMotor.set(0.03);
+                } else if (m_armChainMotor.getEncoder().getPosition() <= Constants.Arm.ArmRotationsAddPower && m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPowerBottom) {
+                    this.m_armChainMotor.set(0.01);
                 }
                 else {
                     this.m_armChainMotor.set(0);
