@@ -17,7 +17,9 @@ public class ExtendArm extends CommandBase {
 
     // Set Motor State to ON / OFF
     @Override
-    public void initialize() {}
+    public void initialize() {
+        this.isDone = false;
+    }
 
     @Override
     public void execute() {

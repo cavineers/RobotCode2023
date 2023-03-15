@@ -22,6 +22,7 @@ public class BottomRight extends CommandBase {
         Robot.armAngle.getArmChainMotor().set(0.0);
         Robot.armAngle.getArmChainMotor2().set(0.0);
         Robot.armExtension.getArmExtensionMotor().set(0.0);
+        this.isDone = false;
         }
     
 
