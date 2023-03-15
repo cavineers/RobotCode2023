@@ -9,7 +9,7 @@ import frc.robot.subsystems.ArmAngle;
 public class HomeArm extends CommandBase {
     
     private boolean isDone;
-    //private double m_timestamp;
+    private double m_timestamp;
 
     public HomeArm() {
         this.addRequirements(Robot.armExtension, Robot.armAngle);
@@ -17,7 +17,11 @@ public class HomeArm extends CommandBase {
 
     // Set Motor State to ON / OFF
     @Override
-    public void initialize() {}
+    public void initialize() {
+        Robot.armAngle.getArmChainMotor().set(0.0);
+        Robot.armAngle.getArmChainMotor2().set(0.0);
+        Robot.armExtension.getArmExtensionMotor().set(0.0);
+    }
     
 
     @Override
@@ -53,9 +57,9 @@ public class HomeArm extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        // if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
-        //     this.isDone = true;
-        // }
+         if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
+             this.isDone = true;
+        }
 
         return this.isDone;
     }

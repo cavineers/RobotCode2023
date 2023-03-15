@@ -18,7 +18,11 @@ public class ArmIntakePickup extends CommandBase {
 
     // Set Motor State to ON / OFF
     @Override
-    public void initialize() {}
+    public void initialize() {
+        Robot.armAngle.getArmChainMotor().set(0.0);
+        Robot.armAngle.getArmChainMotor2().set(0.0);
+        Robot.armExtension.getArmExtensionMotor().set(0.0);
+    }
     
 
     @Override
@@ -47,8 +51,8 @@ public class ArmIntakePickup extends CommandBase {
     @Override
     public boolean isFinished() {
         if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
-
-        }
+            this.isDone = true;
+       }
 
         return this.isDone;
     }
