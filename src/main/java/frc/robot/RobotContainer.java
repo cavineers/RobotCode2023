@@ -24,6 +24,8 @@ import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ClawHoming;
+import frc.robot.commands.ManualOverrideCommands.ClawOpen;
+import frc.robot.commands.ManualOverrideCommands.ClawClose;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
@@ -158,6 +160,10 @@ public class RobotContainer  {
 
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
+
+      //claw manual buttons
+      this.povLeft.onTrue(new ClawOpen());
+      this.povRight.onTrue(new ClawClose());
 
       //deploys intake on button hold and undeploys on release
       this.l_bump.onTrue(new ToggleDeployIntake());
