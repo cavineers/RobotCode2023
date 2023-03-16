@@ -91,7 +91,7 @@ public class AutoPath extends CommandBase {
       Constants.PathPlanning.kAutoDriveTurnPID, // PID constants to correct for rotation error (used to create the rotation controller)
       swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
       generateEventMapping(),
-      true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+      false, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
       swerveSubsystem // The drive subsystem. Used to properly set the requirements of path following commands
       );
   
