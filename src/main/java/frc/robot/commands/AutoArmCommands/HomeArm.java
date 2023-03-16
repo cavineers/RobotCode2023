@@ -10,6 +10,7 @@ public class HomeArm extends CommandBase {
     
     private boolean isDone;
     private double m_timestamp;
+    private boolean upDone;
 
     public HomeArm() {
         this.addRequirements(Robot.armExtension, Robot.armAngle);
@@ -21,14 +22,23 @@ public class HomeArm extends CommandBase {
         Robot.armAngle.getArmChainMotor().set(0.0);
         Robot.armAngle.getArmChainMotor2().set(0.0);
         Robot.armExtension.getArmExtensionMotor().set(0.0);
+        this.upDone = false;
         this.isDone = false;
     }
     
 
     @Override
     public void execute() {
+        if (Timer.getFPGATimestamp() - this.m_timestamp >= 2 && Robot.m_robotContainer.joy.getRawButton(0)) {
+            this.upDone = true;
+        }
+        if (upDone == false) {
+            Robot.armAngle.getArmChainMotor().set(0.1);
+            Robot.armAngle.getArmChainMotor2().set(-0.1);
+        }else {
+    
         if (Robot.armExtension.getExtensionSwitch() == false) {
-            Robot.armExtension.getArmExtensionMotor().set(-0.05);
+            Robot.armExtension.getArmExtensionMotor().set(-0.15);
         }else if (Robot.armExtension.getExtensionSwitch() == true) {
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
             Robot.armExtension.setArmExtensionMotorPosition(0.0);
@@ -41,11 +51,12 @@ public class HomeArm extends CommandBase {
             Robot.armAngle.setArmChainMotor2Position(0.0);
             this.isDone = true;
         } else {
-            Robot.armAngle.getArmChainMotor().set(-0.03);
-            Robot.armAngle.getArmChainMotor2().set(0.03);
+            Robot.armAngle.getArmChainMotor().set(-0.05);
+            Robot.armAngle.getArmChainMotor2().set(0.05);
             }
         }
-    }     
+    }
+}     
 
 
     
@@ -58,10 +69,8 @@ public class HomeArm extends CommandBase {
 
     @Override
     public boolean isFinished() {
-         if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
              this.isDone = true;
-        }
-
+    
         return this.isDone;
     }
 }
