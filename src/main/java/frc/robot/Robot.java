@@ -18,7 +18,6 @@ import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
-import frc.robot.subsystems.AprilTagHoming;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -37,7 +36,6 @@ public class Robot extends TimedRobot {
   public static ArmAngle armAngle;
   public static Intake intake;
   public static Claw claw;
-  public static AprilTagHoming aprilTagHoming;
 
 
   //Navx
@@ -56,7 +54,6 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     claw = new Claw();
 
-    aprilTagHoming = new AprilTagHoming();
     
     //Container
     m_robotContainer = new RobotContainer();
