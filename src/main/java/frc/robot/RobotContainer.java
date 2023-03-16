@@ -163,6 +163,13 @@ public class RobotContainer  {
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
 
+      //zeros heading
+      this.r_bump.onTrue(new InstantCommand() {
+        public void initialize() {
+          swerveSubsystem.zeroHeading();
+        }
+      });
+
       //claw manual buttons
       this.povLeft.onTrue(m_clawOpen);
       this.povLeft.onFalse(new InstantCommand(){
