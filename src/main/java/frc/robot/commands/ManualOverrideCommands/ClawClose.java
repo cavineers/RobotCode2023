@@ -19,7 +19,7 @@ public class ClawClose extends CommandBase {
     @Override
     public void initialize() {
         this.isFinished = false;
-        Robot.claw.setMotorState(Claw.clawMotorState.ON);
+        Robot.claw.setMotorState(Claw.clawMotorState.manualON);
     }
 
     @Override
