@@ -137,6 +137,7 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         SmartDashboard.putNumber("FrontRight Position", frontRight.getEncoderPosition());
         SmartDashboard.putNumber("BackLeft Position", backLeft.getEncoderPosition());
         SmartDashboard.putNumber("BackRight Position", backRight.getEncoderPosition());
+        SmartDashboard.putNumber("Heading", getHeading());
 
         SmartDashboard.putNumber("FrontLeft Cancoder", frontLeft.getAbsolutePosition());
         SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());

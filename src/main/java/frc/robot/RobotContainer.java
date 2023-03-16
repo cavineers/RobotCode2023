@@ -24,6 +24,8 @@ import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.ClawHoming;
+import frc.robot.commands.ManualOverrideCommands.ClawOpen;
+import frc.robot.commands.ManualOverrideCommands.ClawClose;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
@@ -115,8 +117,6 @@ public class RobotContainer  {
   
     private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
-    public POVButton m_povUp = new POVButton(m_joy, 0, 0);
-
     public SwerveHoming swerveHomingCommand;
 
 
@@ -141,6 +141,9 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
+      m_clawClose = new ClawClose();
+      m_clawOpen = new ClawOpen();
+
       swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
       swerveSubsystem.setDefaultCommand(new SwerveCommand(
@@ -159,6 +162,20 @@ public class RobotContainer  {
 
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
+
+      //claw manual buttons
+      this.povLeft.onTrue(m_clawOpen);
+      this.povLeft.onFalse(new InstantCommand(){
+        public void initialize() {
+          m_clawOpen.cancel();
+        }
+      });
+      this.povRight.onTrue(m_clawClose);
+      this.povRight.onFalse(new InstantCommand(){
+        public void initialize() {
+          m_clawClose.cancel();
+        }
+      });
 
       //deploys intake on button hold and undeploys on release
       this.l_bump.onTrue(new ToggleDeployIntake());

@@ -71,8 +71,8 @@ public final class Constants {
         public static double IntakeLowerRightSpeed = IntakeSpeed;
         public static double IntakeRaiseRightSpeed = IntakeSpeed;
         
-        public static double IntakeSpeedTop = .35; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = .25; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedTop = .4; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = .3; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 48;
     }
@@ -173,8 +173,9 @@ public final class Constants {
 
     }
     public static final class Claw {
-        public static final double kCLawCloseSpeed = .1;
+        public static final double kCLawCloseSpeed = .2;
         public static final double kClawHomeSpeed = .05;
+        public static final double kClawManualSpeed = .04;
         public static final double kRevolutionsToHome = 0.285714238882065; //2.5
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
         public static final int kCurrentLimit = 10; //limit in amps
