@@ -24,8 +24,8 @@ public class RaiseArm extends CommandBase {
     @Override
     public void execute() {
         if (Robot.armAngle.getArmChainMotorPosition() < Constants.Arm.MaxAngleRotations) {
-            Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ONMANUAL);
-            Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ONMANUAL);
+            Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
+            Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
     }   else {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);

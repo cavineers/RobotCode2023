@@ -26,16 +26,12 @@ public class ArmAngle extends SubsystemBase {
      public enum ArmChainMotorState {
         ON,
         OFF,
-        REVERSED,
-        ONMANUAL,
-        REVERSEDMANUAL
+        REVERSED
     }
     public enum ArmChainMotor2State {
         ON,
         OFF,
-        REVERSED,
-        ONMANUAL,
-        REVERSEDMANUAL
+        REVERSED
     }
 
     public CANSparkMax m_armChainMotor = new CANSparkMax(Constants.Arm.ArmChainMotor, MotorType.kBrushless);
@@ -69,10 +65,6 @@ public class ArmAngle extends SubsystemBase {
                 // On
                 this.m_armChainMotor.set(Constants.Arm.ArmChainSpeedUp);
                 break;
-            case ONMANUAL:
-                // On when using manual controls
-                this.m_armChainMotor.set(Constants.Arm.ArmChainSpeedUpManual);
-                break;
             case OFF:
                 // Off
                 if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
@@ -88,10 +80,6 @@ public class ArmAngle extends SubsystemBase {
                 // Reversed
                 this.m_armChainMotor.set(Constants.Arm.ArmChainSpeedDown);
                 break;
-            case REVERSEDMANUAL:
-                // On when using manual controls
-                this.m_armChainMotor.set(Constants.Arm.ArmChainSpeedDownManual);
-                break;
             default:
                 this.setArmChainMotorState(ArmChainMotorState.OFF);
         }
@@ -106,10 +94,6 @@ public class ArmAngle extends SubsystemBase {
                 // On
                 this.m_armChainMotor2.set(-(Constants.Arm.ArmChainSpeedUp));
                 break;
-            case ONMANUAL:
-                // On when using manual controls
-                this.m_armChainMotor.set(-(Constants.Arm.ArmChainSpeedUpManual));
-                break;
             case OFF:
                 // Off
                 if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
@@ -122,10 +106,6 @@ public class ArmAngle extends SubsystemBase {
             case REVERSED:
                 // Reversed
                 this.m_armChainMotor2.set(-(Constants.Arm.ArmChainSpeedDown));
-                break;
-            case REVERSEDMANUAL:
-                // On when using manual controls
-                this.m_armChainMotor.set(-(Constants.Arm.ArmChainSpeedDownManual));
                 break;
             default:
                 this.setArmChainMotor2State(ArmChainMotor2State.OFF);
