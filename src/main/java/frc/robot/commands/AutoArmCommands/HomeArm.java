@@ -1,4 +1,4 @@
-package frc.robot.commands.ManualOverrideCommands;
+package frc.robot.commands.AutoArmCommands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;

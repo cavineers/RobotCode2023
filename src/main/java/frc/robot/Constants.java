@@ -145,29 +145,33 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.95;
 
         public static double ArmRotationsAddPower = 11.1190;
-        public static double ArmRotationsAddPowerBottom = 7;
+        public static double ArmRotationsAddPowerBottom = 5;
      
     //Node Rotations
      
+        public static double ArmRestPositionAngleRotations = 5;
+        public static double ArmRestPositionExtensionRotations = 1;
+        public static double ArmBumperAngleRotations = 7.2;
+        public static double ArmBumperExtensionRotations = 52.;
         public static double ArmIntakeAngleRotations = 0;
         public static double ArmIntakeExtensionRotations = 0;
         public static double BottomNodeAngleRotations = 10;
         public static double BottomNodeExtensionRotations = 56;
         public static double MidNodeShelfAngleRotations = 16;
         public static double MidNodeShelfExtensionRotations = 64;
-        public static double MidNodePegAngleRotations = 18;
+        public static double MidNodePegAngleRotations = 20;
         public static double MidNodePegExtensionRotations = 53;
         public static double TopNodeShelfAngleRotations = 19.5;
         public static double TopNodeShelfExtensionRotations = 130;
         public static double TopNodePegAngleRotations = 22;
         public static double TopNodePegExtensionRotations = 130;
     // Encoder deadzones
-     public static double ExtensionEncoderDeadzone = 1.8;
-        public static double AngleEncoderDeadzone = 0.15;
+     public static double ExtensionEncoderDeadzone = 2.3;
+        public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
         public static double MinExtensionRotations = 0;
-        public static double ExtensionLowerSpeedRotations = 9;
+        public static double ExtensionLowerSpeedRotations = 6;
         public static double MaxAngleRotations = 21;
         public static double MinAngleRotations = -0.025;
 
