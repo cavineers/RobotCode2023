@@ -32,12 +32,12 @@ public class ArmRestPosition extends CommandBase {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
             this.isDone = false;
-        } else if (Robot.armExtension.getArmExtensionMotorPosition() < 5 - Constants.Arm.ArmRestPositionExtensionRotations) {
+        } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.ArmRestPositionExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.ON);
             this.isDone = false;
-        } else if(Robot.armExtension.getArmExtensionMotorPosition() > 5 + Constants.Arm.ArmRestPositionExtensionRotations) {      
+        } else if(Robot.armExtension.getArmExtensionMotorPosition() > (Constants.Arm.ArmRestPositionExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.REVERSED);
             this.isDone = false;
         } else if (Robot.armAngle.getArmChainMotorPosition() > (Constants.Arm.ArmRestPositionAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {

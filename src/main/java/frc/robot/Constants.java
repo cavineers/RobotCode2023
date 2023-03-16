@@ -145,12 +145,12 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.95;
 
         public static double ArmRotationsAddPower = 11.1190;
-        public static double ArmRotationsAddPowerBottom = 7;
+        public static double ArmRotationsAddPowerBottom = 5;
      
     //Node Rotations
      
-        public static double ArmRestPositionAngleRotations = 7.5;
-        public static double ArmRestPositionExtensionRotations = 2;
+        public static double ArmRestPositionAngleRotations = 6;
+        public static double ArmRestPositionExtensionRotations = 1;
         public static double ArmBumperAngleRotations = 8;
         public static double ArmBumperExtensionRotations = 20;
         public static double ArmIntakeAngleRotations = 0;
