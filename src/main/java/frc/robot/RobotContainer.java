@@ -22,6 +22,7 @@ import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.BalanceControlCommand;
 import frc.robot.commands.ClawHoming;
 import frc.robot.commands.ManualOverrideCommands.ClawOpen;
 import frc.robot.commands.ManualOverrideCommands.ClawClose;
@@ -168,6 +169,13 @@ public class RobotContainer  {
 
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
+
+      //zeros heading
+      this.r_bump.onTrue(new InstantCommand() {
+        public void initialize() {
+          swerveSubsystem.zeroHeading();
+        }
+      });
 
       //claw manual buttons
       this.povLeft.onTrue(m_clawOpen);
