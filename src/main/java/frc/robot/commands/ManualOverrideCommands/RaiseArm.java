@@ -4,7 +4,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ArmAngle;
 
 public class RaiseArm extends CommandBase {
     
@@ -12,29 +12,30 @@ public class RaiseArm extends CommandBase {
     private double m_timestamp;
 
     public RaiseArm() {
-        this.addRequirements(Robot.arm);
+        this.addRequirements(Robot.armAngle);
     }
 
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
+        this.isDone = false;
     }
 
     @Override
     public void execute() {
-        if (Robot.arm.getArmChainMotorPosition() < Constants.Arm.MaxAngleRotations) {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.ON);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.ON);
+        if (Robot.armAngle.getArmChainMotorPosition() < Constants.Arm.MaxAngleRotations) {
+            Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
+            Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
     }   else {
-            Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-            Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+            Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
+            Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);
     }
 }
 
     @Override
     public void end(boolean interrupted) {
-        Robot.arm.setArmChainMotorState(Arm.ArmChainMotorState.OFF);
-        Robot.arm.setArmChainMotor2State(Arm.ArmChainMotor2State.OFF);
+        Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
+        Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);
     }
 
     @Override

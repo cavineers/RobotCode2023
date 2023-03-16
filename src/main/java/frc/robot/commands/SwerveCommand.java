@@ -58,7 +58,7 @@ public class SwerveCommand extends CommandBase {
 
         // Construct desired chassis speeds
         ChassisSpeeds chassisSpeeds;
-        if (true) { //fieldOrientedFunction.get()
+        if (fieldOrientedFunction.get()) { //
             // Relative to field
             chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
                     xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
