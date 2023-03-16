@@ -106,6 +106,10 @@ public class AprilTagHomingCommand extends CommandBase {
     }
 
     private PathPlannerTrajectory getPointAsPlannerState() {
+        if (this.swerveSubsystem.getRotation2d().getDegrees() < 0) {
+            Rotation2d rotation = new Rotation2d();
+            return this.tagHomingSubsystem.onTheFlyGenerationRelative(rotation.fromDegrees(this.swerveSubsystem.getRotation2d().getDegrees() + 360), calculateGoalRelativeRobot());
+        }
         return this.tagHomingSubsystem.onTheFlyGenerationRelative(this.swerveSubsystem.getRotation2d(), calculateGoalRelativeRobot());
     }
 
@@ -117,15 +121,57 @@ public class AprilTagHomingCommand extends CommandBase {
         }
         return 0;
     }
+
+    private boolean isAtXGoal() {
+        if (Math.abs(this.relativeOdometer.getPoseMeters().getX() - this.goal.getX()) <= 0.05){
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isAtYGoal() {
+        if (Math.abs(this.relativeOdometer.getPoseMeters().getY() - this.goal.getY()) <= 0.05){
+            return true;
+        }
+        return false;
+    } 
+    
+    private boolean isAtThetaGoal() {
+        if (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees() - this.goal.getAngle().getDegrees()) <= 1){
+            return true;
+        }
+        return false;
+    }
     private ChassisSpeeds calculateChassisSpeeds() {
         ChassisSpeeds speeds = swerveTrajFollower.calculate(relativeOdometer.getPoseMeters(), this.trajectory.getEndState());
+        
         ChassisSpeeds newSpeeds = new ChassisSpeeds(clampSpeeds(speeds.vxMetersPerSecond), clampSpeeds(speeds.vyMetersPerSecond), clampSpeeds(speeds.omegaRadiansPerSecond));
+        
+        if (isAtXGoal()) {
+            newSpeeds.vxMetersPerSecond = 0;
+        }
+        
+        if (isAtYGoal()) {
+            newSpeeds.vyMetersPerSecond = 0;
+        }
+
+        if (isAtThetaGoal()) {
+            newSpeeds.omegaRadiansPerSecond = 0;
+        }
+
         return newSpeeds;
+    }
+
+    private boolean checkPosition(){
+        if (isAtXGoal() && isAtYGoal() && isAtThetaGoal()) {
+            return true;
+        }
+        return false;
     }
 
 
     public boolean isFinished() {
-        return (this.swerveTrajFollower.atReference()) || (!this.hasInitialTarget);
+        return (this.swerveTrajFollower.atReference()) || (!this.hasInitialTarget) || checkPosition();
     }
 
     
