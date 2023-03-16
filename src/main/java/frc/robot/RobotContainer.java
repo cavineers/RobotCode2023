@@ -22,18 +22,21 @@ import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
 import frc.robot.commands.ManualOverrideCommands.ExtendArm;
-import frc.robot.commands.ManualOverrideCommands.HomeArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
+import frc.robot.commands.BalanceControlCommand;
 import frc.robot.commands.ClawHoming;
+import frc.robot.commands.ManualOverrideCommands.ClawOpen;
+import frc.robot.commands.ManualOverrideCommands.ClawClose;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
-import frc.robot.commands.AprilTagHomingCommand;
-
+import frc.robot.commands.AutoArmCommands.HomeArm;
+import frc.robot.commands.AutoArmCommands.ArmRestPosition;
+import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.SwerveHoming;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -58,6 +61,8 @@ public class RobotContainer  {
 
     //Arm Commands
     public Command m_armHome;
+    public Command m_armRestPosition;
+    public Command m_armBumperPosition;
     public Command m_armRaise;
     public Command m_armLower;
     public Command m_armExtend;
@@ -136,8 +141,6 @@ public class RobotContainer  {
   
     private Joystick m_joy = new Joystick(OIConstants.kDriverJoystickPort);
 
-    public POVButton m_povUp = new POVButton(m_joy, 0, 0);
-
     public SwerveHoming swerveHomingCommand;
 
 
@@ -148,6 +151,8 @@ public class RobotContainer  {
       m_raiseIntake = new ToggleUndeployIntake();
       m_lowerIntake = new ToggleDeployIntake();
       m_armHome = new HomeArm();
+      m_armRestPosition = new ArmRestPosition();
+      m_armBumperPosition = new ArmAtBumperCommand();
       m_armRaise = new RaiseArm();
       m_armLower = new LowerArm();
       m_armExtend = new ExtendArm();
@@ -162,10 +167,8 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
-      m_aprilTagLeft = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kLeftPosition);
-      m_aprilTagCenter = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kShelfPosition);
-      m_aprilTagRight = new AprilTagHomingCommand(swerveSubsystem, Robot.aprilTagHoming, Constants.PresetTranslations.kRightPosition);
-
+      m_clawClose = new ClawClose();
+      m_clawOpen = new ClawOpen();
 
       swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
@@ -186,6 +189,27 @@ public class RobotContainer  {
 
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
+
+      //zeros heading
+      this.r_bump.onTrue(new InstantCommand() {
+        public void initialize() {
+          swerveSubsystem.zeroHeading();
+        }
+      });
+
+      //claw manual buttons
+      this.povLeft.onTrue(m_clawOpen);
+      this.povLeft.onFalse(new InstantCommand(){
+        public void initialize() {
+          m_clawOpen.cancel();
+        }
+      });
+      this.povRight.onTrue(m_clawClose);
+      this.povRight.onFalse(new InstantCommand(){
+        public void initialize() {
+          m_clawClose.cancel();
+        }
+      });
 
       //deploys intake on button hold and undeploys on release
       this.l_bump.onTrue(new ToggleDeployIntake());
@@ -217,16 +241,8 @@ public class RobotContainer  {
         }
       });
       this.left_menu.onTrue(m_armHome);
-
-      this.a_button2.onTrue(m_armTopLeft); //.andThen(m_armBottomLeft) 1
-      //this.b_button2.onTrue(m_aprilTagCenter); //.andThen(m_armBottomMid) 2
-      //this.x_button2.onTrue(m_aprilTagRight); // .andThen(m_armBottomRight) 3
-      // this.y_button2.onTrue(m_aprilTagLeft.andThen(m_armMidLeft));
-      // this.povUp2.onTrue(m_aprilTagCenter.andThen(m_armMidMid));
-      // this.povRight2.onTrue(m_aprilTagRight.andThen(m_armMidRight));
-      // this.povLeft2.onTrue(m_aprilTagLeft.andThen(m_armTopLeft));
-      // this.povDown2.onTrue(m_aprilTagCenter.andThen(m_armTopMid));
-      // this.r_bump2.onTrue(m_aprilTagRight.andThen(m_armTopRight));
+      this.l_bump2.onTrue(m_armRestPosition);
+      this.left_stick2.onTrue(m_armBumperPosition);
       this.right_menu.onTrue(new ClawHoming());
     }
 

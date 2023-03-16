@@ -76,8 +76,8 @@ public final class Constants {
         public static double IntakeLowerRightSpeed = IntakeSpeed;
         public static double IntakeRaiseRightSpeed = IntakeSpeed;
         
-        public static double IntakeSpeedTop = .35; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = .25; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedTop = .4; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = .3; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 48;
     }
@@ -161,29 +161,33 @@ public final class Constants {
         public static double ArmExtensionSpeedRev = -0.95;
 
         public static double ArmRotationsAddPower = 11.1190;
-        public static double ArmRotationsAddPowerBottom = 7;
+        public static double ArmRotationsAddPowerBottom = 5;
      
     //Node Rotations
      
+        public static double ArmRestPositionAngleRotations = 5;
+        public static double ArmRestPositionExtensionRotations = 1;
+        public static double ArmBumperAngleRotations = 7.2;
+        public static double ArmBumperExtensionRotations = 52.;
         public static double ArmIntakeAngleRotations = 0;
         public static double ArmIntakeExtensionRotations = 0;
         public static double BottomNodeAngleRotations = 10;
         public static double BottomNodeExtensionRotations = 56;
         public static double MidNodeShelfAngleRotations = 16;
         public static double MidNodeShelfExtensionRotations = 64;
-        public static double MidNodePegAngleRotations = 18;
+        public static double MidNodePegAngleRotations = 20;
         public static double MidNodePegExtensionRotations = 53;
         public static double TopNodeShelfAngleRotations = 19.5;
         public static double TopNodeShelfExtensionRotations = 130;
         public static double TopNodePegAngleRotations = 22;
         public static double TopNodePegExtensionRotations = 130;
     // Encoder deadzones
-     public static double ExtensionEncoderDeadzone = 1.8;
-        public static double AngleEncoderDeadzone = 0.15;
+     public static double ExtensionEncoderDeadzone = 2.3;
+        public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
         public static double MinExtensionRotations = 0;
-        public static double ExtensionLowerSpeedRotations = 9;
+        public static double ExtensionLowerSpeedRotations = 6;
         public static double MaxAngleRotations = 21;
         public static double MinAngleRotations = -0.025;
 
@@ -201,9 +205,10 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static final double kCLawCloseSpeed = .1;
+        public static final double kCLawCloseSpeed = .2;
         public static final double kClawHomeSpeed = .05;
-        public static final double kRevolutionsToHome = 0.285714238882065; //2.5
+        public static final double kClawManualSpeed = .05;
+        public static final double kRevolutionsToHome = 0.225714238882065; //2.5
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
         public static final int kCurrentLimit = 10; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
@@ -232,5 +237,15 @@ public final class Constants {
     }
 
     
+    public static final class BalanceConstants {
+        public static final double kBalancingControlGoalDegrees = 0;
+        public static final double kBalancingControlTresholdDegrees = 2.5;
+        
+        public static final double kBalancingControlDriveP = 0.045; // P (Proportional) constant of a PID loop
+        public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
+        public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
+
+        public static final double kBalancingControlBackwardsPowerMultiplier = 2;
+    }
 }
 

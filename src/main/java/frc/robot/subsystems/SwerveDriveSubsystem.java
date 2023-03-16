@@ -174,4 +174,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backRight.toggleIdleMode(mode);
 
     }
+
+    public double getRoll(){
+        return gyro.getRoll();
+    }
 }

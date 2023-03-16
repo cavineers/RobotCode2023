@@ -23,8 +23,8 @@ public class LowerArm extends CommandBase {
     @Override
     public void execute() {
         if (Robot.armAngle.getArmChainMotorPosition() > Constants.Arm.MinAngleRotations) {
-            Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.REVERSED);
-            Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.REVERSED);
+            Robot.armAngle.getArmChainMotor().set(-0.06);
+            Robot.armAngle.getArmChainMotor2().set(0.06);
         } else {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);

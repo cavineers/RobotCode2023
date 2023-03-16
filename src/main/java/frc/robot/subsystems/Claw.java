@@ -46,7 +46,8 @@ public class Claw extends SubsystemBase{
     public enum clawMotorState {
         ON,
         OFF,
-        REVERSE
+        REVERSE,
+        manualON
     }
 
     public CANSparkMax getMotor() {
@@ -89,6 +90,10 @@ public class Claw extends SubsystemBase{
             case REVERSE:
                 // reverses claw
                 this.m_clawMotor.set(-Constants.Claw.kClawHomeSpeed);
+                break;
+            case manualON:
+                //slowly turns motor forward
+                this.m_clawMotor.set(Constants.Claw.kClawManualSpeed);
                 break;
             default: 
                 this.setMotorState(clawMotorState.OFF);
