@@ -164,8 +164,6 @@ public class RobotContainer  {
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
 
-      this.r_bump.onTrue(new BalanceControlCommand(swerveSubsystem));
-
       //claw manual buttons
       this.povLeft.onTrue(m_clawOpen);
       this.povLeft.onFalse(new InstantCommand(){
