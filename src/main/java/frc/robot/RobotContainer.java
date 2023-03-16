@@ -17,7 +17,6 @@ import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.commands.NumPad.TopMid;
 import frc.robot.commands.NumPad.TopRight;
 import frc.robot.commands.ManualOverrideCommands.ExtendArm;
-import frc.robot.commands.ManualOverrideCommands.HomeArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
@@ -29,6 +28,8 @@ import frc.robot.commands.ManualOverrideCommands.ClawClose;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.AutoArmCommands.HomeArm;
+import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.SwerveHoming;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -53,6 +54,7 @@ public class RobotContainer  {
 
     //Arm Commands
     public Command m_armHome;
+    public Command m_armRestPosition;
     public Command m_armRaise;
     public Command m_armLower;
     public Command m_armExtend;
@@ -127,6 +129,7 @@ public class RobotContainer  {
       m_raiseIntake = new ToggleUndeployIntake();
       m_lowerIntake = new ToggleDeployIntake();
       m_armHome = new HomeArm();
+      m_armRestPosition = new ArmRestPosition();
       m_armRaise = new RaiseArm();
       m_armLower = new LowerArm();
       m_armExtend = new ExtendArm();
@@ -207,6 +210,7 @@ public class RobotContainer  {
         }
       });
       this.left_menu.onTrue(m_armHome);
+      this.l_bump2.onTrue(m_armRestPosition);
       this.right_menu.onTrue(new ClawHoming());
     }
 

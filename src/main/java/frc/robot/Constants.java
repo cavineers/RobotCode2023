@@ -149,13 +149,14 @@ public final class Constants {
      
     //Node Rotations
      
+        public static double ArmRestPositionAngleRotations = 7;
         public static double ArmIntakeAngleRotations = 0;
         public static double ArmIntakeExtensionRotations = 0;
         public static double BottomNodeAngleRotations = 10;
         public static double BottomNodeExtensionRotations = 56;
         public static double MidNodeShelfAngleRotations = 16;
         public static double MidNodeShelfExtensionRotations = 64;
-        public static double MidNodePegAngleRotations = 18;
+        public static double MidNodePegAngleRotations = 20;
         public static double MidNodePegExtensionRotations = 53;
         public static double TopNodeShelfAngleRotations = 19.5;
         public static double TopNodeShelfExtensionRotations = 130;
@@ -167,7 +168,7 @@ public final class Constants {
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
         public static double MinExtensionRotations = 0;
-        public static double ExtensionLowerSpeedRotations = 9;
+        public static double ExtensionLowerSpeedRotations = 6;
         public static double MaxAngleRotations = 21;
         public static double MinAngleRotations = -0.025;
 
