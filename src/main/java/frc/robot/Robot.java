@@ -14,7 +14,8 @@ import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 
-import frc.robot.subsystems.Arm;
+import frc.robot.subsystems.ArmAngle;
+import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.AprilTagHoming;
@@ -32,7 +33,8 @@ public class Robot extends TimedRobot {
   public static RobotContainer m_robotContainer;
 
   //Subsystems
-  public static Arm arm;
+  public static ArmExtension armExtension;
+  public static ArmAngle armAngle;
   public static Intake intake;
   public static Claw claw;
   public static AprilTagHoming aprilTagHoming;
@@ -49,7 +51,8 @@ public class Robot extends TimedRobot {
   public Robot() {
 
     //Subsystems
-    arm = new Arm();
+    armExtension = new ArmExtension();
+    armAngle = new ArmAngle();
     intake = new Intake();
     claw = new Claw();
 
