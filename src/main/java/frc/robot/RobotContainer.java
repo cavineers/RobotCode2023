@@ -218,9 +218,9 @@ public class RobotContainer  {
       });
       this.left_menu.onTrue(m_armHome);
 
-      this.a_button2.onTrue(m_aprilTagLeft); //.andThen(m_armBottomLeft) 1
-      this.b_button2.onTrue(m_aprilTagCenter); //.andThen(m_armBottomMid) 2
-      this.x_button2.onTrue(m_aprilTagRight); // .andThen(m_armBottomRight) 3
+      this.a_button2.onTrue(m_armTopLeft); //.andThen(m_armBottomLeft) 1
+      //this.b_button2.onTrue(m_aprilTagCenter); //.andThen(m_armBottomMid) 2
+      //this.x_button2.onTrue(m_aprilTagRight); // .andThen(m_armBottomRight) 3
       // this.y_button2.onTrue(m_aprilTagLeft.andThen(m_armMidLeft));
       // this.povUp2.onTrue(m_aprilTagCenter.andThen(m_armMidMid));
       // this.povRight2.onTrue(m_aprilTagRight.andThen(m_armMidRight));
@@ -250,6 +250,7 @@ public class RobotContainer  {
       m_chooser.addOption("Middle", "Middle");
       m_chooser.addOption("Top Charge", "Top Charge");
       m_chooser.addOption("Top", "Top");
+      m_chooser.addOption("Test", "Test");
       
 
       SmartDashboard.putData("Auto Path Selector", this.m_chooser);

@@ -20,6 +20,7 @@ public class AutoPath extends CommandBase {
     private boolean isActive;
 
     private Command m_lowerIntake;
+    private Command m_raiseIntake;
     private Command m_placeTop;
     private Command m_autoCommand; 
 
@@ -36,6 +37,7 @@ public class AutoPath extends CommandBase {
   
     public AutoPath(SwerveDriveSubsystem swerveSubsystem) {
       this.m_lowerIntake = new ToggleDeployIntake();
+      this.m_raiseIntake = new ToggleUndeployIntake();
       this.m_placeTop = new TopLeft();
       this.swerveSubsystem = swerveSubsystem;
       this.builder = this.createAutoBuilder(); // requires swerveSubsystem
@@ -54,7 +56,7 @@ public class AutoPath extends CommandBase {
       this.isActive = true;
       configCommand(this.pathGroup);
       this.autoCommandGroup.addCommands(
-        this.m_placeTop,
+        //this.m_placeTop,
         this.m_autoCommand
         // Schedule Balance command here
       );
@@ -70,14 +72,15 @@ public class AutoPath extends CommandBase {
   
     private List<PathPlannerTrajectory> generateAutonomousPath() {
       this.pathPath = pathName;
-      List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(this.pathPath, new PathConstraints(Constants.PathPlanning.kMaxSpeedMetersPerSecond, Constants.PathPlanning.kMaxAccelerationMetersPerSecond));
+      List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(this.pathPath, new PathConstraints(1, 0.25));//Constants.PathPlanning.kMaxSpeedMetersPerSecond
       return pathGroup;
     }
   
     private HashMap<String, Command> generateEventMapping(){
       HashMap<String, Command> eventMap = new HashMap<>();
-      eventMap.put("ToggleIntake", this.m_lowerIntake);
-      eventMap.put("PlaceCone", this.m_placeTop);
+      eventMap.put("DeployIntake", this.m_lowerIntake);
+      eventMap.put("UnDeployIntake", this.m_raiseIntake);
+      // eventMap.put("PlaceCone", this.m_placeTop);
       return eventMap;
     }
       
@@ -91,7 +94,7 @@ public class AutoPath extends CommandBase {
       Constants.PathPlanning.kAutoDriveTurnPID, // PID constants to correct for rotation error (used to create the rotation controller)
       swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
       generateEventMapping(),
-      false, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+      true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
       swerveSubsystem // The drive subsystem. Used to properly set the requirements of path following commands
       );
   
