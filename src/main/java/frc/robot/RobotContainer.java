@@ -214,7 +214,7 @@ public class RobotContainer  {
       });
       this.left_menu.onTrue(m_armHome);
       this.l_bump2.onTrue(m_armRestPosition);
-      this.left_menu2.onTrue(m_armBumperPosition);
+      this.left_stick2.onTrue(m_armBumperPosition);
       this.right_menu.onTrue(new ClawHoming());
     }
 
