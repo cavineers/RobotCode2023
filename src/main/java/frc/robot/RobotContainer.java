@@ -195,7 +195,7 @@ public class RobotContainer  {
         }
       });
 
-      deploys intake on button hold and undeploys on release
+      // deploys intake on button hold and undeploys on release
       this.l_bump.onTrue(new ToggleDeployIntake());
       this.l_bump.onFalse(new ToggleUndeployIntake());
 
