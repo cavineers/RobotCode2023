@@ -76,8 +76,8 @@ public final class Constants {
         public static double IntakeLowerRightSpeed = IntakeSpeed;
         public static double IntakeRaiseRightSpeed = IntakeSpeed;
         
-        public static double IntakeSpeedTop = .4; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = .3; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedTop = .2; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = .15; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 48;
     }
