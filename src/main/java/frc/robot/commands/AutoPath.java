@@ -3,7 +3,12 @@ package frc.robot.commands;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.ManualOverrideCommands.ClawClose;
+import frc.robot.commands.ManualOverrideCommands.ClawOpen;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
+
 import frc.robot.commands.NumPad.TopLeft;
 import frc.robot.Robot;
 
@@ -14,14 +19,18 @@ import java.util.List;
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import com.pathplanner.lib.PathConstraints;
+
+import frc.robot.commands.AutoArmCommands.HomeArm;
+import frc.robot.commands.AutoArmCommands.ArmRestPosition;
+import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
+
 
 public class AutoPath extends CommandBase {
     private boolean isActive;
 
-    private Command m_lowerIntake;
-    private Command m_raiseIntake;
-    private Command m_placeTop;
     private Command m_autoCommand; 
 
     private SequentialCommandGroup autoCommandGroup;
@@ -36,14 +45,15 @@ public class AutoPath extends CommandBase {
     SwerveAutoBuilder builder;
   
     public AutoPath(SwerveDriveSubsystem swerveSubsystem) {
-      this.m_lowerIntake = new ToggleDeployIntake();
-      this.m_raiseIntake = new ToggleUndeployIntake();
-      this.m_placeTop = new TopLeft();
+
+      
       this.swerveSubsystem = swerveSubsystem;
       this.builder = this.createAutoBuilder(); // requires swerveSubsystem
       if (swerveSubsystem == null) {
         System.out.println("SwerveSubsystem is null in AutoPath constructor");
       }
+
+    
 
       addRequirements(swerveSubsystem);
     }
@@ -52,11 +62,21 @@ public class AutoPath extends CommandBase {
       this.autoCommandGroup = new SequentialCommandGroup();
       this.pathName = Robot.m_robotContainer.getAutoPath();
       this.pathGroup = generateAutonomousPath();
+
+      swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
   
       this.isActive = true;
       configCommand(this.pathGroup);
       this.autoCommandGroup.addCommands(
-        //this.m_placeTop,
+        generateHomingGroup(),
+        new ClawToggle(),
+        new InstantCommand(){
+          public void initialize() {
+          try {
+            Thread.sleep(1000);
+          }catch(InterruptedException e) {}
+        }},
+        generatePlaceConeGroup(),
         this.m_autoCommand
         // Schedule Balance command here
       );
@@ -78,10 +98,34 @@ public class AutoPath extends CommandBase {
   
     private HashMap<String, Command> generateEventMapping(){
       HashMap<String, Command> eventMap = new HashMap<>();
-      eventMap.put("DeployIntake", this.m_lowerIntake);
-      eventMap.put("UnDeployIntake", this.m_raiseIntake);
-      // eventMap.put("PlaceCone", this.m_placeTop);
+      eventMap.put("DeployIntake", new ToggleDeployIntake());
+      eventMap.put("UnDeployIntake", new ToggleUndeployIntake());
+
+      eventMap.put("CloseClaw", new ClawToggle());
+      eventMap.put("OpenClaw", new ClawToggle());
+      eventMap.put("PlaceCone", generatePlaceConeGroup());
+      eventMap.put("RestArm", new ArmRestPosition());
+      eventMap.put("BumperArm", new ArmAtBumperCommand());
+    
+
       return eventMap;
+    }
+
+    private SequentialCommandGroup generatePlaceConeGroup(){
+
+      return new SequentialCommandGroup(
+        new TopLeft(),
+        new ClawToggle(),
+        new ArmAtBumperCommand()
+        
+      );
+    }
+
+    private ParallelCommandGroup generateHomingGroup() {
+      return new ParallelCommandGroup(
+        new HomeArm(),
+        new ClawHoming()
+      );
     }
       
   
@@ -109,5 +153,9 @@ public class AutoPath extends CommandBase {
   
     public boolean isFinished(){
       return !this.isActive; // Stop if the robot is not currently pathing
+    }
+
+    public void end(){
+      swerveSubsystem.toggleIdleMode(IdleMode.kCoast);
     }
 }

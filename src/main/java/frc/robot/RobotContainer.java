@@ -34,13 +34,10 @@ import frc.robot.commands.ManualOverrideCommands.ClawClose;
 
 import frc.robot.commands.ToggleDeployIntake;
 import frc.robot.commands.ToggleUndeployIntake;
-<<<<<<< Updated upstream
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
-=======
 
->>>>>>> Stashed changes
 import frc.robot.commands.SwerveHoming;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -171,13 +168,10 @@ public class RobotContainer  {
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
 
-<<<<<<< Updated upstream
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
-=======
     
 
->>>>>>> Stashed changes
 
       swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
@@ -250,13 +244,10 @@ public class RobotContainer  {
         }
       });
       this.left_menu.onTrue(m_armHome);
-<<<<<<< Updated upstream
       this.l_bump2.onTrue(m_armRestPosition);
       this.left_stick2.onTrue(m_armBumperPosition);
-=======
 
       
->>>>>>> Stashed changes
       this.right_menu.onTrue(new ClawHoming());
     }
 
