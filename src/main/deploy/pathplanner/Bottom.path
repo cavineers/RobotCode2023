@@ -66,12 +66,10 @@
       "isLocked": false,
       "isStopPoint": true,
       "stopEvent": {
-        "names": [
-          "CloseClaw"
-        ],
+        "names": [],
         "executionBehavior": "sequential",
         "waitBehavior": "deadline",
-        "waitTime": 0.65
+        "waitTime": 0
       }
     },
     {
@@ -116,7 +114,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "PlaceCone"
+          "PlaceCube"
         ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
@@ -128,12 +126,6 @@
   "maxAcceleration": 0.5,
   "isReversed": null,
   "markers": [
-    {
-      "position": 3.9534801136363695,
-      "names": [
-        "RestArm"
-      ]
-    },
     {
       "position": 1.0,
       "names": [

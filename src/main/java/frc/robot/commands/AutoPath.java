@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
@@ -11,10 +12,12 @@ import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.commands.NumPad.TopLeft;
+import frc.robot.commands.NumPad.TopMid;
 import frc.robot.Robot;
 
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -103,6 +106,7 @@ public class AutoPath extends CommandBase {
       List<PathPlannerTrajectory> pathGroup = PathPlanner.loadPathGroup(this.pathPath, new PathConstraints(1, 0.25));//Constants.PathPlanning.kMaxSpeedMetersPerSecond
       return pathGroup;
     }
+
   
     private HashMap<String, Command> generateEventMapping(){
       HashMap<String, Command> eventMap = new HashMap<>();
@@ -112,6 +116,7 @@ public class AutoPath extends CommandBase {
       eventMap.put("CloseClaw", new ClawToggle());
       eventMap.put("OpenClaw", new ClawToggle());
       eventMap.put("PlaceCone", generatePlaceConeGroup());
+      eventMap.put("PlaceCube", generatePlaceCubeGroup());
       eventMap.put("RestArm", new ArmRestPosition());
       eventMap.put("BumperArm", new ArmAtBumperCommand());
       eventMap.put("ArmIntake", generateGrabIntakeGroup());
@@ -128,6 +133,16 @@ public class AutoPath extends CommandBase {
         new TopLeft(),
         new ClawToggle(),
         new ArmIntakePreset()
+        
+      );
+    }
+
+    private SequentialCommandGroup generatePlaceCubeGroup(){
+
+      return new SequentialCommandGroup(
+        new TopLeft(),
+        new ClawToggle()
+        //new HomeArm()
         
       );
     }
@@ -164,17 +179,27 @@ public class AutoPath extends CommandBase {
       Constants.PathPlanning.kAutoDriveTurnPID, // PID constants to correct for rotation error (used to create the rotation controller)
       swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
       generateEventMapping(),
-      false, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+      true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
       swerveSubsystem // The drive subsystem. Used to properly set the requirements of path following commands
       );
   
       return autoBuilder;
   
     }
+
+    public List<PathPlannerTrajectory> inversePathGroup(List<PathPlannerTrajectory> pathGroup){
+      List<PathPlannerTrajectory> transform = new ArrayList<>();
+
+      for (PathPlannerTrajectory path : pathGroup){
+        PathPlannerTrajectory.transformTrajectoryForAlliance(path, Alliance.Red);
+        transform.add(path);
+      }
+      return transform;
+    }
   
     public void configCommand(List<PathPlannerTrajectory> pathGroup) {
       this.isActive = true;
-      this.m_autoCommand = this.builder.fullAuto(pathGroup);
+      this.m_autoCommand = this.builder.fullAuto(inversePathGroup(pathGroup));
     }
   
     public boolean isFinished(){
