@@ -29,6 +29,8 @@ import com.pathplanner.lib.PathConstraints;
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
+import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
+import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 
 
 public class AutoPath extends CommandBase {
@@ -130,7 +132,17 @@ public class AutoPath extends CommandBase {
 
     private SequentialCommandGroup generateGrabIntakeGroup(){
       return new SequentialCommandGroup(
-
+        new ArmIntakePreset(),
+        new ClawToggle(),
+        new InstantCommand(){
+          public void initialize(){
+            try{
+              Thread.sleep(1000);
+            }catch(InterruptedException e){}
+          }
+        },
+        new RetractArm(),
+        new ArmRestPosition()
       );
     }
 
