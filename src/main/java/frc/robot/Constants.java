@@ -71,7 +71,9 @@ public final class Constants {
 
         public static double IntakeSpeed = 0.4;
 
-        public static double IntakeLowerLeftSpeed = IntakeSpeed;
+        public static double IntakeLeftMultiplier = 1.0;
+
+        public static double IntakeLowerLeftSpeed = IntakeSpeed*IntakeLeftMultiplier;
         public static double IntakeRaiseLeftSpeed = IntakeSpeed;
         public static double IntakeLowerRightSpeed = IntakeSpeed;
         public static double IntakeRaiseRightSpeed = IntakeSpeed;
@@ -80,6 +82,7 @@ public final class Constants {
         public static double IntakeSpeedBottom = .15; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 48;
+        public static double RevolutionsToLowerLeft = 52;
     }
     public static final class DriveConstants {
 
