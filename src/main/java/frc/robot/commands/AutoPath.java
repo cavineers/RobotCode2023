@@ -29,6 +29,7 @@ import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.revrobotics.CANSparkMax.IdleMode;
 
 import com.pathplanner.lib.PathConstraints;
+import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
@@ -132,7 +133,7 @@ public class AutoPath extends CommandBase {
       return new SequentialCommandGroup(
         new TopLeft(),
         new ClawToggle(),
-        new ArmIntakePreset()
+        new ArmRestPosition()
         
       );
     }
@@ -149,6 +150,7 @@ public class AutoPath extends CommandBase {
 
     private SequentialCommandGroup generateGrabIntakeGroup(){
       return new SequentialCommandGroup(
+        new ArmIntakePreset(),
         new ClawToggle(),
         new InstantCommand(){
           public void initialize(){
@@ -157,7 +159,6 @@ public class AutoPath extends CommandBase {
             }catch(InterruptedException e){}
           }
         },
-
         new RetractCompletely()
       );
     }
@@ -191,8 +192,8 @@ public class AutoPath extends CommandBase {
       List<PathPlannerTrajectory> transform = new ArrayList<>();
 
       for (PathPlannerTrajectory path : pathGroup){
-        PathPlannerTrajectory.transformTrajectoryForAlliance(path, Alliance.Red);
-        transform.add(path);
+        PathPlannerTrajectory transformPath = PathPlannerTrajectory.transformTrajectoryForAlliance(path, DriverStation.Alliance.Red);
+        transform.add(transformPath);
       }
       return transform;
     }
