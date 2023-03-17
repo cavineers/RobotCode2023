@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.ManualOverrideCommands.ClawClose;
 import frc.robot.commands.ManualOverrideCommands.ClawOpen;
+import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.commands.NumPad.TopLeft;
@@ -112,7 +113,7 @@ public class AutoPath extends CommandBase {
       eventMap.put("PlaceCone", generatePlaceConeGroup());
       eventMap.put("RestArm", new ArmRestPosition());
       eventMap.put("BumperArm", new ArmAtBumperCommand());
-      eventMap.put("ArmIntake", new)
+      eventMap.put("ArmIntake", generateGrabIntakeGroup());
 
       eventMap.put("Balance", new BalanceControlCommand(swerveSubsystem));
     
@@ -141,7 +142,7 @@ public class AutoPath extends CommandBase {
             }catch(InterruptedException e){}
           }
         },
-        new RetractArm(),
+
         new ArmRestPosition()
       );
     }
