@@ -15,7 +15,7 @@ public class ToggleDeployIntake extends CommandBase {
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
-        Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.DEPLOY);
+        //Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.DEPLOY);
         Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.ON);
         this.isFinished = false;
     }
