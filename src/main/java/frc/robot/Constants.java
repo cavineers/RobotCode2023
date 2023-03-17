@@ -148,13 +148,13 @@ public final class Constants {
         public static double ArmRotationsAddPowerBottom = 5;
      
     //Node Rotations
-     
+        
+        public static double ArmIntakeAngleRotations = 10;
+        public static double ArmIntakeExtensionRotations = 0;
         public static double ArmRestPositionAngleRotations = 5;
         public static double ArmRestPositionExtensionRotations = 1;
         public static double ArmBumperAngleRotations = 7.2;
         public static double ArmBumperExtensionRotations = 52.;
-        public static double ArmIntakeAngleRotations = 0;
-        public static double ArmIntakeExtensionRotations = 0;
         public static double BottomNodeAngleRotations = 10;
         public static double BottomNodeExtensionRotations = 56;
         public static double MidNodeShelfAngleRotations = 16;
