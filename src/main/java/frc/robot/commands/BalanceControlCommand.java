@@ -52,7 +52,7 @@ public class BalanceControlCommand extends CommandBase {
           double rollRadians = Math.toRadians(swerveSubsystem.getRoll());
           double hypotenuse = Math.cos(pitchRadians) * Math.cos(rollRadians);
           double error = Math.sqrt(1 - hypotenuse * hypotenuse);
-          return error*90;      // Mult by 90 to get degrees
+          return error;
       }
       
 
@@ -65,7 +65,7 @@ public class BalanceControlCommand extends CommandBase {
         //  if (this.runChecks()) {
         
           this.currentAngle = swerveSubsystem.getRoll();
-          this.error = 0 - currentAngle;
+          this.error = calculateError();
           this.drivePower = pidController.calculate(error);
           ChassisSpeeds chassisSpeeds;
 
@@ -79,7 +79,6 @@ public class BalanceControlCommand extends CommandBase {
           this.swerveSubsystem.setModuleStates(moduleStates);
           counter();
 
-          SmartDashboard.putNumber("Current Angle: ", currentAngle);
           SmartDashboard.putNumber("Error ", error);
           SmartDashboard.putNumber("Drive Power: ", drivePower);
         //}
