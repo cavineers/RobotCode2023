@@ -32,6 +32,8 @@ import frc.robot.commands.ToggleUndeployIntake;
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
+import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
+
 import frc.robot.commands.SwerveHoming;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -62,6 +64,7 @@ public class RobotContainer  {
     public Command m_armLower;
     public Command m_armExtend;
     public Command m_armRetract;
+    public Command m_armIntake;
 
     //NumPad Commands
     public Command m_armBottomLeft;
@@ -147,6 +150,7 @@ public class RobotContainer  {
       m_armTopLeft = new TopLeft();
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
+      m_armIntake = new ArmIntakePreset();
 
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
@@ -191,7 +195,7 @@ public class RobotContainer  {
         }
       });
 
-      //deploys intake on button hold and undeploys on release
+      deploys intake on button hold and undeploys on release
       this.l_bump.onTrue(new ToggleDeployIntake());
       this.l_bump.onFalse(new ToggleUndeployIntake());
 
@@ -223,6 +227,7 @@ public class RobotContainer  {
       this.left_menu.onTrue(m_armHome);
       this.l_bump2.onTrue(m_armRestPosition);
       this.left_stick2.onTrue(m_armBumperPosition);
+      // this.l_bump.onTrue(m_armIntake);
       this.right_menu.onTrue(new ClawHoming());
     }
 
