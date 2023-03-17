@@ -178,4 +178,8 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     public double getRoll(){
         return gyro.getRoll();
     }
+
+    public double getPitch(){
+        return gyro.getPitch();
+    }
 }

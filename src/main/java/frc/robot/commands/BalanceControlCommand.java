@@ -46,6 +46,14 @@ public class BalanceControlCommand extends CommandBase {
         this.counter = 0;
         this.previousError = error;
       }
+
+      public double calculateError(){
+          double pitchRadians = Math.toRadians(swerveSubsystem.getPitch());
+          double rollRadians = Math.toRadians(swerveSubsystem.getRoll());
+          double hypotenuse = Math.cos(pitchRadians) * Math.cos(rollRadians);
+          double error = Math.sqrt(1 - hypotenuse * hypotenuse);
+          return error*90;      // Mult by 90 to get degrees
+      }
       
 
       // Called every time the scheduler runs while the command is scheduled.
@@ -78,24 +86,24 @@ public class BalanceControlCommand extends CommandBase {
       }
 
       public void lockWheels(){
-        // ChassisSpeeds chassisSpeedsStopForward;
-        // ChassisSpeeds chassisSpeedsStopSide;
-        // chassisSpeedsStopForward = ChassisSpeeds.fromFieldRelativeSpeeds(0, 1, 0, swerveSubsystem.getRotation2d());
-        // chassisSpeedsStopSide = ChassisSpeeds.fromFieldRelativeSpeeds(1, 0, 0, swerveSubsystem.getRotation2d());
+        ChassisSpeeds chassisSpeedsStopForward;
+        ChassisSpeeds chassisSpeedsStopSide;
+        chassisSpeedsStopForward = ChassisSpeeds.fromFieldRelativeSpeeds(0, .1, 0, swerveSubsystem.getRotation2d());
+        chassisSpeedsStopSide = ChassisSpeeds.fromFieldRelativeSpeeds(.1, 0, 0, swerveSubsystem.getRotation2d());
 
 
       
-        // SwerveModuleState[] moduleStatesForward = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStopForward);
-        // SwerveModuleState[] moduleStatesSide = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStopSide);
+        SwerveModuleState[] moduleStatesForward = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStopForward);
+        SwerveModuleState[] moduleStatesSide = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStopSide);
     
-        // SwerveModuleState[] combinedStates = new SwerveModuleState[] {
-        //   moduleStatesForward[0],
-        //   moduleStatesSide[1],
-        //   moduleStatesSide[2],
-        //   moduleStatesForward[3]
-        // };
+        SwerveModuleState[] combinedStates = new SwerveModuleState[] {
+          moduleStatesForward[0],
+          moduleStatesSide[1],
+          moduleStatesSide[2],
+          moduleStatesForward[3]
+        };
 
-        // swerveSubsystem.setModuleStates(combinedStates);
+        swerveSubsystem.setModuleStates(combinedStates);
       }
     
       // Called once the command ends or is interrupted.
