@@ -32,6 +32,7 @@ import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
+import frc.robot.commands.AutoArmCommands.RetractCompletely;
 
 
 public class AutoPath extends CommandBase {
@@ -126,14 +127,13 @@ public class AutoPath extends CommandBase {
       return new SequentialCommandGroup(
         new TopLeft(),
         new ClawToggle(),
-        new ArmAtBumperCommand()
+        new ArmIntakePreset()
         
       );
     }
 
     private SequentialCommandGroup generateGrabIntakeGroup(){
       return new SequentialCommandGroup(
-        new ArmIntakePreset(),
         new ClawToggle(),
         new InstantCommand(){
           public void initialize(){
@@ -143,7 +143,7 @@ public class AutoPath extends CommandBase {
           }
         },
 
-        new ArmRestPosition()
+        new RetractCompletely()
       );
     }
 
