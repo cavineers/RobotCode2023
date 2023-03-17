@@ -70,15 +70,16 @@ public class AutoPath extends CommandBase {
       this.autoCommandGroup.addCommands(
         generateHomingGroup(),
         new ClawToggle(),
-        new InstantCommand(){
+
+        new InstantCommand(){ // Wait command
           public void initialize() {
           try {
             Thread.sleep(1000);
           }catch(InterruptedException e) {}
         }},
+
         generatePlaceConeGroup(),
         this.m_autoCommand
-        // Schedule Balance command here
       );
       this.autoCommandGroup.schedule();
     }
@@ -106,6 +107,8 @@ public class AutoPath extends CommandBase {
       eventMap.put("PlaceCone", generatePlaceConeGroup());
       eventMap.put("RestArm", new ArmRestPosition());
       eventMap.put("BumperArm", new ArmAtBumperCommand());
+
+      eventMap.put("Balance", new BalanceControlCommand(swerveSubsystem));
     
 
       return eventMap;
