@@ -145,6 +145,12 @@
       "names": [
         "UnDeployIntake"
       ]
+    },
+    {
+      "position": 2.2605113636363647,
+      "names": [
+        "ArmIntake"
+      ]
     }
   ]
 }

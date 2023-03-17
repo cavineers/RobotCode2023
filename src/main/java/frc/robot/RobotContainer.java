@@ -196,9 +196,10 @@ public class RobotContainer  {
       //zeros heading
       this.r_bump.onTrue(new InstantCommand() {
         public void initialize() {
-          swerveSubsystem.zeroHeading();
+          new BalanceControlCommand(swerveSubsystem).schedule();//swerveSubsystem.zeroHeading();
         }
       });
+
 
       //claw manual buttons
       this.povLeft.onTrue(m_clawOpen);

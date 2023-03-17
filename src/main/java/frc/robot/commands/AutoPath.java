@@ -16,6 +16,9 @@ import frc.robot.subsystems.SwerveDriveSubsystem;
 
 import java.util.HashMap;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialArray;
+
 import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
@@ -107,6 +110,7 @@ public class AutoPath extends CommandBase {
       eventMap.put("PlaceCone", generatePlaceConeGroup());
       eventMap.put("RestArm", new ArmRestPosition());
       eventMap.put("BumperArm", new ArmAtBumperCommand());
+      eventMap.put("ArmIntake", new)
 
       eventMap.put("Balance", new BalanceControlCommand(swerveSubsystem));
     
@@ -121,6 +125,12 @@ public class AutoPath extends CommandBase {
         new ClawToggle(),
         new ArmAtBumperCommand()
         
+      );
+    }
+
+    private SequentialCommandGroup generateGrabIntakeGroup(){
+      return new SequentialCommandGroup(
+
       );
     }
 
@@ -141,7 +151,7 @@ public class AutoPath extends CommandBase {
       Constants.PathPlanning.kAutoDriveTurnPID, // PID constants to correct for rotation error (used to create the rotation controller)
       swerveSubsystem::setModuleStates, // Module states consumer used to output to the drive subsystem
       generateEventMapping(),
-      true, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
+      false, // Should the path be automatically mirrored depending on alliance color. Optional, defaults to true
       swerveSubsystem // The drive subsystem. Used to properly set the requirements of path following commands
       );
   

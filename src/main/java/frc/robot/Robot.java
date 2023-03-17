@@ -19,6 +19,8 @@ import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
 
+import com.pathplanner.lib.server.PathPlannerServer;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -70,7 +72,7 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void robotInit() {
-    // PortForwarder.add(5800, "10.45.41.11", 5800);
+    PathPlannerServer.startServer(5811);
     
     
   }
