@@ -28,12 +28,12 @@
         "y": 0.85
       },
       "prevControl": {
-        "x": 4.758980584836169,
-        "y": 0.7908247132807957
+        "x": 4.756487430819506,
+        "y": 0.85
       },
       "nextControl": {
-        "x": 6.161019415163833,
-        "y": 0.9091752867192298
+        "x": 6.163512569180498,
+        "y": 0.85
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -66,12 +66,10 @@
       "isLocked": false,
       "isStopPoint": true,
       "stopEvent": {
-        "names": [
-          "CloseClaw"
-        ],
+        "names": [],
         "executionBehavior": "sequential",
         "waitBehavior": "deadline",
-        "waitTime": 0.65
+        "waitTime": 0
       }
     },
     {
@@ -80,12 +78,12 @@
         "y": 0.7797492713629506
       },
       "prevControl": {
-        "x": 4.723019176229327,
-        "y": 0.642076727948124
+        "x": 4.730067157509836,
+        "y": 0.7797492713629508
       },
       "nextControl": {
-        "x": 1.6626479068636104,
-        "y": 0.9562441970929149
+        "x": 1.6536124601304047,
+        "y": 0.7797492713629504
       },
       "holonomicAngle": 0,
       "isReversal": false,
@@ -116,7 +114,7 @@
       "isStopPoint": false,
       "stopEvent": {
         "names": [
-          "PlaceCone"
+          "PlaceCube"
         ],
         "executionBehavior": "parallel",
         "waitBehavior": "none",
@@ -129,25 +127,19 @@
   "isReversed": null,
   "markers": [
     {
-      "position": 3.9534801136363695,
-      "names": [
-        "RestArm"
-      ]
-    },
-    {
       "position": 1.0,
       "names": [
         "DeployIntake"
       ]
     },
     {
-      "position": 1.85,
+      "position": 2.5,
       "names": [
         "UnDeployIntake"
       ]
     },
     {
-      "position": 2.25,
+      "position": 2.75,
       "names": [
         "ArmIntake"
       ]
