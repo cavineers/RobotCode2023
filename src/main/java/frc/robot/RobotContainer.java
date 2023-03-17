@@ -270,13 +270,16 @@ public class RobotContainer  {
 
     private void configureSendableChooser() {
       this.m_chooser = new SendableChooser<>();
-      m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
+     //m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
       m_chooser.addOption("Bottom", "Bottom");
-      m_chooser.addOption("Middle Charge", "Middle Charge");
-      m_chooser.addOption("Middle", "Middle");
-      m_chooser.addOption("Top Charge", "Top Charge");
-      m_chooser.addOption("Top", "Top");
-      m_chooser.addOption("Test", "Test");
+      m_chooser.addOption("Bottom Rotational", "Bottom Rotational");
+      m_chooser.addOption("**CHARGE** Middle Scoring Table", "Bottom Middle Charge");
+      m_chooser.addOption("**CHARGE** Middle Human Player", "Top Middle Charge");
+      //m_chooser.addOption("Middle Charge", "Middle Charge");
+      //m_chooser.addOption("Middle", "Middle");
+      //m_chooser.addOption("Top Charge", "Top Charge");
+      //m_chooser.addOption("Top", "Top");
+      //m_chooser.addOption("Test", "Test");
       
 
       SmartDashboard.putData("Auto Path Selector", this.m_chooser);
