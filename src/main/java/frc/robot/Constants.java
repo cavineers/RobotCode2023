@@ -224,7 +224,7 @@ public final class Constants {
         public static final int kDriverRotAxis = 4;
         public static final int kDriverFieldOrientedButtonIdx = 1;
 
-        public static final double kDeadband = 0.1;
+        public static final double kDeadband = 0.05;
     }
 
     public static final class HomingDrivePIDControllerConstants {
@@ -248,7 +248,7 @@ public final class Constants {
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
         public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
 
-        public static final double kBalancingControlBackwardsPowerMultiplier = 3;
+        public static final double kBalancingControlBackwardsPowerMultiplier = 2;
     }
 }
 
