@@ -1,17 +1,26 @@
 package frc.robot;
 
+import javax.swing.text.StyleContext.SmallAttributeSet;
+
+
+
 import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
 
 import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
+
+import com.pathplanner.lib.server.PathPlannerServer;
+
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -34,7 +43,6 @@ public class Robot extends TimedRobot {
   //Navx
   public static AHRS m_ahrs;
 
-
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -48,6 +56,7 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     claw = new Claw();
 
+    
     //Container
     m_robotContainer = new RobotContainer();
 
@@ -57,10 +66,13 @@ public class Robot extends TimedRobot {
         } catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
+      
+    
 
   }
   @Override
   public void robotInit() {
+    
     
   }
 
@@ -92,6 +104,13 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_robotContainer.swerveHomingCommand.schedule();
+    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+
+    // schedule the autonomous command (example)
+    if (m_autonomousCommand != null) {
+      m_autonomousCommand.schedule();
+    }
+    
   }
 
   /** This function is called periodically during autonomous. */

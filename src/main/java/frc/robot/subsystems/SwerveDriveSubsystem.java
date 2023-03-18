@@ -13,6 +13,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.wpilibj.SPI;
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.math.kinematics.SwerveModulePosition;
 
 
@@ -84,6 +86,13 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         return backLeft.getAbsolutePosition();
     }
 
+    public SwerveDriveOdometry getNewOdometer(){
+        return new SwerveDriveOdometry(
+            m_kinematics, 
+            getRotation2d(), 
+            getPositions());
+    }
+
     SwerveDriveOdometry m_odometer = m_odometry;
 
     public SwerveDriveSubsystem() {
@@ -133,16 +142,14 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     public void periodic(){
         m_odometer.update(getRotation2d(), getPositions());
 
-        SmartDashboard.putNumber("FrontLeft Position", frontLeft.getEncoderPosition());
-        SmartDashboard.putNumber("FrontRight Position", frontRight.getEncoderPosition());
-        SmartDashboard.putNumber("BackLeft Position", backLeft.getEncoderPosition());
-        SmartDashboard.putNumber("BackRight Position", backRight.getEncoderPosition());
-        SmartDashboard.putNumber("Heading", getHeading());
+        SmartDashboard.putString("SwervePOSE", getPose()+"");
 
         SmartDashboard.putNumber("FrontLeft Cancoder", frontLeft.getAbsolutePosition());
         SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());
         SmartDashboard.putNumber("BackLeft Cancoder", backLeft.getAbsolutePosition());
         SmartDashboard.putNumber("BackRight Cancoder", backRight.getAbsolutePosition());
+
+        SmartDashboard.putNumber("Heading", getHeading());
     }
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
@@ -160,15 +167,19 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backRight.setEncoder();
     }
 
-    public void toggleIdleMode() {
-        frontLeft.toggleIdleMode();
-        frontRight.toggleIdleMode();
-        backLeft.toggleIdleMode();
-        backRight.toggleIdleMode();
+    public void toggleIdleMode(IdleMode mode) {
+        frontLeft.toggleIdleMode(mode);
+        frontRight.toggleIdleMode(mode);
+        backLeft.toggleIdleMode(mode);
+        backRight.toggleIdleMode(mode);
 
     }
 
     public double getRoll(){
         return gyro.getRoll();
+    }
+
+    public double getPitch(){
+        return gyro.getPitch();
     }
 }

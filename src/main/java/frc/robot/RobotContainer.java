@@ -1,12 +1,17 @@
 package frc.robot;
 
+import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+
+import frc.robot.commands.AutoPath;
 import frc.robot.commands.NumPad.BottomLeft;
 import frc.robot.commands.NumPad.BottomMid;
 import frc.robot.commands.NumPad.BottomRight;
@@ -77,6 +82,12 @@ public class RobotContainer  {
     public Command m_armTopMid;
     public Command m_armTopRight;
 
+    //April Tag Presets
+    
+    public Command m_aprilTagLeft;
+    public Command m_aprilTagCenter;
+    public Command m_aprilTagRight;
+
     //Intake Commands
     public Command m_intake;
     public Command m_lowerIntake;
@@ -87,7 +98,12 @@ public class RobotContainer  {
     public Command m_clawClose;
     public Command m_clawOpen;
 
+    //AUTO COMMAND
+
+
+  
     // Driver Controller
+    
     public Joystick joy = new Joystick(0);
     public JoystickButton a_button = new JoystickButton(joy, 1);
     public JoystickButton b_button = new JoystickButton(joy, 2);
@@ -105,18 +121,21 @@ public class RobotContainer  {
     public POVButton povDown = new POVButton(joy, 180, 0);
     public POVButton povLeft = new POVButton(joy, 270, 0); 
 
-    // Driver Numpad
-    public Joystick joy2 = new Joystick(1);
-    public JoystickButton a_button2 = new JoystickButton(joy2, 1);
-    public JoystickButton b_button2 = new JoystickButton(joy2, 2);
-    public JoystickButton x_button2 = new JoystickButton(joy2, 3);
-    public JoystickButton y_button2 = new JoystickButton(joy2, 4);
-    public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
-    public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
-    public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
-    public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
-    public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
-    public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
+  // FOR AUTO
+
+  SendableChooser<String> m_chooser;
+  // Driver Numpad
+  public Joystick joy2 = new Joystick(1);
+  public JoystickButton a_button2 = new JoystickButton(joy2, 1);
+  public JoystickButton b_button2 = new JoystickButton(joy2, 2);
+  public JoystickButton x_button2 = new JoystickButton(joy2, 3);
+  public JoystickButton y_button2 = new JoystickButton(joy2, 4);
+  public JoystickButton l_bump2 = new JoystickButton(joy2, 5);
+  public JoystickButton r_bump2 = new JoystickButton(joy2, 6);
+  public JoystickButton left_menu2 = new JoystickButton(joy2, 7);
+  public JoystickButton right_menu2 = new JoystickButton(joy2, 8);
+  public JoystickButton left_stick2 = new JoystickButton(joy2, 9);
+  public JoystickButton right_stick2 = new JoystickButton(joy2, 10);
 
     public POVButton povUp2 = new POVButton(joy2, 0, 0);
     public POVButton povRight2 = new POVButton(joy2, 90, 0);
@@ -154,6 +173,8 @@ public class RobotContainer  {
 
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
+    
+
 
       swerveHomingCommand = new SwerveHoming(swerveSubsystem);
 
@@ -165,7 +186,8 @@ public class RobotContainer  {
           () -> !joy.getRawButton(OIConstants.kDriverFieldOrientedButtonIdx)));
 
       configureButtonBindings();
-      configureButtonBindingsNumPad();
+      
+      configureSendableChooser();
     };
 
     private void configureButtonBindings() {
@@ -177,9 +199,16 @@ public class RobotContainer  {
       //zeros heading
       this.r_bump.onTrue(new InstantCommand() {
         public void initialize() {
+          new BalanceControlCommand(swerveSubsystem).schedule();//swerveSubsystem.zeroHeading();
+        }
+      });
+      
+      this.right_stick.onTrue(new InstantCommand() {
+        public void initialize() {
           swerveSubsystem.zeroHeading();
         }
       });
+
 
       //claw manual buttons
       this.povLeft.onTrue(m_clawOpen);
@@ -227,22 +256,42 @@ public class RobotContainer  {
       this.left_menu.onTrue(m_armHome);
       this.l_bump2.onTrue(m_armRestPosition);
       this.left_stick2.onTrue(m_armBumperPosition);
+
+      
       // this.l_bump.onTrue(m_armIntake);
       this.right_menu.onTrue(new ClawHoming());
     }
 
-    private void configureButtonBindingsNumPad() {
-      
-      this.a_button2.onTrue(m_armBottomLeft);
-      this.b_button2.onTrue(m_armBottomMid);
-      this.x_button2.onTrue(m_armBottomRight);
-      this.y_button2.onTrue(m_armMidLeft);
-      this.povUp2.onTrue(m_armMidMid);
-      this.povRight2.onTrue(m_armMidRight);
-      this.povLeft2.onTrue(m_armTopLeft);
-      this.povDown2.onTrue(m_armTopMid);
-      this.r_bump2.onTrue(m_armTopRight);
+
+    // FOR AUTO CHOOSER
+
+    public Command getAutonomousCommand(){
+      return new AutoPath(swerveSubsystem);
     }
+
+
+    public String getAutoPath(){
+      return this.m_chooser.getSelected();
+    }
+
+    private void configureSendableChooser() {
+      this.m_chooser = new SendableChooser<>();
+     //m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
+      m_chooser.addOption("Bottom", "Bottom");
+      m_chooser.addOption("Bottom Rotational", "Bottom Rotational");
+      m_chooser.addOption("**CHARGE** Middle Scoring Table", "Bottom Middle Charge");
+      m_chooser.addOption("**CHARGE** Middle Human Player", "Top Middle Charge");
+      //m_chooser.addOption("Middle Charge", "Middle Charge");
+      //m_chooser.addOption("Middle", "Middle");
+      //m_chooser.addOption("Top Charge", "Top Charge");
+      //m_chooser.addOption("Top", "Top");
+      //m_chooser.addOption("Test", "Test");
+      
+
+      SmartDashboard.putData("Auto Path Selector", this.m_chooser);
+    }
+
+    
 
     public double getJoystickRawAxis(int id) {
         return -m_joy.getRawAxis(id);

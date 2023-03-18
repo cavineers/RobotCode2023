@@ -92,20 +92,16 @@ public class SwerveModule {
 
     public SwerveModulePosition getPosition() {
         return new SwerveModulePosition(
-            getDrivePosition()*Constants.ModuleConstants.kDriveEncoderRot2Meter, new Rotation2d(getTurningPosition()));
+            getDrivePosition(), new Rotation2d(getTurningPosition()));
     }
     
     public double getDriveVelocity() {
         return driveEncoder.getVelocity();
     }
 
-    public void toggleIdleMode() {
-        if (turningMotor.getIdleMode() == IdleMode.kCoast) {
-            turningMotor.setIdleMode(IdleMode.kBrake);
-        }
-        else{
-            turningMotor.setIdleMode(IdleMode.kCoast);
-        }
+    public void toggleIdleMode(IdleMode mode) {
+        turningMotor.setIdleMode(mode);
+        driveMotor.setIdleMode(mode);
     }
 
     public double getTurningVelocity() {

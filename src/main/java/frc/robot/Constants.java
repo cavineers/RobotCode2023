@@ -1,7 +1,12 @@
 package frc.robot;
 
+
 import edu.wpi.first.math.util.Units;
+
+import com.pathplanner.lib.auto.PIDConstants;
+
 import edu.wpi.first.math.geometry.Translation2d;
+import com.pathplanner.lib.auto.PIDConstants;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 
 public final class Constants {
@@ -66,15 +71,18 @@ public final class Constants {
 
         public static double IntakeSpeed = 0.4;
 
-        public static double IntakeLowerLeftSpeed = IntakeSpeed;
+        public static double IntakeLeftMultiplier = 1.0;
+
+        public static double IntakeLowerLeftSpeed = IntakeSpeed*IntakeLeftMultiplier;
         public static double IntakeRaiseLeftSpeed = IntakeSpeed;
         public static double IntakeLowerRightSpeed = IntakeSpeed;
         public static double IntakeRaiseRightSpeed = IntakeSpeed;
         
-        public static double IntakeSpeedTop = .4; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = .3; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedTop = .3; // Intake motor speed (-1.0 -- 1.0)
+        public static double IntakeSpeedBottom = .2; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 48;
+        public static double RevolutionsToLowerLeft = 52;
     }
     public static final class DriveConstants {
 
@@ -132,6 +140,17 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, -kTrackWidth / 2),
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
     }
+    public static final class PathPlanning {
+        public static final double kMaxSpeedMetersPerSecond = .1;
+        public static final double kMaxAccelerationMetersPerSecond = .05;
+
+        public static final PIDConstants kAutoDriveVelocityPID = new PIDConstants(1, 0, 0);
+        public static final PIDConstants kAutoDriveTurnPID = new PIDConstants(0.5, 0, 0);
+        
+        public static final double positionalTolerance = 0.05; // meters
+        public static final double angularTolerance = 2; // degrees
+        
+    }
     public static class Arm {
      // Joint one is closest to chassis and joint two is the furthest
         public static int ArmChainMotor = CANIds.ArmChainMotor;
@@ -176,6 +195,18 @@ public final class Constants {
         public static double MinAngleRotations = -0.025;
 
     }
+
+    public static final class PresetTranslations {
+        //IN METERS needs to be adjusted 
+
+        public static final Translation2d kLeftPosition = new Translation2d(1.5, Units.inchesToMeters(-22));  //0.8128
+        public static final Translation2d kShelfPosition = new Translation2d(1.5, 0); 
+        public static final Translation2d kRightPosition = new Translation2d(1.5, Units.inchesToMeters(22)); //0.8128
+
+        public static final Translation2d kSubstationPosition = new Translation2d(0.5, 0); 
+
+    }
+
     public static final class Claw {
         public static final double kCLawCloseSpeed = .2;
         public static final double kClawHomeSpeed = .05;
@@ -196,6 +227,19 @@ public final class Constants {
         public static final double kDeadband = 0.1;
     }
 
+    public static final class HomingDrivePIDControllerConstants {
+        public static final double kP = 1; //ADJUST
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+    }
+
+    public static final class HomingRotationalPIDControllerConstants {
+        public static final double kP = 0.1; //ADJUST
+        public static final double kI = 0.0;
+        public static final double kD = 0.0;
+    }
+
+    
     public static final class BalanceConstants {
         public static final double kBalancingControlGoalDegrees = 0;
         public static final double kBalancingControlTresholdDegrees = 2.5;
@@ -204,7 +248,7 @@ public final class Constants {
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
         public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
 
-        public static final double kBalancingControlBackwardsPowerMultiplier = 2;
+        public static final double kBalancingControlBackwardsPowerMultiplier = 3;
     }
 }
 

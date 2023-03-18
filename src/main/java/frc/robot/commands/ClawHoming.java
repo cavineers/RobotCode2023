@@ -33,6 +33,7 @@ public class ClawHoming extends CommandBase {
             Robot.claw.setMotorState(Claw.clawMotorState.manualON);
             if (Robot.claw.getEncoderPosition()>=Constants.Claw.kRevolutionsToHome){
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
+                Claw.setClosing(false);
                 Robot.claw.resetEncoder();
                 this.isFinished = true;
             }
