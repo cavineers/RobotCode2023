@@ -111,8 +111,8 @@ public class AutoPath extends CommandBase {
   
     private HashMap<String, Command> generateEventMapping(){
       HashMap<String, Command> eventMap = new HashMap<>();
-      // eventMap.put("DeployIntake", new ToggleDeployIntake());
-      // eventMap.put("UnDeployIntake", new ToggleUndeployIntake());
+      eventMap.put("DeployIntake", new ToggleDeployIntake());
+      eventMap.put("UnDeployIntake", new ToggleUndeployIntake());
 
       eventMap.put("CloseClaw", new ClawToggle());
       eventMap.put("OpenClaw", new ClawToggle());
