@@ -65,7 +65,7 @@ public class BalanceControlCommand extends CommandBase {
         //  if (this.runChecks()) {
         
           this.currentAngle = swerveSubsystem.getRoll();
-          this.error = calculateError();
+          this.error = 0 - currentAngle;
           this.drivePower = pidController.calculate(error);
           ChassisSpeeds chassisSpeeds;
 
