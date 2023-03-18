@@ -202,6 +202,12 @@ public class RobotContainer  {
           new BalanceControlCommand(swerveSubsystem).schedule();//swerveSubsystem.zeroHeading();
         }
       });
+      
+      this.right_stick.onTrue(new InstantCommand() {
+        public void initialize() {
+          swerveSubsystem.zeroHeading();
+        }
+      });
 
 
       //claw manual buttons
