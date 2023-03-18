@@ -80,6 +80,7 @@ public class AutoPath extends CommandBase {
       configCommand(this.pathGroup);
       this.autoCommandGroup.addCommands(
         generateHomingGroup(),
+       // new ArmRestPosition(),
         new ClawToggle(),
 
         new InstantCommand(){ // Wait command

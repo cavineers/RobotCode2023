@@ -86,7 +86,7 @@ public final class Constants {
     }
     public static final class DriveConstants {
 
-        public static final double kPhysicalMaxSpeedMetersPerSecond = 5;
+        public static final double kPhysicalMaxSpeedMetersPerSecond = 2;
         public static final double kPhysicalMaxAngularSpeedRadiansPerSecond = 2 * 2 * Math.PI;
 
         public static final int kFrontLeftDriveCanID = CANIds.kFrontLeftDriveCanID;
@@ -119,7 +119,7 @@ public final class Constants {
         public static final boolean kFrontRightAbsoluteEncoderReversed = false; //TBD
         public static final boolean kBackRightAbsoluteEncoderReversed = false; //TBD
 
-        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond / 3;
+        public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond;
         public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
@@ -189,7 +189,7 @@ public final class Constants {
         public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
-        public static double MinExtensionRotations = 0;
+        public static double MinExtensionRotations = -5;
         public static double ExtensionLowerSpeedRotations = 6;
         public static double MaxAngleRotations = 21;
         public static double MinAngleRotations = -0.025;

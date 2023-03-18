@@ -20,7 +20,7 @@ public class ToggleUndeployIntake extends CommandBase {
     @Override
     public void execute() {
         if (Robot.intake.getIntakeDropMotorState() == Intake.IntakeDropMotorState.OFF) {
-            // Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.UNDEPLOY);
+            //Robot.intake.setIntakeDropMotorState(Intake.IntakeDropMotorState.UNDEPLOY);
             Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.OFF);
         } if (Robot.intake.getIntakeSwitch() == true) {
             isFinished = true;

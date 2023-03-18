@@ -143,12 +143,6 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         m_odometer.update(getRotation2d(), getPositions());
 
         SmartDashboard.putString("SwervePOSE", getPose()+"");
-
-        SmartDashboard.putNumber("FrontLeft Cancoder", frontLeft.getAbsolutePosition());
-        SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());
-        SmartDashboard.putNumber("BackLeft Cancoder", backLeft.getAbsolutePosition());
-        SmartDashboard.putNumber("BackRight Cancoder", backRight.getAbsolutePosition());
-
         SmartDashboard.putNumber("Heading", getHeading());
     }
 

@@ -119,8 +119,6 @@ public class Intake extends SubsystemBase{
     
     public void periodic(){
         SmartDashboard.putBoolean("Intake Limit Switch", getIntakeSwitch());
-        SmartDashboard.putNumber("Left Position", m_intakeLeftDropMotor.getEncoder().getPosition());
-        SmartDashboard.putNumber("Right Position", m_intakeRightDropMotor.getEncoder().getPosition());
         SmartDashboard.putString("State", ""+getIntakeDropMotorState());
     }
     /**

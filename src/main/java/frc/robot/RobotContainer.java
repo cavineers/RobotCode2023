@@ -199,15 +199,15 @@ public class RobotContainer  {
       //zeros heading
       this.r_bump.onTrue(new InstantCommand() {
         public void initialize() {
-          new BalanceControlCommand(swerveSubsystem).schedule();//swerveSubsystem.zeroHeading();
-        }
-      });
-      
-      this.right_stick.onTrue(new InstantCommand() {
-        public void initialize() {
           swerveSubsystem.zeroHeading();
         }
       });
+      
+      // this.right_stick.onTrue(new InstantCommand() {
+      //   public void initialize() {
+      //     right_stick.onTrue(new BalanceControl);
+      //   }
+      // });
 
 
       //claw manual buttons
@@ -260,6 +260,16 @@ public class RobotContainer  {
       
       // this.l_bump.onTrue(m_armIntake);
       this.right_menu.onTrue(new ClawHoming());
+
+      this.a_button2.onTrue(m_armBottomLeft);
+      this.b_button2.onTrue(m_armBottomMid);
+      this.x_button2.onTrue(m_armBottomRight);
+      this.y_button2.onTrue(m_armMidLeft);
+      this.povUp2.onTrue(m_armMidMid);
+      this.povRight2.onTrue(m_armMidRight);
+      this.povLeft2.onTrue(m_armTopLeft);
+      this.povDown2.onTrue(m_armTopMid);
+      this.r_bump2.onTrue(m_armTopRight);
     }
 
 
