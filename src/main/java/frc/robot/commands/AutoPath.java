@@ -34,6 +34,7 @@ import edu.wpi.first.wpilibj.DriverStation;
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
+import frc.robot.commands.AutoArmCommands.ArmAutopickup;
 import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.RetractCompletely;
@@ -80,7 +81,13 @@ public class AutoPath extends CommandBase {
       configCommand(this.pathGroup);
       this.autoCommandGroup.addCommands(
         generateHomingGroup(),
-       // new ArmRestPosition(),
+        new ArmAutopickup(),
+        new InstantCommand(){ // Wait command
+          public void initialize() {
+          try {
+            Thread.sleep(1000);
+          }catch(InterruptedException e) {}
+        }},
         new ClawToggle(),
 
         new InstantCommand(){ // Wait command
@@ -91,8 +98,19 @@ public class AutoPath extends CommandBase {
         }},
 
         generatePlaceConeGroup(),
-        this.m_autoCommand
-      );
+        
+        new InstantCommand(){ // Wait command
+          public void initialize() {
+          try {
+            Thread.sleep(250);
+          }catch(InterruptedException e) {}
+        }},
+
+        new ParallelCommandGroup(
+          new ArmRestPosition(),
+          this.m_autoCommand
+        ));
+        new BalanceControlCommand(swerveSubsystem);
       this.autoCommandGroup.schedule();
     }
 
@@ -123,7 +141,7 @@ public class AutoPath extends CommandBase {
       eventMap.put("BumperArm", new ArmAtBumperCommand());
       eventMap.put("ArmIntake", generateGrabIntakeGroup());
 
-      eventMap.put("Balance", new BalanceControlCommand(swerveSubsystem));
+      //eventMap.put("Balance", new BalanceControlCommand(swerveSubsystem));
     
 
       return eventMap;
@@ -133,8 +151,7 @@ public class AutoPath extends CommandBase {
 
       return new SequentialCommandGroup(
         new TopLeft(),
-        new ClawToggle(),
-        new ArmRestPosition()
+        new ClawToggle()
         
       );
     }
@@ -142,7 +159,7 @@ public class AutoPath extends CommandBase {
     private SequentialCommandGroup generatePlaceCubeGroup(){
 
       return new SequentialCommandGroup(
-        new TopLeft(),
+        new TopMid(),
         new ClawToggle()
         //new HomeArm()
         

@@ -203,12 +203,7 @@ public class RobotContainer  {
         }
       });
       
-      // this.right_stick.onTrue(new InstantCommand() {
-      //   public void initialize() {
-      //     right_stick.onTrue(new BalanceControl);
-      //   }
-      // });
-
+      this.right_stick.onTrue(new BalanceControlCommand(swerveSubsystem));
 
       //claw manual buttons
       this.povLeft.onTrue(m_clawOpen);
@@ -291,6 +286,7 @@ public class RobotContainer  {
       m_chooser.addOption("Bottom Rotational", "Bottom Rotational");
       m_chooser.addOption("**CHARGE** Middle Scoring Table", "Bottom Middle Charge");
       m_chooser.addOption("**CHARGE** Middle Human Player", "Top Middle Charge");
+      m_chooser.setDefaultOption("Exit Community", "Exit Community");
       //m_chooser.addOption("Middle Charge", "Middle Charge");
       //m_chooser.addOption("Middle", "Middle");
       //m_chooser.addOption("Top Charge", "Top Charge");

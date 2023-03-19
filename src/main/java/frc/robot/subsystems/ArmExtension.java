@@ -16,7 +16,6 @@ public class ArmExtension extends SubsystemBase {
         SmartDashboard.putBoolean("ExtensionSwitch", getExtensionSwitch());
 
         if (getExtensionSwitch() == true) {
-            setArmExtensionMotorState(ArmExtensionMotorState.OFF);
             setArmExtensionMotorPosition(0.0);
         }
     }

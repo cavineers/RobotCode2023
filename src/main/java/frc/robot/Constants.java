@@ -120,7 +120,8 @@ public final class Constants {
         public static final boolean kBackRightAbsoluteEncoderReversed = false; //TBD
 
         public static final double kTeleDriveMaxSpeedMetersPerSecond = kPhysicalMaxSpeedMetersPerSecond;
-        public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = kPhysicalMaxAngularSpeedRadiansPerSecond / 4;
+        public static final double kTeleDriveMinSpeedMetersPerSecond = 5/3;
+        public static final double kTeleDriveMaxAngularSpeedRadiansPerSecond = Math.PI/2;
         public static final double kTeleDriveMaxAccelerationUnitsPerSecond = 3;
         public static final double kTeleDriveMaxAngularAccelerationUnitsPerSecond = 3;
 
@@ -157,7 +158,7 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
      
-        public static double ArmChainSpeedUp = 0.25;
+        public static double ArmChainSpeedUp = 0.175;
         public static double ArmChainSpeedDown = -0.08;
 
         public static double ArmExtensionSpeed = 0.95;
@@ -170,6 +171,8 @@ public final class Constants {
         
         public static double ArmIntakeAngleRotations = 0;
         public static double ArmIntakeExtensionRotations = 18;
+        public static double ArmAutoAngleRotations = 4.65;
+        public static double ArmAutoExtensionRotations = 0.1;
         public static double ArmRestPositionAngleRotations = 5;
         public static double ArmRestPositionExtensionRotations = 1;
         public static double ArmBumperAngleRotations = 7.2;
@@ -185,14 +188,14 @@ public final class Constants {
         public static double TopNodePegAngleRotations = 22;
         public static double TopNodePegExtensionRotations = 130;
     // Encoder deadzones
-     public static double ExtensionEncoderDeadzone = 2.3;
+     public static double ExtensionEncoderDeadzone = 2.5;
         public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 132;
-        public static double MinExtensionRotations = -5;
+        public static double MinExtensionRotations = -15;
         public static double ExtensionLowerSpeedRotations = 6;
         public static double MaxAngleRotations = 21;
-        public static double MinAngleRotations = -0.025;
+        public static double MinAngleRotations = -100;
 
     }
 
@@ -208,10 +211,10 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static final double kCLawCloseSpeed = .2;
+        public static final double kCLawCloseSpeed = .25;
         public static final double kClawHomeSpeed = .05;
         public static final double kClawManualSpeed = .05;
-        public static final double kRevolutionsToHome = 0.225714238882065; //2.5
+        public static final double kRevolutionsToHome = 0; //0.225714238882065
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
         public static final int kCurrentLimit = 10; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
@@ -222,7 +225,7 @@ public final class Constants {
         public static final int kDriverYAxis = 1;
         public static final int kDriverXAxis = 0;
         public static final int kDriverRotAxis = 4;
-        public static final int kDriverFieldOrientedButtonIdx = 1;
+        public static final int kDriverFieldOrientedButtonIdx = 9;
 
         public static final double kDeadband = 0.05;
     }
@@ -244,11 +247,11 @@ public final class Constants {
         public static final double kBalancingControlGoalDegrees = 0;
         public static final double kBalancingControlTresholdDegrees = 2.5;
         
-        public static final double kBalancingControlDriveP = 0.045; // P (Proportional) constant of a PID loop
+        public static final double kBalancingControlDriveP = 0.015; // P (Proportional) constant of a PID loop
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
         public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
 
-        public static final double kBalancingControlBackwardsPowerMultiplier = 2;
+        public static final double kBalancingControlBackwardsPowerMultiplier = 1;
     }
 }
 
