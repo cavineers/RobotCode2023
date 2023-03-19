@@ -66,8 +66,8 @@ public class AutoPath extends CommandBase {
       }
 
     
-
       addRequirements(swerveSubsystem);
+
     }
     
     public void initialize(){
@@ -110,7 +110,6 @@ public class AutoPath extends CommandBase {
           new ArmRestPosition(),
           this.m_autoCommand
         ));
-        new BalanceControlCommand(swerveSubsystem);
       this.autoCommandGroup.schedule();
     }
 
@@ -118,6 +117,12 @@ public class AutoPath extends CommandBase {
       if (this.autoCommandGroup.isFinished()) {
         this.isActive = false;
       }
+
+      // if (Math.abs(this.swerveSubsystem.getRoll()) >= 10){
+      //   this.autoCommandGroup.cancel();
+      //   this.isActive = false;
+      //   new BalanceControlCommand(swerveSubsystem).schedule();
+      // }
     }
   
   

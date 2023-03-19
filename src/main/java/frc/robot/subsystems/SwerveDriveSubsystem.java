@@ -144,7 +144,11 @@ public class SwerveDriveSubsystem extends SubsystemBase {
 
         SmartDashboard.putString("SwervePOSE", getPose()+"");
         SmartDashboard.putNumber("Heading", getHeading());
+
+        SmartDashboard.putNumber("Roll", getRoll());
+        SmartDashboard.putNumber("Pitch", getPitch());
     }
+    
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
