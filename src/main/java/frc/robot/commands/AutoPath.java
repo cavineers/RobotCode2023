@@ -102,12 +102,6 @@ public class AutoPath extends CommandBase {
       if (this.autoCommandGroup.isFinished()) {
         this.isActive = false;
       }
-
-      // if (Math.abs(this.swerveSubsystem.getRoll()) >= 10){
-      //   this.autoCommandGroup.cancel();
-      //   this.isActive = false;
-      //   new BalanceControlCommand(swerveSubsystem).schedule();
-      // }
     }
   
   
@@ -152,7 +146,6 @@ public class AutoPath extends CommandBase {
       return new SequentialCommandGroup(
         new TopLeft(),
         new ClawToggle()
-        
       );
     }
 

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
-
+import frc.robot.commands.BalanceControlCommand;
 import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
@@ -115,7 +115,12 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    if (Math.abs(m_ahrs.getRoll()) >= 10){
+        this.m_autonomousCommand.cancel();
+        new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()).schedule();
+      }
+  }
 
   @Override
   public void teleopInit() {
