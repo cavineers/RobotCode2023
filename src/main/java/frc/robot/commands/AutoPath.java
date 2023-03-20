@@ -82,29 +82,14 @@ public class AutoPath extends CommandBase {
       this.autoCommandGroup.addCommands(
         generateHomingGroup(),
         new ArmAutopickup(),
-        new InstantCommand(){ // Wait command
-          public void initialize() {
-          try {
-            Thread.sleep(1000);
-          }catch(InterruptedException e) {}
-        }},
+        generateWait(1000),
         new ClawToggle(),
 
-        new InstantCommand(){ // Wait command
-          public void initialize() {
-          try {
-            Thread.sleep(1000);
-          }catch(InterruptedException e) {}
-        }},
+        generateWait(1000),
 
         generatePlaceConeGroup(),
         
-        new InstantCommand(){ // Wait command
-          public void initialize() {
-          try {
-            Thread.sleep(250);
-          }catch(InterruptedException e) {}
-        }},
+        generateWait(1000),
 
         new ParallelCommandGroup(
           new ArmRestPosition(),
@@ -150,6 +135,16 @@ public class AutoPath extends CommandBase {
     
 
       return eventMap;
+    }
+
+    private Command generateWait(int time){
+      return new InstantCommand(){
+        public void initialize(){
+          try{
+            Thread.sleep(time);
+          }catch(InterruptedException e){}
+        }
+      };
     }
 
     private SequentialCommandGroup generatePlaceConeGroup(){
