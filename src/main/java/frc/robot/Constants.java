@@ -81,8 +81,7 @@ public final class Constants {
         public static double IntakeSpeedTop = .3; // Intake motor speed (-1.0 -- 1.0)
         public static double IntakeSpeedBottom = .2; // Intake motor speed (-1.0 -- 1.0)
 
-        public static double RevolutionsToLower = 48;
-        public static double RevolutionsToLowerLeft = 52;
+        public static double RevolutionsToLower = 5;
     }
     public static final class DriveConstants {
 
@@ -227,7 +226,7 @@ public final class Constants {
         public static final int kDriverRotAxis = 4;
         public static final int kDriverFieldOrientedButtonIdx = 9;
 
-        public static final double kDeadband = 0.05;
+        public static final double kDeadband = 0.05; //blue xbox controller
     }
 
     public static final class HomingDrivePIDControllerConstants {
