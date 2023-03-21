@@ -29,6 +29,7 @@ import com.pathplanner.lib.server.PathPlannerServer;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private Command m_balanceCommand;
 
   //Container
   public static RobotContainer m_robotContainer;
@@ -118,7 +119,8 @@ public class Robot extends TimedRobot {
   public void autonomousPeriodic() {
     if (Math.abs(m_ahrs.getRoll()) >= 10){ //Check the roll of the robot
         this.m_autonomousCommand.cancel(); 
-        new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()).schedule(); //If the robot is tilted, cancel the autonomous command and run the balance control command
+        this.m_balanceCommand = new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()); //If the robot is tilted, cancel the autonomous command and run the balance control command
+        this.m_balanceCommand.schedule();
       }
   }
 
@@ -130,6 +132,9 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+    if (m_balanceCommand != null){
+      m_balanceCommand.cancel();
     }
     m_robotContainer.swerveHomingCommand.schedule();
   }
