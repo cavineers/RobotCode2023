@@ -116,9 +116,9 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    if (Math.abs(m_ahrs.getRoll()) >= 10){
-        this.m_autonomousCommand.cancel();
-        new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()).schedule();
+    if (Math.abs(m_ahrs.getRoll()) >= 10){ //Check the roll of the robot
+        this.m_autonomousCommand.cancel(); 
+        new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()).schedule(); //If the robot is tilted, cancel the autonomous command and run the balance control command
       }
   }
 

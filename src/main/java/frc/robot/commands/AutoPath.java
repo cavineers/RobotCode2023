@@ -131,7 +131,7 @@ public class AutoPath extends CommandBase {
       return eventMap;
     }
 
-    private Command generateWait(int time){
+    private Command generateWait(int time){ // Creates a command that waits for a specified amount of time
       return new InstantCommand(){
         public void initialize(){
           try{
@@ -141,7 +141,7 @@ public class AutoPath extends CommandBase {
       };
     }
 
-    private SequentialCommandGroup generatePlaceConeGroup(){
+    private SequentialCommandGroup generatePlaceConeGroup(){ // Drops cone on the top height
 
       return new SequentialCommandGroup(
         new TopLeft(),
@@ -149,7 +149,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private SequentialCommandGroup generatePlaceCubeGroup(){
+    private SequentialCommandGroup generatePlaceCubeGroup(){ // Drops cube on the top height
 
       return new SequentialCommandGroup(
         new TopMid(),
@@ -159,7 +159,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private SequentialCommandGroup generateGrabIntakeGroup(){
+    private SequentialCommandGroup generateGrabIntakeGroup(){ // Grabs piece from intake
       return new SequentialCommandGroup(
         new ArmIntakePreset(),
         new ClawToggle(),
@@ -174,7 +174,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private ParallelCommandGroup generateHomingGroup() {
+    private ParallelCommandGroup generateHomingGroup() { // Homes the arm and claw
       return new ParallelCommandGroup(
         new HomeArm(),
         new ClawHoming()
