@@ -18,6 +18,9 @@ import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.Strip;
+
+import frc.robot.commands.SetLED;
 
 import com.pathplanner.lib.server.PathPlannerServer;
 
@@ -38,6 +41,7 @@ public class Robot extends TimedRobot {
   public static ArmAngle armAngle;
   public static Intake intake;
   public static Claw claw;
+  public static Strip strip;
 
 
   //Navx
@@ -55,6 +59,7 @@ public class Robot extends TimedRobot {
     armAngle = new ArmAngle();
     intake = new Intake();
     claw = new Claw();
+    strip = new Strip();
 
     
     //Container
@@ -72,8 +77,7 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void robotInit() {
-    
-    
+    new SetLED().schedule();
   }
 
   /**

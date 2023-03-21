@@ -40,6 +40,9 @@ public final class Constants {
         public static final int ClawMotor = 13;
        
     }
+    public static class PWM {
+        public static final int kStripLEDPort = 0;
+    }
     public static class DIO {
         public static int AngleProxSensor = 9;
         public static int ArmExtensionSwitch = 0;
@@ -228,7 +231,6 @@ public final class Constants {
 
         public static final double kDeadband = 0.05; //blue xbox controller
     }
-
     public static final class HomingDrivePIDControllerConstants {
         public static final double kP = 1; //ADJUST
         public static final double kI = 0.0;
@@ -240,8 +242,6 @@ public final class Constants {
         public static final double kI = 0.0;
         public static final double kD = 0.0;
     }
-
-    
     public static final class BalanceConstants {
         public static final double kBalancingControlGoalDegrees = 0;
         public static final double kBalancingControlTresholdDegrees = 2.5;
