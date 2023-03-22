@@ -35,6 +35,7 @@ public class AprilTagHomingCommand extends CommandBase {
     private PIDController rotationPID;
 
     private Translation2d goal; // The peg/shelf/substation that is selected
+    private Translation2d goalRelativeRobot;
 
 
     
@@ -44,7 +45,11 @@ public class AprilTagHomingCommand extends CommandBase {
 
     
 
+<<<<<<< Updated upstream
     public AprilTagHomingCommand(SwerveDriveSubsystem swerveSubsystem, AprilTagHoming tagHomingSubsystem, Translation2d goalOffset) {
+=======
+    public AprilTagHomingCommand(SwerveDriveSubsystem swerveSubsystem, AprilTagHoming tagHomingSubsystem) {
+>>>>>>> Stashed changes
         
         this.swerveSubsystem = swerveSubsystem;
         this.tagHomingSubsystem = tagHomingSubsystem;
@@ -54,7 +59,11 @@ public class AprilTagHomingCommand extends CommandBase {
         this.relativeOdometer = swerveSubsystem.getNewOdometer();
         
 
+<<<<<<< Updated upstream
         this.goal = goalOffset; // The peg/shelf/substation translation2d that is selected
+=======
+        this.goal = new Translation2d(Constants.AprilTagOffsetConstants.kAprilTagOffsetX, Constants.AprilTagOffsetConstants.kAprilTagOffsetY); // The peg/shelf/substation translation2d that is selected
+>>>>>>> Stashed changes
 
         this.xSpeedPID = new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD); // X controller
         this.rotationPID = new PIDController(Constants.HomingRotationalPIDControllerConstants.kP, Constants.HomingRotationalPIDControllerConstants.kI, Constants.HomingRotationalPIDControllerConstants.kD); // Rotation controller
@@ -74,12 +83,9 @@ public class AprilTagHomingCommand extends CommandBase {
     }
 
     public void setSetPoint() {
-        Translation2d goalRelativeRobot = calculateGoalRelativeRobot();
+        this.goalRelativeRobot = calculateGoalRelativeRobot();
+ 
         this.xSpeedPID.setSetpoint(goalRelativeRobot.getX());
-
-        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
-            this.goal = new Translation2d(this.goal.getX(), -this.goal.getY());
-        } 
         
         if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
             this.rotationPID.setSetpoint(0);
@@ -148,21 +154,18 @@ public class AprilTagHomingCommand extends CommandBase {
 
 
     private boolean isAtXGoal() {
-        if (Math.abs(this.relativeOdometer.getPoseMeters().getX() - this.goal.getX()) <= 0.05){
+        if (Math.abs(this.goalRelativeRobot.getX() - this.relativeOdometer.getPoseMeters().getX()) <= 0.05){
             return true;
         }
         return false;
     }
-
-    private boolean isAtYGoal() {
-        if (Math.abs(this.relativeOdometer.getPoseMeters().getY() - this.goal.getY()) <= 0.05){
-            return true;
-        }
-        return false;
-    } 
     
     private boolean isAtThetaGoal() {
-        if (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees() - this.goal.getAngle().getDegrees()) <= 1){
+        if (((Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) <= 0.1)
+            && (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) >= -0.1))
+            || ((Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) >= -179.9) 
+            && (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) <= -180.1)))
+            {
             return true;
         }
         return false;

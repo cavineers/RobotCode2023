@@ -1,5 +1,6 @@
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.util.sendable.Sendable;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -10,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-
+import frc.robot.commands.AprilTagHomingCommand;
 import frc.robot.commands.AutoPath;
 import frc.robot.commands.NumPad.BottomLeft;
 import frc.robot.commands.NumPad.BottomMid;
@@ -84,9 +85,7 @@ public class RobotContainer  {
 
     //April Tag Presets
     
-    public Command m_aprilTagLeft;
-    public Command m_aprilTagCenter;
-    public Command m_aprilTagRight;
+    public Command m_aprilTagHoming;
 
     //Intake Commands
     public Command m_intake;
@@ -173,6 +172,8 @@ public class RobotContainer  {
 
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
+
+      m_aprilTagHoming = new AprilTagHomingCommand(swerveSubsystem);
     
 
 
