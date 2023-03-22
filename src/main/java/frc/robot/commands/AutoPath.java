@@ -35,7 +35,6 @@ import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.ArmAutopickup;
-import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.RetractCompletely;
 
