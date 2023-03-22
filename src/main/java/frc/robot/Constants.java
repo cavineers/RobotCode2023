@@ -253,5 +253,10 @@ public final class Constants {
 
         public static final double kBalancingControlBackwardsPowerMultiplier = 1;
     }
+
+    public static final class AprilTagOffsetConstants {
+        public static final double kAprilTagOffsetX = 0.0;
+        public static final double kAprilTagOffsetY = 0.0;
+    }
 }
 
