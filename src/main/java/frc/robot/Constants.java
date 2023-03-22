@@ -227,7 +227,7 @@ public final class Constants {
         public static final int kDriverRotAxis = 4;
         public static final int kDriverFieldOrientedButtonIdx = 9;
 
-        public static final double kDeadband = 0.05;
+        public static final double kDeadband = 0.05; //blue xbox controller
     }
 
     public static final class HomingDrivePIDControllerConstants {

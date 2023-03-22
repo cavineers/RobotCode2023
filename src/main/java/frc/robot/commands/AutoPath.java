@@ -82,6 +82,7 @@ public class AutoPath extends CommandBase {
       this.autoCommandGroup.addCommands(
         generateHomingGroup(),
         new ArmAutopickup(),
+        
         generateWait(1000),
         new ClawToggle(),
 
@@ -102,6 +103,12 @@ public class AutoPath extends CommandBase {
       if (this.autoCommandGroup.isFinished()) {
         this.isActive = false;
       }
+
+      // if (Math.abs(this.swerveSubsystem.getRoll()) >= 10){
+      //   this.autoCommandGroup.cancel();
+      //   this.isActive = false;
+      //   new BalanceControlCommand(swerveSubsystem).schedule();
+      // }
     }
   
   
@@ -146,10 +153,11 @@ public class AutoPath extends CommandBase {
       return new SequentialCommandGroup(
         new TopLeft(),
         new ClawToggle()
+        
       );
     }
 
-    private SequentialCommandGroup generatePlaceCubeGroup(){ // Drops cube on the top height
+    private SequentialCommandGroup generatePlaceCubeGroup(){
 
       return new SequentialCommandGroup(
         new TopMid(),
@@ -159,7 +167,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private SequentialCommandGroup generateGrabIntakeGroup(){ // Grabs piece from intake
+    private SequentialCommandGroup generateGrabIntakeGroup(){
       return new SequentialCommandGroup(
         new ArmIntakePreset(),
         new ClawToggle(),
@@ -174,7 +182,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private ParallelCommandGroup generateHomingGroup() { // Homes the arm and claw
+    private ParallelCommandGroup generateHomingGroup() {
       return new ParallelCommandGroup(
         new HomeArm(),
         new ClawHoming()
