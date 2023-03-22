@@ -14,6 +14,7 @@ import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveOdometry;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
@@ -31,14 +32,11 @@ public class AprilTagHomingCommand extends CommandBase {
     private AprilTagHoming tagHomingSubsystem;
 
     private PIDController xSpeedPID;
-    private PIDController ySpeedPID;
     private PIDController rotationPID;
-
-    private PPHolonomicDriveController swerveTrajFollower;
 
     private Translation2d goal; // The peg/shelf/substation that is selected
 
-    private PathPlannerTrajectory trajectory;
+
     
     private boolean hasInitialTarget;
 
@@ -59,21 +57,35 @@ public class AprilTagHomingCommand extends CommandBase {
         this.goal = goalOffset; // The peg/shelf/substation translation2d that is selected
 
         this.xSpeedPID = new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD); // X controller
-        this.ySpeedPID = new PIDController(-Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD); // Y controller
         this.rotationPID = new PIDController(Constants.HomingRotationalPIDControllerConstants.kP, Constants.HomingRotationalPIDControllerConstants.kI, Constants.HomingRotationalPIDControllerConstants.kD); // Rotation controller
 
-        this.swerveTrajFollower = new PPHolonomicDriveController(this.xSpeedPID, this.ySpeedPID, this.rotationPID);
-        this.swerveTrajFollower.setTolerance(new Pose2d(new Translation2d(0.05, 0.05), new Rotation2d(0.05)));
     }
 
     public void initialize() {
         swerveSubsystem.toggleIdleMode(IdleMode.kCoast);
-        this.trajectory = this.getPointAsPlannerState();
+        
         if (tagHomingSubsystem.hasTargets) {
             resetOdometry();
             this.hasInitialTarget = true;
         } else {
             this.hasInitialTarget = false;
+        }
+        setSetPoint();
+    }
+
+    public void setSetPoint() {
+        Translation2d goalRelativeRobot = calculateGoalRelativeRobot();
+        this.xSpeedPID.setSetpoint(goalRelativeRobot.getX());
+
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Blue) {
+            this.goal = new Translation2d(this.goal.getX(), -this.goal.getY());
+        } 
+        
+        if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
+            this.rotationPID.setSetpoint(0);
+        } 
+        else {
+            this.rotationPID.setSetpoint(-180);
         }
     }
     
@@ -85,14 +97,15 @@ public class AprilTagHomingCommand extends CommandBase {
         swerveSubsystem.setModuleStates(moduleStates);
        
         SmartDashboard.putString("POSEAPRIL", relativeOdometer.getPoseMeters().toString());
+        SmartDashboard.putString("Goal Pose Relative to Robot", calculateGoalRelativeRobot().toString());
     
-        SmartDashboard.putString("GOALPOSE", trajectory.getEndState().toString());
+        SmartDashboard.putString("GOALPOSE", this.goal.toString());
         SmartDashboard.putString("Chassis Speeds", chassisSpeeds+"");
     }
 
     //Find the dist goal relative to the robot, inverse it because we are driving backwards
     private Translation2d calculateGoalRelativeRobot() {
-        return (this.tagHomingSubsystem.getTranslationToTag().minus(this.goal) ).times(-1); //Find the goal relative to the robot, inverse it because we are driving backwards
+        return ((this.tagHomingSubsystem.getTranslationToTag().minus(this.goal))); //Find the goal relative to the robot, inverse it because we are driving backwards
     }
 
     //resets the odometry to 0,0 as we are relative to the robot, and keeps the gyro the same
@@ -105,14 +118,6 @@ public class AprilTagHomingCommand extends CommandBase {
         relativeOdometer.resetPosition(this.swerveSubsystem.getRotation2d(), this.swerveSubsystem.getPositions(), newPose);
     }
 
-    private PathPlannerTrajectory getPointAsPlannerState() {
-        if (this.swerveSubsystem.getRotation2d().getDegrees() < 0) {
-            Rotation2d rotation = new Rotation2d();
-            return this.tagHomingSubsystem.onTheFlyGenerationRelative(rotation.fromDegrees(this.swerveSubsystem.getRotation2d().getDegrees() + 360), calculateGoalRelativeRobot());
-        }
-        return this.tagHomingSubsystem.onTheFlyGenerationRelative(this.swerveSubsystem.getRotation2d(), calculateGoalRelativeRobot());
-    }
-
     private double clampSpeeds(double speed){
         if (Math.signum(speed) == 1) {
             return MathUtil.clamp(speed, 0.1, .5);
@@ -121,6 +126,26 @@ public class AprilTagHomingCommand extends CommandBase {
         }
         return 0;
     }
+
+    private ChassisSpeeds calculateChassisSpeeds() {
+        
+        double xSpeed = clampSpeeds(xSpeedPID.calculate(this.relativeOdometer.getPoseMeters().getX()));
+        double rotationSpeed = clampSpeeds(rotationPID.calculate(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()));
+        
+        ChassisSpeeds newSpeeds = new ChassisSpeeds();
+        newSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, 0, rotationSpeed, relativeOdometer.getPoseMeters().getRotation());
+        
+        if (isAtXGoal()) {
+            newSpeeds.vxMetersPerSecond = 0;
+        }
+
+        if (isAtThetaGoal()) {
+            newSpeeds.omegaRadiansPerSecond = 0;
+        }
+
+        return newSpeeds;
+    }
+
 
     private boolean isAtXGoal() {
         if (Math.abs(this.relativeOdometer.getPoseMeters().getX() - this.goal.getX()) <= 0.05){
@@ -142,28 +167,9 @@ public class AprilTagHomingCommand extends CommandBase {
         }
         return false;
     }
-    private ChassisSpeeds calculateChassisSpeeds() {
-        ChassisSpeeds speeds = swerveTrajFollower.calculate(relativeOdometer.getPoseMeters(), this.trajectory.getEndState());
-        
-        ChassisSpeeds newSpeeds = new ChassisSpeeds(clampSpeeds(speeds.vxMetersPerSecond), clampSpeeds(speeds.vyMetersPerSecond), clampSpeeds(speeds.omegaRadiansPerSecond));
-        
-        if (isAtXGoal()) {
-            newSpeeds.vxMetersPerSecond = 0;
-        }
-        
-        if (isAtYGoal()) {
-            newSpeeds.vyMetersPerSecond = 0;
-        }
-
-        if (isAtThetaGoal()) {
-            newSpeeds.omegaRadiansPerSecond = 0;
-        }
-
-        return newSpeeds;
-    }
 
     private boolean checkPosition(){
-        if (isAtXGoal() && isAtYGoal() && isAtThetaGoal()) {
+        if (isAtXGoal() && isAtThetaGoal()) {
             return true;
         }
         return false;
@@ -171,7 +177,7 @@ public class AprilTagHomingCommand extends CommandBase {
 
 
     public boolean isFinished() {
-        return (this.swerveTrajFollower.atReference()) || (!this.hasInitialTarget) || checkPosition();
+        return ((!this.hasInitialTarget) || checkPosition());
     }
 
     
