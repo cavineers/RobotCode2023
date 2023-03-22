@@ -7,12 +7,12 @@ import frc.robot.Robot;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.ArmAngle;
 
-public class ArmIntakePreset extends CommandBase {
+public class ArmDoubleSubStation extends CommandBase {
     
     private boolean isDone;
     private double m_timestamp;
 
-    public ArmIntakePreset() {
+    public ArmDoubleSubStation() {
         this.addRequirements(Robot.armExtension, Robot.armAngle);
     }
 
@@ -28,19 +28,19 @@ public class ArmIntakePreset extends CommandBase {
 
     @Override
     public void execute() {
-        if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.ArmIntakeAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
+        if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.DoubleSubStationAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
             this.isDone = false;
-        } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.ArmIntakeExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
+        } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.DoubleSubStationExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.ON);
             this.isDone = false;
-        } else if(Robot.armExtension.getArmExtensionMotorPosition() > (Constants.Arm.ArmIntakeExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
+        } else if(Robot.armExtension.getArmExtensionMotorPosition() > (Constants.Arm.DoubleSubStationExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.REVERSED);
             this.isDone = false;
-        } else if (Robot.armAngle.getArmChainMotorPosition() > (Constants.Arm.ArmIntakeAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
+        } else if (Robot.armAngle.getArmChainMotorPosition() > (Constants.Arm.DoubleSubStationAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.REVERSED);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.REVERSED);
