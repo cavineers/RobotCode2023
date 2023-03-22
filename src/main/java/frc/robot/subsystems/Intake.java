@@ -12,6 +12,8 @@ public class Intake extends SubsystemBase{
 
     public CANSparkMax m_intakeMotorTop;
 
+    public DigitalInput m_intakeIR;
+
     public Intake(){
 
         m_intakeMotorTop = new CANSparkMax(Constants.Intake.IntakeTopID, MotorType.kBrushless);
@@ -20,6 +22,8 @@ public class Intake extends SubsystemBase{
 
         m_intakeMotorTop.setIdleMode(IdleMode.kCoast);
 
+        m_intakeIR = new DigitalInput(Constants.DIO.IntakeSwitch);
+
     }
     //Intake states
     public enum IntakeMotorState {
@@ -27,9 +31,6 @@ public class Intake extends SubsystemBase{
         REVERSE,
         OFF
     }
-
-    // Limit Switch
-    public DigitalInput m_intakeSwitch = new DigitalInput(Constants.DIO.IntakeSwitch);
 
     // Intake states
     public IntakeMotorState m_intakeMotorState = IntakeMotorState.OFF;
@@ -59,12 +60,12 @@ public class Intake extends SubsystemBase{
         return this.m_intakeMotorState;
     }
 
-    public boolean getIntakeSwitch() {
-        return this.m_intakeSwitch.get();
+    public boolean getIntakeIR() {
+        return this.m_intakeIR.get();
       }
     
     public void periodic(){
-        SmartDashboard.putBoolean("Intake Limit Switch", getIntakeSwitch());
+        SmartDashboard.putBoolean("Intake IR", getIntakeIR());
     }
     /**
      * Get the current intake state.

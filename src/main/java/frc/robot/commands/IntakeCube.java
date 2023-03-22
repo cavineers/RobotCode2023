@@ -4,12 +4,17 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.Intake;
+import edu.wpi.first.wpilibj.Timer;
 
 public class IntakeCube extends CommandBase {
+    
     boolean isFinished;
+
+    private double startTime;
     
     public IntakeCube() {
         this.addRequirements(Robot.intake);
+        this.startTime = Timer.getFPGATimestamp();
     }
 
     // Set Motor State to ON / OFF
@@ -26,6 +31,8 @@ public class IntakeCube extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return true;
+        if (Timer.getFPGATimestamp() - this.startTime >= 1||Robot.intake.getIntakeIR()) {
+            return true;
+        } return false;
     }
 }
