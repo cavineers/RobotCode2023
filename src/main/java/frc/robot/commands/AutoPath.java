@@ -106,8 +106,8 @@ public class AutoPath extends CommandBase {
         }},
 
         new ParallelCommandGroup(
-          new ArmRestPosition(),
-          this.m_autoCommand
+          new ArmRestPosition()
+          //this.m_autoCommand
         ));
       this.autoCommandGroup.schedule();
     }
@@ -172,7 +172,7 @@ public class AutoPath extends CommandBase {
 
     private SequentialCommandGroup generateGrabIntakeGroup(){
       return new SequentialCommandGroup(
-        new ArmIntakePreset(),
+        //new ArmIntakePreset(),
         new ClawToggle(),
         new InstantCommand(){
           public void initialize(){

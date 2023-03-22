@@ -28,10 +28,7 @@ public final class Constants {
         public static final int kFrontRightAbsoluteEncoderCanID = 11;
         public static final int kBackRightAbsoluteEncoderCanID = 10;
 
-        public static final int IntakeMotorBottom = 17;
         public static final int IntakeMotorTop = 16;
-        public static final int IntakeRightDropMotor = 18;
-        public static final int IntakeLeftDropMotor = 15;
 
         public static final int ArmChainMotor = 14; // left side
         public static final int ArmChainMotor2 = 20; // right side
@@ -60,26 +57,10 @@ public final class Constants {
     }
     public static final class Intake{
         public static int IntakeTopID = CANIds.IntakeMotorTop;
-        public static int IntakeBottomID = CANIds.IntakeMotorBottom;
-        public static int IntakeRightDropMotorID = CANIds.IntakeRightDropMotor;
-        public static int IntakeLeftDropMotorID = CANIds.IntakeLeftDropMotor;
 
-        public static boolean kInvertRightDeployMotor = false;
-        public static boolean kInvertLeftDeployMotor = false;
         public static boolean kInvertTopFlyWheel = false;
-        public static boolean kInvertBottom = false;
 
-        public static double IntakeSpeed = 0.4;
-
-        public static double IntakeLeftMultiplier = 1.0;
-
-        public static double IntakeLowerLeftSpeed = IntakeSpeed*IntakeLeftMultiplier;
-        public static double IntakeRaiseLeftSpeed = IntakeSpeed;
-        public static double IntakeLowerRightSpeed = IntakeSpeed;
-        public static double IntakeRaiseRightSpeed = IntakeSpeed;
-        
         public static double IntakeSpeedTop = .3; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = .2; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 5;
     }
