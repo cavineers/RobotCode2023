@@ -143,14 +143,12 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         m_odometer.update(getRotation2d(), getPositions());
 
         SmartDashboard.putString("SwervePOSE", getPose()+"");
-
-        SmartDashboard.putNumber("FrontLeft Cancoder", frontLeft.getAbsolutePosition());
-        SmartDashboard.putNumber("FrontRight Cancoder", frontRight.getAbsolutePosition());
-        SmartDashboard.putNumber("BackLeft Cancoder", backLeft.getAbsolutePosition());
-        SmartDashboard.putNumber("BackRight Cancoder", backRight.getAbsolutePosition());
-
         SmartDashboard.putNumber("Heading", getHeading());
+
+        SmartDashboard.putNumber("Roll", getRoll());
+        SmartDashboard.putNumber("Pitch", getPitch());
     }
+    
 
     public void setModuleStates(SwerveModuleState[] desiredStates) {
         SwerveDriveKinematics.desaturateWheelSpeeds(desiredStates, DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
@@ -173,5 +171,13 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         backLeft.toggleIdleMode(mode);
         backRight.toggleIdleMode(mode);
 
+    }
+
+    public double getRoll(){
+        return gyro.getRoll();
+    }
+
+    public double getPitch(){
+        return gyro.getPitch();
     }
 }

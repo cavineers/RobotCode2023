@@ -46,7 +46,8 @@ public class Claw extends SubsystemBase{
     public enum clawMotorState {
         ON,
         OFF,
-        REVERSE
+        REVERSE,
+        manualON
     }
 
     public CANSparkMax getMotor() {
@@ -90,6 +91,10 @@ public class Claw extends SubsystemBase{
                 // reverses claw
                 this.m_clawMotor.set(-Constants.Claw.kClawHomeSpeed);
                 break;
+            case manualON:
+                //slowly turns motor forward
+                this.m_clawMotor.set(Constants.Claw.kClawManualSpeed);
+                break;
             default: 
                 this.setMotorState(clawMotorState.OFF);
         }
@@ -98,7 +103,6 @@ public class Claw extends SubsystemBase{
     public void periodic(){
         SmartDashboard.putBoolean("Claw Limit Switch", this.getLimitSwitch());
         SmartDashboard.putBoolean("Closing?", isClosing());
-        SmartDashboard.putNumber("Claw Encoder Position", clawEncoder.getPosition());
     }
 
 }

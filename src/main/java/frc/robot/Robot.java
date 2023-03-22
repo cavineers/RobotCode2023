@@ -13,12 +13,13 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
-
+import frc.robot.commands.BalanceControlCommand;
 import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
-import frc.robot.subsystems.AprilTagHoming;
+
+import com.pathplanner.lib.server.PathPlannerServer;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -28,6 +29,7 @@ import frc.robot.subsystems.AprilTagHoming;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private Command m_balanceCommand;
 
   //Container
   public static RobotContainer m_robotContainer;
@@ -37,7 +39,6 @@ public class Robot extends TimedRobot {
   public static ArmAngle armAngle;
   public static Intake intake;
   public static Claw claw;
-  public static AprilTagHoming aprilTagHoming;
 
 
   //Navx
@@ -56,7 +57,6 @@ public class Robot extends TimedRobot {
     intake = new Intake();
     claw = new Claw();
 
-    aprilTagHoming = new AprilTagHoming();
     
     //Container
     m_robotContainer = new RobotContainer();
@@ -73,7 +73,6 @@ public class Robot extends TimedRobot {
   }
   @Override
   public void robotInit() {
-    // PortForwarder.add(5800, "10.45.41.11", 5800);
     
     
   }
@@ -117,7 +116,13 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    if (Math.abs(m_ahrs.getRoll()) >= 10){ //Check the roll of the robot
+        this.m_autonomousCommand.cancel(); 
+        this.m_balanceCommand = new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()); //If the robot is tilted, cancel the autonomous command and run the balance control command
+        this.m_balanceCommand.schedule();
+      }
+  }
 
   @Override
   public void teleopInit() {
@@ -127,6 +132,9 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+    if (m_balanceCommand != null){
+      m_balanceCommand.cancel();
     }
     m_robotContainer.swerveHomingCommand.schedule();
   }

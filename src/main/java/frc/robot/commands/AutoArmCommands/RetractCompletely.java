@@ -1,16 +1,15 @@
-package frc.robot.commands.ManualOverrideCommands;
+package frc.robot.commands.AutoArmCommands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.subsystems.ArmExtension;
 
-public class RetractArm extends CommandBase {
-    private boolean isDone = false;
+public class RetractCompletely extends CommandBase {
+    private boolean isDone;
     private double m_timestamp;
 
-    public RetractArm() {
+    public RetractCompletely() {
         this.addRequirements(Robot.armExtension);
     }
 
@@ -28,12 +27,9 @@ public class RetractArm extends CommandBase {
             Robot.armExtension.getArmExtensionMotor().set(-0.25);
     }   else {
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
-        
-        
     }
-        if (Robot.armExtension.getArmExtensionMotorPosition() < .1) {
-            Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
-
+        if (Robot.armExtension.getExtensionSwitch()){
+            this.isDone = true;
         }
 }
     
@@ -44,10 +40,6 @@ public class RetractArm extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
-            this.isDone = true;
-        }
-
         return this.isDone;
     }
 }
