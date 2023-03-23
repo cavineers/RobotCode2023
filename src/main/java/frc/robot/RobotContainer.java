@@ -47,6 +47,7 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
 import frc.robot.Constants.OIConstants;
 import frc.robot.subsystems.ArmExtension;
+import frc.robot.subsystems.AprilTagHoming;
 import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
@@ -59,6 +60,7 @@ public class RobotContainer  {
 
     //Swerve Subsystem
     private final SwerveDriveSubsystem swerveSubsystem;
+    private final AprilTagHoming aprilTagHoming;
 
     public Command m_autoCommand;
 
@@ -85,7 +87,7 @@ public class RobotContainer  {
 
     //April Tag Presets
     
-    public Command m_aprilTagHoming;
+    public Command m_aprilTagHomingCommand;
 
     //Intake Commands
     public Command m_intake;
@@ -149,6 +151,7 @@ public class RobotContainer  {
     public RobotContainer() {
 
       swerveSubsystem = new SwerveDriveSubsystem();
+      aprilTagHoming = new AprilTagHoming();
 
       m_raiseIntake = new ToggleUndeployIntake();
       m_lowerIntake = new ToggleDeployIntake();
@@ -173,7 +176,7 @@ public class RobotContainer  {
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
 
-      m_aprilTagHoming = new AprilTagHomingCommand(swerveSubsystem);
+      m_aprilTagHomingCommand = new AprilTagHomingCommand(swerveSubsystem, aprilTagHoming);
     
 
 
@@ -196,6 +199,17 @@ public class RobotContainer  {
 
       //opens and closes claw
       this.povDown.onTrue(new ClawToggle());
+
+      this.povUp.onTrue(new InstantCommand() {
+        public void initialize() {
+          if (m_aprilTagHomingCommand.isScheduled()) {
+            m_aprilTagHomingCommand.cancel();
+          } else {
+            m_aprilTagHomingCommand.schedule();
+          }
+        }
+      });
+
 
       //zeros heading
       this.r_bump.onTrue(new InstantCommand() {

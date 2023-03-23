@@ -1,5 +1,6 @@
 package frc.robot.commands;
 
+
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.PathPlannerTrajectory.PathPlannerState;
 import com.pathplanner.lib.commands.PPSwerveControllerCommand;
@@ -8,6 +9,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.math.filter.SlewRateLimiter;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -17,7 +19,9 @@ import edu.wpi.first.math.kinematics.SwerveModuleState;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants;
+import frc.robot.Robot;
 import frc.robot.subsystems.SwerveDriveSubsystem;
 import frc.robot.Constants.DriveConstants;
 
@@ -36,6 +40,8 @@ public class AprilTagHomingCommand extends CommandBase {
 
     private Translation2d goal; // The peg/shelf/substation that is selected
     private Translation2d goalRelativeRobot;
+
+    private SlewRateLimiter ySpeedLimiter;
 
 
     
@@ -60,6 +66,8 @@ public class AprilTagHomingCommand extends CommandBase {
         this.xSpeedPID = new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD); // X controller
         this.rotationPID = new PIDController(Constants.HomingRotationalPIDControllerConstants.kP, Constants.HomingRotationalPIDControllerConstants.kI, Constants.HomingRotationalPIDControllerConstants.kD); // Rotation controller
 
+        this.ySpeedLimiter = new SlewRateLimiter(DriveConstants.kTeleDriveMaxAccelerationUnitsPerSecond);
+
     }
 
     public void initialize() {
@@ -76,11 +84,11 @@ public class AprilTagHomingCommand extends CommandBase {
 
     public void setSetPoint() {
         this.goalRelativeRobot = calculateGoalRelativeRobot();
- 
+        
         this.xSpeedPID.setSetpoint(goalRelativeRobot.getX());
         
         if (DriverStation.getAlliance() == DriverStation.Alliance.Red) {
-            this.rotationPID.setSetpoint(0);
+            this.rotationPID.setSetpoint(-180);
         } 
         else {
             this.rotationPID.setSetpoint(-180);
@@ -90,14 +98,19 @@ public class AprilTagHomingCommand extends CommandBase {
     public void execute(){
         relativeOdometer.update(this.swerveSubsystem.getRotation2d(), this.swerveSubsystem.getPositions());
         
+        //get Chassis Speeds from PID controllers
         ChassisSpeeds chassisSpeeds = calculateChassisSpeeds();
         SwerveModuleState[] moduleStates =  DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
         swerveSubsystem.setModuleStates(moduleStates);
+
+        try{
+            Thread.sleep(25);
+        }catch(InterruptedException e){}
+
+
+
+       // Smart Dashboard
        
-        SmartDashboard.putString("POSEAPRIL", relativeOdometer.getPoseMeters().toString());
-        SmartDashboard.putString("Goal Pose Relative to Robot", calculateGoalRelativeRobot().toString());
-    
-        SmartDashboard.putString("GOALPOSE", this.goal.toString());
         SmartDashboard.putString("Chassis Speeds", chassisSpeeds+"");
     }
 
@@ -118,20 +131,19 @@ public class AprilTagHomingCommand extends CommandBase {
 
     private double clampSpeeds(double speed){
         if (Math.signum(speed) == 1) {
-            return MathUtil.clamp(speed, 0.1, .5);
+            return MathUtil.clamp(speed, 0.15, .5);
         } else if (Math.signum(speed) == -1) {
-            return MathUtil.clamp(speed, -0.5, -.1);
+            return MathUtil.clamp(speed, -0.5, -.15);
         }
         return 0;
     }
 
     private ChassisSpeeds calculateChassisSpeeds() {
-        
         double xSpeed = clampSpeeds(xSpeedPID.calculate(this.relativeOdometer.getPoseMeters().getX()));
-        double rotationSpeed = clampSpeeds(rotationPID.calculate(this.tagHomingSubsystem.getYaw()));
+        double rotationSpeed = clampSpeeds(rotationPID.calculate(swerveSubsystem.getHeading()));
         
         ChassisSpeeds newSpeeds = new ChassisSpeeds();
-        newSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, 0, rotationSpeed, relativeOdometer.getPoseMeters().getRotation());
+        newSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, calculateYSpeed(), 0, swerveSubsystem.getRotation2d());
         
         if (isAtXGoal()) {
             newSpeeds.vxMetersPerSecond = 0;
@@ -142,6 +154,12 @@ public class AprilTagHomingCommand extends CommandBase {
         }
 
         return newSpeeds;
+    }
+
+    private double calculateYSpeed(){
+        double ySpeed = Robot.m_robotContainer.getJoystickRawAxis(0);
+        ySpeed = Math.abs(ySpeed) > Constants.OIConstants.kDeadband ? ySpeed : 0.0; // Apply deadband
+        return (ySpeedLimiter.calculate(ySpeed) * DriveConstants.kTeleDriveMinSpeedMetersPerSecond);
     }
 
 

@@ -13,8 +13,7 @@ public class ArmAngle extends SubsystemBase {
 
     public void periodic(){
 
-        SmartDashboard.putNumber("AngleRotations", getArmChainMotorPosition());
-        SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position());
+    
         SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
 
         if (getAngleProxSensor() == true) {
