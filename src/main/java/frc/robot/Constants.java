@@ -60,7 +60,9 @@ public final class Constants {
 
         public static boolean kInvertTopFlyWheel = false;
 
-        public static double IntakeSpeedTop = .3; // Intake motor speed (-1.0 -- 1.0)
+        public static int kIntakeCurrentLimit = 40;
+
+        public static double IntakeSpeedTop = .4; // Intake motor speed (-1.0 -- 1.0)
 
         public static double RevolutionsToLower = 5;
     }

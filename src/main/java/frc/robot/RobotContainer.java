@@ -147,6 +147,9 @@ public class RobotContainer  {
 
     public SwerveHoming swerveHomingCommand;
 
+    public Command intake;
+    public Command outtake;
+
 
     public RobotContainer() {
 
@@ -174,6 +177,9 @@ public class RobotContainer  {
 
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
+
+      intake = new IntakeCube();
+      outtake = new FlushCube();
     
 
 
@@ -198,32 +204,42 @@ public class RobotContainer  {
       this.povDown.onTrue(new ClawToggle());
 
       //zeros heading
-      // this.r_bump.onTrue(new InstantCommand() {
-      //   public void initialize() {
-      //     swerveSubsystem.zeroHeading();
-      //   }
-      // });
+      this.povUp.onTrue(new InstantCommand() {
+        public void initialize() {
+          swerveSubsystem.zeroHeading();
+        }
+      });
       
       this.right_stick.onTrue(new BalanceControlCommand(swerveSubsystem));
 
       //claw manual buttons
-      this.povLeft.onTrue(m_clawOpen);
-      this.povLeft.onFalse(new InstantCommand(){
+      this.povRight.onTrue(m_clawOpen);
+      this.povRight.onFalse(new InstantCommand(){
         public void initialize() {
           m_clawOpen.cancel();
         }
       });
-      this.povRight.onTrue(m_clawClose);
-      this.povRight.onFalse(new InstantCommand(){
+      this.povLeft.onTrue(m_clawClose);
+      this.povLeft.onFalse(new InstantCommand(){
         public void initialize() {
           m_clawClose.cancel();
         }
       });
 
       // deploys intake on button hold and undeploys on release
-      this.l_bump.onTrue(new IntakeCube());
+      this.l_bump.onTrue(intake);
+      this.l_bump.onFalse(new InstantCommand(){
+        public void initialize(){
+          intake.cancel();
+        }
+      });
 
-      this.r_bump.onTrue(new FlushCube());
+      this.r_bump.onTrue(outtake);
+      this.r_bump.onFalse(new InstantCommand(){
+        public void initialize(){
+          outtake.cancel();
+        }
+      });
 
       //Arm Buttons
       this.y_button.onTrue(m_armRaise);
