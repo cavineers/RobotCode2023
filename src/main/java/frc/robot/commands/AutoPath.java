@@ -91,8 +91,8 @@ public class AutoPath extends CommandBase {
         generateWait(1000),
 
         new ParallelCommandGroup(
-          new ArmRestPosition()
-          //this.m_autoCommand
+          new ArmRestPosition(),
+          this.m_autoCommand
         ));
       this.autoCommandGroup.schedule();
     }

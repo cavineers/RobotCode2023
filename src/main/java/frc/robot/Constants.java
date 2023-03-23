@@ -144,8 +144,8 @@ public final class Constants {
         public static double ArmChainSpeedUp = 0.175;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = 0.95;
-        public static double ArmExtensionSpeedRev = -0.95;
+        public static double ArmExtensionSpeed = 1.2;
+        public static double ArmExtensionSpeedRev = -1;
 
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;
