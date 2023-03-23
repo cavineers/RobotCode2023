@@ -36,7 +36,7 @@ public class ArmExtension extends SubsystemBase {
 
         this.m_armExtensionMotor.setInverted(false);
 
-        this.m_armExtensionMotor.setSmartCurrentLimit(39);
+        this.m_armExtensionMotor.setSmartCurrentLimit(100);
        
     }
         public void setArmExtensionMotorState(ArmExtensionMotorState state) {
