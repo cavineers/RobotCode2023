@@ -32,12 +32,12 @@ import frc.robot.commands.ClawHoming;
 import frc.robot.commands.ManualOverrideCommands.ClawOpen;
 import frc.robot.commands.ManualOverrideCommands.ClawClose;
 
-import frc.robot.commands.ToggleDeployIntake;
-import frc.robot.commands.ToggleUndeployIntake;
+import frc.robot.commands.IntakeCube;
+import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
-import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
+import frc.robot.commands.AutoArmCommands.ArmDoubleSubStation;
 
 import frc.robot.commands.SwerveHoming;
 
@@ -63,6 +63,7 @@ public class RobotContainer  {
 
     //Arm Commands
     public Command m_armHome;
+    public Command m_armSubStation;
     public Command m_armRestPosition;
     public Command m_armBumperPosition;
     public Command m_armRaise;
@@ -146,14 +147,18 @@ public class RobotContainer  {
 
     public SwerveHoming swerveHomingCommand;
 
+    public Command intake;
+    public Command outtake;
+
 
     public RobotContainer() {
 
       swerveSubsystem = new SwerveDriveSubsystem();
 
-      m_raiseIntake = new ToggleUndeployIntake();
-      m_lowerIntake = new ToggleDeployIntake();
+      m_raiseIntake = new FlushCube();
+      m_lowerIntake = new IntakeCube();
       m_armHome = new HomeArm();
+      m_armSubStation = new ArmDoubleSubStation();
       m_armRestPosition = new ArmRestPosition();
       m_armBumperPosition = new ArmAtBumperCommand();
       m_armRaise = new RaiseArm();
@@ -169,10 +174,12 @@ public class RobotContainer  {
       m_armTopLeft = new TopLeft();
       m_armTopMid = new TopMid();
       m_armTopRight = new TopRight();
-      m_armIntake = new ArmIntakePreset();
 
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
+
+      intake = new IntakeCube();
+      outtake = new FlushCube();
     
 
 
@@ -197,7 +204,7 @@ public class RobotContainer  {
       this.povDown.onTrue(new ClawToggle());
 
       //zeros heading
-      this.r_bump.onTrue(new InstantCommand() {
+      this.povUp.onTrue(new InstantCommand() {
         public void initialize() {
           swerveSubsystem.zeroHeading();
         }
@@ -206,22 +213,33 @@ public class RobotContainer  {
       this.right_stick.onTrue(new BalanceControlCommand(swerveSubsystem));
 
       //claw manual buttons
-      this.povLeft.onTrue(m_clawOpen);
-      this.povLeft.onFalse(new InstantCommand(){
+      this.povRight.onTrue(m_clawOpen);
+      this.povRight.onFalse(new InstantCommand(){
         public void initialize() {
           m_clawOpen.cancel();
         }
       });
-      this.povRight.onTrue(m_clawClose);
-      this.povRight.onFalse(new InstantCommand(){
+      this.povLeft.onTrue(m_clawClose);
+      this.povLeft.onFalse(new InstantCommand(){
         public void initialize() {
           m_clawClose.cancel();
         }
       });
 
       // deploys intake on button hold and undeploys on release
-      this.l_bump.onTrue(new ToggleDeployIntake());
-      this.l_bump.onFalse(new ToggleUndeployIntake());
+      this.l_bump.onTrue(intake);
+      this.l_bump.onFalse(new InstantCommand(){
+        public void initialize(){
+          intake.cancel();
+        }
+      });
+
+      this.r_bump.onTrue(outtake);
+      this.r_bump.onFalse(new InstantCommand(){
+        public void initialize(){
+          outtake.cancel();
+        }
+      });
 
       //Arm Buttons
       this.y_button.onTrue(m_armRaise);
@@ -250,7 +268,7 @@ public class RobotContainer  {
       });
       this.left_menu.onTrue(m_armHome);
       this.l_bump2.onTrue(m_armRestPosition);
-      this.left_stick2.onTrue(m_armBumperPosition);
+      this.left_stick2.onTrue(m_armSubStation);
 
       
       // this.l_bump.onTrue(m_armIntake);

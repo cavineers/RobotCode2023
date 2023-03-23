@@ -35,7 +35,6 @@ import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.ArmAutopickup;
-import frc.robot.commands.AutoArmCommands.ArmIntakePreset;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.RetractCompletely;
 
@@ -92,8 +91,8 @@ public class AutoPath extends CommandBase {
         generateWait(1000),
 
         new ParallelCommandGroup(
-          new ArmRestPosition(),
-          this.m_autoCommand
+          new ArmRestPosition()
+          //this.m_autoCommand
         ));
       this.autoCommandGroup.schedule();
     }
@@ -114,8 +113,8 @@ public class AutoPath extends CommandBase {
   
     private HashMap<String, Command> generateEventMapping(){
       HashMap<String, Command> eventMap = new HashMap<>();
-      eventMap.put("DeployIntake", new ToggleDeployIntake());
-      eventMap.put("UnDeployIntake", new ToggleUndeployIntake());
+      eventMap.put("DeployIntake", new IntakeCube());
+      eventMap.put("UnDeployIntake", new FlushCube());
 
       eventMap.put("CloseClaw", new ClawToggle());
       eventMap.put("OpenClaw", new ClawToggle());
@@ -161,7 +160,7 @@ public class AutoPath extends CommandBase {
 
     private SequentialCommandGroup generateGrabIntakeGroup(){ // Grabs piece from intake
       return new SequentialCommandGroup(
-        new ArmIntakePreset(),
+        //new ArmIntakePreset(),
         new ClawToggle(),
         new InstantCommand(){
           public void initialize(){
@@ -176,8 +175,8 @@ public class AutoPath extends CommandBase {
 
     private ParallelCommandGroup generateHomingGroup() { // Homes the arm and claw
       return new ParallelCommandGroup(
-        new HomeArm(),
-        new ClawHoming()
+        new HomeArm()
+        // new ClawHoming()
       );
     }
       

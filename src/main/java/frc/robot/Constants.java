@@ -28,10 +28,7 @@ public final class Constants {
         public static final int kFrontRightAbsoluteEncoderCanID = 11;
         public static final int kBackRightAbsoluteEncoderCanID = 10;
 
-        public static final int IntakeMotorBottom = 17;
         public static final int IntakeMotorTop = 16;
-        public static final int IntakeRightDropMotor = 18;
-        public static final int IntakeLeftDropMotor = 15;
 
         public static final int ArmChainMotor = 14; // left side
         public static final int ArmChainMotor2 = 20; // right side
@@ -60,29 +57,14 @@ public final class Constants {
     }
     public static final class Intake{
         public static int IntakeTopID = CANIds.IntakeMotorTop;
-        public static int IntakeBottomID = CANIds.IntakeMotorBottom;
-        public static int IntakeRightDropMotorID = CANIds.IntakeRightDropMotor;
-        public static int IntakeLeftDropMotorID = CANIds.IntakeLeftDropMotor;
 
-        public static boolean kInvertRightDeployMotor = false;
-        public static boolean kInvertLeftDeployMotor = false;
         public static boolean kInvertTopFlyWheel = false;
-        public static boolean kInvertBottom = false;
 
-        public static double IntakeSpeed = 0.4;
+        public static int kIntakeCurrentLimit = 40;
 
-        public static double IntakeLeftMultiplier = 1.0;
+        public static double IntakeSpeedTop = .4; // Intake motor speed (-1.0 -- 1.0)
 
-        public static double IntakeLowerLeftSpeed = IntakeSpeed*IntakeLeftMultiplier;
-        public static double IntakeRaiseLeftSpeed = IntakeSpeed;
-        public static double IntakeLowerRightSpeed = IntakeSpeed;
-        public static double IntakeRaiseRightSpeed = IntakeSpeed;
-        
-        public static double IntakeSpeedTop = .3; // Intake motor speed (-1.0 -- 1.0)
-        public static double IntakeSpeedBottom = .2; // Intake motor speed (-1.0 -- 1.0)
-
-        public static double RevolutionsToLower = 48;
-        public static double RevolutionsToLowerLeft = 52;
+        public static double RevolutionsToLower = 5;
     }
     public static final class DriveConstants {
 
@@ -153,6 +135,7 @@ public final class Constants {
         
     }
     public static class Arm {
+// 2.7 angle rotations subtracted by all preset angle rotations to acount for the new home distance from old home
      // Joint one is closest to chassis and joint two is the furthest
         public static int ArmChainMotor = CANIds.ArmChainMotor;
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
@@ -164,39 +147,38 @@ public final class Constants {
         public static double ArmExtensionSpeed = 0.95;
         public static double ArmExtensionSpeedRev = -0.95;
 
-        public static double ArmRotationsAddPower = 11.1190;
-        public static double ArmRotationsAddPowerBottom = 5;
+        public static double ArmRotationsAddPower = 8.419;
+        public static double ArmRotationsAddPowerBottom = 2.3;
      
     //Node Rotations
         
-        public static double ArmIntakeAngleRotations = 0;
-        public static double ArmIntakeExtensionRotations = 18;
-        public static double ArmAutoAngleRotations = 4.65;
+        public static double ArmAutoAngleRotations = 1.95;
         public static double ArmAutoExtensionRotations = 0.1;
-        public static double ArmRestPositionAngleRotations = 5;
+        public static double ArmRestPositionAngleRotations = 2.3;
         public static double ArmRestPositionExtensionRotations = 1;
-        public static double ArmBumperAngleRotations = 7.2;
-        public static double ArmBumperExtensionRotations = 52.;
-        public static double BottomNodeAngleRotations = 10;
+        public static double ArmBumperAngleRotations = 4.5;
+        public static double ArmBumperExtensionRotations = 52;
+        public static double BottomNodeAngleRotations = 7.3;
         public static double BottomNodeExtensionRotations = 56;
-        public static double MidNodeShelfAngleRotations = 16;
+        public static double MidNodeShelfAngleRotations = 13.3;
         public static double MidNodeShelfExtensionRotations = 64;
-        public static double MidNodePegAngleRotations = 20;
+        public static double MidNodePegAngleRotations = 17.3;
         public static double MidNodePegExtensionRotations = 53;
-        public static double TopNodeShelfAngleRotations = 19.5;
+        public static double TopNodeShelfAngleRotations = 16.8;
         public static double TopNodeShelfExtensionRotations = 130;
-        public static double TopNodePegAngleRotations = 22;
+        public static double TopNodePegAngleRotations = 19.3;
         public static double TopNodePegExtensionRotations = 130;
+        public static double DoubleSubStationAngleRotations = 19;
+        public static double DoubleSubStationExtensionRotations = 10;
     // Encoder deadzones
      public static double ExtensionEncoderDeadzone = 2.5;
         public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
-        public static double MaxExtensionRotations = 132;
-        public static double MinExtensionRotations = -15;
+        public static double MaxExtensionRotations = 130;
+        public static double MinExtensionRotations = -150;
         public static double ExtensionLowerSpeedRotations = 6;
-        public static double MaxAngleRotations = 21;
-        public static double MinAngleRotations = -100;
-
+        public static double MaxAngleRotations = 23;
+        public static double MinAngleRotations = -22;
     }
 
     public static final class PresetTranslations {
@@ -227,7 +209,7 @@ public final class Constants {
         public static final int kDriverRotAxis = 4;
         public static final int kDriverFieldOrientedButtonIdx = 9;
 
-        public static final double kDeadband = 0.05;
+        public static final double kDeadband = 0.07; //blue xbox controller
     }
 
     public static final class HomingDrivePIDControllerConstants {
