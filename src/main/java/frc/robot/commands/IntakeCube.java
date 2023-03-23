@@ -10,19 +10,24 @@ public class IntakeCube extends CommandBase {
     
     boolean isFinished;
 
-    private double startTime;
+    private double m_timestamp;
     
     public IntakeCube() {
         this.addRequirements(Robot.intake);
-        this.startTime = Timer.getFPGATimestamp();
     }
 
     // Set Motor State to ON / OFF
     @Override
     public void initialize() {
         Robot.intake.setIntakeMotorState(Intake.IntakeMotorState.ON);
+        //this.startTime = Timer.getFPGATimestamp();
         this.isFinished = false;
     }
+
+    @Override
+    public void execute(){
+    }
+
 
     @Override
     public void end(boolean interrupted) {
@@ -31,8 +36,9 @@ public class IntakeCube extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        if (Timer.getFPGATimestamp() - this.startTime >= 1||Robot.intake.getIntakeIR()) {
-            return true;
-        } return false;
+        if (Timer.getFPGATimestamp() - this.m_timestamp >= 0 && Robot.m_robotContainer.joy.getRawButton(0)) {
+            this.isFinished = true;
+        }
+        return this.isFinished;
     }
 }

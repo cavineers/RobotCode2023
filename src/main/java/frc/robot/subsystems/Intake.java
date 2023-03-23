@@ -22,6 +22,8 @@ public class Intake extends SubsystemBase{
 
         m_intakeMotorTop.setIdleMode(IdleMode.kCoast);
 
+        m_intakeMotorTop.setSmartCurrentLimit(Constants.Intake.kIntakeCurrentLimit);
+
         m_intakeIR = new DigitalInput(Constants.DIO.IntakeSwitch);
 
     }
@@ -47,6 +49,7 @@ public class Intake extends SubsystemBase{
                 break;
             case REVERSE:
                 this.m_intakeMotorTop.set(-Constants.Intake.IntakeSpeedTop);
+                break;
             case OFF:
                 // turns off intake
                 this.m_intakeMotorTop.set(0.0);
