@@ -168,10 +168,10 @@ public final class Constants {
         public static double TopNodeShelfExtensionRotations = 130;
         public static double TopNodePegAngleRotations = 19.3;
         public static double TopNodePegExtensionRotations = 130;
-        public static double DoubleSubStationAngleRotations = 16;
-        public static double DoubleSubStationExtensionRotations = 5;
+        public static double DoubleSubStationAngleRotations = 15;
+        public static double DoubleSubStationExtensionRotations = 3;
     // Encoder deadzones
-     public static double ExtensionEncoderDeadzone = 2.5;
+     public static double ExtensionEncoderDeadzone = 3;
         public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 130;
