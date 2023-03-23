@@ -219,5 +219,10 @@ public class AutoPath extends CommandBase {
 
     public void end(){
       swerveSubsystem.toggleIdleMode(IdleMode.kCoast);
+
+      if (this.m_autoCommand.isScheduled()) {
+        this.m_autoCommand.cancel();
+      }
+      
     }
 }
