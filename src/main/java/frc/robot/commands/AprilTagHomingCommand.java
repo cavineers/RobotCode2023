@@ -45,11 +45,7 @@ public class AprilTagHomingCommand extends CommandBase {
 
     
 
-<<<<<<< Updated upstream
-    public AprilTagHomingCommand(SwerveDriveSubsystem swerveSubsystem, AprilTagHoming tagHomingSubsystem, Translation2d goalOffset) {
-=======
     public AprilTagHomingCommand(SwerveDriveSubsystem swerveSubsystem, AprilTagHoming tagHomingSubsystem) {
->>>>>>> Stashed changes
         
         this.swerveSubsystem = swerveSubsystem;
         this.tagHomingSubsystem = tagHomingSubsystem;
@@ -59,11 +55,7 @@ public class AprilTagHomingCommand extends CommandBase {
         this.relativeOdometer = swerveSubsystem.getNewOdometer();
         
 
-<<<<<<< Updated upstream
-        this.goal = goalOffset; // The peg/shelf/substation translation2d that is selected
-=======
         this.goal = new Translation2d(Constants.AprilTagOffsetConstants.kAprilTagOffsetX, Constants.AprilTagOffsetConstants.kAprilTagOffsetY); // The peg/shelf/substation translation2d that is selected
->>>>>>> Stashed changes
 
         this.xSpeedPID = new PIDController(Constants.HomingDrivePIDControllerConstants.kP, Constants.HomingDrivePIDControllerConstants.kI, Constants.HomingDrivePIDControllerConstants.kD); // X controller
         this.rotationPID = new PIDController(Constants.HomingRotationalPIDControllerConstants.kP, Constants.HomingRotationalPIDControllerConstants.kI, Constants.HomingRotationalPIDControllerConstants.kD); // Rotation controller
@@ -136,7 +128,7 @@ public class AprilTagHomingCommand extends CommandBase {
     private ChassisSpeeds calculateChassisSpeeds() {
         
         double xSpeed = clampSpeeds(xSpeedPID.calculate(this.relativeOdometer.getPoseMeters().getX()));
-        double rotationSpeed = clampSpeeds(rotationPID.calculate(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()));
+        double rotationSpeed = clampSpeeds(rotationPID.calculate(this.tagHomingSubsystem.getYaw()));
         
         ChassisSpeeds newSpeeds = new ChassisSpeeds();
         newSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, 0, rotationSpeed, relativeOdometer.getPoseMeters().getRotation());
@@ -163,8 +155,8 @@ public class AprilTagHomingCommand extends CommandBase {
     private boolean isAtThetaGoal() {
         if (((Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) <= 0.1)
             && (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) >= -0.1))
-            || ((Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) >= -179.9) 
-            && (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) <= -180.1)))
+            || ((Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) >= 179.9) 
+            && (Math.abs(this.relativeOdometer.getPoseMeters().getRotation().getDegrees()) <= 180.1)))
             {
             return true;
         }
