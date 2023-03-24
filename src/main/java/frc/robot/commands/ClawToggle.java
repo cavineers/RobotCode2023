@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 public class ClawToggle extends CommandBase {
 
     private boolean isFinished;
-    private double requestedRevs;
 
     public ClawToggle() {
         this.addRequirements(Robot.claw);
@@ -32,7 +31,7 @@ public class ClawToggle extends CommandBase {
         //open claw to starting position which is zero
         if (Robot.claw.getMotorState()==Claw.clawMotorState.REVERSE) {
             //Note -- negative value will break
-            if (Robot.claw.getEncoderPosition()<=0) {
+            if (Robot.claw.getEncoderPosition()<=Constants.Claw.kRevolutionsToHome) {
                 Robot.claw.setMotorState(Claw.clawMotorState.OFF);
                 this.isFinished = true;
                 System.out.println("Claw is open");

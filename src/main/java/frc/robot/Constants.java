@@ -194,9 +194,9 @@ public final class Constants {
 
     public static final class Claw {
         public static final double kCLawCloseSpeed = .3;
-        public static final double kClawHomeSpeed = .05;
-        public static final double kClawManualSpeed = .05;
-        public static final double kRevolutionsToHome = 0; //0.225714238882065
+        public static final double kClawHomeSpeed = .1;
+        public static final double kClawManualSpeed = .1;
+        public static final double kRevolutionsToHome = 6.404763698577;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
         public static final int kCurrentLimit = 10; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
@@ -209,7 +209,7 @@ public final class Constants {
         public static final int kDriverRotAxis = 4;
         public static final int kDriverFieldOrientedButtonIdx = 9;
 
-        public static final double kDeadband = 0.07; //blue xbox controller
+        public static final double kDeadband = 0.05; //blue xbox controller
     }
 
     public static final class HomingDrivePIDControllerConstants {

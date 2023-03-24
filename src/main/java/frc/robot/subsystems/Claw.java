@@ -103,6 +103,7 @@ public class Claw extends SubsystemBase{
     public void periodic(){
         SmartDashboard.putBoolean("Claw Limit Switch", this.getLimitSwitch());
         SmartDashboard.putBoolean("Closing?", isClosing());
+        SmartDashboard.putNumber("Claw Encoder", this.getEncoderPosition());
     }
 
 }
