@@ -81,33 +81,18 @@ public class AutoPath extends CommandBase {
       this.autoCommandGroup.addCommands(
         generateHomingGroup(),
         new ArmAutopickup(),
-        new InstantCommand(){ // Wait command
-          public void initialize() {
-          try {
-            Thread.sleep(1000);
-          }catch(InterruptedException e) {}
-        }},
+        generateWait(1000),
         new ClawToggle(),
 
-        new InstantCommand(){ // Wait command
-          public void initialize() {
-          try {
-            Thread.sleep(1000);
-          }catch(InterruptedException e) {}
-        }},
+        generateWait(1000),
 
         generatePlaceConeGroup(),
         
-        new InstantCommand(){ // Wait command
-          public void initialize() {
-          try {
-            Thread.sleep(250);
-          }catch(InterruptedException e) {}
-        }},
+        generateWait(1000),
 
         new ParallelCommandGroup(
-          new ArmRestPosition()
-          //this.m_autoCommand
+          new ArmRestPosition(),
+          this.m_autoCommand
         ));
       this.autoCommandGroup.schedule();
     }
@@ -116,12 +101,6 @@ public class AutoPath extends CommandBase {
       if (this.autoCommandGroup.isFinished()) {
         this.isActive = false;
       }
-
-      // if (Math.abs(this.swerveSubsystem.getRoll()) >= 10){
-      //   this.autoCommandGroup.cancel();
-      //   this.isActive = false;
-      //   new BalanceControlCommand(swerveSubsystem).schedule();
-      // }
     }
   
   
@@ -151,16 +130,25 @@ public class AutoPath extends CommandBase {
       return eventMap;
     }
 
-    private SequentialCommandGroup generatePlaceConeGroup(){
+    private Command generateWait(int time){ // Creates a command that waits for a specified amount of time
+      return new InstantCommand(){
+        public void initialize(){
+          try{
+            Thread.sleep(time);
+          }catch(InterruptedException e){}
+        }
+      };
+    }
+
+    private SequentialCommandGroup generatePlaceConeGroup(){ // Drops cone on the top height
 
       return new SequentialCommandGroup(
         new TopLeft(),
         new ClawToggle()
-        
       );
     }
 
-    private SequentialCommandGroup generatePlaceCubeGroup(){
+    private SequentialCommandGroup generatePlaceCubeGroup(){ // Drops cube on the top height
 
       return new SequentialCommandGroup(
         new TopMid(),
@@ -170,7 +158,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private SequentialCommandGroup generateGrabIntakeGroup(){
+    private SequentialCommandGroup generateGrabIntakeGroup(){ // Grabs piece from intake
       return new SequentialCommandGroup(
         //new ArmIntakePreset(),
         new ClawToggle(),
@@ -185,7 +173,7 @@ public class AutoPath extends CommandBase {
       );
     }
 
-    private ParallelCommandGroup generateHomingGroup() {
+    private ParallelCommandGroup generateHomingGroup() { // Homes the arm and claw
       return new ParallelCommandGroup(
         new HomeArm()
         // new ClawHoming()
@@ -231,5 +219,10 @@ public class AutoPath extends CommandBase {
 
     public void end(){
       swerveSubsystem.toggleIdleMode(IdleMode.kCoast);
+
+      if (this.m_autoCommand.isScheduled()) {
+        this.m_autoCommand.cancel();
+      }
+      
     }
 }

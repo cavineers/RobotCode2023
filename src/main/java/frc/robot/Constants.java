@@ -144,8 +144,8 @@ public final class Constants {
         public static double ArmChainSpeedUp = 0.175;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = 0.95;
-        public static double ArmExtensionSpeedRev = -0.95;
+        public static double ArmExtensionSpeed = 1.2;
+        public static double ArmExtensionSpeedRev = -1;
 
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;
@@ -234,6 +234,11 @@ public final class Constants {
         public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
 
         public static final double kBalancingControlBackwardsPowerMultiplier = 1;
+    }
+
+    public static final class AprilTagOffsetConstants {
+        public static final double kAprilTagOffsetX = 0.0;
+        public static final double kAprilTagOffsetY = 0.0;
     }
 }
 

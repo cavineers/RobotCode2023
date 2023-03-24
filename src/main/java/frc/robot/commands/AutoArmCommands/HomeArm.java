@@ -10,6 +10,7 @@ public class HomeArm extends CommandBase {
     
     private boolean isDone;
     private double m_timestamp;
+    private boolean extensionHomed;
 
     public HomeArm() {
         this.addRequirements(Robot.armExtension, Robot.armAngle);
@@ -22,18 +23,20 @@ public class HomeArm extends CommandBase {
         Robot.armAngle.getArmChainMotor2().set(0.0);
         Robot.armExtension.getArmExtensionMotor().set(0.0);
         this.isDone = false;
+        this.extensionHomed = false;
     }
     
 
     @Override
     public void execute() {
         if (Robot.armExtension.getExtensionSwitch() == false) {
-            Robot.armExtension.getArmExtensionMotor().set(-0.05);
+            Robot.armExtension.getArmExtensionMotor().set(-0.08);
         }else if (Robot.armExtension.getExtensionSwitch() == true) {
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
             Robot.armExtension.setArmExtensionMotorPosition(0.0);
+            this.extensionHomed = true;
         }
-        if (Math.abs(Robot.armExtension.getArmExtensionMotorPosition()) <= 0.1) {
+        if (extensionHomed) {
             if (Robot.armAngle.getAngleProxSensor() == true) {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);

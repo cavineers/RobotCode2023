@@ -324,4 +324,8 @@ public class RobotContainer  {
     public Command getHomingCommand() {
       return this.swerveHomingCommand;
     }
+
+    public SwerveDriveSubsystem getSwerveSubsystem() {
+      return this.swerveSubsystem;
+    }
 }
