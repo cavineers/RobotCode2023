@@ -63,25 +63,23 @@ public class BalanceControlCommand extends CommandBase {
         // Uncomment the line below this to simulate the gyroscope axis with a controller joystick
         // Double currentAngle = -1 * Robot.controller.getRawAxis(Constants.LEFT_VERTICAL_JOYSTICK_AXIS) * 45;
         //  if (this.runChecks()) {
-        
-          this.currentAngle = swerveSubsystem.getRoll();
-          this.error = 0 - currentAngle;
+      
+        this.currentAngle = swerveSubsystem.getRoll();
+        this.error = 0 - currentAngle;
+        if (!(Math.abs(error) < Math.abs(this.previousError))){
           this.drivePower = pidController.calculate(error);
           ChassisSpeeds chassisSpeeds;
-
           chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
             -drivePower, 0, 0, swerveSubsystem.getRotation2d());
           
-
           SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
-
             // Output each module states to wheels
           this.swerveSubsystem.setModuleStates(moduleStates);
           counter();
-
           SmartDashboard.putNumber("Error ", error);
           SmartDashboard.putNumber("Drive Power: ", drivePower);
-        //}
+        }
+        this.previousError = error;
       }
 
       public void lockWheels(){

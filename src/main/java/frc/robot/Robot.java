@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.net.PortForwarder;
 import edu.wpi.first.wpilibj.DriverStation;
-
+import frc.robot.commands.BalanceControlCommand;
 import frc.robot.subsystems.ArmAngle;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.Intake;
@@ -29,6 +29,7 @@ import com.pathplanner.lib.server.PathPlannerServer;
  */
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
+  private Command m_balanceCommand;
 
   //Container
   public static RobotContainer m_robotContainer;
@@ -115,7 +116,13 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {}
+  public void autonomousPeriodic() {
+    if (Math.abs(m_ahrs.getRoll()) >= 10){ //Check the roll of the robot
+        this.m_autonomousCommand.cancel(); 
+        this.m_balanceCommand = new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()); //If the robot is tilted, cancel the autonomous command and run the balance control command
+        this.m_balanceCommand.schedule();
+      }
+  }
 
   @Override
   public void teleopInit() {
@@ -125,6 +132,9 @@ public class Robot extends TimedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    }
+    if (m_balanceCommand != null){
+      m_balanceCommand.cancel();
     }
     m_robotContainer.swerveHomingCommand.schedule();
   }
