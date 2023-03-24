@@ -91,7 +91,11 @@ public class AprilTagHoming extends SubsystemBase { // Drive and orient to the t
 
 
     public Translation2d getTranslationToTag() {
-        return new Translation2d(currentDistance.getX(), currentDistance.getY());
+        if (this.hasTargets || this.currentDistance != null) {
+            return new Translation2d(currentDistance.getX(), currentDistance.getY());
+        } else {
+            return new Translation2d(0,0);
+        }
     }
 
 

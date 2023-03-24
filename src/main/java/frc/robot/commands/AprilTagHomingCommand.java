@@ -97,6 +97,14 @@ public class AprilTagHomingCommand extends CommandBase {
     
     public void execute(){
         relativeOdometer.update(this.swerveSubsystem.getRotation2d(), this.swerveSubsystem.getPositions());
+
+        if (this.tagHomingSubsystem.hasTargets == true){
+            Translation2d dist = tagHomingSubsystem.getTranslationToTag();
+            Pose2d newPose = new Pose2d(dist.getX(), dist.getY(), this.swerveSubsystem.getPose().getRotation());
+
+            // Reset the odometry pose to the newPose object using the odometry object's resetPosition() method
+            relativeOdometer.resetPosition(this.swerveSubsystem.getRotation2d(), this.swerveSubsystem.getPositions(), newPose);
+        }
         
         //get Chassis Speeds from PID controllers
         ChassisSpeeds chassisSpeeds = calculateChassisSpeeds();
