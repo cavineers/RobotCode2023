@@ -144,7 +144,7 @@ public final class Constants {
         public static double ArmChainSpeedUp = 0.175;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = 1.2;
+        public static double ArmExtensionSpeed = 1;
         public static double ArmExtensionSpeedRev = -1;
 
         public static double ArmRotationsAddPower = 8.419;
@@ -193,7 +193,7 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static final double kCLawCloseSpeed = .25;
+        public static final double kCLawCloseSpeed = .3;
         public static final double kClawHomeSpeed = .05;
         public static final double kClawManualSpeed = .05;
         public static final double kRevolutionsToHome = 0; //0.225714238882065
