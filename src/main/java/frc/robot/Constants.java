@@ -168,10 +168,10 @@ public final class Constants {
         public static double TopNodeShelfExtensionRotations = 130;
         public static double TopNodePegAngleRotations = 19.3;
         public static double TopNodePegExtensionRotations = 130;
-        public static double DoubleSubStationAngleRotations = 16;
-        public static double DoubleSubStationExtensionRotations = 5;
+        public static double DoubleSubStationAngleRotations = 15;
+        public static double DoubleSubStationExtensionRotations = 3;
     // Encoder deadzones
-     public static double ExtensionEncoderDeadzone = 2.5;
+     public static double ExtensionEncoderDeadzone = 3;
         public static double AngleEncoderDeadzone = 0.16;
     // Min and Max Rotations 
         public static double MaxExtensionRotations = 130;
@@ -198,7 +198,7 @@ public final class Constants {
         public static final double kClawManualSpeed = .1;
         public static final double kRevolutionsToHome = 6.404763698577;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
-        public static final int kCurrentLimit = 10; //limit in amps
+        public static final int kCurrentLimit = 40; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
     }
     public static final class OIConstants {
@@ -229,9 +229,9 @@ public final class Constants {
         public static final double kBalancingControlGoalDegrees = 0;
         public static final double kBalancingControlTresholdDegrees = 2.5;
         
-        public static final double kBalancingControlDriveP = 0.015; // P (Proportional) constant of a PID loop
+        public static final double kBalancingControlDriveP = 0.025; // P (Proportional) constant of a PID loop
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
-        public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
+        public static final double kBalancingControlDriveD = 0.008; // D (Derivative) constant of a PID loop
 
         public static final double kBalancingControlBackwardsPowerMultiplier = 1;
     }

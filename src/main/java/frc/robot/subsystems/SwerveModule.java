@@ -66,7 +66,6 @@ public class SwerveModule {
         test = new PIDController(0.03, 0, 0);
         test.enableContinuousInput(0, 360);
 
-
         resetEncoders();
     }
 
@@ -135,8 +134,6 @@ public class SwerveModule {
         driveMotor.set(state.speedMetersPerSecond / DriveConstants.kPhysicalMaxSpeedMetersPerSecond);
         turningMotor.set(turningPidController.calculate(getTurningPosition(), state.angle.getRadians()));
     }
-
-    
     
 
     public void stop() {
