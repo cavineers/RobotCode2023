@@ -31,7 +31,7 @@ public class Claw extends SubsystemBase{
         clawEncoder = m_clawMotor.getEncoder();
 
         m_clawMotor.setInverted(Constants.Claw.kSetClawMotorInverted);
-        m_clawMotor.setIdleMode(IdleMode.kCoast);
+        m_clawMotor.setIdleMode(IdleMode.kBrake);
         m_clawMotor.setSmartCurrentLimit(Constants.Claw.kCurrentLimit);
     
         clawLimitSwitch = new DigitalInput(Constants.Claw.kClawLimitSwitchPort);

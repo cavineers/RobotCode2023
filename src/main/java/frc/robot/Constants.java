@@ -144,15 +144,15 @@ public final class Constants {
         public static double ArmChainSpeedUp = 0.175;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = 1;
-        public static double ArmExtensionSpeedRev = -1;
+        public static double ArmExtensionSpeed = .9;
+        public static double ArmExtensionSpeedRev = -.9;
 
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;
      
     //Node Rotations
         
-        public static double ArmAutoAngleRotations = 1.95;
+        public static double ArmAutoAngleRotations = 1;//928571701049805
         public static double ArmAutoExtensionRotations = 0.1;
         public static double ArmRestPositionAngleRotations = 2.3;
         public static double ArmRestPositionExtensionRotations = 1;
@@ -193,12 +193,12 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static final double kCLawCloseSpeed = .3;
+        public static final double kCLawCloseSpeed = .2;
         public static final double kClawHomeSpeed = .1;
         public static final double kClawManualSpeed = .1;
         public static final double kRevolutionsToHome = 6.404763698577;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
-        public static final int kCurrentLimit = 40; //limit in amps
+        public static final int kCurrentLimit = 27; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
     }
     public static final class OIConstants {

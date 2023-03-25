@@ -103,6 +103,10 @@ public class SwerveModule {
         driveMotor.setIdleMode(mode);
     }
 
+    public void lockWheels(){
+        driveMotor.setIdleMode(IdleMode.kBrake);
+    }
+
     public double getTurningVelocity() {
         return turningEncoder.getVelocity();
     }

@@ -84,21 +84,26 @@ public class BalanceControlCommand extends CommandBase {
       }
 
       public void lockWheels(){
-        ChassisSpeeds chassisSpeedsStop;
-        chassisSpeedsStop = ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0.1, swerveSubsystem.getRotation2d());
+        // ChassisSpeeds chassisSpeedsStop;
+        // chassisSpeedsStop = ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0.1, swerveSubsystem.getRotation2d());
 
 
       
-        SwerveModuleState[] moduleState = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStop);
+        // SwerveModuleState[] moduleState = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStop);
     
-        SwerveModuleState[] combinedStates = new SwerveModuleState[] {
-          moduleState[0],
-          moduleState[1],
-          moduleState[2],
-          moduleState[3]
-        };
+        // SwerveModuleState[] combinedStates = new SwerveModuleState[] {
+        //   moduleState[0],
+        //   moduleState[1],
+        //   moduleState[2],
+        //   moduleState[3]
+        // };
 
-        swerveSubsystem.setModuleStates(combinedStates);
+        
+
+        
+        //swerveSubsystem.setModuleStates(combinedStates);
+
+        swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
       }
     
       // Called once the command ends or is interrupted.
@@ -106,10 +111,11 @@ public class BalanceControlCommand extends CommandBase {
       public void end(boolean interrupted) {
         System.out.println("COMMAND FINISHED");
         
-        this.lockWheels();
-  
+        
 
         swerveSubsystem.stopModules();
+        lockWheels();
+  
       }
 
       public static double round(double value, int places) {
