@@ -7,12 +7,12 @@ import frc.robot.Robot;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.ArmAngle;
 
-public class BottomMid extends CommandBase {
+public class ArmHybrid extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public BottomMid() {
+    public ArmHybrid() {
         this.addRequirements(Robot.armExtension, Robot.armAngle);
     }
 

@@ -7,12 +7,12 @@ import frc.robot.Robot;
 import frc.robot.subsystems.ArmExtension;
 import frc.robot.subsystems.ArmAngle;
 
-public class TopMid extends CommandBase {
+public class ArmMidPeg extends CommandBase {
     
     private boolean isDone = false;
     private double m_timestamp;
 
-    public TopMid() {
+    public ArmMidPeg() {
         this.addRequirements(Robot.armExtension, Robot.armAngle);
     }
 
@@ -29,19 +29,19 @@ public class TopMid extends CommandBase {
     @Override
     public void execute() {
     // 12.36 is angle rotations and 45.81 is extension rotations
-    if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.TopNodeShelfAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
+    if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.MidNodePegAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
         Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
         this.isDone = false;
-    } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.TopNodeShelfExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
+    } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.MidNodePegExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
         Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.OFF);
         Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.ON);
         this.isDone = false;
-    } else if(Robot.armExtension.getArmExtensionMotorPosition() > (Constants.Arm.TopNodeShelfExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
+    } else if(Robot.armExtension.getArmExtensionMotorPosition() > (Constants.Arm.MidNodePegExtensionRotations) + Constants.Arm.ExtensionEncoderDeadzone) {      
         Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.REVERSED);
         this.isDone = false;
-    } else if (Robot.armAngle.getArmChainMotorPosition() > (Constants.Arm.TopNodeShelfAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
+    } else if (Robot.armAngle.getArmChainMotorPosition() > (Constants.Arm.MidNodePegAngleRotations) + Constants.Arm.AngleEncoderDeadzone) {
         Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.REVERSED);
         Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.REVERSED);
