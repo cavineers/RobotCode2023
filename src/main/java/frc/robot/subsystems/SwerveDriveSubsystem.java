@@ -170,7 +170,13 @@ public class SwerveDriveSubsystem extends SubsystemBase {
         frontRight.toggleIdleMode(mode);
         backLeft.toggleIdleMode(mode);
         backRight.toggleIdleMode(mode);
+    }
 
+    public void lockWheels(){
+        frontLeft.lockWheel();
+        frontRight.lockWheel();
+        backLeft.lockWheel();
+        backRight.lockWheel();
     }
 
     public double getRoll(){
