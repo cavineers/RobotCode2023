@@ -144,15 +144,15 @@ public final class Constants {
         public static double ArmChainSpeedUp = 0.175;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = 1;
-        public static double ArmExtensionSpeedRev = -1;
+        public static double ArmExtensionSpeed = .9;
+        public static double ArmExtensionSpeedRev = -.9;
 
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;
      
     //Node Rotations
         
-        public static double ArmAutoAngleRotations = 1.95;
+        public static double ArmAutoAngleRotations = 1;//928571701049805
         public static double ArmAutoExtensionRotations = 0.1;
         public static double ArmRestPositionAngleRotations = 2.3;
         public static double ArmRestPositionExtensionRotations = 1;
@@ -193,12 +193,12 @@ public final class Constants {
     }
 
     public static final class Claw {
-        public static final double kCLawCloseSpeed = .3;
-        public static final double kClawHomeSpeed = .05;
-        public static final double kClawManualSpeed = .05;
-        public static final double kRevolutionsToHome = 0; //0.225714238882065
+        public static final double kCLawCloseSpeed = .2;
+        public static final double kClawHomeSpeed = .1;
+        public static final double kClawManualSpeed = .1;
+        public static final double kRevolutionsToHome = 6.404763698577;
         public static final int kClawLimitSwitchPort = DIO.clawLimitSwitch; 
-        public static final int kCurrentLimit = 10; //limit in amps
+        public static final int kCurrentLimit = 27; //limit in amps
         public static final boolean kSetClawMotorInverted = true;
     }
     public static final class OIConstants {
@@ -209,7 +209,7 @@ public final class Constants {
         public static final int kDriverRotAxis = 4;
         public static final int kDriverFieldOrientedButtonIdx = 9;
 
-        public static final double kDeadband = 0.07; //blue xbox controller
+        public static final double kDeadband = 0.05; //blue xbox controller
     }
 
     public static final class HomingDrivePIDControllerConstants {
@@ -229,9 +229,9 @@ public final class Constants {
         public static final double kBalancingControlGoalDegrees = 0;
         public static final double kBalancingControlTresholdDegrees = 2.5;
         
-        public static final double kBalancingControlDriveP = 0.015; // P (Proportional) constant of a PID loop
+        public static final double kBalancingControlDriveP = 0.025; // P (Proportional) constant of a PID loop
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
-        public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
+        public static final double kBalancingControlDriveD = 0.008; // D (Derivative) constant of a PID loop
 
         public static final double kBalancingControlBackwardsPowerMultiplier = 1;
     }

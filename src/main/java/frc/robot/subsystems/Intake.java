@@ -68,7 +68,6 @@ public class Intake extends SubsystemBase{
       }
     
     public void periodic(){
-        SmartDashboard.putBoolean("Intake IR", getIntakeIR());
     }
     /**
      * Get the current intake state.

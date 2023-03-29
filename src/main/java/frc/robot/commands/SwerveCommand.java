@@ -38,7 +38,7 @@ public class SwerveCommand extends CommandBase {
 
     @Override
     public void initialize() {
-        swerveSubsystem.toggleIdleMode(IdleMode.kCoast);
+        
     }
 
     @Override
@@ -71,7 +71,7 @@ public class SwerveCommand extends CommandBase {
         chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
             xSpeed, ySpeed, turningSpeed, swerveSubsystem.getRotation2d());
 
-         //   chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
+         // chassisSpeeds = new ChassisSpeeds(xSpeed, ySpeed, turningSpeed);
         
         // Convert chassis speeds to individual module states
         SwerveModuleState[] moduleStates = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);

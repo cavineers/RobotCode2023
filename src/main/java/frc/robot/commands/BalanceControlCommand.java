@@ -65,8 +65,8 @@ public class BalanceControlCommand extends CommandBase {
         //  if (this.runChecks()) {
       
         this.currentAngle = swerveSubsystem.getRoll();
-        this.error = 0 - currentAngle;
-        if (!(Math.abs(error) < Math.abs(this.previousError))){
+        this.error = 0 - swerveSubsystem.getRoll();
+        //if ((Math.abs(error) >= Math.abs(this.previousError))){
           this.drivePower = pidController.calculate(error);
           ChassisSpeeds chassisSpeeds;
           chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
@@ -76,31 +76,34 @@ public class BalanceControlCommand extends CommandBase {
             // Output each module states to wheels
           this.swerveSubsystem.setModuleStates(moduleStates);
           counter();
-          SmartDashboard.putNumber("Error ", error);
-          SmartDashboard.putNumber("Drive Power: ", drivePower);
-        }
+         
+        // }
+        SmartDashboard.putNumber("Error ", error);
+        SmartDashboard.putNumber("Drive Power: ", drivePower);
         this.previousError = error;
       }
 
       public void lockWheels(){
-        ChassisSpeeds chassisSpeedsStopForward;
-        ChassisSpeeds chassisSpeedsStopSide;
-        chassisSpeedsStopForward = ChassisSpeeds.fromFieldRelativeSpeeds(0, .1, 0, swerveSubsystem.getRotation2d());
-        chassisSpeedsStopSide = ChassisSpeeds.fromFieldRelativeSpeeds(.1, 0, 0, swerveSubsystem.getRotation2d());
+        // ChassisSpeeds chassisSpeedsStop;
+        // chassisSpeedsStop = ChassisSpeeds.fromFieldRelativeSpeeds(0, 0, 0.1, swerveSubsystem.getRotation2d());
 
 
       
-        SwerveModuleState[] moduleStatesForward = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStopForward);
-        SwerveModuleState[] moduleStatesSide = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStopSide);
+        // SwerveModuleState[] moduleState = DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeedsStop);
     
-        SwerveModuleState[] combinedStates = new SwerveModuleState[] {
-          moduleStatesForward[0],
-          moduleStatesSide[1],
-          moduleStatesSide[2],
-          moduleStatesForward[3]
-        };
+        // SwerveModuleState[] combinedStates = new SwerveModuleState[] {
+        //   moduleState[0],
+        //   moduleState[1],
+        //   moduleState[2],
+        //   moduleState[3]
+        // };
 
-        swerveSubsystem.setModuleStates(combinedStates);
+        
+
+        
+        //swerveSubsystem.setModuleStates(combinedStates);
+
+        swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
       }
     
       // Called once the command ends or is interrupted.
@@ -108,10 +111,11 @@ public class BalanceControlCommand extends CommandBase {
       public void end(boolean interrupted) {
         System.out.println("COMMAND FINISHED");
         
-        this.lockWheels();
-  
+        
 
         swerveSubsystem.stopModules();
+        lockWheels();
+  
       }
 
       public static double round(double value, int places) {
@@ -123,8 +127,6 @@ public class BalanceControlCommand extends CommandBase {
         if (Math.abs(error) < BalanceConstants.kBalancingControlTresholdDegrees){
           SmartDashboard.putNumber("Counter", counter);
           counter++;
-        } else {
-          counter = 0;
         }
         if (counter > 75){
           m_isFinished = true;

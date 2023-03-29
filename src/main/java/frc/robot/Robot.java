@@ -20,6 +20,8 @@ import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Claw;
 
 import com.pathplanner.lib.server.PathPlannerServer;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -106,7 +108,7 @@ public class Robot extends TimedRobot {
   public void autonomousInit() {
     m_robotContainer.swerveHomingCommand.schedule();
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
+    this.m_balanceCommand = null;
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
@@ -117,11 +119,11 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    if (Math.abs(m_ahrs.getRoll()) >= 10){ //Check the roll of the robot
-        this.m_autonomousCommand.cancel(); 
-        this.m_balanceCommand = new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()); //If the robot is tilted, cancel the autonomous command and run the balance control command
-        this.m_balanceCommand.schedule();
-      }
+    // if (Math.abs(m_ahrs.getRoll()) >= 7 && this.m_balanceCommand == null){ //Check the roll of the robot
+    //     this.m_autonomousCommand.cancel(); 
+    //     this.m_balanceCommand = new BalanceControlCommand(m_robotContainer.getSwerveSubsystem()); //If the robot is tilted, cancel the autonomous command and run the balance control command
+    //     this.m_balanceCommand.schedule();
+    //   }
   }
 
   @Override
@@ -137,6 +139,7 @@ public class Robot extends TimedRobot {
       m_balanceCommand.cancel();
     }
     m_robotContainer.swerveHomingCommand.schedule();
+    m_robotContainer.getSwerveSubsystem().toggleIdleMode(IdleMode.kCoast);
   }
 
   /** This function is called periodically during operator control. */

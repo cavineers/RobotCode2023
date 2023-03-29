@@ -25,7 +25,7 @@ public class RetractArm extends CommandBase {
         if (Robot.armExtension.getArmExtensionMotorPosition() > Constants.Arm.ExtensionLowerSpeedRotations){
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.REVERSED);
         } else if (Robot.armExtension.getArmExtensionMotorPosition() < Constants.Arm.ExtensionLowerSpeedRotations) {
-            Robot.armExtension.getArmExtensionMotor().set(-0.25);
+            Robot.armExtension.getArmExtensionMotor().set(-0.3);
     }   else {
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.OFF);
         
