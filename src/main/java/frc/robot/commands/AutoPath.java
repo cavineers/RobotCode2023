@@ -12,8 +12,8 @@ import frc.robot.commands.ManualOverrideCommands.ClawOpen;
 import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
-import frc.robot.commands.NumPad.TopLeft;
-import frc.robot.commands.NumPad.TopMid;
+import frc.robot.commands.NumPad.ArmTopPeg;
+import frc.robot.commands.NumPad.ArmTopShelf;
 import frc.robot.Robot;
 
 import frc.robot.subsystems.SwerveDriveSubsystem;
@@ -144,7 +144,7 @@ public class AutoPath extends CommandBase {
     private SequentialCommandGroup generatePlaceConeGroup(){ // Drops cone on the top height
 
       return new SequentialCommandGroup(
-        new TopLeft(),
+        new ArmTopPeg(),
         new ClawToggle()
       );
     }
@@ -152,7 +152,7 @@ public class AutoPath extends CommandBase {
     private SequentialCommandGroup generatePlaceCubeGroup(){ // Drops cube on the top height
 
       return new SequentialCommandGroup(
-        new TopMid(),
+        new ArmTopShelf(),
         new ClawToggle()
         //new HomeArm()
         

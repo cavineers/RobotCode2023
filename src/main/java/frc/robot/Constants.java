@@ -13,12 +13,12 @@ public final class Constants {
     
     public static class CANIds {
 
-        public static final int kFrontLeftDriveCanID = 1;
-        public static final int kBackLeftDriveCanID = 3;
+        public static final int kFrontLeftDriveCanID = 30;
+        public static final int kBackLeftDriveCanID = 33;
         public static final int kFrontRightDriveCanID = 7;
         public static final int kBackRightDriveCanID = 5;
 
-        public static final int kFrontLeftTurningCanID = 2;
+        public static final int kFrontLeftTurningCanID = 32;
         public static final int kBackLeftTurningCanID = 4;
         public static final int kFrontRightTurningCanID = 8;
         public static final int kBackRightTurningCanID = 6;
@@ -30,9 +30,9 @@ public final class Constants {
 
         public static final int IntakeMotorTop = 16;
 
-        public static final int ArmChainMotor = 14; // left side
-        public static final int ArmChainMotor2 = 20; // right side
-        public static final int ArmExtensionMotor = 19;
+        public static final int ArmChainMotor = 1; // left side
+        public static final int ArmChainMotor2 = 2; // right side
+        public static final int ArmExtensionMotor = 3;
 
         public static final int ClawMotor = 13;
        
@@ -141,7 +141,7 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
      
-        public static double ArmChainSpeedUp = 0.175;
+        public static double ArmChainSpeedUp = 0.17;
         public static double ArmChainSpeedDown = -0.08;
 
         public static double ArmExtensionSpeed = .9;
