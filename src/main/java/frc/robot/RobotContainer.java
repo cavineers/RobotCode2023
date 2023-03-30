@@ -12,15 +12,11 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 
 import frc.robot.commands.AutoPath;
-import frc.robot.commands.NumPad.BottomLeft;
-import frc.robot.commands.NumPad.BottomMid;
-import frc.robot.commands.NumPad.BottomRight;
-import frc.robot.commands.NumPad.MidLeft;
-import frc.robot.commands.NumPad.MidMid;
-import frc.robot.commands.NumPad.MidRight;
-import frc.robot.commands.NumPad.TopLeft;
-import frc.robot.commands.NumPad.TopMid;
-import frc.robot.commands.NumPad.TopRight;
+import frc.robot.commands.NumPad.ArmHybrid;
+import frc.robot.commands.NumPad.ArmMidShelf;
+import frc.robot.commands.NumPad.ArmMidPeg;
+import frc.robot.commands.NumPad.ArmTopShelf;
+import frc.robot.commands.NumPad.ArmTopPeg;
 import frc.robot.commands.ManualOverrideCommands.ExtendArm;
 import frc.robot.commands.ManualOverrideCommands.LowerArm;
 import frc.robot.commands.ManualOverrideCommands.RaiseArm;
@@ -74,15 +70,11 @@ public class RobotContainer  {
     public Command m_armIntake;
 
     //NumPad Commands
-    public Command m_armBottomLeft;
-    public Command m_armBottomMid;
-    public Command m_armBottomRight;
-    public Command m_armMidLeft;
-    public Command m_armMidMid;
-    public Command m_armMidRight;
-    public Command m_armTopLeft;
-    public Command m_armTopMid;
-    public Command m_armTopRight;
+    public Command m_armHybrid;
+    public Command m_armMidShelf;
+    public Command m_armMidPeg;
+    public Command m_armTopShelf;
+    public Command m_armTopPeg;
 
     //April Tag Presets
     
@@ -166,15 +158,11 @@ public class RobotContainer  {
       m_armLower = new LowerArm();
       m_armExtend = new ExtendArm();
       m_armRetract = new RetractArm();
-      m_armBottomLeft = new BottomLeft();
-      m_armBottomMid = new BottomMid();
-      m_armBottomRight = new BottomRight();
-      m_armMidLeft = new MidLeft();
-      m_armMidMid = new MidMid();
-      m_armMidRight = new MidRight();
-      m_armTopLeft = new TopLeft();
-      m_armTopMid = new TopMid();
-      m_armTopRight = new TopRight();
+      m_armHybrid = new ArmHybrid();
+      m_armMidShelf = new ArmMidShelf();
+      m_armMidPeg = new ArmMidPeg();
+      m_armTopShelf = new ArmTopShelf();
+      m_armTopPeg = new ArmTopPeg();
 
       m_clawClose = new ClawClose();
       m_clawOpen = new ClawOpen();
@@ -275,15 +263,12 @@ public class RobotContainer  {
       // this.l_bump.onTrue(m_armIntake);
       this.right_menu.onTrue(new ClawHoming());
 
-      this.a_button2.onTrue(m_armBottomLeft);
-      this.b_button2.onTrue(m_armBottomMid);
-      this.x_button2.onTrue(m_armBottomRight);
-      this.y_button2.onTrue(m_armMidLeft);
-      this.povUp2.onTrue(m_armMidMid);
-      this.povRight2.onTrue(m_armMidRight);
-      this.povLeft2.onTrue(m_armTopLeft);
-      this.povDown2.onTrue(m_armTopMid);
-      this.r_bump2.onTrue(m_armTopRight);
+      this.b_button2.onTrue(m_armHybrid);
+      this.povUp2.onTrue(m_armMidShelf);
+      this.povRight2.onTrue(m_armMidPeg);
+      this.povDown2.onTrue(m_armTopShelf);
+      this.r_bump2.onTrue(m_armTopPeg);
+      this.a_button2.onTrue(m_armBumperPosition);
     }
 
 

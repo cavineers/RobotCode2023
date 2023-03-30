@@ -42,7 +42,6 @@ public final class Constants {
         public static int ArmExtensionSwitch = 0;
         public static int IntakeSwitch = 7;
         public static int clawLimitSwitch = 1;
-        public static int intakeInfaredSensor = 4;
     }
     public static final class ModuleConstants {
         public static final double kWheelDiameterMeters = Units.inchesToMeters(4);
@@ -141,11 +140,11 @@ public final class Constants {
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
      
-        public static double ArmChainSpeedUp = 0.175;
+        public static double ArmChainSpeedUp = 0.17;
         public static double ArmChainSpeedDown = -0.08;
 
         public static double ArmExtensionSpeed = .9;
-        public static double ArmExtensionSpeedRev = -.9;
+        public static double ArmExtensionSpeedRev = -.9; // revert to .9
 
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;

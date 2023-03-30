@@ -29,8 +29,8 @@ public class ArmDoubleSubStation extends CommandBase {
     @Override
     public void execute() {
         if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.DoubleSubStationAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
-            Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
-            Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
+            Robot.armAngle.getArmChainMotor().set(Constants.Arm.ArmChainSpeedUp + (Constants.Arm.DoubleSubStationAngleRotations - Robot.armAngle.getArmChainMotorPosition())/50 );
+            Robot.armAngle.getArmChainMotor2().set(-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.DoubleSubStationAngleRotations - Robot.armAngle.getArmChainMotorPosition())/50);
             this.isDone = false;
         } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.DoubleSubStationExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);
