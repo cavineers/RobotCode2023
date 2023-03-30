@@ -267,6 +267,7 @@ public class RobotContainer  {
       this.povRight2.onTrue(m_armMidPeg);
       this.povDown2.onTrue(m_armTopShelf);
       this.r_bump2.onTrue(m_armTopPeg);
+      this.a_button2.onTrue(m_armBumperPosition);
     }
 
 
