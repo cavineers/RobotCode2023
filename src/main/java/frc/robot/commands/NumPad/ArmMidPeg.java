@@ -30,8 +30,8 @@ public class ArmMidPeg extends CommandBase {
     public void execute() {
     // 12.36 is angle rotations and 45.81 is extension rotations
     if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.MidNodePegAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
-        Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
-        Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
+        Robot.armAngle.getArmChainMotor().set(Constants.Arm.ArmChainSpeedUp + (Constants.Arm.MidNodePegAngleRotations - Robot.armAngle.getArmChainMotorPosition())/50 );
+        Robot.armAngle.getArmChainMotor2().set(-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.MidNodePegAngleRotations - Robot.armAngle.getArmChainMotorPosition())/50);
         this.isDone = false;
     } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.MidNodePegExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);

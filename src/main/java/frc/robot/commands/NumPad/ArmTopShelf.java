@@ -30,8 +30,8 @@ public class ArmTopShelf extends CommandBase {
     public void execute() {
     // 12.36 is angle rotations and 45.81 is extension rotations
     if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.TopNodeShelfAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
-        Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
-        Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
+        Robot.armAngle.getArmChainMotor().set(Constants.Arm.ArmChainSpeedUp + (Constants.Arm.TopNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/75 );
+        Robot.armAngle.getArmChainMotor2().set(-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.TopNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/75);
         this.isDone = false;
     } else if (Robot.armExtension.getArmExtensionMotorPosition() < (Constants.Arm.TopNodeShelfExtensionRotations) - Constants.Arm.ExtensionEncoderDeadzone) {
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.OFF);

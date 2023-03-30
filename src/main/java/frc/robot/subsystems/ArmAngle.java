@@ -17,7 +17,7 @@ public class ArmAngle extends SubsystemBase {
         SmartDashboard.putNumber("AngleRotations", getArmChainMotorPosition());
         SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position()); 
         SmartDashboard.putNumber("AngleSpeed", (Constants.Arm.ArmChainSpeedUp + (Constants.Arm.MidNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/150 ));
-        SmartDashboard.putNumber("Angle2Speed", getArmChainMotor2Position());   
+        SmartDashboard.putNumber("Angle2Speed",-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.MidNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/150 );   
         SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
 
         if (getAngleProxSensor() == true) {
