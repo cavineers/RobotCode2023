@@ -8,13 +8,16 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.Robot;
 
 public class ArmAngle extends SubsystemBase {
 
     public void periodic(){
 
         SmartDashboard.putNumber("AngleRotations", getArmChainMotorPosition());
-        SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position());    
+        SmartDashboard.putNumber("Angle2Rotations", getArmChainMotor2Position()); 
+        SmartDashboard.putNumber("AngleSpeed", (Constants.Arm.ArmChainSpeedUp + (Constants.Arm.MidNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/150 ));
+        SmartDashboard.putNumber("Angle2Speed", getArmChainMotor2Position());   
         SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
 
         if (getAngleProxSensor() == true) {
