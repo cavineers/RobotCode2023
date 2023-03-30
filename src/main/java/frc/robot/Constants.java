@@ -231,7 +231,7 @@ public final class Constants {
         
         public static final double kBalancingControlDriveP = 0.025; // P (Proportional) constant of a PID loop
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop
-        public static final double kBalancingControlDriveD = 0.008; // D (Derivative) constant of a PID loop
+        public static final double kBalancingControlDriveD = 0.0; // D (Derivative) constant of a PID loop
 
         public static final double kBalancingControlBackwardsPowerMultiplier = 1;
     }

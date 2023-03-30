@@ -28,6 +28,7 @@ import frc.robot.commands.ManualOverrideCommands.RetractArm;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.SwerveCommand;
 import frc.robot.commands.BalanceControlCommand;
+import frc.robot.commands.NewBalanceCommand;
 import frc.robot.commands.ClawHoming;
 import frc.robot.commands.ManualOverrideCommands.ClawOpen;
 import frc.robot.commands.ManualOverrideCommands.ClawClose;
@@ -210,7 +211,7 @@ public class RobotContainer  {
         }
       });
       
-      this.right_stick.onTrue(new BalanceControlCommand(swerveSubsystem));
+      this.right_stick.onTrue(new NewBalanceCommand(swerveSubsystem));
 
       //claw manual buttons
       this.povRight.onTrue(m_clawOpen);
