@@ -143,8 +143,8 @@ public final class Constants {
         public static double ArmChainSpeedUp = 0.17;
         public static double ArmChainSpeedDown = -0.08;
 
-        public static double ArmExtensionSpeed = .9;
-        public static double ArmExtensionSpeedRev = -.9; // revert to .9
+        public static double ArmExtensionSpeed = .95;
+        public static double ArmExtensionSpeedRev = -.95; // revert to .9
 
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;
@@ -155,8 +155,8 @@ public final class Constants {
         public static double ArmAutoExtensionRotations = 0.1;
         public static double ArmRestPositionAngleRotations = 2.3;
         public static double ArmRestPositionExtensionRotations = 1;
-        public static double ArmBumperAngleRotations = 4.5;
-        public static double ArmBumperExtensionRotations = 52;
+        public static double ArmBumperAngleRotations = 4.25;
+        public static double ArmBumperExtensionRotations = 53;
         public static double BottomNodeAngleRotations = 7.3;
         public static double BottomNodeExtensionRotations = 56;
         public static double MidNodeShelfAngleRotations = 13.3;
