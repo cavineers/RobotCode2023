@@ -31,6 +31,7 @@ import frc.robot.commands.IntakeCube;
 import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoCommands.ExitCommunity;
+import frc.robot.commands.AutoCommands.ChargeStationCube;
 import frc.robot.commands.AutoCommands.TemplateAuto;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
@@ -49,7 +50,6 @@ import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class RobotContainer  {
     
-    public SendableChooser<Command> auto = new SendableChooser<Command>();
 
     public int intakeState = 1;
 
@@ -117,7 +117,8 @@ public class RobotContainer  {
 
   // FOR AUTO
 
-  SendableChooser<String> m_chooser;
+  SendableChooser<Command> m_chooser;
+
   // Driver Numpad
   public Joystick joy2 = new Joystick(1);
   public JoystickButton a_button2 = new JoystickButton(joy2, 1);
@@ -274,17 +275,15 @@ public class RobotContainer  {
 
     // FOR AUTO CHOOSER
 
-    public Command getAutonomousCommand(){
-      return new TemplateAuto(swerveSubsystem);
-    }
+  
 
 
-    public String getAutoPath(){
+    public Command getAutoCommand(){
       return this.m_chooser.getSelected();
     }
 
     private void configureSendableChooser() {
-      this.m_chooser = new SendableChooser<>();
+      this.m_chooser = new SendableChooser<Command>();
      //m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
       m_chooser.setDefaultOption("Exit Community", new ExitCommunity(swerveSubsystem));
       m_chooser.addOption("Charge Station Cube", new ChargeStationCube(swerveSubsystem));
