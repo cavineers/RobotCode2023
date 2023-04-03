@@ -21,13 +21,12 @@ public class NewBalanceCommand extends CommandBase {
     public NewBalanceCommand(SwerveDriveSubsystem swerve) {
         this.addRequirements(swerve);
         this.swerveDriveSubsystem = swerve;
+        this.previousAngle = this.swerveDriveSubsystem.getPitch();
     }
     
     @Override
     public void initialize() {
         this.isFinished = false;
-        this.currentAngle = this.swerveDriveSubsystem.getPitch();
-        this.previousAngle = 0;
         if (this.isWithinThreshold()) {
             this.isFinished = true;
         }
@@ -41,13 +40,13 @@ public class NewBalanceCommand extends CommandBase {
     private boolean isDecreasing(){
         if (this.currentAngle <= this.previousAngle) {
             this.previousAngle = this.currentAngle;
-            return(true);
+            return true;
         }
         this.previousAngle = this.currentAngle;
         return false;
     }
 
-    private SwerveModuleState[] generateStates() {
+    public SwerveModuleState[] generateStates() {
         ChassisSpeeds chassisSpeeds;
         chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
             0.15, 0, 0, swerveDriveSubsystem.getRotation2d());
@@ -57,6 +56,7 @@ public class NewBalanceCommand extends CommandBase {
     }
     @Override
     public void execute() {
+        this.currentAngle = this.swerveDriveSubsystem.getPitch();
         if (!this.isWithinThreshold()) {
             if (!this.isDecreasing()){
                 swerveDriveSubsystem.setModuleStates(states);
