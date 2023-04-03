@@ -1,46 +1,27 @@
 package frc.robot.commands.AutoCommands;
 
-import frc.robot.Constants;
-import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import frc.robot.commands.ManualOverrideCommands.ClawClose;
-import frc.robot.commands.ManualOverrideCommands.ClawOpen;
-import frc.robot.commands.ManualOverrideCommands.RetractArm;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
-
-import frc.robot.commands.NumPad.ArmTopPeg;
-import frc.robot.commands.NumPad.ArmTopShelf;
 import frc.robot.Robot;
 
 import frc.robot.subsystems.SwerveDriveSubsystem;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
-import com.pathplanner.lib.PathPlanner;
 import com.pathplanner.lib.PathPlannerTrajectory;
 import com.pathplanner.lib.auto.SwerveAutoBuilder;
 import com.revrobotics.CANSparkMax.IdleMode;
 
-import com.pathplanner.lib.PathConstraints;
-import edu.wpi.first.wpilibj.DriverStation;
-
-import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.ClawToggle;
-import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.ArmAutopickup;
-import frc.robot.commands.AutoArmCommands.RetractCompletely;
-
 import frc.lib.AutoCommandGroups;
 
-public class TemplateAuto extends CommandBase {
+public class ExitCommunity extends CommandBase {
     private final SwerveDriveSubsystem swerveSubsystem;
     private boolean isActive;
 
@@ -50,10 +31,10 @@ public class TemplateAuto extends CommandBase {
     SwerveAutoBuilder builder;
     private Command m_autoCommand; 
     private SequentialCommandGroup autoCommandGroup;
-  
-    public TemplateAuto(SwerveDriveSubsystem swerveSubsystem) {
 
-      this.pathName = "EXAMPLE";
+    public ExitCommunity(SwerveDriveSubsystem swerveSubsystem) {
+
+      this.pathName = "Exit Community";
 
       this.swerveSubsystem = swerveSubsystem;
       this.builder = AutoCommandGroups.createAutoBuilder(swerveSubsystem); 
@@ -67,6 +48,7 @@ public class TemplateAuto extends CommandBase {
     public void initialize(){
 
       this.autoCommandGroup = new SequentialCommandGroup();
+
       this.pathGroup = AutoCommandGroups.createAutonomousPath(this.pathName);
 
       swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
@@ -102,7 +84,7 @@ public class TemplateAuto extends CommandBase {
       }
     }
   
-    public void configCommand(List<PathPlannerTrajectory> pathGroup) {  
+    public void configCommand(List<PathPlannerTrajectory> pathGroup) {
       this.m_autoCommand = this.builder.fullAuto(this.pathGroup);
     }
   

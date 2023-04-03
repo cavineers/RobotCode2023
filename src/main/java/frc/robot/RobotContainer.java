@@ -30,6 +30,7 @@ import frc.robot.commands.ManualOverrideCommands.ClawClose;
 import frc.robot.commands.IntakeCube;
 import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.HomeArm;
+import frc.robot.commands.AutoCommands.ExitCommunity;
 import frc.robot.commands.AutoCommands.TemplateAuto;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
@@ -285,16 +286,8 @@ public class RobotContainer  {
     private void configureSendableChooser() {
       this.m_chooser = new SendableChooser<>();
      //m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
-      m_chooser.addOption("Bottom", "Bottom");
-      m_chooser.addOption("Bottom Rotational", "Bottom Rotational");
-      m_chooser.addOption("**CHARGE** Middle Scoring Table", "Bottom Middle Charge");
-      m_chooser.addOption("**CHARGE** Middle Human Player", "Top Middle Charge");
-      m_chooser.setDefaultOption("Exit Community", "Exit Community");
-      //m_chooser.addOption("Middle Charge", "Middle Charge");
-      //m_chooser.addOption("Middle", "Middle");
-      //m_chooser.addOption("Top Charge", "Top Charge");
-      //m_chooser.addOption("Top", "Top");
-      //m_chooser.addOption("Test", "Test");
+      m_chooser.setDefaultOption("Exit Community", new ExitCommunity(swerveSubsystem));
+      m_chooser.addOption("Charge Station Cube", new ChargeStationCube(swerveSubsystem));
       
 
       SmartDashboard.putData("Auto Path Selector", this.m_chooser);
