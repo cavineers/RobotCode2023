@@ -1,8 +1,11 @@
 package frc.robot.commands;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.math.kinematics.ChassisSpeeds;
 import edu.wpi.first.math.kinematics.SwerveDriveKinematics;
 import edu.wpi.first.math.kinematics.SwerveModuleState;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.subsystems.SwerveDriveSubsystem;
@@ -21,28 +24,33 @@ public class NewBalanceCommand extends CommandBase {
     public NewBalanceCommand(SwerveDriveSubsystem swerve) {
         this.addRequirements(swerve);
         this.swerveDriveSubsystem = swerve;
-        this.previousAngle = this.swerveDriveSubsystem.getPitch();
+       
     }
     
     @Override
     public void initialize() {
         this.isFinished = false;
+        this.previousAngle = this.swerveDriveSubsystem.getPitch();
         if (this.isWithinThreshold()) {
             this.isFinished = true;
         }
         this.states = generateStates();
+        this.swerveDriveSubsystem.toggleIdleMode(IdleMode.kBrake);
     }
 
     private boolean isWithinThreshold() {
-        return (Math.abs(0 - swerveDriveSubsystem.getPitch()) <= Constants.BalanceConstants.kBalancingControlTresholdDegrees);
+        return currentAngle <= Constants.BalanceConstants.kBalancingControlTresholdDegrees;
     }
 
     private boolean isDecreasing(){
-        if (this.currentAngle <= this.previousAngle) {
+        if (this.currentAngle <= this.previousAngle -.25) {
+            this.previousAngle = this.currentAngle;
+            SmartDashboard.putBoolean("Is Decreasing", true);
             this.previousAngle = this.currentAngle;
             return true;
         }
         this.previousAngle = this.currentAngle;
+        SmartDashboard.putBoolean("Is Decreasing", false);
         return false;
     }
 
@@ -57,11 +65,9 @@ public class NewBalanceCommand extends CommandBase {
     @Override
     public void execute() {
         this.currentAngle = this.swerveDriveSubsystem.getPitch();
-        if (!this.isWithinThreshold()) {
-            if (!this.isDecreasing()){
-                swerveDriveSubsystem.setModuleStates(states);
-            }
-        }else{
+        if (!this.isWithinThreshold()||!this.isDecreasing()) {
+            swerveDriveSubsystem.setModuleStates(states);
+        } else if (this.isWithinThreshold()) {
             this.isFinished = true;
         }
     }
