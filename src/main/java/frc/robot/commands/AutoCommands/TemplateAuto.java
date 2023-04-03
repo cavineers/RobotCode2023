@@ -41,19 +41,15 @@ import frc.robot.commands.AutoArmCommands.RetractCompletely;
 import frc.lib.AutoCommandGroups;
 
 public class TemplateAuto extends CommandBase {
-
-    private boolean isActive;
-    private Command m_autoCommand; 
-
-    private SequentialCommandGroup autoCommandGroup;
-  
-    private String pathName; // Name of the path file
-  
-    private List<PathPlannerTrajectory> pathGroup;
-  
     private final SwerveDriveSubsystem swerveSubsystem;
-  
+    private boolean isActive;
+
+    private String pathName; // Name of the path file
+    private List<PathPlannerTrajectory> pathGroup;
+
     SwerveAutoBuilder builder;
+    private Command m_autoCommand; 
+    private SequentialCommandGroup autoCommandGroup;
   
     public TemplateAuto(SwerveDriveSubsystem swerveSubsystem) {
 
@@ -71,7 +67,6 @@ public class TemplateAuto extends CommandBase {
     public void initialize(){
 
       this.autoCommandGroup = new SequentialCommandGroup();
-      this.pathName = Robot.m_robotContainer.getAutoPath();
       this.pathGroup = AutoCommandGroups.createAutonomousPath(this.pathName);
 
       swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
