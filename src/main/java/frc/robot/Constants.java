@@ -123,8 +123,8 @@ public final class Constants {
                 new Translation2d(-kWheelBase / 2, kTrackWidth / 2));
     }
     public static final class PathPlanning {
-        public static final double kMaxSpeedMetersPerSecond = .1;
-        public static final double kMaxAccelerationMetersPerSecond = .05;
+        public static final double kMaxSpeedMetersPerSecond = 4;
+        public static final double kMaxAccelerationMetersPerSecond = 3;
 
         public static final PIDConstants kAutoDriveVelocityPID = new PIDConstants(1, 0, 0);
         public static final PIDConstants kAutoDriveTurnPID = new PIDConstants(0.5, 0, 0);

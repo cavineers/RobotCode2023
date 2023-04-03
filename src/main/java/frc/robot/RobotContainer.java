@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-
-import frc.robot.commands.AutoPath;
 import frc.robot.commands.NumPad.ArmHybrid;
 import frc.robot.commands.NumPad.ArmMidShelf;
 import frc.robot.commands.NumPad.ArmMidPeg;
@@ -32,6 +30,7 @@ import frc.robot.commands.ManualOverrideCommands.ClawClose;
 import frc.robot.commands.IntakeCube;
 import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.HomeArm;
+import frc.robot.commands.AutoCommands.TemplateAuto;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.ArmDoubleSubStation;
@@ -275,7 +274,7 @@ public class RobotContainer  {
     // FOR AUTO CHOOSER
 
     public Command getAutonomousCommand(){
-      return new AutoPath(swerveSubsystem);
+      return new TemplateAuto(swerveSubsystem);
     }
 
 
