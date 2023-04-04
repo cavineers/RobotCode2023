@@ -142,7 +142,7 @@ public class SwerveDriveSubsystem extends SubsystemBase {
     public void periodic(){
         m_odometer.update(getRotation2d(), getPositions());
 
-        SmartDashboard.putString("SwervePOSE", getPose()+"");
+        // SmartDashboard.putString("SwervePOSE", getPose()+"");
         SmartDashboard.putNumber("Heading", getHeading());
 
         SmartDashboard.putNumber("Roll", getRoll());

@@ -43,14 +43,12 @@ public class NewBalanceCommand extends CommandBase {
     }
 
     private boolean isDecreasing(){
-        if (this.currentAngle <= this.previousAngle -.25) {
+        if (this.currentAngle <= this.previousAngle - Constants.BalanceConstants.kBalancingControlDeadbandDegrees) {
             this.previousAngle = this.currentAngle;
-            SmartDashboard.putBoolean("Is Decreasing", true);
             this.previousAngle = this.currentAngle;
             return true;
         }
         this.previousAngle = this.currentAngle;
-        SmartDashboard.putBoolean("Is Decreasing", false);
         return false;
     }
 
