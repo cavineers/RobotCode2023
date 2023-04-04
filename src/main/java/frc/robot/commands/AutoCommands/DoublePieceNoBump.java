@@ -19,10 +19,11 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.BalanceControlCommand;
 import frc.robot.commands.ClawToggle;
+import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.ArmAutopickup;
 import frc.lib.AutoCommandGroups;
 
-public class ChargeStationCube extends CommandBase {
+public class DoublePieceNoBump extends CommandBase {
     private final SwerveDriveSubsystem swerveSubsystem;
     private boolean isActive;
 
@@ -33,9 +34,9 @@ public class ChargeStationCube extends CommandBase {
     private Command m_autoCommand; 
     private SequentialCommandGroup autoCommandGroup;
 
-    public ChargeStationCube(SwerveDriveSubsystem swerveSubsystem) {
+    public DoublePieceNoBump(SwerveDriveSubsystem swerveSubsystem) {
 
-      this.pathName = "ChargeStationCube";
+      this.pathName = "NoBump2Piece";
 
       this.swerveSubsystem = swerveSubsystem;
       this.builder = AutoCommandGroups.createAutoBuilder(swerveSubsystem); 
@@ -69,14 +70,16 @@ public class ChargeStationCube extends CommandBase {
 
         AutoCommandGroups.createPlaceCubeGroup(),
         
-        new WaitCommand(.1),
+        new WaitCommand(100),
 
         new ParallelCommandGroup(
-          new ArmRestPosition()
-          //this.m_autoCommand
+          new ArmRestPosition(),
+          this.m_autoCommand
         ),
 
-        new BalanceControlCommand(swerveSubsystem));
+        new FlushCube()
+      );
+
       this.autoCommandGroup.schedule();
     }
 

@@ -39,8 +39,8 @@ public class AutoCommandGroups {
     private static HashMap<String, Command> createEventMapping(){
 
         HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("DeployIntake", new IntakeCube());
-        eventMap.put("UnDeployIntake", new FlushCube());
+        eventMap.put("Intake", new IntakeCube());
+        eventMap.put("Flush", new FlushCube());
   
         eventMap.put("CloseClaw", new ClawToggle());
         eventMap.put("OpenClaw", new ClawToggle());
