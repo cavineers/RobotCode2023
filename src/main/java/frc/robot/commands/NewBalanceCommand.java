@@ -20,6 +20,7 @@ public class NewBalanceCommand extends CommandBase {
     private SwerveDriveSubsystem swerveDriveSubsystem;
 
     private SwerveModuleState[] states;
+    private SwerveModuleState[] lock;
 
     public NewBalanceCommand(SwerveDriveSubsystem swerve) {
         this.addRequirements(swerve);
@@ -35,6 +36,8 @@ public class NewBalanceCommand extends CommandBase {
             this.isFinished = true;
         }
         this.states = generateStates();
+        this.lock = generateSidewaysStates();
+
         this.swerveDriveSubsystem.toggleIdleMode(IdleMode.kBrake);
     }
 
@@ -60,6 +63,15 @@ public class NewBalanceCommand extends CommandBase {
 
         return Constants.DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
     }
+    public SwerveModuleState[] generateSidewaysStates() {
+        ChassisSpeeds chassisSpeeds;
+        chassisSpeeds = ChassisSpeeds.fromFieldRelativeSpeeds(
+            0, 0, .01, swerveDriveSubsystem.getRotation2d());
+          
+
+        return Constants.DriveConstants.kDriveKinematics.toSwerveModuleStates(chassisSpeeds);
+    }
+
     @Override
     public void execute() {
         this.currentAngle = this.swerveDriveSubsystem.getPitch();
@@ -72,6 +84,7 @@ public class NewBalanceCommand extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
+        // swerveDriveSubsystem.setModuleStates(lock);
         swerveDriveSubsystem.stopModules();
     }
 
