@@ -101,6 +101,6 @@ public class NewBalanceCommand extends CommandBase {
 
     @Override
     public boolean isFinished() {
-        return isFinished;
+        return this.isFinished;
     }
 }
