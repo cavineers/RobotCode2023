@@ -32,6 +32,7 @@ import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.HomeArm;
 import frc.robot.commands.AutoCommands.ExitCommunity;
 import frc.robot.commands.AutoCommands.ChargeStationCube;
+import frc.robot.commands.AutoCommands.DoublePieceNoBump;
 import frc.robot.commands.AutoCommands.TemplateAuto;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
@@ -287,6 +288,7 @@ public class RobotContainer  {
      //m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
       m_chooser.setDefaultOption("Exit Community", new ExitCommunity(swerveSubsystem));
       m_chooser.addOption("Charge Station Cube", new ChargeStationCube(swerveSubsystem));
+      m_chooser.addOption("2 Piece NO BUMP", new DoublePieceNoBump(swerveSubsystem));
       
 
       SmartDashboard.putData("Auto Path Selector", this.m_chooser);
