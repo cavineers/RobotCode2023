@@ -227,6 +227,7 @@ public final class Constants {
     public static final class BalanceConstants {
         public static final double kBalancingControlGoalDegrees = 0;
         public static final double kBalancingControlTresholdDegrees = 2.5;
+        public static final double kBalancingControlDeadbandDegrees = .25;
         
         public static final double kBalancingControlDriveP = 0.025; // P (Proportional) constant of a PID loop
         public static final double kBalancingControlDriveI = 0.0; // I (Integral) constant of a PID loop

@@ -12,7 +12,7 @@ import frc.robot.Constants;
 public class ArmExtension extends SubsystemBase {
 
     public void periodic(){
-        SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
+        // SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
         SmartDashboard.putBoolean("ExtensionSwitch", getExtensionSwitch());
 
         if (getExtensionSwitch() == true) {

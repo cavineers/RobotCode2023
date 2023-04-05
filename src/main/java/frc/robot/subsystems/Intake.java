@@ -68,10 +68,6 @@ public class Intake extends SubsystemBase{
       }
     
     public void periodic(){
-        SmartDashboard.putBoolean("IntakeIrSensor", getIntakeIR());
+        SmartDashboard.putBoolean("IR Sensor", getIntakeIR());
     }
-    /**
-     * Get the current intake state.
-     * @return intake state
-     */
 }
