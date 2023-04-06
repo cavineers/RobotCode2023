@@ -10,8 +10,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-
-import frc.robot.commands.AutoPath;
 import frc.robot.commands.NumPad.ArmHybrid;
 import frc.robot.commands.NumPad.ArmMidShelf;
 import frc.robot.commands.NumPad.ArmMidPeg;
@@ -32,6 +30,10 @@ import frc.robot.commands.ManualOverrideCommands.ClawClose;
 import frc.robot.commands.IntakeCube;
 import frc.robot.commands.FlushCube;
 import frc.robot.commands.AutoArmCommands.HomeArm;
+import frc.robot.commands.AutoCommands.ExitCommunity;
+import frc.robot.commands.AutoCommands.ChargeStationCube;
+import frc.robot.commands.AutoCommands.DoublePieceNoBump;
+import frc.robot.commands.AutoCommands.TemplateAuto;
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.AutoArmCommands.ArmAtBumperCommand;
 import frc.robot.commands.AutoArmCommands.ArmDoubleSubStation;
@@ -49,7 +51,6 @@ import frc.robot.subsystems.SwerveDriveSubsystem;
 
 public class RobotContainer  {
     
-    public SendableChooser<Command> auto = new SendableChooser<Command>();
 
     public int intakeState = 1;
 
@@ -117,7 +118,8 @@ public class RobotContainer  {
 
   // FOR AUTO
 
-  SendableChooser<String> m_chooser;
+  SendableChooser<Command> m_chooser;
+
   // Driver Numpad
   public Joystick joy2 = new Joystick(1);
   public JoystickButton a_button2 = new JoystickButton(joy2, 1);
@@ -274,28 +276,19 @@ public class RobotContainer  {
 
     // FOR AUTO CHOOSER
 
-    public Command getAutonomousCommand(){
-      return new AutoPath(swerveSubsystem);
-    }
+  
 
 
-    public String getAutoPath(){
+    public Command getAutoCommand(){
       return this.m_chooser.getSelected();
     }
 
     private void configureSendableChooser() {
-      this.m_chooser = new SendableChooser<>();
+      this.m_chooser = new SendableChooser<Command>();
      //m_chooser.setDefaultOption("Bottom Charge", "Bottom Charge");
-      m_chooser.addOption("Bottom", "Bottom");
-      m_chooser.addOption("Bottom Rotational", "Bottom Rotational");
-      m_chooser.addOption("**CHARGE** Middle Scoring Table", "Bottom Middle Charge");
-      m_chooser.addOption("**CHARGE** Middle Human Player", "Top Middle Charge");
-      m_chooser.setDefaultOption("Exit Community", "Exit Community");
-      //m_chooser.addOption("Middle Charge", "Middle Charge");
-      //m_chooser.addOption("Middle", "Middle");
-      //m_chooser.addOption("Top Charge", "Top Charge");
-      //m_chooser.addOption("Top", "Top");
-      //m_chooser.addOption("Test", "Test");
+      m_chooser.setDefaultOption("Exit Community", new ExitCommunity(swerveSubsystem));
+      m_chooser.addOption("Charge Station Cube", new ChargeStationCube(swerveSubsystem));
+      m_chooser.addOption("2 Piece NO BUMP", new DoublePieceNoBump(swerveSubsystem));
       
 
       SmartDashboard.putData("Auto Path Selector", this.m_chooser);
