@@ -70,7 +70,7 @@ public class ArmAngle extends SubsystemBase {
                 break;
             case OFF:
                 // Off
-                if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower) {
+                if (m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPower && m_armChainMotor.getEncoder().getPosition() <= Constants.Arm.MaxAngleRotations) {
                     this.m_armChainMotor.set(0.03);
                 } else if (m_armChainMotor.getEncoder().getPosition() <= Constants.Arm.ArmRotationsAddPower && m_armChainMotor.getEncoder().getPosition() >= Constants.Arm.ArmRotationsAddPowerBottom) {
                     this.m_armChainMotor.set(0.01);

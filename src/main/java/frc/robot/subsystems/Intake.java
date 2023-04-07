@@ -64,7 +64,7 @@ public class Intake extends SubsystemBase{
     }
 
     public boolean getIntakeIR() {
-        return this.m_intakeIR.get();
+        return !this.m_intakeIR.get();
       }
     
     public void periodic(){

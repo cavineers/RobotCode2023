@@ -70,14 +70,14 @@ public class DoublePieceNoBump extends CommandBase {
 
         AutoCommandGroups.createPlaceCubeGroup(),
         
-        new WaitCommand(100),
+        new WaitCommand(1),
 
         new ParallelCommandGroup(
           new ArmRestPosition(),
           this.m_autoCommand
         ),
 
-        new FlushCube()
+        new AutoFlushCube()
       );
 
       this.autoCommandGroup.schedule();

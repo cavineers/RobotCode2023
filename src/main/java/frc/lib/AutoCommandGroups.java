@@ -24,7 +24,9 @@ import frc.robot.commands.AutoArmCommands.ArmAutopickup;
 import frc.robot.commands.AutoArmCommands.RetractCompletely;
 import frc.robot.commands.NumPad.ArmTopPeg;
 import frc.robot.commands.NumPad.ArmTopShelf;
-
+import frc.robot.commands.AutoCommands.AutoFlushCube;
+import frc.robot.commands.AutoCommands.AutoIntakeCube;
+import frc.robot.commands.ClawHoming;
 import frc.robot.commands.ClawToggle;
 
 import frc.robot.commands.IntakeCube;
@@ -39,8 +41,8 @@ public class AutoCommandGroups {
     private static HashMap<String, Command> createEventMapping(){
 
         HashMap<String, Command> eventMap = new HashMap<>();
-        eventMap.put("Intake", new IntakeCube());
-        eventMap.put("Flush", new FlushCube());
+        eventMap.put("Intake", new AutoIntakeCube());
+        eventMap.put("Flush", new AutoFlushCube());
   
         eventMap.put("CloseClaw", new ClawToggle());
         eventMap.put("OpenClaw", new ClawToggle());
@@ -56,7 +58,7 @@ public class AutoCommandGroups {
 
         return new SequentialCommandGroup(
           new ArmTopShelf(),
-          new ClawToggle()
+          new ClawHoming()
           //new HomeArm()
           
         );

@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Robot;
 
 import frc.robot.subsystems.SwerveDriveSubsystem;
@@ -58,6 +59,10 @@ public class ChargeStationCube extends CommandBase {
       configCommand(this.pathGroup);
 
       this.autoCommandGroup.addCommands(
+        new InstantCommand(){
+          public void initialize() {
+            swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
+        }},
         AutoCommandGroups.createHomingGroup(),
         //new ArmAutopickup(),
 
@@ -72,8 +77,8 @@ public class ChargeStationCube extends CommandBase {
         new WaitCommand(.1),
 
         new ParallelCommandGroup(
-          new ArmRestPosition()
-          //this.m_autoCommand
+          new ArmRestPosition(),
+          this.m_autoCommand
         ),
 
         new BalanceControlCommand(swerveSubsystem));

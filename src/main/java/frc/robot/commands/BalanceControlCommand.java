@@ -45,6 +45,7 @@ public class BalanceControlCommand extends CommandBase {
         this.error = 0 - currentAngle;
         this.counter = 0;
         this.previousError = error;
+        
       }
 
       public double calculateError(){

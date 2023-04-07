@@ -58,9 +58,9 @@ public class ExitCommunity extends CommandBase {
 
       this.autoCommandGroup.addCommands(
         AutoCommandGroups.createHomingGroup(),
-        new ArmAutopickup(),
+        //new ArmAutopickup(),
 
-        new WaitCommand(1),
+        //new WaitCommand(1),
 
         new ClawToggle(),
 
@@ -68,7 +68,7 @@ public class ExitCommunity extends CommandBase {
 
         AutoCommandGroups.createPlaceConeGroup(),
         
-        new WaitCommand(100),
+        new WaitCommand(1),
 
         new ParallelCommandGroup(
           new ArmRestPosition(),
