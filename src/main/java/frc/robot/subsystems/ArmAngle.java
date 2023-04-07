@@ -20,10 +20,10 @@ public class ArmAngle extends SubsystemBase {
         // SmartDashboard.putNumber("Angle2Speed",-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.MidNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/150 );   
         SmartDashboard.putBoolean("AngleProxSensor", getAngleProxSensor());
 
-        if (getAngleProxSensor() == true) {
-            setArmChainMotorPosition(0.0);
-            setArmChainMotor2Position(0.0);
-        }
+        // if (getAngleProxSensor() == true) {
+        //     setArmChainMotorPosition(0.0);
+        //     setArmChainMotor2Position(0.0);
+        // }
     }
 
      public enum ArmChainMotorState {

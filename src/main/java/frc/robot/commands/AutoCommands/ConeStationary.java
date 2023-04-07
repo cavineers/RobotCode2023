@@ -25,7 +25,7 @@ import frc.robot.commands.ClawToggle;
 import frc.robot.commands.AutoArmCommands.ArmAutopickup;
 import frc.lib.AutoCommandGroups;
 
-public class ChargeStationCube extends CommandBase {
+public class ConeStationary extends CommandBase {
     private final SwerveDriveSubsystem swerveSubsystem;
     private boolean isActive;
 
@@ -36,7 +36,7 @@ public class ChargeStationCube extends CommandBase {
     private Command m_autoCommand; 
     private SequentialCommandGroup autoCommandGroup;
 
-    public ChargeStationCube(SwerveDriveSubsystem swerveSubsystem) {
+    public ConeStationary(SwerveDriveSubsystem swerveSubsystem) {
 
       this.pathName = "ChargeStationCube";
 
@@ -61,22 +61,17 @@ public class ChargeStationCube extends CommandBase {
       configCommand(this.pathGroup);
 
       this.autoCommandGroup.addCommands(
-        new InstantCommand(){
-          public void initialize() {
-            swerveSubsystem.toggleIdleMode(IdleMode.kBrake);
-        }},
-
         new ClawToggle(),
         //AutoCommandGroups.createHomingGroup(),
         //new ArmAutopickup(),
 
-        //new WaitCommand(1),
+        new WaitCommand(1),
 
         
 
         //new WaitCommand(1),
 
-        AutoCommandGroups.createPlaceCubeGroup(),
+        AutoCommandGroups.createPlaceConeGroup(),
         
         new WaitCommand(.1),
 
@@ -86,16 +81,12 @@ public class ChargeStationCube extends CommandBase {
           new ClawHoming(),
 
           new SequentialCommandGroup(
-            new WaitCommand(.75),
+            new WaitCommand(1),
 
-            new ParallelCommandGroup(
-              new ArmRestPosition(),
-              this.m_autoCommand
-            )
+            new ArmRestPosition()
           )
-        ),
-
-        new BalanceControlCommand(swerveSubsystem));
+        ));
+        //new BalanceControlCommand(swerveSubsystem));
       this.autoCommandGroup.schedule();
     }
 
