@@ -57,8 +57,8 @@ public class AutoCommandGroups {
     public static SequentialCommandGroup createPlaceCubeGroup(){ // Drops cube on the top height
 
         return new SequentialCommandGroup(
-          new ArmTopShelf(),
-          new ClawHoming()
+          new ArmTopShelf()
+          
           //new HomeArm()
           
         );
