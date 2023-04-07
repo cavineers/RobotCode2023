@@ -3,6 +3,7 @@ package frc.robot.commands.AutoCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -19,6 +20,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 
 import frc.robot.commands.AutoArmCommands.ArmRestPosition;
 import frc.robot.commands.BalanceControlCommand;
+import frc.robot.commands.ClawHoming;
 import frc.robot.commands.ClawToggle;
 import frc.robot.commands.AutoArmCommands.ArmAutopickup;
 import frc.lib.AutoCommandGroups;
@@ -76,9 +78,19 @@ public class ChargeStationCube extends CommandBase {
         
         new WaitCommand(.1),
 
+        
+
         new ParallelCommandGroup(
-          new ArmRestPosition(),
-          this.m_autoCommand
+          new ClawHoming(),
+
+          new SequentialCommandGroup(
+            new WaitCommand(.75),
+
+            new ParallelCommandGroup(
+              new ArmRestPosition(),
+              this.m_autoCommand
+            )
+          )
         ),
 
         new BalanceControlCommand(swerveSubsystem));
