@@ -28,6 +28,8 @@ public class ArmDoubleSubStation extends CommandBase {
 
     @Override
     public void execute() {
+        // Command uses encoder values to turn motors until the claw is positioned at the double substation
+        // This command checks whether the arm is going up or down to decide whether the chain motors or extension motors move first
         if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.DoubleSubStationAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
             Robot.armAngle.getArmChainMotor().set(Constants.Arm.ArmChainSpeedUp + (Constants.Arm.DoubleSubStationAngleRotations - Robot.armAngle.getArmChainMotorPosition())/50 );
             Robot.armAngle.getArmChainMotor2().set(-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.DoubleSubStationAngleRotations - Robot.armAngle.getArmChainMotorPosition())/50);

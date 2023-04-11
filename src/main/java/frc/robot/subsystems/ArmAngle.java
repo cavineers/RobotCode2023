@@ -25,7 +25,7 @@ public class ArmAngle extends SubsystemBase {
         //     setArmChainMotor2Position(0.0);
         // }
     }
-
+    // States for both motors
      public enum ArmChainMotorState {
         ON,
         OFF,
@@ -37,15 +37,18 @@ public class ArmAngle extends SubsystemBase {
         REVERSED
     }
 
+    // Motor Initialization
     public CANSparkMax m_armChainMotor = new CANSparkMax(Constants.Arm.ArmChainMotor, MotorType.kBrushless);
     public CANSparkMax m_armChainMotor2 = new CANSparkMax(Constants.Arm.ArmChainMotor2, MotorType.kBrushless);
 
+    // Sensor initialization
     private DigitalInput m_angleProxSensor = new DigitalInput(Constants.DIO.AngleProxSensor);
     
-    
+    // Starts motors in their off state
     public ArmChainMotorState m_armChainMotorState = ArmChainMotorState.OFF;
     public ArmChainMotor2State m_armChainMotor2State = ArmChainMotor2State.OFF;
 
+    // Motor sparkmax settings
     public ArmAngle() {
         this.m_armChainMotor.setIdleMode(IdleMode.kBrake);
         this.m_armChainMotor2.setIdleMode(IdleMode.kBrake);

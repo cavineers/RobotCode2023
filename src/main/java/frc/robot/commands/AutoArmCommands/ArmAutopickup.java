@@ -28,6 +28,8 @@ public class ArmAutopickup extends CommandBase {
 
     @Override
     public void execute() {
+        // Command uses encoder values to turn motors until the claw is positioned to pick up on the plexy glass at the front of the robot
+        // This command checks whether the arm is going up or down to decide whether the chain motors or extension motors move first
         if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.ArmAutoAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
             Robot.armAngle.getArmChainMotor().set(0.1);
             Robot.armAngle.getArmChainMotor2().set(-0.1);

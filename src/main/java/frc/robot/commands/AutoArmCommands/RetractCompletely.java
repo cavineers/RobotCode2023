@@ -21,6 +21,7 @@ public class RetractCompletely extends CommandBase {
 
     @Override
     public void execute() {
+        // Command uses a limit switch to turn the extension motor until the arm is fully retracted
         if (Robot.armExtension.getArmExtensionMotorPosition() > Constants.Arm.ExtensionLowerSpeedRotations){
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.REVERSED);
         } else if (Robot.armExtension.getArmExtensionMotorPosition() < Constants.Arm.ExtensionLowerSpeedRotations) {

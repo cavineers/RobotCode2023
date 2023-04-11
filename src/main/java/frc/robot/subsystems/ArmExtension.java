@@ -15,23 +15,29 @@ public class ArmExtension extends SubsystemBase {
         // SmartDashboard.putNumber("ExtensionRotations", getArmExtensionMotorPosition());
         SmartDashboard.putBoolean("ExtensionSwitch", getExtensionSwitch());
 
+        // Passive homing resets encoder values whenever extension switch is triggered
         if (getExtensionSwitch() == true) {
             setArmExtensionMotorPosition(0.0);
         }
     }
+    // State for the extension motor
     public enum ArmExtensionMotorState {
         ON,
         OFF,
         REVERSED
     }
 
+    // motor initialization
     public CANSparkMax m_armExtensionMotor = new CANSparkMax(Constants.Arm.ArmExtensionMotor, MotorType.kBrushless);
 
+    // sensor initialization
     private DigitalInput m_extensionLimitSwitch = new DigitalInput(Constants.DIO.ArmExtensionSwitch);
 
+    // start motors in off state
     public ArmExtensionMotorState m_armExtensionMotorState = ArmExtensionMotorState.OFF;
 
     public ArmExtension() {
+        // motor sparkmax settings
         this.m_armExtensionMotor.setIdleMode(IdleMode.kBrake);
 
         this.m_armExtensionMotor.setInverted(false);

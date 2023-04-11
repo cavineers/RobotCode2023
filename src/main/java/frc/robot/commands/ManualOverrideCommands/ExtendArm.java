@@ -23,6 +23,7 @@ public class ExtendArm extends CommandBase {
 
     @Override
     public void execute() {
+        // Extends the arm
         if (Robot.armExtension.getArmExtensionMotorPosition() <= Constants.Arm.MaxExtensionRotations) {
             Robot.armExtension.setArmExtensionMotorState(ArmExtension.ArmExtensionMotorState.ON);
         } else {

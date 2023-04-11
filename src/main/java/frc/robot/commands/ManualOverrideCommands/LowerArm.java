@@ -22,6 +22,7 @@ public class LowerArm extends CommandBase {
 
     @Override
     public void execute() {
+        // Lowers the arm
         if (Robot.armAngle.getArmChainMotorPosition() > Constants.Arm.MinAngleRotations) {
             Robot.armAngle.getArmChainMotor().set(-0.06);
             Robot.armAngle.getArmChainMotor2().set(0.06);

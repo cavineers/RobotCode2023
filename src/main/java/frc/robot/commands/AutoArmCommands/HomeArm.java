@@ -29,6 +29,8 @@ public class HomeArm extends CommandBase {
 
     @Override
     public void execute() {
+        // Command uses encoder values to turn motors until both then prox sensor and the limit switch are hit
+        // Extension motor always moves first
         if (Robot.armExtension.getExtensionSwitch() == false) {
             Robot.armExtension.getArmExtensionMotor().set(-0.3);
         }else if (Robot.armExtension.getExtensionSwitch() == true) {

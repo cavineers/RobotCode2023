@@ -28,7 +28,8 @@ public class ArmTopPeg extends CommandBase {
 
     @Override
     public void execute() {
-    // 16.41 is angle rotations and 60.41 is extension rotations
+    // Command uses encoder values to turn motors until the claw is positioned at the top peg
+    // This command checks whether the arm is going up or down to decide whether the chain motors or extension motors move first
     if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.TopNodePegAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.armAngle.getArmChainMotor().set(Constants.Arm.ArmChainSpeedUp + (Constants.Arm.TopNodePegAngleRotations - Robot.armAngle.getArmChainMotorPosition())/70 );
         Robot.armAngle.getArmChainMotor2().set(-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.TopNodePegAngleRotations - Robot.armAngle.getArmChainMotorPosition())/70);

@@ -134,24 +134,26 @@ public final class Constants {
         
     }
     public static class Arm {
-// 2.7 angle rotations subtracted by all preset angle rotations to acount for the new home distance from old home
-     // Joint one is closest to chassis and joint two is the furthest
+    // 2.7 angle rotations subtracted by all preset angle rotations to acount for the new home distance from old home
+
         public static int ArmChainMotor = CANIds.ArmChainMotor;
         public static int ArmChainMotor2 = CANIds.ArmChainMotor2;
         public static int ArmExtensionMotor = CANIds.ArmExtensionMotor;
-     
+    // Arm goes up faster to account for gravity
+
         public static double ArmChainSpeedUp = 0.17;
         public static double ArmChainSpeedDown = -0.08;
 
         public static double ArmExtensionSpeed = .95;
-        public static double ArmExtensionSpeedRev = -.95; // revert to .9
+        public static double ArmExtensionSpeedRev = -.95;
 
+    // Amount of rotations the chain motors do before adding a constant power
         public static double ArmRotationsAddPower = 8.419;
         public static double ArmRotationsAddPowerBottom = 2.3;
      
-    //Node Rotations
+    //Node Rotations (amount of rotations each motor does to reach a preset command)
         
-        public static double ArmAutoAngleRotations = 1;//928571701049805
+        public static double ArmAutoAngleRotations = 1;
         public static double ArmAutoExtensionRotations = 0.1;
         public static double ArmRestPositionAngleRotations = 2.3;
         public static double ArmRestPositionExtensionRotations = 1;
@@ -169,10 +171,12 @@ public final class Constants {
         public static double TopNodePegExtensionRotations = 130;
         public static double DoubleSubStationAngleRotations = 14.2;
         public static double DoubleSubStationExtensionRotations = 3;
-    // Encoder deadzones
-     public static double ExtensionEncoderDeadzone = 3;
+    // Encoder deadzones is the zone of rotation amount in which the motor will be in its off state when reached
+
+        public static double ExtensionEncoderDeadzone = 3;
         public static double AngleEncoderDeadzone = 0.16;
-    // Min and Max Rotations 
+    // Min and Max Rotations sets code stops and boundries for the arm
+
         public static double MaxExtensionRotations = 130;
         public static double MinExtensionRotations = -150;
         public static double ExtensionLowerSpeedRotations = 6;
