@@ -23,6 +23,7 @@ public class RaiseArm extends CommandBase {
 
     @Override
     public void execute() {
+        // Raises the arm
         if (Robot.armAngle.getArmChainMotorPosition() < Constants.Arm.MaxAngleRotations) {
             Robot.armAngle.getArmChainMotor().set(0.13);
             Robot.armAngle.getArmChainMotor2().set(-0.13);

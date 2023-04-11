@@ -28,7 +28,8 @@ public class ArmHybrid extends CommandBase {
 
     @Override
     public void execute() {
-    // 7.2 is angle rotations and 46 is extension rotations
+    // Command uses encoder values to turn motors until the claw is positioned at the hybrid node
+    // This command checks whether the arm is going up or down to decide whether the chain motors or extension motors move first
     if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.BottomNodeAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
         Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);

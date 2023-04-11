@@ -28,7 +28,8 @@ public class ArmTopShelf extends CommandBase {
 
     @Override
     public void execute() {
-    // 12.36 is angle rotations and 45.81 is extension rotations
+    // Command uses encoder values to turn motors until the claw is positioned at the top shelf
+    // This command checks whether the arm is going up or down to decide whether the chain motors or extension motors move first
     if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.TopNodeShelfAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
         Robot.armAngle.getArmChainMotor().set(Constants.Arm.ArmChainSpeedUp + (Constants.Arm.TopNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/75 );
         Robot.armAngle.getArmChainMotor2().set(-(Constants.Arm.ArmChainSpeedUp) - (Constants.Arm.TopNodeShelfAngleRotations - Robot.armAngle.getArmChainMotorPosition())/75);

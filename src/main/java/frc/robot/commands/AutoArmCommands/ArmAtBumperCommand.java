@@ -28,6 +28,8 @@ public class ArmAtBumperCommand extends CommandBase {
 
     @Override
     public void execute() {
+        // Command uses encoder values to turn motors until the claw is positioned in front of the bumper
+        // This command checks whether the arm is going up or down to decide whether the chain motors or extension motors move first
         if(Robot.armAngle.getArmChainMotorPosition() < (Constants.Arm.ArmBumperAngleRotations) - Constants.Arm.AngleEncoderDeadzone) {
             Robot.armAngle.setArmChainMotorState(ArmAngle.ArmChainMotorState.ON);
             Robot.armAngle.setArmChainMotor2State(ArmAngle.ArmChainMotor2State.ON);
